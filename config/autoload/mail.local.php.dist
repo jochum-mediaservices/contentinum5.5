@@ -1,0 +1,30 @@
+<?php
+/**
+ * Local Configuration Override
+ *
+ * This configuration override file is for overriding environment-specific and
+ * security-sensitive configuration information. Copy this file without the
+ * .dist extension at the end and populate values as needed.
+ *
+ * @NOTE: This file is ignored from Git by default with the .gitignore included
+ * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
+ * credentials from accidentally being committed into version control.
+ */
+return array(
+    'mail' => array(
+        'transport' => array(
+            'options' => array(
+                'name' => 'localhost', // Name of the SMTP host; defaults to “localhost”
+                'host' => '127.0.0.1', // Remote hostname or IP address; defaults to “127.0.0.1”.
+                'port' => 465, // Notice port change for TLS is 587
+                'connection_class' => 'smtp', // Is be one of smtp, plain, login, or crammd5, and defaults to smtp.
+                'connection_config' => array(
+                    'username' => 'username',
+                    'password' => 'password',
+                    'ssl' => 'ssl'// ssl or tls
+                ) 
+
+            )
+        )
+    )
+);
