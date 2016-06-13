@@ -1,0 +1,20 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head>
+<meta charset="<?php echo $this->charset ?>">
+<?php echo $this->headTitle();
+echo "\n" . '<meta name="viewport" content="'. $this->viewport .'">';
+echo $this->headMeta();
+echo "\n" . $this->headlink();    
+echo $this->stylesheets;
+echo $this->scripthead;
+echo "\n" . $this->headscript();
+?>
+</head>
+<body<?php echo $this->bodyTagAttribs ?>>
+<?php echo $this->content;
+echo $this->scriptInline;
+echo $this->inlineScript();
+?>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?php 
+if ($this->modul && isset($this->pluginViewHelper[$this->modul])) {
+    $pluginViewHelper = $this->pluginViewHelper[$this->modul];
+    if (isset($this->plugins[$this->modul][1])) {
+        print $this->$pluginViewHelper($this->plugins[$this->modul][1], $this->pluginstyles, 1);
+    }    
+}
+exit;
+?>

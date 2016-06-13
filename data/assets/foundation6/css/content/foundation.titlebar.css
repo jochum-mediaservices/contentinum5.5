@@ -1,0 +1,24 @@
+.title-bar {
+  background: #0a0a0a;
+  color: #fefefe;
+  padding: 0.5rem; }
+  .title-bar::before, .title-bar::after {
+    content: ' ';
+    display: table; }
+  .title-bar::after {
+    clear: both; }
+  .title-bar .menu-icon {
+    margin-left: 0.25rem;
+    margin-right: 0.5rem; }
+
+.title-bar-left {
+  float: left; }
+
+.title-bar-right {
+  float: right;
+  text-align: right; }
+
+.title-bar-title {
+  font-weight: bold;
+  vertical-align: middle;
+  display: inline-block; }

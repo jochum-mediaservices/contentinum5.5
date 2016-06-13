@@ -1,0 +1,21 @@
+.badge {
+  display: inline-block;
+  padding: 0.3em;
+  min-width: 2.1em;
+  font-size: 0.6rem;
+  text-align: center;
+  border-radius: 50%;
+  background: #2199e8;
+  color: #fefefe; }
+  .badge.secondary {
+    background: #777;
+    color: #fefefe; }
+  .badge.success {
+    background: #3adb76;
+    color: #fefefe; }
+  .badge.warning {
+    background: #ffae00;
+    color: #fefefe; }
+  .badge.alert {
+    background: #ec5840;
+    color: #fefefe; }

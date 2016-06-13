@@ -1,0 +1,28 @@
+#searchForm p.formElement,
+p.formElement input,
+p.formElement select,
+p.formElement textarea {
+	margin-bottom: 0;
+}
+p.formElement input.validation-error,
+p.formElement select.validation-error,
+p.formElement textarea.validation-error {
+	border-color: #E74C3C;
+}
+span.validation-valid,
+span.validation-error,
+.server-error {
+	background: #E74C3C;
+	color: #FFFFFF;
+	padding: 6px 0 6px 4px;
+	display: block;
+}
+.validation-valid {
+	background: #2ECC71;
+}
+h3.searchresult a {
+	color:#006621;
+}
+.searchresultmark {
+	background-color:#FDFD00;
+}

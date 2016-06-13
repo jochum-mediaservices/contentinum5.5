@@ -1,0 +1,21 @@
+body {
+	background: #EEEEEE;
+	padding-top: 5.25rem;
+}
+#loginFooter {
+	text-align:center;
+}
+#loginFooter p {
+	margin-bottom: 0;
+	font-size: 0.875rem;
+}
+
+.alert-box.error {
+	background-color: #c60f13;
+    border-color: #a20004;
+}
+.alert-box p {
+	margin-bottom: 0;
+	color: #FFFFFF;
+	font-weight: bold;
+}

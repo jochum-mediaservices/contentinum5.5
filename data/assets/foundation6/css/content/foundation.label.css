@@ -1,0 +1,22 @@
+.label {
+  display: inline-block;
+  padding: 0.33333rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: default;
+  border-radius: 0;
+  background: #2199e8;
+  color: #fefefe; }
+  .label.secondary {
+    background: #777;
+    color: #fefefe; }
+  .label.success {
+    background: #3adb76;
+    color: #fefefe; }
+  .label.warning {
+    background: #ffae00;
+    color: #fefefe; }
+  .label.alert {
+    background: #ec5840;
+    color: #fefefe; }

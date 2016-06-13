@@ -1,0 +1,14 @@
+<?php 
+$html = '<div class="row"><div class="large-12 columns">';
+$html .= '<a class="close-reveal-modal" aria-label="Close">&#215;</a>';
+if ($this->success){
+    $html .= '<p>Die E-Mail wurde erfogreich versandt.</p>';
+} else {
+    if ($this->form){
+        $html .= $this->renderForm($this->form);        
+    }
+}
+$html .= '</div></div>';
+echo $html;
+exit();
+?>

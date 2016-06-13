@@ -1,0 +1,29 @@
+<?php
+print '<div class="row"><div class="small-6 large-centered columns"><div class="callout callout-shadow panel userlogin">';
+
+if (isset($this->content['headline']) && strlen($this->content['headline']) > 1) {
+    echo $this->content['headline'];
+}
+
+print $this->mcworkAlert($this->messages, $this->msgtype, false);
+$display = true;
+if ($this->messages){
+    foreach ($this->messages as $message) {
+        if (is_array($message)) {
+            foreach ($message as $tval) {
+                if ('user_locked' === $tval) {
+                    $display = false;
+                }
+            }
+        }
+    }
+}
+if (true === $display) {
+    print $this->renderForm($this->form);
+}
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '<footer id="loginFooter">' . $this->version . '</footer>';
+print '</div></div></div>';
+?>

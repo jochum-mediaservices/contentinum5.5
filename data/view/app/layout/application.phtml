@@ -1,0 +1,29 @@
+<?php echo $this->doctype(); ?>
+<html<?php echo $this->htmlTagAttribs ?>>
+<head>
+<meta charset="<?php echo $this->charset ?>">
+<?php echo $this->headTitle();
+echo "\n" . '<meta name="viewport" content="'. $this->viewport .'">';
+echo $this->headMeta();
+if ($this->pageHeaders){
+    echo "\n";    
+    foreach ($this->pageHeaders[0] as $links){
+        echo '<link' . ContentinumComponents\Html\HtmlAttribute::attributeArray($links) . " />\n";
+    }  
+}
+echo $this->stylesheets;
+echo "\n" . $this->headstyles;
+echo "\n" . $this->scripthead;
+echo "\n" . $this->headscript();
+?>
+<script>var cb=function(){var e=document.createElement("link");e.rel="stylesheet",e.media="print",e.href="/assets/print.css";var t=document.getElementsByTagName("head")[0];t.parentNode.insertBefore(e,t)},raf=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;raf?raf(cb):window.addEventListener("load",cb);</script>
+</head>
+<body<?php echo $this->bodyTagAttribs ?>>
+<?php
+echo $this->content;
+echo $this->inlineScript();
+echo $this->scriptInline;
+echo $this->bodyInlineScript;
+?>
+</body>
+</html>

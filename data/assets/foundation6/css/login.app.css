@@ -1,0 +1,46 @@
+body {
+	background: #EEEEEE;
+	padding-top: 7.75rem;
+}
+#loginFooter {
+	text-align:center;
+}
+#loginFooter p {
+	margin-bottom: 0;
+	font-size: 0.875rem;
+}
+.alert-box {
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1.5rem 0.875rem 0.875rem;
+  position: relative;
+  transition: opacity 300ms ease-out;
+  background-color: #008CBA;
+  border-color: #0078a0;
+  color: #FFFFFF; }
+  .alert-box .close {
+    right: 0.25rem;
+    background: inherit;
+    color: #333333;
+    font-size: 1.375rem;
+    line-height: .9;
+    margin-top: -0.6875rem;
+    opacity: 0.3;
+    padding: 0 6px 4px;
+    position: absolute;
+    top: 50%; }
+    .alert-box .close:hover, .alert-box .close:focus {
+      opacity: 0.5; }
+.alert-box.error {
+	background-color: #c60f13;
+    border-color: #a20004;
+}
+.alert-box p {
+	margin-bottom: 0;
+	color: #FFFFFF;
+	font-weight: bold;
+}

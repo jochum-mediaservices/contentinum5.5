@@ -1,0 +1,111 @@
+@media only screen {
+ .small-offset-0 {
+    margin-left: 0 !important; }
+
+  .small-offset-1 {
+    margin-left: 8.33333% !important; }
+
+  .small-offset-2 {
+    margin-left: 16.66667% !important; }
+
+  .small-offset-3 {
+    margin-left: 25% !important; }
+
+  .small-offset-4 {
+    margin-left: 33.33333% !important; }
+
+  .small-offset-5 {
+    margin-left: 41.66667% !important; }
+
+  .small-offset-6 {
+    margin-left: 50% !important; }
+
+  .small-offset-7 {
+    margin-left: 58.33333% !important; }
+
+  .small-offset-8 {
+    margin-left: 66.66667% !important; }
+
+  .small-offset-9 {
+    margin-left: 75% !important; }
+
+  .small-offset-10 {
+    margin-left: 83.33333% !important; }
+
+  .small-offset-11 {
+    margin-left: 91.66667% !important; }	
+}
+@media only screen and (min-width: 40.0625em) {
+  .medium-offset-0 {
+    margin-left: 0 !important; }
+
+  .medium-offset-1 {
+    margin-left: 8.33333% !important; }
+
+  .medium-offset-2 {
+    margin-left: 16.66667% !important; }
+
+  .medium-offset-3 {
+    margin-left: 25% !important; }
+
+  .medium-offset-4 {
+    margin-left: 33.33333% !important; }
+
+  .medium-offset-5 {
+    margin-left: 41.66667% !important; }
+
+  .medium-offset-6 {
+    margin-left: 50% !important; }
+
+  .medium-offset-7 {
+    margin-left: 58.33333% !important; }
+
+  .medium-offset-8 {
+    margin-left: 66.66667% !important; }
+
+  .medium-offset-9 {
+    margin-left: 75% !important; }
+
+  .medium-offset-10 {
+    margin-left: 83.33333% !important; }
+
+  .medium-offset-11 {
+    margin-left: 91.66667% !important; }	
+}
+@media only screen and (min-width: 64.0625em) {
+  .large-offset-0 {
+    margin-left: 0 !important; }
+
+  .large-offset-1 {
+    margin-left: 8.33333% !important; }
+
+  .large-offset-2 {
+    margin-left: 16.66667% !important; }
+
+  .large-offset-3 {
+    margin-left: 25% !important; }
+
+  .large-offset-4 {
+    margin-left: 33.33333% !important; }
+
+  .large-offset-5 {
+    margin-left: 41.66667% !important; }
+
+  .large-offset-6 {
+    margin-left: 50% !important; }
+
+  .large-offset-7 {
+    margin-left: 58.33333% !important; }
+
+  .large-offset-8 {
+    margin-left: 66.66667% !important; }
+
+  .large-offset-9 {
+    margin-left: 75% !important; }
+
+  .large-offset-10 {
+    margin-left: 83.33333% !important; }
+
+  .large-offset-11 {
+    margin-left: 91.66667% !important; }	
+}

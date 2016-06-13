@@ -1,0 +1,13 @@
+<?php
+return array(
+    'default' => array(
+        'support_mail' => array(
+            'mailfrom' => 'webmaster@jochum-mediaservices.net',
+            'mailfromname' => 'Webmaster',
+            'signature' => '[ Dies ist eine automatisch durch das Webformular generierte E-Mail. ]',
+        
+        ),
+        
+        'google_map_apikey' => 'AIzaSyDRVYpFbVUL_8VTW8E50itQSeXBbWge_kE',
+    )
+);

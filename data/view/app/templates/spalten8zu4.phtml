@@ -1,0 +1,20 @@
+<header class="row"><div class="medium-12 columns">
+<?php 
+print $this->pagecontent($this->entries,'HEADER');
+print $this->pagecontent($this->entries,'MAINNAVIGATION');
+?>
+</div></header>
+<div class="row"><div class="medium-8 columns" role="main">
+<?php 
+print $this->pagecontent($this->entries);
+?>
+</div><aside class="medium-4 columns asideright" role="complementary">
+<?php 
+print $this->pagecontent($this->entries,'ASIDE');
+?>
+</aside></div>
+<footer class="row"><div class="medium-12 columns">
+<?php 
+print $this->pagecontent($this->entries,'FOOTER');
+?>
+</div></footer>
