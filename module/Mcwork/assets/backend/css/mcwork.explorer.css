@@ -1,0 +1,37 @@
+#modal {
+	padding: 0;
+	height: 700px;
+	overflow-y: scroll;
+}
+#footercontent {
+	padding-top: 0.625rem;
+	padding-bottom: 0.625rem;
+}
+.exlporer-element {
+	float: left;
+	width: 200px;
+	overflow: hidden;
+	margin: 0.75rem;
+	text-align: center;
+	background: #EEEEEE;
+}
+.explorer-item {
+	float: left;
+	width: 200px;
+	height:150px;
+	overflow: hidden;
+	text-align: center;
+}
+.element-desc {
+	padding: 0.625rem 0.25rem;
+	background-color: #DB7131;
+	color: #FFFFFF;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.dirsublist {
+	display:none;
+}
+ul.directorylist li {
+	list-style: none;
+}

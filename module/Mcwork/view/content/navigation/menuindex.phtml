@@ -1,0 +1,262 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+use ContentinumComponents\Html\HtmlTable;
+use ContentinumComponents\Html\Table\FactoryTable;
+
+// prepare content, create a table
+$tableFactory = new HtmlTable(new FactoryTable());
+// set table tag attributes
+$tableFactory->setAttributes('class', 'table tblNoSort display compact');
+$tableFactory->setAttributes('id', 'mcworkTables');
+$i = 0;
+$iClass = 0;//sorting_disabled
+$headlines = array(
+    '#' => array(),
+    'Page' => array(),
+    'Sequence' => array(),
+    'Rang' => array(
+        'head' => array(
+            'class' => 'text-center'
+        ),
+        'body' => array(
+            'class' => 'text-center'
+        )    
+    ),
+    'Navigation' => array(),
+    'Branch' => array(),
+    'Access rights' => array(),
+    'Publish' => array(
+        'head' => array(
+            'class' => 'text-center'
+        ),
+        'body' => array(
+            'class' => 'text-center'
+        )        
+    ),
+    'Edit' => array(
+        'head' => array(
+            'class' => 'hide-for-small text-right'
+        ),
+        'body' => array(
+            'class' => 'hide-for-small text-right'
+        )
+    )
+);
+$ihead = count($headlines);
+foreach ($headlines as $column => $attributes) {
+    $columns[] = $this->translate($column);
+    if (is_array($attributes) && ! empty($attributes)) {
+        foreach ($attributes as $area => $attribute) {
+            switch ($area) {
+                case 'head':
+                    $tableFactory->setHeadlineAttributtes('class', $attribute['class'], $i);
+                    break;
+                case 'body':
+                    $tableFactory->setTagAttributtes('class', $attribute['class'], $i);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    $i ++;
+}
+$tableFactory->setHeadline($columns);
+$i = 0;
+$defaults = $this->toolbarcontent->toArray();
+$defaults['attribute']['class'] = 'button-group left';
+
+$rangSelect = count($this->entries);
+$navigationCatgegory = $this->category;
+foreach ($this->entries as $entry) {
+    if (true === $this->listIsAllowed($entry, $this->identity)){
+    $i ++;
+    $tbl = array(
+        'up' => array(
+            'attribs' => array(                
+                'data-group' => $entry->webNavigations->id,
+                'data-category' => $entry->id,
+                'data-groupname' => 'webNavigations',
+                'data-categoryname' => 'id',
+                'data-rang' => $entry->itemRang,
+                'data-entity' => 'entity_tree', 
+                'data-move' => 'moveup',
+                'class' => 'button tiny moveitem'
+            )
+        ),        
+        'down' => array(
+            'attribs' => array(
+                'data-group' => $entry->webNavigations->id,
+                'data-category' => $entry->id,
+                'data-groupname' => 'webNavigations',
+                'data-categoryname' => 'id',
+                'data-rang' => $entry->itemRang,
+                'data-entity' => 'entity_tree',  
+                'data-move' => 'movedown',
+                'class' => 'button tiny moveitem'
+            )
+        ), 
+    );
+    $cachekey = null;
+    if ( in_array($entry->webNavigations->menue, array('std','helper'))){
+        $tbl['up']['attribs']['data-cache'] = 'navigation' . $entry->webNavigations->id;
+        $tbl['down']['attribs']['data-cache'] = 'navigation' . $entry->webNavigations->id;
+        $cachekey = 'navigation' . $entry->webNavigations->id;
+    } elseif ('sub' == $entry->webNavigations->menue){
+        $tbl['up']['attribs']['data-cache'] = 'navigation1';
+        $tbl['down']['attribs']['data-cache'] = 'navigation1';
+        $cachekey = 'navigation1';        
+    }
+    if (1 == $i){
+        unset($tbl['up']);
+    }
+    if ($i == $rangSelect){
+        unset($tbl['down']);
+    }
+    $rowContent = array();
+    $navigationCatgegory = $entry->webNavigations->id;
+    $rowContent[] = '<input id="row' . $i . '" type="checkbox" value="' . $entry->id . '" name="cb[]" data-name="'.$entry->webPages->label.'" data-categoryname="entity_tree" data-model="Remove" data-group="' . $entry->webNavigations->id . '">';
+    $rowContent[] = $entry->webPages->label;
+    $rowContent[] = $this->mcworkToolbar($tbl, true, $defaults);      
+    $rowContent[] = $this->mcworkSelectRang($entry->webNavigations->id,'webNavigations',$entry->id,'id',$entry->itemRang, $rangSelect, 'entity_tree', $cachekey);
+    
+    $rowContent[] = $entry->webNavigations->title; 
+    
+    if ($entry->parentFrom > '0'){
+        $str = '<ul class="button-group"><li id="handleSubmenu'.$i.'">';
+        $str .= '<a class="button tiny success" href="/mcwork/menue/category/' . $entry->parentFrom;
+        $str .= '" role="button"><i class="fa fa-pencil"> </i></a></li>';
+        $str .= '<li id="handleRemoveMenu'.$i.'"><a title="'. $this->translate('Unhook this navigation branch') .'" class="button tiny alert removesub" ';
+        $str .= 'href="#" data-ident="' . $entry->id . '" data-parent="'.$entry->parentFrom.'" ';
+        $str .= 'data-action="unlock" ';
+        $str .= 'data-label="' . $entry->webPages->label . '" ';
+        $str .= 'data-ident="' . $entry->id . '" ';
+        $str .= 'data-scope="' . $entry->webPages->scope . '" ';
+        $str .= 'data-pageident="' . $entry->webPages->id . '" ';
+        $str .= 'data-groupname="webNavigations" ';
+        $str .= 'data-entity="entity_navigation" ';
+        $str .= '" role="button"><i class="fa fa-minus"> </i></a></li>';
+        $str .= '</ul>';
+    } else {
+        $str = '<ul class="button-group"><li id="handleSubmenu'.$i.'">';
+        $str .= '<a class="button tiny addsubmenue" href="#" ';
+        $str .= 'data-service="backend_client_app " ';
+        $str .= 'data-element="handleSubmenu'.$i.'" ';
+        $str .= 'data-appkey="addsubmenue" '; 
+        $str .= 'data-action="add" ';
+        $str .= 'data-label="' . $entry->webPages->label . '" ';
+        $str .= 'data-ident="' . $entry->id . '" ';
+        $str .= 'data-scope="' . $entry->webPages->scope . '" ';
+        $str .= 'data-entity="entity_navigation" ';
+        $str .= 'data-groupname="webNavigations" ';
+        $str .= 'data-pageident="' . $entry->webPages->id . '">';
+        $str .= '<i class="fa fa-plus"> </i></a>';
+        $str .= '</li></ul>';
+    }
+    $rowContent[] = $str;
+    $rowContent[] = $entry->resource;
+    $rowContent[] = $this->mcworkPublishItem($entry->publish,$entry->id,'entity_tree',$cachekey);
+    $props = array();
+    $props = array(
+        'edit' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/edit/' . $entry->id . '/' . $this->paramter['category'],
+            'attribs' => array(
+                'title' => 'Edit item',
+                'class' => 'button tiny'
+            )
+        ),
+        'remove' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/delete/' . $entry->id . '/' . $this->paramter['category'],
+            'attribs' => array(
+                'data-name' => $entry->webPages->label,
+                'data-ident' => 'row' . $i,
+                'title' => 'Remove item',
+                'class' => 'button tiny alert removeitem'
+            )
+        ),
+        'info' => array(
+            'attribs' => array(
+                    'data-service' => 'backend_client_app',
+                    'data-appkey' => 'infoapp',          
+                    'data-entity' => 'entity_tree',
+                    'data-ident' => $entry->id, 
+                    'data-upDate' => $entry->upDate->format('d F Y, H:i:s'),
+                    'data-registerDate' => $entry->registerDate->format('d F Y, H:i:s'),
+                    'data-createBy' => $entry->createdBy,
+                    'data-updateBy' => $entry->updateBy,
+                    'data-username' => $this->identity->name,
+                    'data-role' => $this->role,
+                    'title' => 'Item properties',
+                    'class' => 'button tiny infotip'
+            )
+        )        
+    );    
+    if ($entry->parentFrom > '0'){
+        unset($props['remove']);
+    }
+    
+    $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
+    $tableFactory->setHtmlContent($rowContent);
+    }
+}
+if (true === $this->xmlHttpRequest){
+    print $tableFactory->display();
+    exit();
+}
+$toolbar = '';
+if (isset($this->toolbarcontent)) {
+    $links = array(
+        'add' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/add/' . $this->paramter['category'],
+        ),
+        'edit' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/edit',
+            'attribs' => array(
+                'data-category' => $this->paramter['category']
+            ),            
+        ),
+        'delete' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/delete'
+        ),
+        'back' => array(
+            'href' => '/mcwork/navigation'
+        )        
+    );
+    $toolbar = $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
+}
+print '<div class="row toprow"><div class="medium-6 columns"><h2>' . $this->content['headline'] . '</h2>';
+print '</div><div class="medium-6 columns">'. $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
+print '</div></div>';
+print $this->mcworkAlert($this->messages, $this->msgtype);
+print '<div class="row"><div id="addTblContent" class="medium-12 columns">';
+print $tableFactory->display();
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '</div></div>';
+?>

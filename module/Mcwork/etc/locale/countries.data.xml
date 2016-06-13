@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data version="1.0.0">
+	<at name="Austria"></at>
+	<be name="Belgium"></be>
+	<ca name="Canada"></ca>	
+	<fr name="France"></fr>		
+	<de name="Germany"></de>
+	<it name="Italy"></it>
+	<lu name="Luxembourg"></lu>	
+	<mc name="Monaco"></mc>	
+	<ch name="Switzerland"></ch>	
+	<gb name="United Kingdom"></gb>	
+	<us name="United States"></us>
+</data>

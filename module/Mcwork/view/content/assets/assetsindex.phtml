@@ -1,0 +1,246 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+use ContentinumComponents\Html\HtmlTable;
+use ContentinumComponents\Html\Table\FactoryTable;
+// prepare content, create a table
+$tableFactory = new HtmlTable(new FactoryTable());
+// set table tag attributes
+$tableFactory->setAttributes('class', 'mcworkBackendTable table display');
+$i = 0;
+$iClass = 0;
+$headlines = array(
+    '#' => array(),
+    'File' => array(),
+    'Default' => array(),
+    'Date' => array(
+        'head' => array(
+            'class' => 'hide-for-small text-right'
+        ),
+        'body' => array(
+            'class' => 'hide-for-small text-right'
+        )
+    ),
+    'Edit' => array(
+        'head' => array(
+            'class' => 'hide-for-small text-right'
+        ),
+        'body' => array(
+            'class' => 'hide-for-small text-right'
+        )
+    )
+);
+$ihead = count($headlines);
+foreach ($headlines as $column => $attributes) {
+    $columns[] = $this->translate($column);
+    if (is_array($attributes) && ! empty($attributes)) {
+        foreach ($attributes as $area => $attribute) {
+            switch ($area) {
+                case 'head':
+                    $tableFactory->setHeadlineAttributtes('class', $attribute['class'], $i);
+                    break;
+                case 'body':
+                    $tableFactory->setTagAttributtes('class', $attribute['class'], $i);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    $i ++;
+}
+$tableFactory->setHeadline($columns);
+
+
+$defasset = '';
+if ( isset($this->services['defasset']) ){
+    $defasset = $this->services['defasset'];
+}
+
+$dbMediaInUse = array();
+if ($this->services && isset($this->services['inusemedias'])) {
+    $dbMediaInUse = $this->services['inusemedias'];
+}
+
+$dbMediaTable = array();
+if ($this->services && isset($this->services['medias'])) {
+    $dbMediaTable = $this->services['medias'];
+}
+$dbAssignTagsTable = array();
+if ($this->services && isset($this->services['assigntags'])) {
+    $dbAssignTagsTable = $this->services['assigntags'];
+}
+
+$upDate = $registerDate = $owner = $updater = '';
+$i = 0;
+if (strlen($this->paramter['article']) > 1){
+    $dir = $this->paramter['article'] . '_';
+    
+    
+    $up = '';
+    $array = explode('_', $this->paramter['article']);
+    if (null != array_pop($array)) {
+        $up = implode('_', $array);
+        if (strlen($up) > 0){
+            $up = '/' . $up;
+        }
+    } 
+    
+    
+    
+    $i ++;
+    $rowContent = array();
+    $rowContent[] = '#';
+    $rowContent[] = '<a href="/mcwork/' . $this->paramter['section'] . $up . '" class="tiny button"><i class="fa fa-arrow-up"></i></a>';
+    $rowContent[] = '&nbsp;';
+    $rowContent[] = '&nbsp;';
+    $rowContent[] = '&nbsp;';
+    $tableFactory->setHtmlContent($rowContent);    
+    
+    
+} else {
+    $dir = '';
+}
+
+foreach ($this->entries as $entry) {
+    if ('.' != $entry->filename && '..' != $entry->filename && ! in_array($entry->filename, array('collections')) && 'dir' == $entry->type) {
+        $dataAttribInUse = '';
+        if (true == $entry->childs ){
+            $dataAttribChilds = ' data-childs="yes"';
+            $icon = '<i class="fa fa-folder-open"></i>';
+        } else {
+            $dataAttribChilds = ' data-childs="no"';
+            $icon = '<i class="fa fa-folder"></i>';
+        }        
+        $i ++;
+        $rowContent = array();      
+        $rowContent[] = '<input id="row' . $i .'" type="checkbox" data-name="' . $entry->filename . '" value="' . $entry->filename . '" name="cb[]" data-type="dir">';
+        $rowContent[] = '<a href="/mcwork/' . $this->paramter['section'] .'/'.$dir.$entry->filename.'">'.$icon.' ' . $entry->filename . '</a>';
+        if ('' === $dir){
+            if ($entry->filename == $defasset){
+                $rowContent[] = '<i class="fa fa-2x fa-check emerald-color" aria-hidden="true"> </i>';
+            } else {
+                $rowContent[] = '<a href="#" class="assetsettings" data-confval="'. $entry->filename .'" data-confkey="default_collection"><i class="fa fa-2x fa-toggle-off alizarin-color" aria-hidden="true"> </i></a>';
+            }
+        } else {
+            $rowContent[] = ' &mdash; ';
+        }
+        $rowContent[] = date("d.m.Y H:i:s", $entry->time);
+        
+        $props = array(
+            'copy' => array(
+                'attribs' => array(
+                   'class' => 'tiny button copyassetfiles',
+                   'data-ident' =>  $entry->filename,
+                    'data-current' => $dir,
+                    'data-service' => 'backend_client_app',
+                    'data-appkey' => 'copyassetfiles',
+                )
+            ),
+            'delete' => array(
+                'attribs' => array(
+                    'data-row' => 'row' . $i,
+                    'data-current' => $dir,
+                    'data-url' => '/mcwork/' . $this->paramter['section'] . '/delete',
+                    'title' => 'Delete item',
+                    'class' => 'button tiny alert deleteitem'
+                )
+            ),            
+        );
+        
+        if ('default' === $entry->filename){
+            unset($props['delete']);
+        }
+        
+        $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
+        $tableFactory->setHtmlContent($rowContent);
+    }
+}
+foreach ($this->entries as $entry) {
+    if ('.' != $entry->filename && '..' != $entry->filename && ! in_array($entry->filename, array('README.md','index.html')) && false === strpos($entry->filename, '-200-th') && 'file' == $entry->type) {
+        $pathname = \ContentinumComponents\Path\Clean::get($entry->pathname);
+        $pathname = str_replace($entry->docroot, '', $pathname);
+       
+        
+        $i++;
+        $rowContent = array();
+        $rowContent[] = '<input id="row' . $i .'" type="checkbox" data-name="' . $entry->filename . '" value="' . $entry->filename . '" name="cb[]" data-type="file">';
+        $rowContent[] = '<i class="fa fa-file"></i> ' . $entry->filename;
+        $rowContent[] = '&nbsp;';
+        $rowContent[] = date("d.m.Y H:i:s", $entry->time);
+            
+        
+        $props = array(
+            'copy' => array(
+                'attribs' => array(
+                    'class' => 'tiny button copyassetfile',
+                    'data-ident' =>  $entry->filename,
+                    'data-type' => 'file',
+                    'data-current' => $dir,
+                    'data-service' => 'backend_client_app',
+                    'data-appkey' => 'copyassetfile',
+                    'title' => 'Copy and rename file'
+                )
+            ),
+            'delete' => array(
+                'attribs' => array(
+                    'data-row' => 'row' . $i,
+                    'data-current' => $dir,
+                    'data-url' => '/mcwork/' . $this->paramter['section'] . '/delete',
+                    'title' => 'Delete item',
+                    'class' => 'button tiny alert deleteitem'
+                )
+            ),           
+        );
+        
+        $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
+        $tableFactory->setHtmlContent($rowContent);        
+    }
+}
+$links = array(   
+    'delete' => array(
+        'attribs' => array(
+            'data-current' => $dir,
+            'data-url' => '/mcwork/' . $this->paramter['section'] . '/delete',
+        ),
+    )
+);
+if (true === $this->xmlHttpRequest){
+    print $tableFactory->display();
+    exit();
+}
+print '<div class="row toprow"><div class="medium-6 columns"><h2>' . $this->content['headline'] . '</h2>';
+print '</div><div class="medium-6 columns">'. $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
+print '</div></div>';
+print $this->mcworkAlert($this->messages, $this->msgtype);
+print '<div class="row"><div id="addTblContent" class="medium-12 columns">';
+print $tableFactory->display();
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '</div></div>';
+?>

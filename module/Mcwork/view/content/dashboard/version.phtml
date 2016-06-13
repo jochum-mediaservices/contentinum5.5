@@ -1,0 +1,70 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+?>
+<div id="versionrow" class="row">
+	<div class="large-6 medium-12 columns">
+		<h2><?php echo $this->content['headline']; ?></h2>
+		<div class="panel">
+		<h3>
+		<?php 
+		echo $this->entries['brand'] . '<sup>&reg;</sup> ' . $this->entries['contentinum_version'] . ' <em>' .  $this->entries['name']  . '</em>';
+		?>
+		</h3>
+		<h5>
+		<?php 
+		echo 'Version ' . $this->entries['major'] . '.' . $this->entries['number'] . ' build ' . $this->entries['build'] . ' vom ' . $this->entries['date'];
+		?>
+		</h5>	
+		<p>
+		<?php 
+		echo '&copy; ' . date('Y') . ' ' . $this->entries['copy'];
+		?>
+		</p>		
+		</div>
+		<dl class="panel">
+		<?php 
+		$i = 0;
+		foreach ($this->entries['notes'] as $key => $notes){
+		    print '<dt>Build: '  . $key . '</dt>';
+		    foreach ($notes as $note){
+		        print '<dd>' . $note . '</dd>';
+		    }
+		    $i++;
+		    if ( $i > 10){
+		        break;
+		    }
+		}
+		
+		
+		if ( isset($this->content['content']) && strlen($this->content['content']) > 1 ){
+		    echo $this->content['content'];
+		}
+		?>
+		</dl>
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+// display form
+$html = $this->renderForm($this->form);
+$html .= $this->translate($this->mcworkContent($this->page, $this->pagecontent, 'content'));
+
+$cat = '';
+if (null !== $this->category){
+    $cat = '/category/' . $this->category;
+}
+
+if ('no' === $this->setcategrory){
+    $cat = '';
+}
+
+if ( is_array($this->btnconfiguration) ){
+    
+    $btn = $this->btnconfiguration;
+    if (isset($btn['cancel'])){
+        $btn['cancel']['attribs']['data-back'] = $this->abortation . $cat; 
+    }
+    
+} else {
+
+    $btn = array(
+        'save' => array(),
+        'cancel' => array('label' => 'Cancel', 'attribs' => array('data-back' => $this->abortation . $cat )),
+    );
+}
+
+$button = $this->mcworkToolbar($btn,true,$this->formbuttons->toArray());
+print '<div class="row toprow">';
+print '<div class="medium-6 columns"><h2>' . $this->translate($this->content['headline']) . '</h2></div>';
+print '<div class="medium-6 columns">'. $button . '</div>';
+print '</div>';
+print $this->mcworkAlert($this->messages, $this->msgtype);
+print '<div class="row"><div id="setFormContent" class="medium-12 columns">';
+print $this->renderForm($this->form);
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '</div></div>';
+?>

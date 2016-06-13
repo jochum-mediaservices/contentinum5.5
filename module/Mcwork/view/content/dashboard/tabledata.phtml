@@ -1,0 +1,93 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+$i = 0;
+$pageLabels = array();
+if ( isset($this->services['pages']) ){
+    $pageLabels = $this->services['pages'];
+}
+$datatables['data'] = array();
+foreach ($this->entries as $entry) {
+    if (true === $this->listIsAllowed($entry, $this->identity)){
+        $i ++;
+        $rowContent = array(); 
+        $rowContent[] = '<input id="row' . $entry->id . '" type="checkbox" value="' . $entry->id . '" name="cb[]" />';
+        $last = ', Letzte &Auml;nderung: ' . $entry->upDate->format('d.m.Y, H:i:s');
+        if ( isset($pageLabels[$entry->id]) ){
+            if ('_default' != $pageLabels[$entry->id]['url']){
+                $rowContent[] = '<a href="/'.$pageLabels[$entry->id]['url'] .'" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ' . $pageLabels[$entry->id]['label'] . '</a>'.$last;
+            } else {
+                $rowContent[] = $pageLabels[$entry->id]['label'] . $last;
+            }
+        } else {
+            $rowContent[] = '?' . $last;
+        }
+        
+        $rowContent[] = $entry->title;
+        $rowContent[] = $this->mcworkPublishItem($entry->publish,$entry->id,'entity_content');  
+        $props = array(
+            'edit' => array(
+                'href' => '/mcwork/contribution/edit/' . $entry->id,
+                'attribs' => array(
+                    'title' => 'Edit item',
+                    'class' => 'button tiny'
+                )
+            ),
+            'info' => array(
+                'attribs' => array(
+                    'data-service' => 'backend_client_app',
+                    'data-appkey' => 'infoapp',
+                    'data-entity' => 'entity_content',
+                    'data-ident' => $entry->id,
+                    'data-update' => $entry->upDate->format('d F Y, H:i'),
+                    'data-registerdate' => $entry->registerDate->format('d F Y, H:i'),
+                    'data-createby' => $entry->createdBy,
+                    'data-updateby' => $entry->updateBy,
+                    'data-username' => $this->identity->name,
+                    'data-role' => $this->role,
+                    'title' => 'Item properties',
+                    'class' => 'button tiny infotip'
+                )
+            ),
+            'remove' => array(
+                'href' => '/mcwork/validate/changes',
+                'label' => '<i class="fa fa-question" aria-hidden="true"> </i>',
+                'attribs' => array(
+                    'class' => 'button secondary tiny setvalidation',
+                    'data-entity' => 'entity_content',
+                    'data-row' => 'row' . $entry->id,
+                    'data-ident' => $entry->id,
+                )
+            ),            
+        );
+        $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );        
+        $datatables['data'][] = $rowContent;
+    }    
+}
+print $this->json($datatables);
+exit();
+?>

@@ -1,0 +1,29 @@
+<?php
+return array(
+    'contentinum_config' => array(
+        'default_collection' => 'default',
+        'contentinum_navigation_cache' => false,
+        'db_cache_keys' => array(            
+            'contentinum_domain_preference' => array(
+                'name' => 'Domain Konfiguration',
+                'cache' => 'contentinum_domain_preference',
+                'savecache' => false,
+            ),            
+            'contentinum_public_pages' => array(
+                'name' => 'Seiten im Webauftritt',
+                'cache' => 'contentinum_public_pages',
+                'savecache' => true,
+            ),
+            'contentinum_attribute_pages' => array(
+                'name' => 'Seiten Eigenschaften',
+                'cache' => 'contentinum_attribute_pages',
+                'savecache' => false,
+            ),
+            'contentinum_page_header' => array(
+                'name' => 'Seiten Headerlinks',
+                'cache' => 'contentinum_page_header',
+                'savecache' => false,
+            ),            
+        ),    
+    ),
+);

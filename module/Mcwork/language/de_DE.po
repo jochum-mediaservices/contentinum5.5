@@ -1,0 +1,966 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Contentinum 5.5\n"
+"Report-Msgid-Bugs-To: jochum-mediaservices <hallo@jochum-mediaservices.de>\n"
+"POT-Creation-Date: 2015-08-01 23:45-0700\n"
+"PO-Revision-Date: 2016-05-31 12:39+0100\n"
+"Last-Translator: Michael Jochum <michael.jochum@jochum-mediaservices.de>\n"
+"Language-Team: jochum-mediaservices <hallo@jochum-mediaservices.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.7\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: Buttons
+msgid "Edit item"
+msgstr "Artikel bearbeiten"
+
+msgid "Edit data"
+msgstr "Daten bearbeiten"
+
+msgid "Delete item"
+msgstr "Daten löschen"
+
+msgid "Delete data"
+msgstr "Daten löschen"
+
+msgid "Item properties"
+msgstr "Artikeleigenschaften"
+
+msgid "Save your form entries"
+msgstr "Formulareingaben speichern"
+
+msgid "Save your form entries and clear form"
+msgstr "Formulareingaben speichern und leeren"
+
+msgid "Cancel operation and save anything"
+msgstr "Vorgang abrechen und nichts speichern"
+
+msgid "Add item"
+msgstr "Daten anlegen"
+
+msgid "Item trash"
+msgstr "Daten Mülleimer"
+
+msgid "Remove item"
+msgstr "Daten entfernen"
+
+msgid "Empty cache"
+msgstr "Cache leeren"
+
+msgid "Assign tags to this item"
+msgstr "Tags zuordnen"
+
+msgid "information to the data set"
+msgstr "Informationen zu diesen Daten"
+
+msgid "move item up"
+msgstr "Reihenfolge nach oben ändern"
+
+msgid "move item down"
+msgstr "Reihenfolge nach unten ändern"
+
+#: general
+msgid "Access resources"
+msgstr "Zugriffsrechte"
+
+msgid "Access rights"
+msgstr "Zugriffsrechte"
+
+msgid "Publication start"
+msgstr "Start Veröffentlichung"
+
+msgid "Publication end"
+msgstr "Ende Veröffentlichung"
+
+msgid "Display items"
+msgstr "Artikel anzeigen"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Groupname"
+msgstr "Gruppenname"
+
+msgid "User"
+msgstr "Benutzer"
+
+msgid "Group"
+msgstr "Gruppe"
+
+msgid "Groups"
+msgstr "Gruppen"
+
+msgid "Configuration"
+msgstr "Konfiguration"
+
+msgid "Last write access"
+msgstr "Letzter Schreibzugriff"
+
+#: Navigation
+msgid "Mcwork_Controller_Index"
+msgstr "Dashboard"
+
+msgid "Files"
+msgstr "Dateien"
+
+msgid "mcContent"
+msgstr "Content"
+
+msgid "Contentinum_Apps"
+msgstr "Plugins"
+
+msgid "PublicMedias"
+msgstr "Öffentliche Dateien"
+
+msgid "MediaMetas"
+msgstr "Metadaten Medien"
+
+msgid "MediaGroup"
+msgstr "Dateigruppen"
+
+msgid "Navigation structure"
+msgstr "Navigationsstruktur"
+
+msgid "Kind of navigation"
+msgstr "Art der Navigations"
+
+msgid "Navigation name"
+msgstr "Navigationsname"
+
+msgid "Create a helper navigationstree"
+msgstr "Hilfsnavigation anlegen"
+
+msgid "Create another main tree"
+msgstr "Weitere Hauptnavigation anlegen"
+
+msgid "Sequence"
+msgstr "Reihenfolge"
+
+msgid "Branch"
+msgstr "Unterpunkt"
+
+msgid "Page or link to this item"
+msgstr "Seiten oder Linkname auswählen"
+
+msgid "Link rel attribute"
+msgstr "Rel-Attribute festlegen"
+
+msgid "Link class selectoren"
+msgstr "Link Klassen Selektor"
+
+msgid "Link data attribute"
+msgstr "Link Daten Attribut"
+
+msgid "Element ID selector"
+msgstr "ID Selektor setzen"
+
+msgid "Element CLASS selector"
+msgstr "Kassen Selektor setzen"
+
+msgid "edit_Menu"
+msgstr "Menüpunkt bearbeiten"
+
+msgid "add_Menu"
+msgstr "Menüpunkt anlegen"
+
+msgid "add_Navigation"
+msgstr "Navigation anlegen"
+
+msgid "edit_Navigation"
+msgstr "Navigation bearbeiten"
+
+#: Pages
+msgid "Page"
+msgstr "Seite"
+
+msgid "Pages"
+msgstr "Seiten"
+
+msgid "Linkname"
+msgstr "Seitenname"
+
+msgid "Page Id"
+msgstr "Seiten Identifikation"
+
+msgid "add_Pages"
+msgstr "Seite hinzufügen"
+
+msgid "edit_Pages"
+msgstr "Seite bearbeiten"
+
+msgid "PageAttribute"
+msgstr "Seiten Eigenschaften"
+
+msgid "add_PageAttribute"
+msgstr "Seiten Eigenschaften anlegen"
+
+msgid "edit_PageAttribute"
+msgstr "Seiten Eigenschaften bearbeiten"
+
+msgid "Add this page in a navigation"
+msgstr "Seite in die Navigation einfügen"
+
+msgid "Assign page to a domain"
+msgstr "Seite einer Domain zuordnen (nur bei Pflege mehrerer Webseiten)"
+
+msgid "Choose a assets collection"
+msgstr "zusätzliche Layoutelemente auswählen"
+
+msgid "Set access rights to that resource"
+msgstr "Zugriffsrechte setzen"
+
+msgid "Link title"
+msgstr "Link Title"
+
+msgid "Page title"
+msgstr "Seiten Title"
+
+msgid "Page Standard"
+msgstr "Standadeinstellungen Seiten"
+
+msgid "Page standard datas"
+msgstr "Standadeinstellungen Seiten"
+
+msgid "Page metadatas (SEO)"
+msgstr "Metadaten Seiten (SEO)"
+
+msgid "Page meta specified"
+msgstr "Metadaten Seiten (SEO)"
+
+msgid "Page publications"
+msgstr "Veröffentlichung Seiten"
+
+msgid "Page publication"
+msgstr "Veröffentlichung Seiten"
+
+msgid "Set meta value robots"
+msgstr "Robots-Anweisungen setzen"
+
+msgid "Sitemap Parameter Page priority"
+msgstr "Sitemap Priorität"
+
+msgid "Language parent page"
+msgstr "Zugehörige Seite in der Hauptsprache"
+
+msgid "Links"
+msgstr "Internet Link's"
+
+msgid "add_Links"
+msgstr "Ein Link anlegen"
+
+msgid "edit_Links"
+msgstr "Ein Link bearbeiten"
+
+msgid "Headlinks"
+msgstr "Seiten Header Links"
+
+msgid "add_Headlinks"
+msgstr "Headerlink anlegen"
+
+msgid "edit_Headlinks"
+msgstr "Headerlink bearbeiten"
+
+#: Users
+msgid "Users"
+msgstr "Benutzer*innen"
+
+msgid "add_User"
+msgstr "Benutzer*in hinzufügen"
+
+msgid "edit_User"
+msgstr "Benutzer*in bearbeiten"
+
+msgid "Username"
+msgstr "Loginname"
+
+msgid "Role"
+msgstr "Gruppe"
+
+msgid "Verify"
+msgstr "Verifizieren"
+
+#: contribution
+msgid "Contribution"
+msgstr "Beiträge"
+
+msgid "add_Contribution"
+msgstr "Beitrag anlegen"
+
+msgid "recycle_Contribution"
+msgstr "Beitrag recyceln"
+
+msgid "edit_Contribution"
+msgstr "Beitrag bearbeiten"
+
+msgid ""
+"First select a page and than insert contribution to a defined contribution "
+"group"
+msgstr ""
+"Alle folgenden Beiträge mit dem ersten Beitrag einer Gruppe verknüpfen und "
+"anschließend die Layoutauswahl unter Beitragseigenschaften (z.B. Akkordeon) "
+"auswählen"
+
+msgid "Add a contribution to a defined contribution group"
+msgstr "Beitrag einer vorhandenen Beitragsgruppe zuweisen"
+
+#: contribution form
+msgid "Title"
+msgstr "Titel"
+
+msgid "Assign to a page"
+msgstr "Einer Seite zuweisen"
+
+msgid "Assign in contribution group"
+msgstr "Einer Beitragsgruppe zuweisen"
+
+msgid "Content type"
+msgstr "Inhaltstyp"
+
+msgid "Overwrite this contribution"
+msgstr "Diesen Beitrag überschreiben"
+
+msgid "Only effective in default pages"
+msgstr "Nur wirksam in Standardseiten"
+
+msgid "Replace this contribution"
+msgstr "Diesen Beitrag ersetzten"
+
+msgid "Media style"
+msgstr "Medien Style"
+
+msgid "Choose a media template"
+msgstr "Media Template auswählen"
+
+msgid "PublicPdfFiles"
+msgstr "Öffentliche PDF Dateien"
+
+msgid "NoPublicFiles"
+msgstr "Nicht Öffentliche Dateien"
+
+msgid "Contribution element"
+msgstr "Beitrags Elemente"
+
+msgid "Contribution attributte"
+msgstr "Beitrags Attribute"
+
+msgid "Element content"
+msgstr "Element Inhalt"
+
+msgid "Search and set a link to a page or set an external link"
+msgstr "Suchen und setzen einen Link auf eine Seite oder einen externen Link"
+
+msgid "Ideal for integrating iframes"
+msgstr "Ideal zur Einbindung von iframe's"
+
+msgid "Publish Author"
+msgstr "Verfasser"
+
+msgid "Author Email"
+msgstr "E-Mail Verfasser"
+
+msgid "Contribution media attachment"
+msgstr "Medien anhängen"
+
+msgid "Contribution Styles"
+msgstr "Beitragsformatierungen"
+
+msgid "Forming published author"
+msgstr "Beitragsverfasser"
+
+msgid "Contribution plugin attachment"
+msgstr "Plugin anhängen"
+
+#: contribution properties
+msgid "contributionProperties"
+msgstr "Beitrags Eigenschaften"
+
+msgid "sort_Contribution"
+msgstr "Beiträge sortieren"
+
+msgid "edit_Properties"
+msgstr "Eigenschaften bearbeiten"
+
+msgid "Choose a contribution widget"
+msgstr "Beitrags Template auswählen"
+
+msgid "edit_Contentgroup"
+msgstr "Beitragsgruppen bearbeiten"
+
+msgid "Content Group style"
+msgstr "Beitragsgruppen Template auswählen"
+
+msgid "Group element"
+msgstr "Beitragsgruppen Elemente"
+
+msgid "Group attributte"
+msgstr "Beitragsgruppen Attribute"
+
+msgid "sort_Contentgroup"
+msgstr "Beitragsgruppe sortieren"
+
+msgid "Template variable"
+msgstr "Abweichendes Template"
+
+msgid "Contributory group"
+msgstr "Beitragsgruppe"
+
+msgid "Dissolve"
+msgstr "Gruppe auflösen"
+
+msgid "Assort"
+msgstr "Sortieren"
+
+msgid "News or Blog Article"
+msgstr "News oder Blog Beiträge"
+
+msgid "News & Blogs"
+msgstr "Nachrichten & Blogs"
+
+msgid "News or Blog name"
+msgstr "Nachrichten oder Blog"
+
+msgid "Category and Tags"
+msgstr "Kategorien und Tags"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "New Tags"
+msgstr "Neue Tags"
+
+msgid "Separate new Tags with comma"
+msgstr "Neue Tags mit Komma getrennt eingeben"
+
+msgid "Number characters"
+msgstr "Anzahl Zeichen"
+
+msgid "Link label"
+msgstr "Link Bezeichnung"
+
+msgid "News & Blog Categories"
+msgstr "Nachrichten & Blog Kategorien"
+
+msgid "News & Blog Settings"
+msgstr "Nachrichten & Blog Einstellungen"
+
+msgid "Blog & News Groups"
+msgstr "Nachrichten & Blog Gruppen"
+
+msgid "add_Article"
+msgstr "Artikel hinzufügen"
+
+msgid "edit_Article"
+msgstr "Artikel bearbeiten"
+
+#: files
+msgid "Medias"
+msgstr "Dateien"
+
+msgid "Add a foldername here"
+msgstr "Ordnername eintragen"
+
+msgid "Add Folder"
+msgstr "Ordner anlegen"
+
+#: filegroups
+msgid "Filegroups"
+msgstr "Dateigruppen"
+
+msgid "Filegroup"
+msgstr "Dateigruppe"
+
+msgid "add_Filegroup"
+msgstr "Dateigruppe anlegen"
+
+msgid "edit_Filegroup"
+msgstr "Dateigruppe bearbeiten"
+
+msgid "Filegroup_categories"
+msgstr "Dateien einer Dateigruppe"
+
+msgid "add_Filegroup_category"
+msgstr "Datei einer Gruppe hinzufügen"
+
+msgid "edit_Filegroup_category"
+msgstr "Datei in einer Gruppe bearbeiten"
+
+msgid "Link target attribute"
+msgstr "Linkziel Attribute"
+
+msgid "CombineFilegroups"
+msgstr "Zusammengefasste Dateigruppen"
+
+msgid "add_CombineFilegroups"
+msgstr "Zusammengefasste Dateigruppe anlegen"
+
+msgid "edit_CombineFilegroups"
+msgstr "Zusammengefasste Dateigruppe bearbeiten"
+
+msgid "Filegroups_categories"
+msgstr "Dateigruppen in einer Dateigruppe"
+
+msgid "add_Filegroups_category"
+msgstr "Dateigruppe einer Gruppe hinzufügen"
+
+msgid "edit_Filegroups_category"
+msgstr "Dateigruppe in einer Gruppe bearbeiten"
+
+#: blogcategory
+msgid "News or Blog categories"
+msgstr "Nachrichten oder Blog Kategorien"
+
+msgid "add_Blogcategory"
+msgstr "Eine Kategorie anlegen"
+
+msgid "edit_Blogcategory"
+msgstr "Eine Kategorie bearbeiten"
+
+#: blogsettings
+msgid "News or Blog Settings"
+msgstr "Nachrichten oder Blog Einstellungen"
+
+msgid "add_BlogNews"
+msgstr "Nachrichten oder Blog anlegen"
+
+msgid "edit_BlogNews"
+msgstr "Einstellungen bearbeiten"
+
+#: bloggroup
+msgid "News or Blog Groups"
+msgstr "Nachrichten oder Blog Gruppen"
+
+msgid "add_Bloggroup"
+msgstr "Gruppe anlegen"
+
+msgid "edit_Bloggroup"
+msgstr "Gruppe bearbeiten"
+
+#: bloggroupindex
+msgid "News or Blog Groupindex"
+msgstr "Gruppeninhalt Nachrichten oder Blogs"
+
+msgid "add_Bloggroupindex"
+msgstr "Nachrichten oder Blog hinzufügen"
+
+msgid "edit_Bloggroupindex"
+msgstr "Nachrichten oder Blog in der Gruppe bearbeiten"
+
+#: form
+msgid "Form"
+msgstr "Formular"
+
+msgid "Forms"
+msgstr "Formulare"
+
+msgid "add_Form"
+msgstr "Formular anlegen"
+
+msgid "edit_Form"
+msgstr "Formular bearbeiten"
+
+msgid "Send form to"
+msgstr "Formular senden an"
+
+msgid "Send to"
+msgstr "Senden an"
+
+msgid "Email name"
+msgstr "Name Formularempfänger"
+
+msgid "Only for internal use"
+msgstr "nur intern angezeigt"
+
+msgid "Response email"
+msgstr "Antwort Mail"
+
+msgid "Send form to CC"
+msgstr "E-Mail weitere Formularempfänger in CC"
+
+msgid "Separate multiple recipients with a semicolon"
+msgstr "Trennen Sie mehrere Empfänger mit einem Semikolon"
+
+msgid "Email subject"
+msgstr "Betreffzeile E-Mail aus Formular"
+
+msgid "Description above the form"
+msgstr "Text über dem Formular"
+
+msgid "Response text after send mail success"
+msgstr "Textanzeige nach erfolgreichen Formularversand"
+
+msgid "Replay email"
+msgstr "Antwort E-Mail"
+
+msgid "Replayemail name"
+msgstr "Name Antwort E-Mail"
+
+msgid "form_basedata"
+msgstr "Formulareinstellungen"
+
+msgid "form_extended"
+msgstr "Erweiterte Einstellungen"
+
+msgid "form_adjusments"
+msgstr "E-Mailantwort Einstellungen"
+
+msgid "Formfields"
+msgstr "Formularfelder"
+
+msgid "add_Formfields"
+msgstr "Formularfeld anlegen"
+
+msgid "edit_Formfields"
+msgstr "Formularfeld bearbeiten"
+
+msgid "field_basedata"
+msgstr "Formularfeldeinstellungen"
+
+msgid "field_extended"
+msgstr "Erweiterte Formularfeldeinstellungen"
+
+msgid "Required field"
+msgstr "Pflichtfeld"
+
+msgid "Form element"
+msgstr "Formularelement"
+
+msgid "Field value"
+msgstr "Feldwert"
+
+msgid "Field name"
+msgstr "Feldname"
+
+msgid "Fieldoptions"
+msgstr "Auswahloptionen"
+
+msgid "Field"
+msgstr "Feld"
+
+msgid "Value"
+msgstr "Wert"
+
+#: maps
+msgid "Maps"
+msgstr "Karten"
+
+msgid "Map"
+msgstr "Karte"
+
+msgid "add_Maps"
+msgstr "Karte anlegen"
+
+msgid "edit_Maps"
+msgstr "Karte bearbeiten"
+
+msgid "Mapdatas"
+msgstr "Kartendaten"
+
+msgid "Teaser Headline"
+msgstr "Absatz Überschrift"
+
+msgid "Map zoom"
+msgstr "Karten Zoom"
+
+msgid "Map section (location)"
+msgstr "Standort, Lage ermitteln"
+
+msgid "Latitude"
+msgstr "Breitengrad"
+
+msgid "Longitude"
+msgstr "Längengrad"
+
+msgid "Mapmarker"
+msgstr "Karten Markierungen"
+
+msgid "Marker"
+msgstr "Karten Markierungen"
+
+msgid "add_Mapmarker"
+msgstr "Kartenmarkierung setzen"
+
+msgid "edit_Mapmarker"
+msgstr "Kartenmarkierung bearbeiten"
+
+msgid "Street and number"
+msgstr "Straße und Hausnummer"
+
+msgid "Zipcode and city"
+msgstr "Postleitzahl und Ort"
+
+msgid "Search location"
+msgstr "Standort, Lage ermitteln"
+
+msgid "Map marker icon"
+msgstr "Icon für Kartenmarkierung"
+
+msgid "Markerdatas"
+msgstr "Daten Kartenmarkierung"
+
+#: usergroups
+msgid "Usergroups"
+msgstr "Benutzergruppen"
+
+msgid "Usergroup"
+msgstr "Benutzergruppe"
+
+msgid "add_Usergroups"
+msgstr "Benutzergruppe anlegen"
+
+msgid "edit_Usergroups"
+msgstr "Benutzergruppe bearbeiten"
+
+msgid "Useringroups"
+msgstr "Benutzer in Benutzergruppen"
+
+msgid "User in groups"
+msgstr "Benutzer in Benutzergruppen"
+
+msgid "add_Useringroups"
+msgstr "Benutzer in Gruppe einfügen"
+
+msgid "edit_Useringroups"
+msgstr "Benutzer in Gruppe bearbeiten"
+
+#: Preferences
+msgid "Preferences"
+msgstr "Einstellungen"
+
+msgid "Basedata"
+msgstr "Einstellungen"
+
+msgid "Website metadatas (SEO)"
+msgstr "Metadaten Webseite (SEO)"
+
+msgid "Will be overwritten by the individual entry per page"
+msgstr "Wird von den individuellen Eingabe pro Seite überschrieben"
+
+msgid "Javascript instructions"
+msgstr "Javascriptanweisungen"
+
+msgid "Alias domain from"
+msgstr "Alias Domain von"
+
+msgid "Website title"
+msgstr "Haupttitel Webseite"
+
+msgid "Location parameters"
+msgstr "Standort"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Metas"
+msgstr "Metadaten"
+
+msgid "Meta value description"
+msgstr "Metawert Beschreibung"
+
+msgid "Meta value keywords"
+msgstr "Metawert Keywords Webseite"
+
+msgid "Google site verification"
+msgstr "Google Verification Webseite"
+
+msgid "Embed javascript instruction block"
+msgstr "Inline Javascriptanweisungen"
+
+msgid "Javascript block head tag"
+msgstr "Javascript im HEAD Tag"
+
+msgid "Javascript block body end tag"
+msgstr "Javascript vor Ende BODY Tag"
+
+#: redirects
+msgid "Redirects"
+msgstr "Weiterleitungen"
+
+msgid "Redirect"
+msgstr "Weiterleitung"
+
+msgid "add_Redirects"
+msgstr "Weiterleitung anlegen"
+
+msgid "edit_Redirects"
+msgstr "Weiterleitung bearbeiten"
+
+#: emailtemplates
+msgid "Emailtemplates"
+msgstr "E-Mailvorlagen"
+
+msgid "Emailtextemplates"
+msgstr "E-Mailvorlagen"
+
+msgid "add_Emailtemplates"
+msgstr "E-Mailvorlage anlegen"
+
+msgid "edit_Emailtemplates"
+msgstr "E-Mailvorlage bearbeiten"
+
+msgid "Emailsignatures"
+msgstr "E-Mail Signaturen"
+
+msgid "add_Emailsignatures"
+msgstr "Signatur anlegen"
+
+msgid "edit_Emailsignatures"
+msgstr "Signatur bearbeiten"
+
+msgid "Accounttypes"
+msgstr "Organisation Schlüssel"
+
+msgid "Accounttype"
+msgstr "Organisation Schlüssel"
+
+msgid "Fieldtype"
+msgstr "Schlüssel"
+
+msgid "add_Accounttypes"
+msgstr "Schlüssel anlegen"
+
+msgid "edit_Accounttypes"
+msgstr "Schlüssel bearbeiten"
+
+#: Organizations
+msgid "Organizations"
+msgstr "Organisationen"
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "add_Organizations"
+msgstr "Organisation anlegen"
+
+msgid "edit_Organizations"
+msgstr "Organisation bearbeiten"
+
+msgid "add_orgagrp"
+msgstr "Organisationsgruppe anlegen"
+
+msgid "edit_orgagrp"
+msgstr "Organisationsgruppe bearbeiten"
+
+msgid "Contact data"
+msgstr "Kontaktdaten"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Select organization type"
+msgstr "Organisationtyp auswählen"
+
+msgid "Parent organisation"
+msgstr "Übergeordnente Organisation"
+
+msgid "Organizationgroups"
+msgstr "Organisationsgruppen"
+
+msgid "Organizationgroup"
+msgstr "Organisationsgruppe"
+
+msgid "add_orgingrp"
+msgstr "Organisationgruppe anlegen"
+
+msgid "edit_orgingrp"
+msgstr "Organisationgruppe bearbeiten"
+
+msgid "Select organization"
+msgstr "Organisation auswählen"
+
+#: contact
+msgid "Contacts"
+msgstr "Kontakte"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "add_Contact"
+msgstr "Kontakt anlegen"
+
+msgid "edit_Contact"
+msgstr "Kontakt bearbeiten"
+
+msgid "First name"
+msgstr "Vorname"
+
+msgid "Last name"
+msgstr "Nachname"
+
+#: contact
+msgid "Contactgroups"
+msgstr "Kontaktgruppen"
+
+msgid "Contactgroup"
+msgstr "Kontaktgruppe"
+
+msgid "add_Contactgroup"
+msgstr "Kontaktgruppe anlegen"
+
+msgid "edit_Contactgroup"
+msgstr "Kontaktgruppe bearbeiten"
+
+msgid "ContactsInGroup"
+msgstr "Kontakte in einer Gruppe"
+
+msgid "add_contactingrp"
+msgstr "Kontakt in einer Gruppe anlegen"
+
+msgid "edit_contactingrp"
+msgstr "Kontakt in einer Gruppe bearbeiten"
+
+#: dates
+msgid "Dates"
+msgstr "Termine"
+
+msgid "Organizer"
+msgstr "Veranstalter"
+
+msgid "Event"
+msgstr "Veranstaltung"
+
+msgid "Description and Files"
+msgstr "Beschreibung und Dateien"
+
+msgid "Description and Images"
+msgstr "Beschreibung und Bilder"
+
+msgid "Event address"
+msgstr "Veranstaltungsadresse"
+
+msgid "Add images"
+msgstr "Bild zufügen"
+
+msgid "Calendar"
+msgstr "Kalender"
+
+msgid "Summary"
+msgstr "Veranstaltungs Titel"
+
+msgid "Add a file attachment"
+msgstr "Dateianhang zufügen"
+
+msgid "add_Date"
+msgstr "Termin zufügen"
+
+msgid "edit_Date"
+msgstr "Termin bearbeiten"
+
+msgid "add_Calendar"
+msgstr "Kalender zufügen"
+
+msgid "edit_Calendar"
+msgstr "Kalender bearbeiten"
+
+msgid "Calendargroup"
+msgstr "Kalendergruppe"
+
+msgid "add_Calendargroup"
+msgstr "Kalendergruppe zufügen"
+
+msgid "edit_Calendargroup"
+msgstr "Kalendergruppe bearbeiten"

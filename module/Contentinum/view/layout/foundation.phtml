@@ -1,0 +1,27 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('contentinum 5.5 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+
+
+    </head>
+    <body>
+             <h1>foundation.phtml</h1>
+    
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; 2005 - <?php echo date('Y') ?> by jochum-mediaservices <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+    
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

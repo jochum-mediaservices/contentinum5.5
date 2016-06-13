@@ -1,0 +1,61 @@
+
+form#mcworkForm {
+	border: 1px solid #C6C9CA;
+	background: #F9F9F9;
+	padding: 10px 20px;
+}
+
+form.custom .custom.dropdown {
+	background: #ECF0F1;
+}
+#filescrollarea {
+	margin-bottom: 1em;
+}
+#contentinumUpload {
+	height: 200px;
+}
+p.formElement {
+	padding: 0.8em 0;
+	margin-bottom: 0;
+}
+#fieldimgLogo,
+#fieldimgSource,
+#fieldcontactImgSource,
+#fieldsetnonpublic,
+#fieldsetpublicpdf,
+#fieldmediaLinkPage,
+#fieldwebMediasId,
+#fieldcontactImgSource,
+#fieldmediaLinkUrl,
+#fieldimgSource,
+#contactImgSource,
+p.formElement.elmNoPadd {
+	padding-bottom: 0;
+}
+p.formElement textarea,
+p.formElement select,
+p.formElement input {
+	margin-bottom: 0;
+}
+p.formElement.error label {
+	font-weight: bold;
+	color: #E74C3C;
+}
+p.formElement.valid label {
+	font-weight: bold;
+	color: #2ECC71;
+}
+p.formElement.error input {
+	border-color: #E74C3C;
+}
+p.formElement.valid input {
+	border-color: #2ECC71;
+}
+.form-field-desc {
+	font-style: italic;
+	font-size: 0.75rem;
+}
+.progress.warn .meter {
+   background: #DB7131;
+   display: block;
+   height: 100%; }

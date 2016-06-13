@@ -1,0 +1,38 @@
+{{ docType() }}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    {% block title %}
+        {{ headTitle() }}
+    {% endblock %}
+
+    {% block meta %}
+        {% do headMeta('viewport', 'width=device-width, initial-scale=1.0') %}
+        {{ headMeta() }}
+    {% endblock %}
+
+    {% block link %}
+        {{ headLink() }}
+    {% endblock %}
+
+    {% block headscript %}
+        {{ headScript() }}
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <!-- content|raw is required for phtml fallback -->
+    {% block content %}{{ content|raw }}{% endblock content %}
+</div>
+<!-- /container -->
+
+
+{% block inlinescript %}
+    {{ inlineScript() }}
+{% endblock %}
+
+{% block inline %}{% endblock inline %}
+</body>
+</html>

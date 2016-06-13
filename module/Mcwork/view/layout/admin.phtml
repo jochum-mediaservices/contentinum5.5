@@ -1,0 +1,31 @@
+<?php echo $this->doctype(); ?>
+<html lang="de">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<?php 
+echo $this->headTitle(); 
+echo "\n" . '<meta name="viewport" content="'. $this->viewport .'">';
+echo $this->headMeta();
+echo "\n" . $this->headlink();
+echo $this->stylesheets;
+echo $this->scripthead;
+echo "\n" . $this->headscript();
+?>
+</head>
+<body<?php echo $this->bodyIdent; ?>>
+<nav class="top-bar" data-topbar="data-topbar"><ul class="title-area"><li class="name"><h1><a href="/mcwork/dashboard">contentinum 5</a></h1></li><li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li></ul><div class="top-bar-section">
+<?php
+echo $this->navigationcontentinum($this->mcworknavigation)->setAcl($this->acl)->setRole($this->role)->setUlClass('right');
+echo '</div></nav>';
+echo $this->content; 
+?>
+<div id="modal" class="reveal-modal" data-reveal> </div>
+<div id="second_modal" class="reveal-modal" data-reveal> </div>
+<div id="big_modal" class="reveal-modal large" data-reveal> </div>
+<?php
+echo $this->prependScripts;
+echo $this->scriptInline;
+echo $this->inlineScript();
+?>
+</body>
+</html>

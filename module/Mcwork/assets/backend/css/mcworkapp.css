@@ -1,0 +1,185 @@
+
+body#mcworkdashboard {
+	background: #FFFFFF url(/assets/app/images/contentinum-logo-soft.jpg) no-repeat center center;
+}
+table#mcworkTables,
+table.mcworkBackendTable {
+	width: 100%;
+}
+#map_canvas {
+	width: 100%;
+	height: 744px;
+}
+td .button {
+	margin-bottom: 0;
+}
+
+ul.modal-buttons {
+	margin: 0;
+}
+#dashboardrow {
+	margin-top: 2rem;
+}
+.modal-buttons li {
+	list-style: none;
+	display: inline;
+}
+.progress {
+	height: 12px;
+}
+.modal-buttons .button {
+	margin-bottom: 0;
+}
+.toprow {
+	margin-top: 2em;
+}
+.filegroup-list li.active {
+	background-color: #c60f13;
+}
+.filegroup-element {
+	margin: 0;
+}
+
+ul.nostyle-list {
+	list-style: none;
+}
+
+dl.asset-collection dt, dl.asset-collection dd {
+	font-weight: normal;
+	margin-bottom: 0;
+}
+ul.accordion {
+	margin-left: 0;
+}
+select.changerang {
+	margin-bottom: 0;
+	height: auto;
+	width: 4.0625rem;
+}
+.emerald {
+	background: #82bb54
+}
+.alizarin {
+	background: #c60f13
+}
+.belize-hole {
+	background: #2980B9
+}
+.pumpkim {
+	background: #D35400
+}
+
+.emerald-color {
+	color: #82bb54
+}
+.alizarin-color {
+	color: #c60f13
+}
+.belize-hole-color {
+	color: #2980B9
+}
+.pumpkim-color {
+	color: #D35400
+}
+.turquoise {
+	background: #1ABC9C
+}
+.green-sea {
+	background: #16A085
+}
+.nephritis {
+	background: #27AE60
+}
+.peter-river {
+	background: #3498DB
+}
+.amethyst {
+	background: #9B59B6
+}
+.wisteria {
+	background: #8E44AD
+}
+.wet-aspahlt {
+	background: #34495E
+}
+.midnight-blue {
+	background: #2C3E50
+}
+.sun-flower {
+	background: #F1C40F
+}
+.orange {
+	background: #F39C12
+}
+.carrot {
+	background: #E67E22
+}
+.pomegranate {
+	background: #C0392B
+}
+.clouds {
+	background: #ECF0F1
+}
+.silver {
+	background: #BDC3C7
+}
+.concrete {
+	background: #95A5A6
+}
+.asbestos {
+	background: #7F8C8D
+}
+.turquoise-color {
+	color: #1ABC9C
+}
+.green-sea-color {
+	color: #16A085
+}
+.nephritis-color {
+	color: #27AE60
+}
+.peter-river-color {
+	color: #3498DB
+}
+.amethyst-color {
+	color: #9B59B6
+}
+.wisteria-color {
+	color: #8E44AD
+}
+.wet-aspahlt-color {
+	color: #34495E
+}
+.midnight-blue-color {
+	color: #2C3E50
+}
+.sun-flower-color {
+	color: #F1C40F
+}
+.orange-color {
+	color: #F39C12
+}
+.carrot-color {
+	color: #E67E22
+}
+.pomegranate-color {
+	color: #C0392B
+}
+.clouds-color {
+	color: #ECF0F1
+}
+.silver-color {
+	color: #BDC3C7
+}
+.concrete-color {
+	color: #95A5A6
+}
+.asbestos-color {
+	color: #7F8C8D
+}
+.pdf-color {
+	color:#BB0706;
+}
+.display-block {
+	display: block;
+}

@@ -1,0 +1,157 @@
+<?php
+/**
+ * contentinum - accessibility websites
+ *
+ * LICENSE
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @category contentinum backend
+ * @package View
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
+ * @license http://www.opensource.org/licenses/bsd-license
+ * @since contentinum version 5.0
+ * @link      https://github.com/Mikel1961/contentinum-components
+ * @version   1.0.0
+ */
+use ContentinumComponents\Html\HtmlTable;
+use ContentinumComponents\Html\Table\FactoryTable;
+// prepare content, create a table
+$tableFactory = new HtmlTable(new FactoryTable());
+// set table tag attributes
+$tableFactory->setAttributes('class', 'table tblNoSort display compact');
+$tableFactory->setAttributes('id', 'mcworkTables');
+$i = 0;
+$iClass = 0;
+$headlines = array(
+    '#' => array(),
+    'News or Blog name' => array(),
+    'Headline' => array(),
+    'Datum' => array(),
+    'Publish' => array(),
+    'Edit' => array(
+        'head' => array(
+            'class' => 'hide-for-small text-right'
+        ),
+        'body' => array(
+            'class' => 'hide-for-small text-right'
+        )
+    )
+)
+;
+$ihead = count($headlines);
+foreach ($headlines as $column => $attributes) {
+    $columns[] = $this->translate($column);
+    if (is_array($attributes) && ! empty($attributes)) {
+        foreach ($attributes as $area => $attribute) {
+            switch ($area) {
+                case 'head':
+                    $tableFactory->setHeadlineAttributtes('class', $attribute['class'], $i);
+                    break;
+                case 'body':
+                    $tableFactory->setTagAttributtes('class', $attribute['class'], $i);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    $i ++;
+}
+$tableFactory->setHeadline($columns);
+$dbCategories = array();
+if ($this->services && isset($this->services['categories'])) {
+    $dbCategories = $this->services['categories'];
+}
+$i = 0;
+foreach ($this->entries as $entry) {
+    if ( 1 !== $entry->webContent->id && true === $this->listIsAllowed($entry, $this->identity)){
+    $i ++;
+    $rowContent = array();
+    $rowContent[] = '<input id="row' . $i . '" type="checkbox" value="' . $entry->webContent->id . '" name="cb[]" data-name="' .  $entry->webContent->title . '" />';  
+    $rowContent[] = $entry->name;
+    $cat = (isset($dbCategories[$entry->webContent->contentCategory])) ? '<br /><em>Category: ' . $dbCategories[$entry->webContent->contentCategory] . '</em>' : '';
+    $rowContent[] = $entry->webContent->title . $cat;
+    $rowContent[] = $this->datetimeformat($entry->webContent->publishDate, 'FULL');    
+    $rowContent[] = $this->mcworkPublishItem($entry->webContent->publish,$entry->webContent->id,'entity_content');
+    
+    $props = array(
+        'edit' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/edit/' . $entry->webContent->id,
+            'attribs' => array(
+                'title' => 'Edit item',
+                'class' => 'button tiny'
+            )
+        ),
+        'delete' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/delete/' . $entry->webContent->id,
+            'attribs' => array(
+                'data-name' => $entry->webContent->title,
+                'data-ident' => 'row' . $i,
+                'title' => 'Delete item',
+                'class' => 'button tiny alert deleteitem'
+            )
+        ),
+        'info' => array(
+            'attribs' => array(
+                    'data-service' => 'backend_client_app',
+                    'data-appkey' => 'infoapp',          
+                    'data-entity' => 'entity_content',
+                    'data-ident' => $entry->webContent->id,                    
+                    'data-update' => $entry->webContent->upDate->format('d F Y, H:i'),
+                    'data-registerdate' => $entry->webContent->registerDate->format('d F Y, H:i'),
+                    'data-createBy' => $entry->webContent->createdBy,
+                    'data-updateBy' => $entry->webContent->updateBy,
+                    'data-username' => $this->identity->name,
+                    'data-role' => $this->role,
+                    'title' => 'Item properties',
+                    'class' => 'button tiny infotip'
+            )
+        )
+    );    
+    
+    $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
+    $tableFactory->setHtmlContent($rowContent);
+    }
+}
+if (true === $this->xmlHttpRequest){
+    print $tableFactory->display();
+    exit();
+}
+$toolbar = '';
+if (isset($this->toolbarcontent)) {
+    $links = array(
+        'add' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/add'
+        ),
+        'edit' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/edit'
+        ),
+        'delete' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/delete'
+        ),
+    );
+    $toolbar = $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
+}
+print '<div class="row toprow"><div class="medium-6 columns"><h2>' . $this->translate($this->content['headline']) . '</h2>';
+print '</div><div class="medium-6 columns">'. $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
+print '</div></div>';
+print $this->mcworkAlert($this->messages, $this->msgtype);
+print '<div class="row"><div id="addTblContent" class="medium-12 columns">';
+print $tableFactory->display();
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '</div></div>';
+?>

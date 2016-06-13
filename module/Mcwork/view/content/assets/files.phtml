@@ -1,0 +1,10 @@
+<?php
+$result = array();
+foreach ($this->entries as $entry){
+    if ('.' != $entry->filename && '..' != $entry->filename) {
+        $result[] = array( 'type' => $entry->type, 'filename' => $entry->filename, 'path' => str_replace($entry->docroot . DS . 'data/assets/', '', $entry->pathname));
+    }   
+}
+print $this->json($result);
+exit;
+?>
