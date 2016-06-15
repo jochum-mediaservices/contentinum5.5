@@ -157,7 +157,7 @@ return array(
                             array(
                                 'label' => 'Organizationgroups',
                                 'uri' => '/mcwork/accountgroups',
-                                'resource' => 'managerresource'
+                                'resource' => 'publisherresource',
                             ),                            
                         ) // end sub fieldtypes
 
@@ -175,7 +175,7 @@ return array(
                             array(
                                 'label' => 'Kontakte gruppieren',
                                 'uri' => '/mcwork/contactgroup',
-                                'resource' =>  'managerresource'
+                                'resource' =>  'publisherresource',
                             )
                         ), 
                     ),                    
