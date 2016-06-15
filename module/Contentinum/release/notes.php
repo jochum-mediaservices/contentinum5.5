@@ -1,5 +1,8 @@
 <?php
 return array(
+    5511 => array(
+        'Zugriffsrechte Backendnavigation auf Organisationsgruppen und Kontaktgruppen',
+    ),    
     5510 => array(
         "ALTER TABLE `municipal_user_acls` CHANGE `login_group` `login_group` INT(5) UNSIGNED NOT NULL DEFAULT '0';",
         "ALTER TABLE `web_content` ADD `resource_group` INT(5) UNSIGNED NOT NULL DEFAULT '0' AFTER `resource`;"
