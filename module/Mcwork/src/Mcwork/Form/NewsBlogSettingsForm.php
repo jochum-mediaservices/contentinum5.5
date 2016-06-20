@@ -44,7 +44,6 @@ class NewsBlogSettingsForm extends AbstractForms
      */
     protected function tabHeader()
     {
-        $translation = $this->getServiceLocator()->get('translator');
         $html = '<dl class="tabs" data-tab="data-tab">';// tab header start
         $html .= '<dd class="active"><a href="#fieldsetBasedata">Basiskonfiguration</a></dd>';// tab1
         $html .= '<dd><a href="#fieldsetExtendet">Erweiterte Konfiguration</a></dd>';// tab2

@@ -44,7 +44,6 @@ class ContactGroupForm extends AbstractForms
      */
     protected function tabHeader()
     {
-        $translation = $this->getServiceLocator()->get('translator');
         $html = '<dl class="tabs" data-tab="data-tab">';// tab header start
         $html .= '<dd class="active"><a href="#fieldsetName">Kontaktgruppe</a></dd>';// tab1
         $html .= '<dd><a href="#fieldsetEnable">Parameter</a></dd>';// tab4
