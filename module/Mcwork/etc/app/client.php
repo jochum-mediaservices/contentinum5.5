@@ -1865,7 +1865,60 @@ return array(
                         )
                     ),
                     'form' => array(
+                        
+                        
                         1 => array(
+                            'spec' => array(
+                                'name' => 'imagesize',
+                                'required' => false,
+                                'options' => array(
+                                    'label' => 'Bildgröße',
+                                    'empty_option' => 'Bitte auswählen',
+                                    'value_options' => array(
+                                        '2048' => '2048px',
+                                        '1920' => '1920px',
+                                        '1440' => '1440px',
+                                        '1200' => '1200px',
+                                        '1024' => '1024px',
+                                        '680' => '680px',
+                                        '480' => '480px',
+                                        '320' => '320px',
+                                    )
+                                ),
+                                'type' => 'Select',
+                        
+                                'attributes' => array(
+                                    'id' => 'imagesize'
+                                )
+                            )
+                        ), 
+                        2 => array(
+                            'spec' => array(
+                                'name' => 'imagequality',
+                                'required' => false,
+                                'options' => array(
+                                    'label' => 'Bildqualität (Nur jpg)',
+                                    'empty_option' => 'Bitte auswählen',
+                                    'value_options' => array(
+                                        '100' => '100% (Standard, keine Komprimierung)',
+                                        '90' => '90% Komprimierung',
+                                        '80' => '80% Komprimierung',
+                                        '70' => '70% Komprimierung',
+                                        '60' => '60% Komprimierung',
+                                        '50' => '50% Komprimierung',
+                                        '40' => '40% Komprimierung',
+                                    )
+                                ),
+                                'type' => 'Select',
+                        
+                                'attributes' => array(
+                                    'id' => 'imagequality',
+                                )
+                            )
+                        ),                        
+                        
+                        
+                        3 => array(
                             'spec' => array(
                                 'name' => 'file',
                                 'required' => true,
@@ -1880,8 +1933,10 @@ return array(
                                 )
                             )
                         ),
+                        
+                       
     
-                        2 => array(
+                        3 => array(
                             'spec' => array(
                                 'name' => 'currentuploadpath',
                                 'required' => false,

@@ -117,6 +117,18 @@ class Upload extends Resize
      * @var unknown
      */
     protected $notNew = false;
+    
+    /**
+     * 
+     * @var unknown
+     */
+    protected $imageQuality = 100;
+    
+    /**
+     * 
+     * @var integer
+     */
+    protected $resizeImage = 0;
 
     /**
      * 
@@ -139,6 +151,22 @@ class Upload extends Resize
     public function getTargetFileName()
     {
         return $this->targetFileName;
+    }
+
+    /**
+     * @return the $targetPathFileName
+     */
+    public function getTargetPathFileName()
+    {
+        return $this->targetPathFileName;
+    }
+
+    /**
+     * @param string $targetPathFileName
+     */
+    public function setTargetPathFileName($targetPathFileName)
+    {
+        $this->targetPathFileName = $targetPathFileName;
     }
 
     /**
@@ -459,6 +487,36 @@ class Upload extends Resize
     {
         $this->notNew = $notNew;
     }
-    
-    
+    /**
+     * @return the $imageQuality
+     */
+    public function getImageQuality()
+    {
+        return $this->imageQuality;
+    }
+
+    /**
+     * @param \Mcwork\Model\Medias\unknown $imageQuality
+     */
+    public function setImageQuality($imageQuality)
+    {
+        $this->imageQuality = $imageQuality;
+    }
+
+    /**
+     * @return the $resizeImage
+     */
+    public function getResizeImage()
+    {
+        return $this->resizeImage;
+    }
+
+    /**
+     * @param number $resizeImage
+     */
+    public function setResizeImage($resizeImage)
+    {
+        $this->resizeImage = $resizeImage;
+    }
+
 }

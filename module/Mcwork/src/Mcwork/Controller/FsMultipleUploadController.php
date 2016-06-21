@@ -57,29 +57,23 @@ class FsMultipleUploadController extends AbstractApplicationController
                 $this->worker->setFsCurrent(str_replace('_', DS, $datas['currentuploadpath']) . DS);
             }
             
-            $this->worker->setResizes(array(
-                '200'
-            ));
+            if (isset($datas['imagesize']) && strlen($datas['imagesize']) > 2) {
+                $this->worker->setResizeImage($datas['imagesize']);
+            }
+            
+            if (isset($datas['imagequality']) && strlen($datas['imagequality']) > 1) {
+                $this->worker->setImageQuality($datas['imagequality']);
+            }            
             
             $save = new \Mcwork\Model\Medias\SaveUpload($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'));
             $save->setEntity(new \Contentinum\Entity\WebMedias());
             $entityName = $save->getEntityName();
+            $ret = array();
             foreach ($_FILES['file']['tmp_name'] as $k => $file) {
                 $this->worker->multipleUpload($_FILES, $k, $file);             
                 $this->worker->addInsert('resource', 'index');
                 $save->save($this->worker->preparedInsert($datas->toArray())
-                    ->emptyInserts(), new $entityName());
-                $lastInsertId = $save->getLastInsertId();
-                $saveStatus = $save->getSaveStatus();
-                /*
-                if (null != ($resizeImages = $this->worker->getResizesImages()) && 'insert' == $saveStatus){
-                    foreach ($resizeImages as $image){
-                        $inserts = $image;                    
-                        $inserts['parentMedia'] = $lastInsertId;
-                        $save->unsetEntity();
-                        $save->save($inserts, new $entityName() , 'force');                        
-                    }
-                }  */        
+                    ->emptyInserts(), new $entityName());      
                 $ret[$_FILES['file']['name'][$k]]['filename'] = $this->worker->getTargetFileName();
             }
             $view = $view = new ViewModel(array(
