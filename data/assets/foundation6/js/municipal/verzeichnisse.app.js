@@ -28,7 +28,7 @@
 				trigger : '#selectkategorie',
 				url : '/contentplugin',
 				attribute : $(this).data(),
-			}
+			};
 			defaults = $.extend({}, defaults, options);	
 
 			$(document.body).on('change', defaults.trigger, function(ev) {

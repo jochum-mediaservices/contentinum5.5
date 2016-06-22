@@ -7,13 +7,58 @@
 			trash : '',
 			month : false,
 			monthIdent : false,
+			disableDates : false,
+			currentHeadline : false,
+			currentDate : false,
 			selectmonth : '#selectmonat',
 		};
+
+		var AddDateZero = function(i){
+		    if (i < 10) {
+		        i = "0" + i;
+		    }
+		    return i;
+		};
+
+		var GetCurrentDate = function() {
+		    var d = new Date();
+		    var y = d.getFullYear()
+		    var mm = AddDateZero(d.getMonth() + 1);
+		    var t = AddDateZero(d.getDate());
+		    var h = AddDateZero(d.getHours());
+		    var m = AddDateZero(d.getMinutes());
+		    var s = AddDateZero(d.getSeconds());
+		    defaults.currentDate =  y + "-" + mm + "-" + t + " " + h + ":" + m + ":" + s;
+		};
+
+		var GetCurrentHeadline = function() {
+		    var d = new Date();
+		    defaults.currentHeadline = AddDateZero(d.getMonth() + 1);
+		};				
+
 		var UserMessage = function() {
-			var htmlstr = '<div data-alert class="alert-box success">';
-			htmlstr = 'Ihre Einstellungen wurden gespeichert. <a href="#" class="close">&times;</a></div>';
+			var htmlstr = '<p class="emerald-color appnotice"><i class="fa fa-check-circle" aria-hidden="true"></i> ';
+			htmlstr += 'Ihre Einstellungen wurden auf diesem Ger&auml;t gespeichert.</p>';
 			return htmlstr;
 		};
+
+		var FilterDates = function() {
+			$.each($('#trashdatelist').children(), function(k,v){
+				$.each($(v).children(), function(key, value) {
+					if ($(value).hasClass('event-mounth-headline') ){
+						if (defaults.currentHeadline > $(value).attr('data-month')){
+							$(value).css("display","none");
+						}
+					}
+					if ($(value).hasClass('event-wrapper') ){ // && 'none' !== $(value).css('display')){
+						if (defaults.currentDate > $(value).attr('data-trashdate')){
+							$(value).css("display","none");
+						}
+					}				
+				});
+			});
+		};
+
 		var FilterTrash = function() {
 			$.each($('#trashdatelist').children(), function(k,v){
 				$.each($(v).children(), function(key, value) {
@@ -87,6 +132,14 @@
 				$('#' + previous.monthIdent).removeAttr('style');
 			}	
 			if ('00' == defaults.month){
+				if (true === defaults.disableDates){
+					GetCurrentDate();
+					GetCurrentHeadline();
+				} else {
+					defaults.currentHeadline = false;
+					defaults.currentDate = false;
+				}
+
 				$.each($('#trashdatelist').children(), function(k,v){
 					$(v).css("display","block");
 				});
@@ -95,6 +148,9 @@
 				}
 				if (true !== jQuery.isEmptyObject(defaults.districts)){
 					FilterDistrict();
+				}
+				if (true === defaults.disableDates){
+					FilterDates();
 				}
 			} else {
 				$('#' + defaults.monthIdent).css("display","block");
@@ -174,6 +230,23 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$(document.body).on('click', '#disablePrevDate', function(ev) {
+		
+		
+		if ( 1 == $( '#disablePrevDate' ).val( ) ){
+			$( '#disablePrevDate' ).val(0)
+			$("#disablePrevDate").removeAttr('checked');
+			trashapp.init({'disableDates' : false});
+		} else {
+			$( '#disablePrevDate' ).val(1)
+			$("#disablePrevDate").attr( "checked", "checked" );
+			var d = new Date();
+			trashapp.init({'disableDates' : true }); 
+		}
+		
+		//trashapp.init({'disableDates' : true });
+	});		
 	$(document.body).on('click', '#savetrash', function(ev) {
 		ev.preventDefault();
 		trashapp.init({'cookie' : true });
