@@ -22,7 +22,7 @@
 
 		var GetCurrentDate = function() {
 		    var d = new Date();
-		    var y = d.getFullYear()
+		    var y = d.getFullYear();
 		    var mm = AddDateZero(d.getMonth() + 1);
 		    var t = AddDateZero(d.getDate());
 		    var h = AddDateZero(d.getHours());
@@ -37,10 +37,16 @@
 		};				
 
 		var UserMessage = function() {
-			var htmlstr = '<p class="emerald-color appnotice"><i class="fa fa-check-circle" aria-hidden="true"></i> ';
-			htmlstr += 'Ihre Einstellungen wurden auf diesem Ger&auml;t gespeichert.</p>';
+			var htmlstr = '<div class="callout secondary"><p class="emerald-color"><i class="fa fa-check-circle" aria-hidden="true"> </i> ';
+			htmlstr += 'Ihre Einstellungen wurden auf diesem Ger&auml;t gespeichert.</p></div>';
 			return htmlstr;
 		};
+
+		var UserMessageRemove = function() {
+			var htmlstr = '<div class="callout secondary"><p class="emerald-color"><i class="fa fa-check-circle" aria-hidden="true"> </i> ';
+			htmlstr += 'Ihre Einstellungen wurden von diesem Ger&auml;t entfernt.</p></div>';
+			return htmlstr;
+		};		
 
 		var FilterDates = function() {
 			$.each($('#trashdatelist').children(), function(k,v){
@@ -95,7 +101,7 @@
 		
 		var ini = function () {
 			var trashcookie = $.cookie("municipaltrash");
-			if(typeof trashcookie !== typeof undefined){
+			if(typeof trashcookie !== typeof undefined ){
 				sets(JSON.parse(trashcookie));
 				$("#selectmeull option[value='"+defaults.trash+"']").attr('selected',true);
 				$("#selectbezirk option[value='"+defaults.usrstreet+"']").attr('selected',true);
@@ -167,8 +173,9 @@
 					$.each($('#' + defaults.monthIdent).children(), function(key, value) {
 						if ($(value).hasClass('event-wrapper')){
 							if (defaults.districts.hasOwnProperty($(value).attr('data-district')) ){
+								//console.log($(value).css('display'));
 								//if (! $(value).css('none')){
-                                if ( typeof $(value).css('none') !== "undefined" ){						
+                                if ($(value).css('display') == "none" ){						
 									$(value).css("display","block");
 								}
 							} else {
@@ -183,6 +190,20 @@
 			$.cookie("municipaltrash",  JSON.stringify( defaults )  , { path: '/', expires: 365 });
 			$('#usrmessage').html(UserMessage());
 		};
+		var deletecookie = function(){
+			$.cookie("municipaltrash",  null  , { path: '/' });
+			$.removeCookie("municipaltrash");
+			defaults.districts = {};
+			defaults.usrstreet = '';
+			defaults.trash = '';
+			defaults.month = false;
+			defaults.monthIdent = false;
+			defaults.disableDates = false;
+			defaults.currentHeadline = false;
+			defaults.currentDate = false;
+			$('#usrmessage').html(UserMessageRemove());
+			ini();
+		};		
 		return { 
 			init : function(options) {
 				if (true === jQuery.isEmptyObject(options)){
@@ -190,6 +211,8 @@
 				} else {
 					if ( options.hasOwnProperty('cookie') ){
 						setcookie(options);
+				    } else if (options.hasOwnProperty('delcookie')){
+				    	deletecookie();
 					} else {
 						sets(options);
 					}
@@ -199,6 +222,13 @@
 	};
 })(jQuery);
 $(document).ready(function() {
+
+
+
+	$(document.body).on('click', '.displayselectform', function(ev) {
+		ev.preventDefault();
+		$('#' + $(this).attr('data-ident')).toggle();
+	});		
 	
 	var trashapp = $('#trashdatelist').MunicipalTrashlist();
 	trashapp.init({});
@@ -251,5 +281,9 @@ $(document).ready(function() {
 		ev.preventDefault();
 		trashapp.init({'cookie' : true });
 	});	
+	$(document.body).on('click', '#deletetrash', function(ev) {
+		ev.preventDefault();
+		trashapp.init({'delcookie' : true });
+	});		
 	
 });
