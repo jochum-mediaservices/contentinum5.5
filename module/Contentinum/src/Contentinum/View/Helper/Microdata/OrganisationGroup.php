@@ -52,7 +52,7 @@ class OrganisationGroup extends Parameters
         $html = '';
         foreach ($entries['modulContent']['account'] as $entry) {
             $cardData = '';
-            if ('_nomedia' != $entry->accounts->imgSource) {
+            if (1 === $entry->indexGroup->imageSource && '_nomedia' != $entry->accounts->imgSource) {
                 $cardData .= $this->deployRow($this->imagesSource, '<img src="' . $entry->accounts->imgSource . '" alt="' . $entry->accounts->organisation . '" />' );
             }
             $ext = '';
@@ -103,12 +103,26 @@ class OrganisationGroup extends Parameters
                 $cardData .= $this->deployRow($this->accountEmail, $entry->accounts->accountEmail);
             }
             
-            if ($this->internet && strlen($entry->accounts->internet) > 0) {
+            if (1 === $entry->indexGroup->enableInternet  &&  $this->internet && strlen($entry->accounts->internet) > 0) {
                 $cardData .= $this->deployRow($this->internet, $entry->accounts->internet);
             }
             
             if (1 === $entry->indexGroup->enableDescription && $this->description && strlen($entry->accounts->description) > 0) {
-                $cardData .= $this->deployRow($this->description, $entry->accounts->description);
+                
+                
+                
+                $descriptionHead = $this->descriptionhead->toArray();
+                $descriptionBody = $this->description->toArray();
+                $descriptionHead['grid']['attr']['data-ident'] = 'toogleElement' . $entry->id;
+                $descriptionBody['grid']['attr']['id'] = 'toogleElement' . $entry->id;
+                $descriptionBody['grid']['attr']['class'] .= ' toogleDescription';
+                $cardData .= $this->deployRow($descriptionHead, 'Weitere Informationen');
+                $cardData .= $this->deployRow($descriptionBody, $entry->accounts->description);                
+                
+                
+                
+                
+                //$cardData .= $this->deployRow($this->description, $entry->accounts->description);
             }
             
             $html .= $this->deployRow($this->schema, $cardData);

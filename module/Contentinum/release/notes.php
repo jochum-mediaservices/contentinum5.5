@@ -1,5 +1,14 @@
 <?php
 return array(
+    5514 => array(
+        "ALTER TABLE `field_types` ADD `select_login` INT(1) NOT NULL DEFAULT '0' AFTER `params`;"
+    ),
+    5513 => array(
+        'Neues Features: Content Post Loader für Verzeichnisse',
+    ),  
+    5512 => array(
+        'Neues Features: VHS Verwaltung',
+    ),    
     5511 => array(
         'Zugriffsrechte Backendnavigation auf Organisationsgruppen und Kontaktgruppen',
     ),    

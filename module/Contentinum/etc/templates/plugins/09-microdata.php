@@ -509,7 +509,7 @@ return array(
                             'attr' => array(
                                 'itemprop' => 'streetAddress'
                             ),
-                            'content:after:outside' => ', '
+                            'content:after:outside' => '<br />'
                         )
                     ),
         
@@ -845,7 +845,7 @@ return array(
                             'attr' => array(
                                 'itemprop' => 'streetAddress'
                             ),
-                            'content:after:outside' => ', '
+                            'content:after:outside' => '<br />'
                         )
                     ),
         
@@ -1154,7 +1154,7 @@ return array(
                             'attr' => array(
                                 'itemprop' => 'streetAddress'
                             ),
-                            'content:after:outside' => ', '
+                            'content:after:outside' => '<br />'
                         )
                     ),
         

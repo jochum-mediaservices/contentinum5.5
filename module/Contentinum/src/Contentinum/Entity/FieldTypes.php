@@ -42,6 +42,13 @@ class FieldTypes extends AbstractEntity
      * @ORM\Column(name="params", type="text", nullable=false)
      */
     private $params = '';
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="select_login", type="integer", nullable=false)
+     */    
+    private $selectLogin = 0;
 
     /**
      * @var integer
@@ -204,6 +211,22 @@ class FieldTypes extends AbstractEntity
     public function getParams()
     {
         return $this->params;
+    }
+
+    /**
+     * @return the $selectLogin
+     */
+    public function getSelectLogin()
+    {
+        return $this->selectLogin;
+    }
+
+    /**
+     * @param number $selectLogin
+     */
+    public function setSelectLogin($selectLogin)
+    {
+        $this->selectLogin = $selectLogin;
     }
 
     /**

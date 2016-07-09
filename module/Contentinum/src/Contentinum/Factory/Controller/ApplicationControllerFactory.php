@@ -45,7 +45,7 @@ class ApplicationControllerFactory implements FactoryInterface
                 switch ($page) {
                     case 'mcevent':
                     case 'mcwork':
-                    case 'municipal': 
+                    case 'municipal':
                     case 'utilities':
                         if (isset($pages['/' . $pageOptions->split(null, 3)])) {
                             $pageOptions->addOptions($pages, '/' . $pageOptions->split(null, 3), true);

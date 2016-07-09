@@ -147,6 +147,13 @@ class AccountGroups extends AbstractEntity
      * @ORM\Column(name="enable_description", type="integer", nullable=false)
      */    
     private $enableDescription = 1;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="enable_internet", type="integer", nullable=false)
+     */    
+    private $enableInternet = 1;
 
     /**
      * @var integer
@@ -521,6 +528,22 @@ class AccountGroups extends AbstractEntity
     public function setEnableDescription($enableDescription)
     {
         $this->enableDescription = $enableDescription;
+    }
+
+    /**
+     * @return the $enableInternet
+     */
+    public function getEnableInternet()
+    {
+        return $this->enableInternet;
+    }
+
+    /**
+     * @param string $enableInternet
+     */
+    public function setEnableInternet($enableInternet)
+    {
+        $this->enableInternet = $enableInternet;
     }
 
     /**
