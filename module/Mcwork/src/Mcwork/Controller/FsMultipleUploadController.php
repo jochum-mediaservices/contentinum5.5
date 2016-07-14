@@ -67,6 +67,9 @@ class FsMultipleUploadController extends AbstractApplicationController
             
             $save = new \Mcwork\Model\Medias\SaveUpload($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'));
             $save->setEntity(new \Contentinum\Entity\WebMedias());
+            if (method_exists($save, 'setIdentity')) {
+                $save->setIdentity($this->getIdentity());
+            }            
             $entityName = $save->getEntityName();
             $ret = array();
             foreach ($_FILES['file']['tmp_name'] as $k => $file) {

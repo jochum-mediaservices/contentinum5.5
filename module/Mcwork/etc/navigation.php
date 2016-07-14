@@ -6,6 +6,7 @@ return array(
             array(
                 'label' => 'Mcwork_Controller_Index',
                 'uri' => '/mcwork/dashboard',
+                'resource' => 'authorresource',
                 'order' => 1
             ),
             array(

@@ -54,7 +54,14 @@ class Maps extends AbstractHelper
             $jsMarkerData[$i]['latitude'] = (float) $entry->latitude;
             $jsMarkerData[$i]['longitude'] = (float) $entry->longitude;
             $jsMarkerData[$i]['zindex'] = 1;
-            $jsMarkerData[$i]['image'] = "";
+            
+            if (1 !== $entry->webMediasId->id){
+                $jsMarkerData[$i]['image'] = $entry->webMediasId->mediaLink;
+            } else {
+                $jsMarkerData[$i]['image'] = "";
+            }
+            
+            
             $jsMarkerData[$i]['street'] = $entry->street;
             $jsMarkerData[$i]['city'] = $entry->city;
             $jsMarkerData[$i]['description'] = $entry->description;

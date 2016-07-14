@@ -67,8 +67,11 @@ class FsUploadController extends AbstractApplicationController
             $ret = $this->worker->singleUpload($uploadedFile, $datas['newname']);
             $model = $this->worker->getParameter('model');
             $entity = $this->worker->getParameter('entity');
-            if (false === $this->worker->getNotNew()){
+            if (false === $this->worker->getNotNew()){             
                 $save = new $model($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'));
+                if (method_exists($save, 'setIdentity')) {
+                    $save->setIdentity($this->getIdentity());
+                }            
                 $this->worker->addInsert('resource', 'memberresource');
                 $save->save($this->worker->preparedInsert($datas->toArray())
                     ->emptyInserts(), new $entity());

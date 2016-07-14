@@ -18,8 +18,9 @@ return array(
              
              'mcevent_static_dates' => 'Mcevent\Factory\Mapper\ModulDatesFactory',
              'mcevent_app_dates' => 'Mcevent\Factory\Mapper\ModulGroupDatesFactory',
-             'mcevent_actual_dates' => 'Mcevent\Factory\Mapper\ModulActualDatesFactory',
+             'mcevent_actual_dates' => 'Mcevent\Factory\Mapper\ModulActualDatesFactory',//
              'mcevent_actual_groupdates' => 'Mcevent\Factory\Mapper\ModulActualGroupDatesFactory',
+             'mcevent_actual_groupbyday' => 'Mcevent\Factory\Mapper\ModulActualGroupByDayFactory',
              'mcevent_event_navigation' => 'Mcevent\Factory\Mapper\ModulNavigationFactory',
          ),
      ),

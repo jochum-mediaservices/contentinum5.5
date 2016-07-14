@@ -24,6 +24,7 @@ $(document).ready(function() {
 		$.ajax({
 			url : '/municipal/services/application/accountcategory',
 			type : 'POST',
+			async: false, 
 			data : datas,
 			beforeSend: function(){ 
 				$('#getAccountCategorieForm').html('<p><i class="fa fa-spinner fa-pulse"> </i></p>');
@@ -146,14 +147,9 @@ $(document).ready(function() {
 						Mcwork.Modals.buildError(msg);
 				}				
 			});				
-			
-			
-			
 		});
 	}
-	
 	if (  $('#setAccountCategoryForm').length ){
-		
 		var categoryForm = {
 			1 : {
 				'spec' : {
@@ -171,8 +167,6 @@ $(document).ready(function() {
 	            }
 	         },
 	   };
-	   
-		
 		//$('#accountGroup').change(function(ev){
 		$(document.body).on('change', '#accountGroup', function(ev) {	
 			$('#setAccountCategoryForm').html('');
@@ -194,10 +188,6 @@ $(document).ready(function() {
 						Mcwork.Modals.buildError(msg);
 				}				
 			});				
-			
-			
-			
 		});
 	}		
-	
 });

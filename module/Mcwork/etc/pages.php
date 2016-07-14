@@ -2845,7 +2845,7 @@ return array(
             'entity' => 'Contentinum\Entity\WebMapsData',
             'targetentities' => array(
                 'webMaps' => 'Contentinum\Entity\WebMaps',
-                'webMedias' => 'Contentinum\Entity\WebMedias',
+                'webMediasId' => 'Contentinum\Entity\WebMedias',
             ),
             'formdecorators' => 'mcwork_form_decorators',
             'form' => 'Mcwork\Form\MapMarkerForm',
@@ -2897,7 +2897,7 @@ return array(
             'entity' => 'Contentinum\Entity\WebMapsData',
             'targetentities' => array(
                 'webMaps' => 'Contentinum\Entity\WebMaps',
-                'webMedias' => 'Contentinum\Entity\WebMedias',
+                'webMediasId' => 'Contentinum\Entity\WebMedias',
             ),
             'formdecorators' => 'mcwork_form_decorators',
             'form' => 'Mcwork\Form\MapMarkerForm',

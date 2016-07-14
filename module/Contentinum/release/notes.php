@@ -1,6 +1,21 @@
 <?php
 return array(
+    5516 => array(
+        "Diverse kleine Fehler und Anpassungen",
+    ),
+    5515 => array(
+        "Anpassung der Tabellenspalten an die function date('D')",
+        "ALTER TABLE `municipal_service_open` CHANGE `mo` `mon` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `tu` `tue` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `we` `wed` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `th` `thu` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `fr` `fri` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `sa` `sat` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+        ALTER TABLE `municipal_service_open` CHANGE `su` `sun` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;",
+        "ALTER TABLE `municipal_service_open` ADD `variable_holidays` VARCHAR(250) NOT NULL AFTER `close_days`;",
+    ),
     5514 => array(
+        "Auswahl für Municipal Userlogin setzen",
         "ALTER TABLE `field_types` ADD `select_login` INT(1) NOT NULL DEFAULT '0' AFTER `params`;"
     ),
     5513 => array(

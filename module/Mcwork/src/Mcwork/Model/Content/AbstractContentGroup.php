@@ -69,7 +69,7 @@ abstract class AbstractContentGroup extends Process
         if (false === $this->contentRang) {
             $assigns = $this->getSl()->get('contentinum_template_assign');
             $itemRang = array();
-            foreach ($styles->assigns as $key => $row) {
+            foreach ($assigns->assigns as $key => $row) {
                 $itemRang[$key] = $row->rang;
             }
             $this->setContentRang($itemRang);

@@ -29,6 +29,7 @@ namespace Mcwork\Model\Content;
 
 use Mcwork\Model\Content\AbstractContribution;
 
+
 /**
  * 
  * @author mike
@@ -44,10 +45,12 @@ class SaveContribution extends AbstractContribution
     public function save($datas, $entity = null, $stage = '', $id = null)
     {
         $entity = $this->handleEntity($entity);
+        $filter = new \ContentinumComponents\Filter\Remove\Tags();
         if (null === $entity->getPrimaryValue()) {
             $datas['deleted'] = '0';
             $datas['updateflag'] = '1';
-            $msg = parent::save($datas, $entity, $stage, $id);
+            $datas['content'] = $filter->filter($datas['content']);
+            parent::save($datas, $entity, $stage, $id);
             $lastInsertId = $this->getLastInsertId();
             $this->inUseMedia($datas['webMediasId'], $lastInsertId);
             $this->assignGroup($datas, $lastInsertId);
@@ -57,6 +60,7 @@ class SaveContribution extends AbstractContribution
             }
             $this->inUseMedia($entity->webMediasId->id, $entity->id, self::INUSE_GROUP, 'delete');
             $datas['updateflag'] = '1';
+            $datas['content'] = $filter->filter($datas['content']);
             parent::save($datas, $entity, $stage, $id);
             $this->inUseMedia($datas['webMediasId'], $entity->id);
             $this->updateGroup($datas, $entity, $entity->id);

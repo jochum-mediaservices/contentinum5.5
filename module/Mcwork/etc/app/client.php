@@ -397,7 +397,162 @@ return array(
                 )
             )
         )
+    ), 
+    
+    
+    'uploadloginuser' => array(
+    
+        'modal' => array(
+            'header' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns'
+                    )
+                ),
+                'content' => array(
+                    'element' => 'h4',
+                    'attr' => array(
+                        'class' => 'test',
+                        'id' => 'modalhead'
+                    ),
+                    'translate' => array(
+                        'key' => 'heads',
+                        'txt' => 'uploadloginusrfiles'
+                    ),
+                    'behind' => '<span id="server-process"> </span>'
+                )
+            ),
+            'body' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns',
+                        'id' => 'modalcontent'
+                    )
+                ),
+                'content' => array(
+                    'options' => array(
+                        'form' => array(
+                            'action' => '/municipal/files/upload',
+                            'attributes' => array(
+                                'id' => 'file-ajax-form',
+                                'enctype' => 'multipart/form-data'
+                            )
+                        )
+                    ),
+                    'form' => array(
+    
+                        1 => array(
+                            'spec' => array(
+                                'name' => 'fileUpload',
+                                'required' => true,
+                                'options' => array(
+                                    'label' => 'uploadfile',
+                                    'deco-row' => 'text'
+                                ),
+                                'type' => 'File',
+    
+                                'attributes' => array(
+                                    'id' => 'fileUpload'
+                                )
+                            )
+                        ),
+                        2 => array(
+                            'spec' => array(
+                                'name' => 'uploadprogress',
+                                'options' => array(),
+                                'type' => 'Note',
+                                'attributes' => array(
+                                    'id' => 'uploadprogress',
+                                    'value' => '<div class="progress"><span id="percent" class="meter" style="width:0%"> </span></div>'
+                                )
+                            )
+                        ),
+                        3 => array(
+                            'spec' => array(
+                                'name' => 'formextension',
+                                'options' => array(),
+                                'type' => 'Note',
+                                'attributes' => array(
+                                    'id' => 'formextension',
+                                    'value' => '<div id="mediametas"> </div>'
+                                )
+                            )
+                        )                        
+                    )
+                )
+            ),
+            'footer' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns'
+                    )
+                ),
+                'content' => array(
+                    'row' => array(
+                        'element' => 'ul',
+                        'attr' => array(
+                            'class' => 'modal-buttons right'
+                        )
+                    ),
+                    'grids' => array(
+                        '1' => array(
+                            'element' => 'li'
+                        ),
+                        '2' => array(
+                            'element' => 'li'
+                        )
+                    ),
+                    '1' => array(
+                        'element' => 'button',
+                        'attr' => array(
+                            'id' => 'upload-button',
+                            'class' => 'button'
+                        ),
+                        'translate' => array(
+                            'key' => 'btn',
+                            'txt' => 'upload'
+                        )
+                    ),
+                    '2' => array(
+                        'element' => 'button',
+                        'attr' => array(
+                            'id' => 'cancel-button',
+                            'class' => 'button'
+                        ),
+                        'translate' => array(
+                            'key' => 'btn',
+                            'txt' => 'close'
+                        )
+                    )
+                )
+            )
+        )
     ),    
+    
+    
+    
+    
     
     'uploadnonpublicfiles' => array(
     
@@ -1883,7 +2038,8 @@ return array(
                                         '680' => '680px',
                                         '480' => '480px',
                                         '320' => '320px',
-                                    )
+                                    ),
+                                    'desc' => 'Bitte Einstellungen vor dem Bildupload setzen'
                                 ),
                                 'type' => 'Select',
                         
@@ -1907,7 +2063,8 @@ return array(
                                         '60' => '60% Komprimierung',
                                         '50' => '50% Komprimierung',
                                         '40' => '40% Komprimierung',
-                                    )
+                                    ),
+                                    'desc' => 'Bitte Einstellungen vor dem Bildupload setzen'
                                 ),
                                 'type' => 'Select',
                         

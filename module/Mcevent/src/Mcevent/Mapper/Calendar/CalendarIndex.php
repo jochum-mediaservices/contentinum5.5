@@ -47,7 +47,7 @@ class CalendarIndex extends Worker
     {
         return $this->getStorage()
             ->getRepository($this->getEntityName())
-            ->findAll();
+            ->findBy(array(),array('name' => 'ASC'));
     }
 
     /**

@@ -44,7 +44,7 @@ class SaveMarker extends Process
      */
     public function save($datas, $entity = null, $stage = '', $id = null)
     {
-            $entity = $this->handleEntity($entity);
+        $entity = $this->handleEntity($entity);
         if (null === $entity->getPrimaryValue()) {
             parent::save($datas, $entity);
         } else {

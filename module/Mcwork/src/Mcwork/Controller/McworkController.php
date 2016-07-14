@@ -11,6 +11,10 @@ class McworkController extends AbstractApplicationController
     {
         $this->backendlayout($pageOptions, $this->getIdentity(), $role, $acl, $this->layout(), $this->getServiceLocator());
         
+        if (method_exists($this->worker, 'setIdentity')) {
+            $this->worker->setIdentity($this->getIdentity());
+        }        
+        
         return $this->buildView(array(
             'acl' => $acl,
             'role' => $role,

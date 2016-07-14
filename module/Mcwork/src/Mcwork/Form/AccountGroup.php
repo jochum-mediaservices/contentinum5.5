@@ -272,6 +272,23 @@ class AccountGroup extends AbstractForms
                     'options' => array(
                         'label' => ' Beschreibung anzeigen',
                         'label_attributes' => array('for' => 'enableDescription'),
+                    ),
+                    'type' => 'Checkbox',
+                    'attributes' => array(
+                        'id' => 'enableDescription',
+                        'value' => 1
+                    )
+                )
+            ),
+            
+            array(
+                'spec' => array(
+                    'name' => 'enableInternet',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => ' Internetadresse anzeigen',
+                        'label_attributes' => array('for' => 'enableInternet'),
                         'fieldset' => array(
                             'legend' => 'Parameter ein- oder ausblenden',
                             'attributes' => array(
@@ -283,11 +300,11 @@ class AccountGroup extends AbstractForms
                     ),
                     'type' => 'Checkbox',
                     'attributes' => array(
-                        'id' => 'enableDescription',
+                        'id' => 'enableInternet',
                         'value' => 1
                     )
                 )
-            ),
+            ),            
             
             array(
                 'spec' => array(

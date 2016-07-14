@@ -161,6 +161,28 @@ class MapMarkerForm extends AbstractForms
                         'class' => 'chosen-select',
                     )
                 )
+            ), 
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'webMediasId',
+                    'required' => true,
+                    'options' => array(
+                        'label' => 'Bild im Infolayer',
+                        'empty_option' => 'Please select',
+                        'value_options' => $this->getServiceLocator()->get('mcwork_public_media'),
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+            
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'required' => 'required',
+                        'id' => 'webMediasId',
+                        'class' => 'chosen-select',
+                        'value' => 1,
+                    )
+                )
             ),            
               
             

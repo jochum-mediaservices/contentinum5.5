@@ -1652,14 +1652,21 @@ return array(
                         'spec' => array(
                             'name' => 'modulFormat',
                             'required' => false,
-                            'options' => array(),
-                            'type' => 'Hidden',
-            
+                            'options' => array(
+                                'label' => 'Set display headline y/n',
+                                'empty_option' => 'Headline',
+                                'value_options' => array(
+                                    'y' => 'Enable',
+                                    'n' => 'Disable',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
                             'attributes' => array(
                                 'id' => 'modulFormat'
                             )
                         )
-                    ),
+                    ),                   
             
                     4 => array(
                         'spec' => array(

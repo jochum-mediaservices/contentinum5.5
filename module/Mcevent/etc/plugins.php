@@ -4,12 +4,14 @@ return array(
         'eventnavigation' => 'mcevent_event_navigation',
         'eventdates' => 'mcevent_static_dates',
         'actualdates' => 'mcevent_actual_dates',
+        'actualgroupdatesbyday' => 'mcevent_actual_groupbyday',
         'actualgroupdates' => 'mcevent_actual_groupdates',
         'eventapp' => 'mcevent_app_dates'
     ),
     'viewhelper_plugins' => array(
         'eventnavigation' => 'eventnavigation',
         'actualdates' => 'eventdates',
+        'actualgroupdatesbyday' => 'eventdates',
         'actualgroupdates' => 'eventdates',
         'eventdates' => 'eventdates',
         'eventapp' => 'eventapp',
@@ -116,6 +118,131 @@ return array(
                 
                 
             ),
+            
+            'actualgroupdatesbyday' => array(
+                'resource' => 'intranet',
+                'name' => 'Kalendergruppe (Aktuelle Termine nach Tagen)',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Kalender',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Mcevent\Entity\MceventGroup',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'title'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                            
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Template',
+                                'empty_option' => 'Please Select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/services',
+                                    'data' => array(
+                                        'entity' => 'templates_plugin_events',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'name'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                    
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),  
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Anzahl Tage',
+                                'value_options' => array(
+                                    '1' => '+1 Tage',
+                                    '2' => '+2 Tage',
+                                    '3' => '+3 Tage',
+                                    '4' => '+4 Tage',
+                                    '5' => '+5 Tage',
+                                    '6' => '+6 Tage',
+                                    '7' => '+7 Tage',
+                                    '8' => '+8 Tage',
+                                    '9' => '+9 Tage',
+                                    '10' => '+10 Tage',
+                                    '11' => '+11 Tage',
+                                    '12' => '+12 Tage',
+                                    '13' => '+13 Tage',
+                                    '14' => '+14 Tage',
+                                    '15' => '+15 Tage',
+                                    '16' => '+16 Tage',
+                                    '17' => '+17 Tage',
+                                    '18' => '+18 Tage',
+                                    '19' => '+19 Tage',
+                                    '20' => '+20 Tage',
+                                    '21' => '+21 Tage',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+            
+                            'attributes' => array(
+                                'id' => 'modulDisplay',
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )
+            ) ,            
+            
+            
             'actualdates' => array(
                 'resource' => 'intranet',
                 'name' => 'Kalender (Aktuelle Termine)',

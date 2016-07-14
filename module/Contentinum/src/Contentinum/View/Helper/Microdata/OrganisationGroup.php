@@ -52,7 +52,7 @@ class OrganisationGroup extends Parameters
         $html = '';
         foreach ($entries['modulContent']['account'] as $entry) {
             $cardData = '';
-            if (1 === $entry->indexGroup->imageSource && '_nomedia' != $entry->accounts->imgSource) {
+            if (1 === $entry->indexGroup->enableImages && '_nomedia' != $entry->accounts->imgSource) {
                 $cardData .= $this->deployRow($this->imagesSource, '<img src="' . $entry->accounts->imgSource . '" alt="' . $entry->accounts->organisation . '" />' );
             }
             $ext = '';

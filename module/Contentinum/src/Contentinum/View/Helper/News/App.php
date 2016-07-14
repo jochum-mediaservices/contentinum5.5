@@ -57,7 +57,14 @@ class App extends Images
         if (false !== ($headline = $this->getGroupParameter('headlineGroup'))){
             $this->groupName = $headline;
         }
-        $html .= $this->groupHeader('<h1>' . $this->groupName . '</h1>');
+        
+        switch ($entries['modulFormat']){
+            case 'n' :
+                break;
+            case 'y' :
+            default:
+            $html .= $this->groupHeader('<h1>' . $this->groupName . '</h1>');    
+        }
         
         $readMoreView = false;
         if ( strlen($this->view->paramter['section']) > 1  ){
@@ -79,7 +86,8 @@ class App extends Images
         $publishDate['grid']['format']['dateFormat']['attr'] = $this->getDateFormat($entries);
         $header = $this->header->toArray();
         $filter = new \Zend\Filter\HtmlEntities();
-        $urlFiler = new \ContentinumComponents\Filter\Url\Prepare();     
+        $urlFiler = new \ContentinumComponents\Filter\Url\Prepare(); 
+        $links = array();    
         $i = 0;
         foreach ($entries['modulContent']['news'] as $entry) {
             $head = '';
@@ -88,7 +96,7 @@ class App extends Images
             $publishDate['grid']['attr']['datetime'] = $entry->webContent->publishDate;
             $head .= $this->deployRow($publishDate, $entry->webContent->publishDate);
             $head .= $this->deployRow($this->publishAuthor, $entry->webContent->publishAuthor);
-
+            
             if (null !== $this->toolbar) {
                 
                 $links['pdf'] = array(
