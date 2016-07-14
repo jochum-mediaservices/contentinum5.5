@@ -172,6 +172,14 @@ class App extends Images
                     $article .= $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray());
                 }
                 $article .= $this->formatElement($entry->webContent->content, $entry->webContent);
+
+                if (isset($entries['modulContent']['newsplugins'])) {
+                    $plugins = $entries['modulContent']['newsplugins'];
+                    if (isset($plugins[$entry->webContent->modul][$entry->webContent->id])) {
+                        $pluginViewHelper = $this->view->pluginViewHelper[$entry->webContent->modul];
+                        $article .= $this->view->$pluginViewHelper($plugins[$entry->webContent->modul][$entry->webContent->id], $this->view->pluginstyles, $entry->webContent->webMediasId);                  
+                    }                                   
+                }                
                 
                 $backLink["grid"]["attr"]['href'] = '/' . $this->groupurl;
                 

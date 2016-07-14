@@ -34,6 +34,11 @@ namespace Contentinum\Mapper;
  */
 class ModulBlog extends AbstractModuls
 {
+    /**
+     *
+     * @var unknown
+     */
+    private $findModul = false;    
     
     private $backlink = null;
     
@@ -61,11 +66,75 @@ class ModulBlog extends AbstractModuls
         $result = array();
         $result['news'] = $entries;
         $result['group'] = $this->fetchBlogGroup($this->configure['modulParams']);
+        if (false !== ($section = $this->getParameter('section'))) {
+            switch ($section) {
+                case 'tag':
+                case 'category':
+                case 'archive':   
+                    break;
+                default:
+                    $this->isModulContent($entries);
+                    if (false !== $this->findModul){
+                        $result['newsplugins'] = $this->fetchModulContent();
+                    }                    
+            }
+        }
+        
+        
         if (null !== $this->backlink){
             $result['archivbacklink'] = $this->backlink;
         }
         return $result;
     }
+    
+    /**
+     *
+     * @param unknown $entries
+     * @return unknown
+     */
+    private function isModulContent($entries)
+    {
+        $modul = array();
+        foreach ($entries as $entry) {
+            if (1 !== (int) $entry->webContent->id){
+                if (strlen($entry->webContent->modul) > 1) {
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulReferer'] = $entry->webContent->id;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulParams'] = $entry->webContent->modulParams;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulDisplay'] = $entry->webContent->modulDisplay;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulConfig'] = $entry->webContent->modulConfig;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulLink'] = $entry->webContent->modulLink;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulFormat'] = $entry->webContent->modulFormat;
+                    $this->findModul = $modul;
+                }
+                break;
+            }
+    
+        }
+    
+        return $entries;
+    }   
+    
+    /**
+     *
+     */
+    private function fetchModulContent()
+    {
+        
+        $modul = $this->getSl()->get('contentinum_modul');
+        $modul->setPlugins($this->getSl()->get('contentinum_plugin_keys'));
+        $modul->setArticle( $this->getArticle());
+        $modul->setCategory($this->getCategory());
+        $modul->setTag($this->getTag());
+        $modul->setTagValue($this->getTagValue());        
+        $modul->setIdentity($this->getIdentity());
+        $modul->setAcl($this->getAcl());
+        $modul->setDefaultRole($this->getDefaultRole());
+        $modul->setUrl($this->getUrl());
+        $modul->setXmlHttpRequest($this->getXmlHttpRequest());
+        $modul->setModul($this->findModul);
+        return $modul->fetchContent();        
+     
+    }    
 
     /**
      * Database query
