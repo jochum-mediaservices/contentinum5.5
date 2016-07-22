@@ -91,12 +91,15 @@ foreach ($this->entries as $entry) {
             'display' => array(
                 'href' => '/mcwork/logs/display/' . $entry->filename,
                 'attribs' => array(
+                    'title' => 'Display log file',
                     'class' => 'small button'
                 )
             ),
+            
             'download' => array(
                 'href' => '/mcwork/logs/download/' . $entry->filename,
                 'attribs' => array(
+                    'title' => 'Download log file',
                     'class' => 'small button'
                 )
             ),
@@ -108,24 +111,17 @@ foreach ($this->entries as $entry) {
                     'class' => 'small button alert'
                 )
             ),
-            'delete' => array(
-                'href' => '/mcwork/logs/delete/' . $entry->filename,
-                'attribs' => array(
-                    'title' => 'Delete log file content',
-                    'class' => 'small button alert'
-                )
-            )
         );
         
         $i ++;
         $rowContent = array();
         if (! $entry->writable) {
-            unset($tbl['clear'], $tbl['delete']);
+            unset($tbl['clear']);
         }
         $rowContent[] = $entry->filename; // . //$this->mcworkTableEdit($tbl);
         $rowContent[] = $this->filesize($entry->size);
         $rowContent[] = date("d.m.Y H:i:s", $entry->time);
-        $rowContent[] = '&nbsp;'; //$this->mcworkToolbar($tbl, true, $this->tableeditcontent->toArray(), false );
+        $rowContent[] = $this->mcworkToolbar($tbl, true, $this->tableeditcontent->toArray(), false );
         $tableFactory->setHtmlContent($rowContent);
     }
 }
