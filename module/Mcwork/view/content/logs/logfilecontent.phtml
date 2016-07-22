@@ -1,0 +1,14 @@
+<?php 
+print '<div class="row toprow">';
+print '<div class="medium-12 columns"><h2>' . $this->content['headline'] . '['.$this->entries['name'].']</h2></div>';
+print '</div>';
+print '<div class="row"><div id="addTblContent" class="medium-12 columns">';
+print '<pre id="logfilecontent">';
+print $this->entries['content'];
+print '</pre>';
+if (isset($this->content['content']) && strlen($this->content['content']) > 1) {
+    echo $this->content['content'];
+}
+print '<p><a class="button" href="/mcwork/logs">Zur&uuml;ck</a></p>';
+print '</div></div>';
+?>

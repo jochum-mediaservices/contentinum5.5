@@ -4863,6 +4863,60 @@ return array(
         ),
     ), 
     
+    '/mcwork/logs/display' => array(
+        'resource' => 'adminresource',
+        'metaTitle' => 'Logs',
+        'template' => 'content/logs/logfilecontent',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Logs',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Files\LogsContent',
+            'entitymanager' => 'contentinum_files_storage_manager',
+            'entity' => 'Mcwork\Entity\LogFiles',
+        ),
+        'assets' => array(
+            'sets' => array('mcworkstylefiles','mcworkhead','mcworkfiles'),
+        ),
+    ),
+    
+    '/mcwork/logs/download' => array(
+        'resource' => 'adminresource',
+        'metaTitle' => 'Logs',
+        'template' => 'content/logs/logfiledownload',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Logs',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Files\LogsDownload',
+            'entitymanager' => 'contentinum_files_storage_manager',
+            'entity' => 'Mcwork\Entity\LogFiles',
+        ),
+        'assets' => array(
+            'sets' => array('mcworkstylefiles','mcworkhead','mcworkfiles'),
+        ),
+    ),  
+    
+    '/mcwork/logs/clear' => array(
+        'splitQuery' => 4,
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Logs\Clear',
+            'entitymanager' => 'contentinum_files_storage_manager',
+            'entity' =>  'Mcwork\Entity\LogFiles',
+            'settoroute' => '/mcwork/logs'
+        )
+    ),    
+    
     '/mcwork/filesdenied' => array(
         'resource' => 'publisherresource',
         'metaTitle' => 'NoPublicFiles',
