@@ -18,6 +18,9 @@ class McworkController extends AbstractApplicationController
         return $this->buildView(array(
             'acl' => $acl,
             'role' => $role,
+            'protocol' => $pageOptions->getProtocol(),
+            'url' => $pageOptions->getUrl(),
+            'host' => $pageOptions->getHost(),            
             'resource' => $this->getServiceLocator()
                 ->get('mcwork_acl_resource'),
             'current' => $pageOptions->getActive(),
