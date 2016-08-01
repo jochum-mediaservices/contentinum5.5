@@ -6,8 +6,41 @@ return array(
             'mailfromname' => 'Webmaster',
             'signature' => '[ Dies ist eine automatisch durch das Webformular generierte E-Mail. ]',
         
-        ),
-        
+        ),     
         'google_map_apikey' => 'AIzaSyDRVYpFbVUL_8VTW8E50itQSeXBbWge_kE',
+        'municicpal' => array(
+            'email' => 'presse@stadt-muehlheim.de',
+            'name' => 'Markus Ruhr',
+            'phone' => '06108 601604',
+            'signature' => 'markusruhrpresse',
+            'loginurl' => 'http://mhm.app01.vhost724.net/login',
+            'sperrmuell' => array(
+                'masteremail' => '0', // Email Sachbearbeiter*in
+                'mastername' => '0', // Name Sachbearbeiter*in
+                'phone' => '0', // Telefon Sachbearbeiter*in
+                'plz' => '0', // Postleitzahl Kommune 
+                'city' => '0', // Name Kommune
+                'district' => '10',
+                'emailsubjekt' => 'Bestätigung Antrag auf Sperrmüllabfuhr für den {SPERLLMUELLDATE}',
+                'htmlmessages' => 'Ihr Sperrmüllantrag wurde übermittelt. In Ihrem Postfach sollte eine E-Mail innerhalb der nächsten Stunde eingegangen sein, bitte kontrollieren Sie auch SPAM Ordner.',
+                'htmlerrormessages' => 'Ihr Antrag konnte nicht übermittelt werden. Versuchen Sie es später nocheinmal oder rufen Sie uns unter der Telefonnummer an',
+                'template' => 'sperrmuellantrag'
+            ),
+            'newpassword' => array(
+                'emailsubjekt' => 'Änderung Zugangsdaten',
+                'template' => 'newpasswortmunicipal'
+            ), 
+            'registration' => array(
+                'emailsubjekt' => 'Zugangsdaten',
+                'template' => 'registrationmunicipal'                
+            ),
+            'registrationvalid' => array(
+                'emailsubjekt' => 'Ihr Eintrag auf der Webseite wurde freigeschaltet',
+                'template' => 'uservalidmunicipal'
+            ), 
+            'directory' => array(
+                 'calendar' => '91',
+            ),      
+        )        
     )
 );
