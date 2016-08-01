@@ -195,10 +195,13 @@ class App extends Images
                     $article .= $this->deployRow($this->footer, $foot);
                 }                
             }
-            
-            
-            
-           $html .= $this->deployRow($this->news, $article);
+           if (0 === $i) {
+               $news = $this->news->toArray();
+               $news["grid"]["attr"]['class'] .= ' first-element';
+               $html .= $this->deployRow($news, $article);
+            } else {
+               $html .= $this->deployRow($this->news, $article);
+            }
            $i++;
            if ($i === $numbernews){
                break;
