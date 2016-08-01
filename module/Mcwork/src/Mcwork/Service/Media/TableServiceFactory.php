@@ -76,6 +76,7 @@ class TableServiceFactory extends WebsiteServiceFactory
                 'mediaAlternate',
                 'mediaMetas',
                 'mediaSizes',
+                'mediaDimensions',
                 'resource',
                 'createdBy',
                 'updateBy',
@@ -91,6 +92,7 @@ class TableServiceFactory extends WebsiteServiceFactory
                 $result[$row['mediaSource']]['mediaType'] = $row['mediaType'];
                 $result[$row['mediaSource']]['mediaAlternate'] = $row['mediaAlternate'];
                 $result[$row['mediaSource']]['mediaMetas'] = $row['mediaMetas'];
+                $result[$row['mediaSource']]['mediaDimensions'] = $row['mediaDimensions'];
                 $result[$row['mediaSource']]['resource'] = $row['resource'];
                 $result[$row['mediaSource']]['createdBy'] = $row['createdBy'];
                 $result[$row['mediaSource']]['updateBy'] = $row['updateBy'];

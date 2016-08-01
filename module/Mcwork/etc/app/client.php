@@ -1,6 +1,134 @@
 <?php
 return array(
     
+    
+    'makefilegroup' => array(
+    
+        'appoptions' => array(
+            'method' => 'ajax',
+            'url' => '/mcwork/publicmedias/addfilegroup',
+            'app' => array(
+                'worker' => 'Mcwork\Model\Medias\AddImageGroup',
+                'attribute' => 'file',
+                'entity' => 'entity_file_group',
+            )
+        ),
+    
+        'modal' => array(
+    
+            'header' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns'
+                    )
+                ),
+                'content' => array(
+                    'element' => 'h4',
+                    'attr' => array(
+                        'id' => 'modalhead'
+                    ),
+                    'translate' => array(
+                        'key' => 'heads',
+                        'txt' => 'Select files'
+                    ),
+                    'behind' => '<span id="server-process"> </span>'
+                )
+            ),
+    
+            'body' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns',
+                        'id' => 'modalcontent'
+                    )
+                ),
+                'content' => array(),
+            ),
+            'footer' => array(
+                'row' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'row'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'div',
+                    'attr' => array(
+                        'class' => 'large-12 columns'
+                    )
+                ),
+                'content' => array(
+                    'row' => array(
+                        'element' => 'ul',
+                        'attr' => array(
+                            'class' => 'modal-buttons right'
+                        )
+                    ),
+                    'grids' => array(
+                        '1' => array(
+                            'element' => 'li'
+                        ),
+                        '2' => array(
+                            'element' => 'li'
+                        ),
+                        '3' => array(
+                            'element' => 'li'
+                        )                        
+                    ),
+                    '1' => array(
+                        'element' => 'button',
+                        'attr' => array(
+                            'id' => 'save-button',
+                            'class' => 'button'
+                        ),
+                        'translate' => array(
+                            'key' => 'btn',
+                            'txt' => 'save'
+                        )
+                    ),
+                    '2' => array(
+                        'element' => 'button',
+                        'attr' => array(
+                            'id' => 'display-button',
+                            'class' => 'button'
+                        ),
+                        'translate' => array(
+                            'key' => 'btn',
+                            'txt' => 'Bilder zeigen'
+                        )
+                    ),                    
+                    '3' => array(
+                        'element' => 'button',
+                        'attr' => array(
+                            'id' => 'close-button',
+                            'class' => 'button'
+                        ),
+                        'translate' => array(
+                            'key' => 'btn',
+                            'txt' => 'close'
+                        )
+                    )
+                )
+            )
+        )
+    ),    
+    
+    
+    
     'fileattribute' => array(
     
         'appoptions' => array(

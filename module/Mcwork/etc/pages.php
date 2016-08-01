@@ -661,6 +661,7 @@ return array(
                         '/backend/js/mcwork.language.js',
                         '/backend/js/mcwork.app.js',
                         '/backend/js/mcwork.files.js',
+                        '/backend/js/mcwork.makefilegrp.js',
                     )                    
                     
                 ),
@@ -5061,6 +5062,29 @@ return array(
             'worker' => 'Mcwork\Model\Files\Delete',
             'entity' => 'Contentinum\Entity\WebMedias'
         )
+    ),
+    
+    '/mcwork/publicmedias/creategroup' => array(
+        'splitQuery' => 3,
+        'resource' => 'authorresource',
+        'template' => 'content/medias/creategroup',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Model\Medias\CreateImageGroup',
+            'entitymanager' => 'contentinum_files_storage_manager',
+            'entity' => 'Mcwork\Entity\FsPublic',
+        )
+    ),  
+    
+    '/mcwork/publicmedias/addfilegroup' => array(
+        'splitQuery' => 3,
+        'resource' => 'authorresource',
+        'template' => 'content/medias/creategroup',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Model\Medias\AddImageGroup',
+            'entity' => 'Contentinum\Entity\WebMediaGroup',
+        )        
     ),
     
     '/mcwork/publicmedias/rmdir' => array(

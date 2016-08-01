@@ -145,21 +145,37 @@ foreach ($this->entries as $entry) {
         $rowContent[] = '<a href="/mcwork/' . $this->paramter['section'] .'/'.$dir.$entry->filename.'">'.$icon.' ' . $entry->filename . '</a> ' . $label ;
         $rowContent[] = date("d.m.Y H:i:s", $entry->time);
         
-        $props = array(
-            'delete' => array(
-                'href' => '/mcwork/' . $this->paramter['section'] . '/rmdir',
-                'attribs' => array(
-                    'data-row' => 'row' . $i,
-                    'data-current' => $dir,
-                    'title' => 'Delete item',
-                    'class' => 'button tiny alert rmdir'
-                )
-            ),            
-        );
+
+        
         
         if (false === $delete){
-            $rowContent[] = '&nbsp;';
+            $props = array(
+                'delete' => array(
+                    'label' => '<i class="fa fa-file-image-o" aria-hidden="true"> </i>',
+                    'href' => '/mcwork/' . $this->paramter['section'] . '/creategroup',
+                    'attribs' => array(
+                        'data-service' => 'backend_client_app',
+                        'data-appkey' => 'makefilegroup',                        
+                        'data-row' => 'row' . $i,
+                        'data-current' => $dir.$entry->filename,
+                        'title' => 'Bildergruppe erstellen',
+                        'class' => 'button tiny success createimagegroup'
+                    )
+                ),
+            );            
+            $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
         } else {
+            $props = array(
+                'delete' => array(
+                    'href' => '/mcwork/' . $this->paramter['section'] . '/rmdir',
+                    'attribs' => array(
+                        'data-row' => 'row' . $i,
+                        'data-current' => $dir,
+                        'title' => 'Delete item',
+                        'class' => 'button tiny alert rmdir'
+                    )
+                ),
+            );            
             $rowContent[] = $this->mcworkToolbar($props, true, $this->tableeditcontent->toArray(), false );
         }
         $tableFactory->setHtmlContent($rowContent);
@@ -225,6 +241,7 @@ foreach ($this->entries as $entry) {
             $updater = $thisItem['updateBy'];
         } 
         $props = array(
+            /*
             'copy' => array(
                 'attribs' => array(
                     'class' => 'tiny button copypublicfile',
@@ -235,7 +252,7 @@ foreach ($this->entries as $entry) {
                     'data-appkey' => 'copypublicfile',
                     'title' => 'Copy and rename file'
                 )
-            ),
+            ),*/
             'edit' => array(
                 'href' => '/mcwork/' . $this->paramter['section'] . '/edit/' . $thisItem['id'],
                 'attribs' => array(
@@ -315,6 +332,37 @@ if (true === $this->xmlHttpRequest){
     exit();
 }
 $category = $dir;
+$path = $dir;
+
+$link = '/mcwork/publicmedias';
+$breadcrumb = '<ul class="breadcrumbs publicmedias"><li><a href="'.$link.'">Home</a></li>';
+$link .= '/';
+if (strlen($path) > 1){
+    $crumps = explode('_', $path);
+    $iPath = count($crumps);
+    $i = 0;
+    foreach ($crumps as $crump){
+        $i++;
+        $breadcrumb .= '<li';
+        if ($i == $iPath){
+            $breadcrumb .= ' class="current"';
+            $link = '#';
+        } else {
+            if ($i > 1){
+                $link .= '_'. $crump;
+            } else {
+                $link .= $crump;
+            }
+        }
+        $breadcrumb .= '><a href="'.$link.'">' . $crump . '</a></li>';
+    }
+
+
+
+    $path = '/' . $path;
+}
+$breadcrumb .= '</ul>';
+
 print '<div class="row toprow"><div class="medium-6 columns"><h2>' . $this->translate($this->content['headline']) . '</h2>';
 print '</div><div class="medium-6 columns">'. $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
 print '</div></div>';
@@ -330,6 +378,7 @@ print '<a id="btnNewFolder" href="#" class="button postfix">'. $this->translate(
 print '</div></div>';
 print '<input name="currentpath" id="currentpath" data-currentpath="'.$category.'" type="hidden" value="'.$category.'" />';
 print '</form>';
+print $breadcrumb;
 print '</div></div>';
 print '<div class="row"><div id="addTblContent" class="medium-12 columns">';
 print $tableFactory->display();
