@@ -165,7 +165,7 @@ class Sendmail extends Message
         $mail->CharSet = 'utf-8';
         $creditals = $transport->getConnectionConfig();
         $mail->Username = $creditals["username"]; // SMTP username
-        $mail->Password = $creditals["password"]; // SMTP password
+        $mail->Password = $creditals["password"]; // SMTP password  
         $mail->SMTPSecure = 'ssl'; // Enable TLS encryption, `ssl` also accepted
         $mail->Port = $transport->getPort();
         
