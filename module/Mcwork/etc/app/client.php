@@ -13,7 +13,7 @@ return array(
                 'entity' => 'entity_file_group',
             )
         ),
-    
+     
         'modal' => array(
     
             'header' => array(
