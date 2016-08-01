@@ -59,6 +59,12 @@ class Parameter extends AbstractContentHelper
     protected $schema;
     
     /**
+     * 
+     * @var array
+     */
+    protected $datepanel;
+    
+    /**
      *
      * @var array
      */
@@ -128,6 +134,7 @@ class Parameter extends AbstractContentHelper
         'toolbar',
         'wrapper',
         'schema',
+        'datepanel',
         'summary',
         'imagesSource',
         'organizer',

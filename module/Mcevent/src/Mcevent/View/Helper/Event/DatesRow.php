@@ -201,8 +201,24 @@ class DatesRow extends Parameter
                 $displaymonthname = $mthNum;
                 $events .= $this->deployRow($this->displaymonthname, $this->convert($mthNum));
             }
-            $events .= $this->deployRow($this->schema, $toolbar . $dateData);
+            $datepanel = '';
+            if (null !== $this->datepanel){
+                $datepaneltemplate = $this->datepanel->toArray();
+                $schema = $this->schema->toArray();
+                $datepaneltemplate['row']['attr']['class'] .= ' medium-2 columns';
+                $datepaneltemplate['grid']['content:before:outside'] = $datetime->format('d');
+                $datepanel = $this->deployRow($datepaneltemplate, $datetime->format('M') );
+                $events .= $this->deployRow($schema, '<div class="row">'. $datepanel . '<div class="medium-10 columns">'. $toolbar . $dateData . '</div></div>');
+            } else {
+                $events .= $this->deployRow($this->schema, $toolbar . $datepanel . $dateData );
+            }
+            
+            
             $dataProp = array();
+        }
+        
+        if (strlen($events) < 10){
+            return '<p><i class="fa fa-calendar" aria-hidden="true"> </i> Zur Zeit ist in dieser Rubrik kein Termin vorhanden.</p>';
         }
         
         $events = $this->deployRow($this->wrapper, $events);
