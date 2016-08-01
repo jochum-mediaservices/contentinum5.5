@@ -1,27 +1,6 @@
 (function($) {
 	'use strict';
 	$.extend($.fn, {
-		XXToogleDescription : function(options){
-			var defaults = {
-				elm : $(this),
-				class : '.' + $(this).attr('class'),
-			};
-
-			defaults = $.extend({}, defaults, options);	
-			$(document).on('click', defaults.class, function(ev) {
-				ev.stopPropagation();
-				ev.preventDefault();
-				var ident = $(this).data('ident');
-				$("#" + ident).slideToggle("slow");
-				if ($(this).children().hasClass('fa-plus')) {
-					$(this).children().removeClass('fa-plus');
-					$(this).children().addClass('fa-minus');
-				} else if ($(this).children().hasClass('fa-minus')) {
-					$(this).children().removeClass('fa-minus');
-					$(this).children().addClass('fa-plus');
-				}
-			});			
-		},
 		LoadDirectoryEntries : function(options){
 			
 			var defaults = {
@@ -33,10 +12,10 @@
 
 			$(document.body).on('change', defaults.trigger, function(ev) {
 				ev.preventDefault();
-				var location = window.history.location || window.location;
+				//var location = window.history.location || window.location;
 				defaults.attribute.category = $(this).val();
-                defaults.url = '/contentplugin/tags/' + $('#selectbranch').val() + '/' + $(this).val();
-                history.pushState(null, null, '/' + defaults.attribute.url + '/tags/' + $('#selectbranch').val() + '/' + $(this).val());
+                defaults.url = '/contentplugin/kurse/' + $('#selectbranch').val() + '/' + $(this).val();
+                //history.pushState(null, null, '/' + defaults.attribute.url + '/tags/' + $('#selectbranch').val() + '/' + $(this).val());
 				$.ajax({
 					url : defaults.url,
 					async: false, 
@@ -44,9 +23,7 @@
 					dataType : 'html',
 					data : defaults.attribute,
 					success : function(data) {
-						$('#municipal-directories').html(data);		
-						$('#paginationrow').attr('aria-hidden' , 'true');	
-						$('#paginationrow').css('display' , 'none');			
+						$('#vhscourselist').html(data);					
 					}		
 				});
 
@@ -57,10 +34,10 @@
 			var defaults = {
 				elm : $(this),
 				id : '#' + $(this).attr('id'),
-				url : '/municipal/services/application/keywords',
+				url : '/municipal/services/application/coursecategory',
 				target : '#fieldselectkategorie',
 				fieldname : 'selectkategorie',
-				label : 'Schlagworte',
+				label : 'Kategorien',
 				datas : {},
 				results : {},
 			};
@@ -109,23 +86,33 @@
 		},
 	});
 })(jQuery);
-
 $(document).ready(function() {
 	'use strict';
-  	if ( $('.pagination').length) {
-	    $('.pagination').pagination({
-	        items: $('.pagination').attr('data-total'),
-	        itemsOnPage: 10,
-	        displayedPages: 10,
-	        hrefTextPrefix: '/' + $('.pagination').attr('data-url'),
-	        hrefTextSuffix: '0',
-			prevText: 'Zur&uuml;ck',
-			nextText: 'Vor',   
-			currentPage: $('.pagination').attr('data-current'),     
-	    }); 
-    } 
-
-	//$('.toogleHcardElement').ToogleDescription();
+	$(document).on('click', '.toogleVhsElement', function(ev) {
+			ev.stopPropagation();
+			ev.preventDefault();	
+			var ident = $(this).data('ident');	
+			$("#desc" + ident).slideToggle("slow");
+			$("#room" + ident).slideToggle("slow");
+			$("#participant" + ident).slideToggle("slow");
+			$("#desc2" + ident).slideToggle("slow");
+			$("#tax" + ident).slideToggle("slow");
+			$("#termine" + ident).slideToggle("slow");
+			if ( 'block' ==  $("#termine" + ident).css('display')){
+				$.ajax({
+					url : '/municipal/services/application/coursedates',
+					async: false, 
+					type : 'POST',
+					dataType : 'html',
+					data : {'course' : ident },
+					success : function(data) {
+						$("#seminardates" + ident).html(data);					
+					}		
+				});			
+			} else {
+				$("#seminardates" + ident).html('');
+			}
+	});
 	$('#selectbranch').LoadKeywords();
-	$('#municipal-directories').LoadDirectoryEntries();
+	$('#vhscourselist').LoadDirectoryEntries();
 });

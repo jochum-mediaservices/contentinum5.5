@@ -1,12 +1,13 @@
 $(document).ready(function() {
 	if ($('.accordion').length){
-		 $(document).foundation({
-			  accordion: {
-			    callback : function (el) {
-			    var containerPos = $(el).parent().offset().top;
-			      $('html, body').animate({ scrollTop: containerPos }, 600);
-			    }
-			  }
-		});
+		$('.accordion-title').on('click.zf.accordion', function() {
+			//console.log($(this).attr('id'));
+		    var containerPos = $(this).offset().top;
+		    //var containerPos = $(this).parent().offset().top;
+		    //console.log(containerPos);
+		    $('html, body').animate({ scrollTop: containerPos }, 600);
+
+		    
+  		});
 	}
 });

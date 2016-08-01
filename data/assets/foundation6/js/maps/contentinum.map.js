@@ -17,7 +17,7 @@
 			fensterInfoHtml : function(location) {
 				var str = '<div id="content"><div id="siteNotice"></div><div id="bodyContent">';
 				if (location.image.length > 2) {
-					str = str + '<p><img src="' + location.image + '" alt="' + location.name + '" /></p>';
+					str = str + '<p><img class="images-in-map" src="' + location.image + '" alt="' + location.name + '" /></p>';
 				}
 				str = str + '<p><strong>' + location.name + '</strong><br />' + location.street + '<br />' + location.city + '</p>';
 				if (location.description.length > 2) {
@@ -63,6 +63,7 @@
 				};
 				var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 				this.setMarkers(map, mapMarker);
+				return map;
 			},
 		});
 	})); 
