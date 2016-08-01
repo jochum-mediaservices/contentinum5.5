@@ -20,6 +20,10 @@ class ApplicationController extends AbstractApplicationController
         $cookies = $this->getRequest()->getHeaders()->get('Cookie');
         if (isset($cookies['PHPSESSID'])){
             unset($cookies['PHPSESSID']);
+        }    
+        
+        if (method_exists($this->worker, 'setIdentity')) {
+            $this->worker->setIdentity($this->getIdentity());
         }        
         
         return $this->buildView(array(
