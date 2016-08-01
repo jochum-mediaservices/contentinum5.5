@@ -547,27 +547,16 @@
 	module.exports = PdfPrinter;
 
 
-	/* temporary browser extension */
+	/** temporary browser extension */
 	PdfPrinter.prototype.fs = __webpack_require__(10);
 
 
 /***/ },
-/* 3 */
+/** 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {/* FileSaver.js
-	 * A saveAs() FileSaver implementation.
-	 * 2014-08-29
-	 *
-	 * By Eli Grey, http://eligrey.com
-	 * License: X11/MIT
-	 *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
-	 */
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(module) {
 
-	/*global self */
-	/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
-
-	/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
 
 	var saveAs = saveAs
 	  // IE 10+ (native saveAs)

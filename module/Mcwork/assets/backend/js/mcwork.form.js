@@ -670,6 +670,13 @@ $(document).ready(function() {
 	
 	$(".chosen-select").chosen({width : '100%'});
 	
+	if ($("#occupancyStart").length){
+		if ('0000-00-00 00:00:00' == $("#occupancyStart").val()){
+			$("#occupancyStart").val('');
+		}		
+		$("#occupancyStart").datetimepicker( Mcwork.Parameter.getDatePicker() );
+	}	
+	
 	
 	if ($("#dateStart").length){
 		if ('0000-00-00 00:00:00' == $("#dateStart").val()){

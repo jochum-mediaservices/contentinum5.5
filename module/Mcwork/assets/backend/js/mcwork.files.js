@@ -490,9 +490,6 @@ $(document).ready(function() {
         datas.url = $(this).attr('href');
 		$().McworkRemoveDirectory(this, datas);
 	});
-		
-	
-	
 	
 	$('#btnUpload').click(function(ev){
 		ev.preventDefault();
