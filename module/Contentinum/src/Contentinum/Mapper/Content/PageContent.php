@@ -14,7 +14,8 @@ class PageContent extends Worker
      */
     public function fetchContent(array $params = null)
     {
-
+        $dateQuery = date('Y-m-d H:i:s');
+        $entries = array();
         $em = $this->getStorage();
         $builder = $em->createQueryBuilder();
         $builder->select('main');
@@ -26,6 +27,9 @@ class PageContent extends Worker
         $builder->andWhere("main.publish = 'yes'");
         $builder->andWhere('ref2.scope = :group');
         $builder->andWhere("ref3.publish = 'yes'");
+        $builder->andWhere("ref3.resource = 'index'");
+        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '". $dateQuery ."'");
+        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '". $dateQuery ."'");
         $builder->setParameter('id', $params['pageIdent']);
         $builder->setParameter('id2', $params['parentPage']);
         $builder->setParameter('group', 'content');     
@@ -33,7 +37,7 @@ class PageContent extends Worker
         $builder->orderBy('main.itemRang', 'ASC');
         $builder->getQuery()->getSql();
         $entries['content'] = $builder->getQuery()->getResult(); // page content
-        $entries['groups'] = $this->fetchContentGroups($params); // default content
+        $entries['groups'] = $this->fetchContentGroups($params,$dateQuery); // default content
         return $entries;
     }  
     
@@ -54,7 +58,7 @@ class PageContent extends Worker
      * 
      * @param array $params
      */
-    protected function fetchContentGroups(array $params = null)
+    protected function fetchContentGroups(array $params = null, $dateQuery)
     {
         $em = $this->getStorage();
         $builder = $em->createQueryBuilder();
@@ -68,6 +72,9 @@ class PageContent extends Worker
         $builder->andWhere("main.groupStyle != 'none'");
         $builder->andWhere("ref2.publish = 'yes'");
         $builder->andWhere("ref3.publish = 'yes'");
+        $builder->andWhere("ref3.resource = 'index'");
+        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '". $dateQuery ."'");
+        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '". $dateQuery ."'");        
         $builder->setParameter('id', $params['pageIdent']);
         $builder->setParameter('id2', $params['parentPage']);
         $builder->setParameter('group', 'content');

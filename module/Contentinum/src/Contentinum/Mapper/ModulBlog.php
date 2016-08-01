@@ -200,6 +200,7 @@ class ModulBlog extends AbstractModuls
         }
         $builder->andWhere('ref1.publish = :publish');
         $builder->andWhere("ref1.publishUp = '0000-00-00 00:00:00' OR ref1.publishUp <= '". date('Y-m-d H:i:s') ."'"); 
+        $builder->andWhere("ref1.publishDown = '0000-00-00 00:00:00' OR ref1.publishDown >= '". date('Y-m-d H:i:s') ."'");
         $builder->setParameter('id', $id);
         $builder->setParameter('publish', 'yes');
         $builder->orderBy('main.publishDate', 'DESC');
