@@ -1,5 +1,20 @@
 <?php
 return array(
+    5521 => array(
+        'Core Update: Wechsel bei Zend Framework Komponenten zu den Versionen 2.5, 2.6, 2.7',
+    ),    
+    5520 => array(
+        'Verbesserung der abfrage von Inhalten per Zeitsteuerung',
+    ),    
+    5519 => array(
+        'Update tinymce auf version 4.4.1',
+    ),    
+    5518 => array(
+        'Erstellen von Bildergruppen durch auslesen eines Dateiverzeichnisses',
+    ),    
+    5517 => array(
+        "ALTER TABLE `municipal_service_groups` ADD `allowedips` VARCHAR(500) NOT NULL AFTER `groupscope`;ALTER TABLE `municipal_service_groups` ADD `urlident` VARCHAR(50) NOT NULL AFTER `groupscope`;",
+    ),
     5516 => array(
         "Diverse kleine Fehler und Anpassungen",
     ),
