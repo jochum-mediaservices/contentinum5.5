@@ -21,7 +21,7 @@ class ApplicationController extends AbstractApplicationController
         if (isset($cookies['PHPSESSID'])){
             unset($cookies['PHPSESSID']);
         }    
-        
+
         if (method_exists($this->worker, 'setIdentity')) {
             $this->worker->setIdentity($this->getIdentity());
         }        

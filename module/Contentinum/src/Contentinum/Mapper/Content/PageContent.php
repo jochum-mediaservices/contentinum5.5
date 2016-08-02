@@ -1,15 +1,16 @@
 <?php
-
 namespace Contentinum\Mapper\Content;
 
-
-
 use ContentinumComponents\Mapper\Worker;
+
 class PageContent extends Worker
 {
+
     /**
      * Content query
-     * @param array $params query conditions
+     * 
+     * @param array $params
+     *            query conditions
      * @return multitype:
      */
     public function fetchContent(array $params = null)
@@ -27,36 +28,77 @@ class PageContent extends Worker
         $builder->andWhere("main.publish = 'yes'");
         $builder->andWhere('ref2.scope = :group');
         $builder->andWhere("ref3.publish = 'yes'");
-        $builder->andWhere("ref3.resource = 'index'");
-        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '". $dateQuery ."'");
-        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '". $dateQuery ."'");
+        
+        if (null !== ($identity = $this->getIdentity())) {
+            if ('admin' == $identity->role) {
+                $builder->andWhere("ref3.resourceGroup >= 0");
+            } else {
+                
+                switch ($identity->role) {
+                    case 'intranet':
+                        $builder->andWhere("ref3.resource = 'index' OR ref3.resource = 'intranetresource'");
+                        $orWhere = "ref3.resourceGroup = 0";
+                        if ($identity->usergroups && ! empty($identity->usergroups)  ){
+                            foreach ($identity->usergroups as $usrgrp){
+                                $orWhere .= ' OR ';                            
+                                $orWhere .= "ref3.resourceGroup = {$usrgrp}";
+                            }
+                        }
+                        $builder->andWhere($orWhere);
+                        break;
+                    case 'member':
+                        $builder->andWhere("ref3.resource = 'index' OR ref3.resource = 'memberresource'");
+                        $orWhere = "ref3.resourceGroup = 0";
+                        if ($identity->usergroups && ! empty($identity->usergroups)  ){
+                            foreach ($identity->usergroups as $usrgrp){
+                                $orWhere .= ' OR ';                            
+                                $orWhere .= "ref3.resourceGroup = {$usrgrp}";
+                            }
+                        }
+                        $builder->andWhere($orWhere);
+                        break;
+                    case 'guest':
+                    default:
+                        $builder->andWhere("ref3.resource = 'index'");
+                        $builder->andWhere("ref3.resourceGroup = 0");
+                        break;
+                }
+                
+            }
+        } else {
+            $builder->andWhere("ref3.resource = 'index'");
+            $builder->andWhere("ref3.resourceGroup = 0");            
+        }
+        
+        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '" . $dateQuery . "'");
+        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '" . $dateQuery . "'");
         $builder->setParameter('id', $params['pageIdent']);
         $builder->setParameter('id2', $params['parentPage']);
-        $builder->setParameter('group', 'content');     
+        $builder->setParameter('group', 'content');
         $builder->orderBy('ref2.itemRang', 'ASC');
         $builder->orderBy('main.itemRang', 'ASC');
         $builder->getQuery()->getSql();
         $entries['content'] = $builder->getQuery()->getResult(); // page content
-        $entries['groups'] = $this->fetchContentGroups($params,$dateQuery); // default content
+        $entries['groups'] = $this->fetchContentGroups($params, $dateQuery); // default content
         return $entries;
-    }  
-    
+    }
+
     /**
      *
-     * @param array $params
-     * @param string $posts
+     * @param array $params            
+     * @param string $posts            
      */
     public function processRequest(array $params = null, $posts = null)
     {
-        if (is_array($posts)){
-            $params = array_merge($params,$posts);
+        if (is_array($posts)) {
+            $params = array_merge($params, $posts);
         }
         return $this->fetchContent($params);
-    } 
-    
+    }
+
     /**
-     * 
-     * @param array $params
+     *
+     * @param array $params            
      */
     protected function fetchContentGroups(array $params = null, $dateQuery)
     {
@@ -73,14 +115,14 @@ class PageContent extends Worker
         $builder->andWhere("ref2.publish = 'yes'");
         $builder->andWhere("ref3.publish = 'yes'");
         $builder->andWhere("ref3.resource = 'index'");
-        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '". $dateQuery ."'");
-        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '". $dateQuery ."'");        
+        $builder->andWhere("ref3.resourceGroup = 0"); 
+        $builder->andWhere("ref3.publishUp = '0000-00-00 00:00:00' OR ref3.publishUp <= '" . $dateQuery . "'");
+        $builder->andWhere("ref3.publishDown = '0000-00-00 00:00:00' OR ref3.publishDown >= '" . $dateQuery . "'");
         $builder->setParameter('id', $params['pageIdent']);
         $builder->setParameter('id2', $params['parentPage']);
         $builder->setParameter('group', 'content');
         $builder->orderBy('ref2.itemRang', 'ASC');
         $builder->orderBy('main.itemRang', 'ASC');
         return $builder->getQuery()->getResult();
-    }    
-
+    }
 }

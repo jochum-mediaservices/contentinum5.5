@@ -76,14 +76,19 @@ abstract class AbstractApplicationController extends AbstractContentinumControll
         $this->getPageOptions()->addParameter( 'categoryvalue', $this->params()->fromRoute('categoryvalue', false));    
         $this->getPageOptions()->addParameter( 'query', $this->params()->fromQuery());
         
-        if ('index' !== $this->pageOptions->resource) {
-            $authService = $this->getServiceLocator()->get('user_authentication');
+        $authService = $this->getServiceLocator()->get('user_authentication');
+        
+        if ('index' !== $this->pageOptions->resource) {    
             if (! $authService->hasIdentity()) {
                 return $this->redirect()->toUrl('/login');
             } else {
                 $this->setIdentity($authService->getIdentity());
             }
-        }        
+        } 
+        
+        if (null === $this->getIdentity() && $authService->hasIdentity()){
+            $this->setIdentity($authService->getIdentity());
+        }
         
         $role = $this->getServiceLocator()->get('contentinum_acl_defaultrole');
         $acl = $this->getServiceLocator()->get('contentinum_acl_acl');        
