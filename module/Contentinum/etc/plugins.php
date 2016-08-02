@@ -25,6 +25,7 @@ return array(
         'forms' => 'contentinum_forms',
         
         'breadcrumbs' => 'contentinum_navigation',
+        'sitemap' => 'contentinum_navigation',
         
         'microdatagroup' => 'contentinum_contact_group',
         'microdatacontact' => 'contentinum_contact',
@@ -60,6 +61,7 @@ return array(
         'forms' => 'forms',
         
         'breadcrumbs' => 'breadcrumbnav',
+        'sitemap' => 'sitemapbuild',
         
         'microdatagroup' =>  'microdatacontactgroup',
         'microdatacontact' => 'microdatacontact',
@@ -884,7 +886,117 @@ return array(
                     )
                 )
             ),            
-            
+            'sitemap' => array(
+                'resource' => 'intranet',
+                'name' => 'Sitemap HTML',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Navigation auswählen',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Contentinum\Entity\WebNavigations',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'title'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Branch depth',
+                                'empty_option' => 'Max depth',
+                                'value_options' => array(
+                                    '1' => 'Level 1',
+                                    '2' => 'Level 2',
+                                    '3' => 'Level 3'
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Template auswählen',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/services',
+                                    'data' => array(
+                                        'entity' => 'templates_plugin_navigation',
+                                        'prepare' => 'select',
+                                        'result' => 'array',
+                                        'value' => '1',
+                                        'label' => '1'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                            'attributes' => array(
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Set display headline',
+                                'empty_option' => 'No headline',
+                                'value_options' => array(
+                                    'displayheadline' => 'Display headline'
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )                
+            ),
             'navigation' => array(
                 'resource' => 'intranet',
                 'name' => 'Navigation',

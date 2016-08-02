@@ -19,6 +19,7 @@ return array(
         'navigationmmenu'  => 'Contentinum\View\Helper\Navigation\Mmenu',
         'navigationmultilevel'  => 'Contentinum\View\Helper\Navigation\Multilevel',  
         'breadcrumbnav' => 'Contentinum\View\Helper\Navigation\Breadcrumbs',
+        'sitemapbuild' => 'Contentinum\View\Helper\Navigation\Sitemap',
         
         'images' => 'Contentinum\View\Helper\Medias\Images',
         'getmedialink' => 'Contentinum\View\Helper\Medias\ImageLink',
