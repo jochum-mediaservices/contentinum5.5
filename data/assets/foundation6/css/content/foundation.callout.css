@@ -6,8 +6,6 @@
   position: relative;
   color: #0a0a0a;
   background-color: white; }
-  .callout.callout-shadow {
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);}
   .callout > :first-child {
     margin-top: 0; }
   .callout > :last-child {

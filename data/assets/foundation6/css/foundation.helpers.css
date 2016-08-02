@@ -83,10 +83,10 @@
     .show-for-portrait {
       display: block !important; } }
 
-.float-left, .left {
+.float-left {
   float: left !important; }
 
-.float-right, .right {
+.float-right {
   float: right !important; }
 
 .float-center {

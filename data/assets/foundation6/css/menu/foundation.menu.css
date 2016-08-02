@@ -15,13 +15,16 @@
   .menu button {
     margin-bottom: 0; }
   .menu > li > a img,
-  .menu > li > a i {
+  .menu > li > a i,
+  .menu > li > a svg {
     vertical-align: middle; }
-  .menu > li > a i + span,
-  .menu > li > a img + span {
-    vertical-align: middle; }
+    .menu > li > a img + span,
+    .menu > li > a i + span,
+    .menu > li > a svg + span {
+      vertical-align: middle; }
   .menu > li > a img,
-  .menu > li > a i {
+  .menu > li > a i,
+  .menu > li > a svg {
     margin-right: 0.25rem;
     display: inline-block; }
   .menu > li {
@@ -60,7 +63,8 @@
   .menu.icon-top > li > a {
     text-align: center; }
     .menu.icon-top > li > a img,
-    .menu.icon-top > li > a i {
+    .menu.icon-top > li > a i,
+    .menu.icon-top > li > a svg {
       display: block;
       margin: 0 auto 0.25rem; }
   .menu.nested {

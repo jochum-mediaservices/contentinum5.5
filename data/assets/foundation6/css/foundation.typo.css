@@ -46,7 +46,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'OpenSansLight', Roboto, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: inherit;
@@ -229,5 +229,3 @@ kbd {
     text-align: center; }
   .large-text-justify {
     text-align: justify; } }
-.show-for-print {
-  display: none !important; }    

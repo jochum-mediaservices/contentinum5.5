@@ -18,7 +18,7 @@
   .menu-icon:hover::after {
     background: #cacaca;
     box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
-
+  		
 .menu-icon.dark {
   position: relative;
   display: inline-block;
