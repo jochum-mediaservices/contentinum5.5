@@ -85,10 +85,7 @@ class Sitemap extends AbstractContentHelper
         
         $navlist = $entry['modulContent']['nav'];
         
-        $ulClass = 'navigation-list';
-        if (null !== $this->ulclass){
-            $ulClass = $this->ulclass;
-        }
+        $ulClass = 'sitemap-html';
         
         
         $container = new \Zend\Navigation\Navigation($navlist);
