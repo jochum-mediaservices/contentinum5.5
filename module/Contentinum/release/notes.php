@@ -1,10 +1,14 @@
 <?php
 return array(
+    5524 => array(
+        'Wechsel Zend Framework von Version 2.4 auf 2.5/2.7',
+    ),    
     5523 => array(
         'Neuer View Helper: Sitemap als HTML Version nach Linkwertigkeit sortiert',
     ),    
     5522 => array(
         'Municipal Kontakte Sachgebiete und Fachbreiche ein- und ausblenden von Kontaktdaten',
+        "ALTER TABLE `municipal_fachbereiche` ADD `enable_dept_phone` TINYINT(1) NOT NULL DEFAULT '0' AFTER `description`, ADD `enable_dept_fax`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_phone`, ADD `enable_dept_email`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_fax`, ADD `enable_dept_internet`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_email`;",        
         "ALTER TABLE `municipal_sachgebiete` CHANGE `sg_internet` `debt_internet` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;ALTER TABLE `municipal_sachgebiete` CHANGE `sg_email` `debt_email` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;ALTER TABLE `municipal_sachgebiete` CHANGE `sg_fax` `debt_fax` VARCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;ALTER TABLE `municipal_sachgebiete` CHANGE `sg_phone` `debt_phone` VARCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;",
         "ALTER TABLE `municipal_sachgebiete` ADD `enable_dept_phone` TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_organization`, ADD `enable_dept_fax`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_phone`, ADD `enable_dept_email`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_fax`, ADD `enable_dept_internet`  TINYINT(1) NOT NULL DEFAULT '0' AFTER `enable_dept_email`;",
     ),    
