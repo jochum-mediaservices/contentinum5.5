@@ -215,6 +215,21 @@ class ArticleForm extends AbstractForms
                         'id' => 'publishUp',
                     )
                 )
+            ),   
+            
+            array(
+                'spec' => array(
+                    'name' => 'publishDown',
+                    'required' => false,
+                    'options' => array(
+                        'label' => 'Publication end',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW)
+                    ),
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'publishDown',
+                    )
+                )
             ),            
             
             array(
