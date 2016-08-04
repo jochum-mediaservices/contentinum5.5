@@ -28,8 +28,34 @@
  */
 namespace Guestbook\Model\Guests;
 
-
-
 use ContentinumComponents\Mapper\Process;
+
 class SaveEntry extends Process
-{}
+{
+
+    /**
+     * Prepare datas before save
+     *
+     * @see \ContentinumComponents\Mapper\Process::save()
+     */
+    public function save($datas, $entity = null, $stage = '', $id = null)
+    {
+        $entity = $this->handleEntity($entity);
+        if (null === $entity->getPrimaryValue()) {
+            if (isset($datas['furthernames']) && strlen($datas['furthernames']) > 0) {
+                return array(
+                    'error' => 'Sorry! ERROR!'
+                );
+            } else {
+                parent::save($datas, $entity, $stage, $id);
+                return array(
+                    'success' => 'Vielen Dank! Dein Eintrag wurde registriert und nach Prüfung freigeschaltet.'
+                );
+            }
+        } else {
+            return array(
+                'error' => 'Sorry! Es gab einen Fehler Bitte probiere es später noch einmal!'
+            );
+        }
+    }
+}

@@ -2,7 +2,7 @@
 return array(
     '_default' => array(
         'splitQuery' => 2,
-        'title' => 'guestbook',
+        'title' => 'Contentinum Plugin',
         'resource' => 'index',
         'charset' => 'utf-8',
         'locale' => 'de_DE',
@@ -259,6 +259,28 @@ return array(
             'settoroute' => '/guestbook/entries'
         )
     ),
+    
+    '/guestbook/public/entry' => array(
+        'splitQuery' => 3,
+        'resource' => 'index',
+        'metaTitle' => 'Eintrag',
+        'template' => 'forms/public',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Eintrag',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Guestbook\Model\Guests\SaveEntry',
+            'entity' => 'Guestbook\Entity\Guestbook',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Guestbook\Form\PublicGuestbookForm',
+            'formaction' => '/guestbook/public/entry',
+            'settoroute' => '/guestbook/public/entry',
+        ),
+    ),    
     
     '/guestbook/entries/validate' => array(
         'resource' => 'publisherresource',

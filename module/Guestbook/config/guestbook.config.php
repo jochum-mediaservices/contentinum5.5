@@ -3,13 +3,14 @@ namespace Guestbook;
 
 return array(
     'service_manager' => array(
-         
         'factories' => array(
             'entity_guestbook_guestbook' => 'Guestbook\Factory\Entities\GuestbookFactory',
 
+            'modul_guestbook_guestbook'  => 'Guestbook\Factory\Mapper\ModulGuestbookFactory',
+            
+            'templates_plugin_guestbook' => 'Guestbook\Service\Plugins\TemplateGuestbookFactory',
         ),
     ),    
-    
     'contentinum_config' => array(
         'contentinum_module' => array('guestbook'),
         'contentinum_version' => 'guestbook',
@@ -20,7 +21,6 @@ return array(
             'app_plugins' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/plugins.php'),
             'app_plugin_templates' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/templates/plugins'),
             'mcwork_navigation' => array(__NAMESPACE__ => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/navigation.php'),
-    
         ),
     ), 
     'doctrine' => array(
@@ -43,6 +43,5 @@ return array(
         'template_path_stack' => array(
             'guestbook' => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/view'
         )
-    ),    
-    
+    ),
 );

@@ -25,37 +25,16 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Guestbook\Mapper\Book;
+namespace Guestbook\Service\Plugins;
 
-use ContentinumComponents\Mapper\Worker;
+use Contentinum\Service\Plugins\AbstractDefaultTemplate;
 
 /**
- * Query contents for this request
- *
+ * Config template key html layout
+ * 
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  */
-class Entries extends Worker
+class TemplateGuestbookFactory extends AbstractDefaultTemplate
 {
-    /**
-     * Content query
-     * @param array $params query conditions
-     * @return multitype:
-     */
-    public function fetchContent(array $params = null)
-    {
-        return $this->getStorage()->getRepository( $this->getEntityName() )->findBy(array(), array('registerDate' => 'DESC'));
-    }
-    
-    /**
-     *
-     * @param array $params
-     * @param string $posts
-     */
-    public function processRequest(array $params = null, $posts = null)
-    {
-        if (is_array($posts)){
-            $params = array_merge($params,$posts);
-        }
-        return $this->fetchContent($params);
-    }    
+    const PLUGIN_KEY = 'guestbook';    
 }

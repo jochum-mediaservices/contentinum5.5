@@ -16,8 +16,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category contentinum
- * @package Service
+ * @category Municipal
+ * @package View
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
  * @license http://www.opensource.org/licenses/bsd-license
@@ -25,37 +25,48 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Guestbook\Mapper\Book;
+namespace Guestbook\View\Helper\Book;
 
-use ContentinumComponents\Mapper\Worker;
+use Contentinum\View\Helper\AbstractContentHelper;
+use ContentinumComponents\Filter\TextToHtml;
 
-/**
- * Query contents for this request
- *
- * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
- */
-class Entries extends Worker
+class App extends AbstractContentHelper
 {
-    /**
-     * Content query
-     * @param array $params query conditions
-     * @return multitype:
-     */
-    public function fetchContent(array $params = null)
-    {
-        return $this->getStorage()->getRepository( $this->getEntityName() )->findBy(array(), array('registerDate' => 'DESC'));
-    }
+    const VIEW_TEMPLATE = 'guestbook';    
     
     /**
      *
-     * @param array $params
-     * @param string $posts
+     * @var unknown
      */
-    public function processRequest(array $params = null, $posts = null)
+    protected $schemakey;
+    
+    /**
+     *
+     * @var array
+     */
+    protected $properties = array(
+        'schemakey',
+    );    
+    
+    /**
+     *
+     * @param unknown $entries
+     * @param unknown $medias
+     * @param string $template
+     * @return string
+     */
+    public function __invoke($entries, $template, $media)
     {
-        if (is_array($posts)){
-            $params = array_merge($params,$posts);
+        $html = '';
+        $filter = new TextToHtml();
+        $html .= $html = '<div class="server-process"> </div><div id="orderform"> </div>';
+        $html .= '<p class="orderinfo"><a href="#" class="button guestbookentry">Wir freuen uns &uuml;ber einen Eintrag</a></p>';
+        foreach ($entries['modulContent'] as $entry) {
+            $html .= '<div class="callout callout-shadow panel bookentry">';
+            $html .= $filter->filter(stripslashes($entry->com));
+            $html .= '<p>' . $entry->name  . ', ' . $entry->registerDate->format('d.m.Y') . '</p>';
+            $html .= '</div>';
         }
-        return $this->fetchContent($params);
-    }    
+        return $html;
+    }
 }

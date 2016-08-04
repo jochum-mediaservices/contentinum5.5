@@ -1,5 +1,11 @@
 <?php
 return array(
-    'plugins' => array(       
+    'plugins' => array(   
+        'guestbook' => array(
+            'viewhelper' => 'guestbook',
+            'key' => 'guestbook',
+            'name' => 'Gästebuch',
+            'schemakey' => 'entryrow',
+        )        
     ),
 );

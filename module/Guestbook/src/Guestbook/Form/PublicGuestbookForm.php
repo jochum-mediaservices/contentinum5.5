@@ -171,6 +171,18 @@ class PublicGuestbookForm extends AbstractForms
                         'id' => 'homepage'
                     )
                 )
+            ), 
+            
+            array(
+                'spec' => array(
+                    'name' => 'send',
+                    'type' => 'Submit',
+                    'attributes' => array(
+                        'class' => 'button expand',
+                        'value' => 'Absenden',
+                        'id' => 'sendbutton'
+                    )
+                )
             ),            
         );
     }

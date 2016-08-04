@@ -17,7 +17,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category contentinum
- * @package Service
+ * @package Model
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
  * @license http://www.opensource.org/licenses/bsd-license
@@ -25,37 +25,26 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Guestbook\Mapper\Book;
+namespace Guestbook\Factory\Mapper;
 
-use ContentinumComponents\Mapper\Worker;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Contentinum\Factory\EntityManagerFactory;
+use Guestbook\Mapper\ModulGuestbook;
 
 /**
- * Query contents for this request
+ * 
+ * @author mike
  *
- * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  */
-class Entries extends Worker
+class ModulGuestbookFactory extends EntityManagerFactory
 {
     /**
-     * Content query
-     * @param array $params query conditions
-     * @return multitype:
-     */
-    public function fetchContent(array $params = null)
-    {
-        return $this->getStorage()->getRepository( $this->getEntityName() )->findBy(array(), array('registerDate' => 'DESC'));
-    }
-    
-    /**
+     * (non-PHPdoc)
      *
-     * @param array $params
-     * @param string $posts
+     * @see \Zend\ServiceManager\FactoryInterface::createService()
      */
-    public function processRequest(array $params = null, $posts = null)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (is_array($posts)){
-            $params = array_merge($params,$posts);
-        }
-        return $this->fetchContent($params);
+        return new ModulGuestbook($serviceLocator->get(self::MC_ENTITYMANAGER));
     }    
 }
