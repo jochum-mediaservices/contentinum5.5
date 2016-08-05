@@ -6,7 +6,7 @@ $host .= '://' . $this->host;
 $configure = $entries['feed'];
 $feed->setTitle($configure['feed_title']);
 $feed->setLink($host);
-$feed->setFeedLink($host . '/' . $configure['feed_url'], 'rss');
+$feed->setFeedLink($host . '/feed/' . $configure['feed_url'], 'rss');
 $feed->addAuthor(array(
     'name' => $configure['feed_author'],
     'email' => $configure['feed_authoremail'],
