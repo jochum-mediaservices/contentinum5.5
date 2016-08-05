@@ -46,6 +46,7 @@ class FeedController extends AbstractApplicationController
         $dateFormat = $viewHelperManager->get('dateFormat');
         $dateFormat->setTimezone("Europa/Berlin")->setLocale("de_DE");
         
+        $variables = array();
         $variables['host'] = $pageOptions->getHost();
         $variables['protocol'] = $pageOptions->getProtocol();
         $variables['entries'] = $this->worker->fetchContent($pageOptions->getParams());

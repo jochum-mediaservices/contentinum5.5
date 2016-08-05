@@ -65,6 +65,7 @@ class ApplicationController extends AbstractApplicationController
         $form->setInputFilter($form->getInputFilter());
         $form->setData($datas);
         if ($form->isValid()) {
+            $response = array();
             $configuration = $this->getServiceLocator()->get('contentinum_customer');
             $process = $this->getServiceLocator()->get('contentinum_form_process');
             /**

@@ -57,6 +57,8 @@ class PluginController extends AbstractApplicationController
         $modul->setDefaultRole($role);
         $modul->setUrl($pageOptions->getUrl());
         $modul->setXmlHttpRequest('html'); 
+        
+        $variables = array();
         $variables['pluginstyles'] = $this->getServiceLocator()->get('contentinum_template_plugins');
         $variables['pluginViewHelper'] = $this->getServiceLocator()->get('contentinum_plugin_views');
         $variables['plugins'] = $this->worker->fetchContent($pageOptions->getParams(), $this->params()->fromPost(),$modul);

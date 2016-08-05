@@ -59,6 +59,7 @@ class RecommendationController extends AbstractApplicationController
         $dateFormat = $viewHelperManager->get('dateFormat');
         $dateFormat->setTimezone("Europa/Berlin")->setLocale("de_DE");
     
+        $variables = array();
         $variables['host'] = $pageOptions->getHost();
         $variables['protocol'] = $pageOptions->getProtocol();
         $variables['xmlHttpRequest'] = $this->getXmlHttpRequest();
@@ -100,6 +101,7 @@ class RecommendationController extends AbstractApplicationController
         $dateFormat = $viewHelperManager->get('dateFormat');
         $dateFormat->setTimezone("Europa/Berlin")->setLocale("de_DE");
     
+        $variables = array();
         $variables['host'] = $pageOptions->getHost();
         $variables['protocol'] = $pageOptions->getProtocol();
         $variables['xmlHttpRequest'] = $this->getXmlHttpRequest();
@@ -112,6 +114,7 @@ class RecommendationController extends AbstractApplicationController
         $form = $formFactory->getForm();
         $form->setInputFilter($form->getInputFilter());
         $form->setData($datas);
+        $jsonVar = array();
         if ($form->isValid()) {
             $configuration = $this->getServiceLocator()->get('contentinum_customer');
             /**

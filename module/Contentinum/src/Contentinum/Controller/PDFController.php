@@ -49,6 +49,7 @@ class PDFController extends AbstractApplicationController
         $dateFormat = $viewHelperManager->get('dateFormat');
         $dateFormat->setTimezone("Europa/Berlin")->setLocale("de_DE");
         
+        $variables = array();
         $variables['host'] = $pageOptions->getHost();
         $variables['entries'] = $this->worker->fetchContent($pageOptions->getParams());
         $variables['parameter'] = $pageOptions->getParams();
