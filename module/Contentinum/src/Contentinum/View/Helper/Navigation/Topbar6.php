@@ -99,7 +99,11 @@ class Topbar6 extends AbstractContentHelper
         $html = '';
         if (isset($entries['modulDisplay']) && strlen($entries['modulDisplay']) > 0){
             $label = $entries['modulDisplay'];
-            if (isset($entry['modulLink'])){
+            if (isset($entries['modulConfig']) && strlen($entries['modulConfig']) > 0){
+                $label = '<img src="' . $entries['modulConfig'] . '" alt="'.$label.'" />';
+            }
+            
+            if (isset($entries['modulLink'])){
                 $label = '<a href="'.$entries['modulLink'].'">'.$label.'</a>';
             }
             $html .= $this->deployRow($this->titlewrapper, $this->deployRow($this->sitetitle, $label));
