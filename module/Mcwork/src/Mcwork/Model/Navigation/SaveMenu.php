@@ -44,14 +44,16 @@ class SaveMenu extends DeleteCache
      */
     public function save($datas, $entity = null, $stage = '', $id = null)
     {
-            $entity = $this->handleEntity($entity);
+        $entity = $this->handleEntity($entity);
         if (null === $entity->getPrimaryValue()) {
             $datas['itemRang'] = $this->sequence('webNavigations', $datas['webNavigations'], 'itemRang') + 1;
             parent::save($datas, $entity);
             $this->emptyPublicCache('navigation' . $datas['webNavigations']);
         } else {
             $msg = parent::save($datas, $entity, $stage, $id);
-            $this->emptyPublicCache('navigation' . $datas['webNavigations']);
+            if (isset($datas['webNavigations'])){
+                $this->emptyPublicCache('navigation' . $datas['webNavigations']);
+            }
             return $msg;
         }
     }
