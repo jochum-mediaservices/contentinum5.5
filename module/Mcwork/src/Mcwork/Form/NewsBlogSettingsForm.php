@@ -88,7 +88,7 @@ class NewsBlogSettingsForm extends AbstractForms
                         'value_options' => array(),                        
                         'value_options' => $this->getSelectOptions('webPages', array(
                             'value' => 'id',
-                            'label' => 'label'
+                            'label' => array('label','url')
                             ), array('main.scope != :scope' => array(':scope', '_default'),
                                  'andWhere' => 'main.onlylink = \'0\''                            
                             )

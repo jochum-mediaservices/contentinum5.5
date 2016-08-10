@@ -132,7 +132,7 @@ class ContributionForm extends AbstractForms
                         'empty_option' => 'Please select',
                         'value_options' => $this->getSelectOptions('webPages', array(
                             'value' => 'id',
-                            'label' => 'label'
+                            'label' => array('label','url')
                         ), array('main.onlylink != :onlylink' => array(':onlylink', '1')),null,false,array(),array('main.label'  => 'ASC')
                         ),                        
                         
