@@ -147,7 +147,7 @@ class MceventDates extends AbstractEntity
      *
      * @ORM\Column(name="web_files_id", type="integer", nullable=false)
      */
-    private $webFilesId = '';    
+    private $webFilesId = 1;    
     
     /**
      * @var string
