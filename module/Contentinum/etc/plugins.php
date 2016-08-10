@@ -632,7 +632,7 @@ return array(
                                     'method' => 'ajax',
                                     'url' => '/mcwork/services/application/configure',
                                     'data' => array(
-                                        'service' => 'mcwork_clientapp_publicmedia',
+                                        'service' => 'mcwork_public_mediasrc',
                                         'prepare' => 'select',
                                         'value' => 'id',
                                         'label' => 'name'
@@ -744,7 +744,7 @@ return array(
                                     'method' => 'ajax',
                                     'url' => '/mcwork/services/application/configure',
                                     'data' => array(
-                                        'service' => 'mcwork_clientapp_publicmedia',
+                                        'service' => 'mcwork_public_mediasrc',
                                         'prepare' => 'select',
                                         'value' => 'id',
                                         'label' => 'name'
