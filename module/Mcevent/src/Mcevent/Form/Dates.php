@@ -329,6 +329,7 @@ class Dates extends AbstractForms
                     'attributes' => array(
                         'id' => 'webFilesId',
                         'class' => 'chosen-select',
+                        'value' => 1,
                     )
                 )
             ),  
@@ -372,6 +373,7 @@ class Dates extends AbstractForms
                     'attributes' => array(
                         'id' => 'webMediasId',
                         'class' => 'chosen-select',
+                        'value' => 1,
                     )
                 )
             ),                     
