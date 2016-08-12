@@ -328,6 +328,7 @@ return array(
                                     '18' => 'Display 18',
                                     '19' => 'Display 19',
                                     '20' => 'Display 20',
+                                    '9999' => '&infin;'
                                 ),
                                 'deco-row' => 'text'
                             ),
