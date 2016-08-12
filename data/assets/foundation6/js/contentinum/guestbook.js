@@ -28,5 +28,18 @@ $(document).ready(function() {
 				}		
 			});		
 	});
+	
+    Waves.attach('.btn-floating', ['waves-effect ']);
+    Waves.init();	
+    
+	$().ScrollEvent({
+	    listItem: '.bookentry',
+	    listContainer: '#guestbookentries',
+	    nextMarker: '.next',
+	    dataUrl : 'data-url',
+	    pagination: '#pagination',
+	    delay: 400,
+	    negativeMargin: 10
+	});   	
 
 });

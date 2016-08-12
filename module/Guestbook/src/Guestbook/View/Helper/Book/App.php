@@ -58,15 +58,70 @@ class App extends AbstractContentHelper
     public function __invoke($entries, $template, $media)
     {
         $html = '';
+        $total = 0;
+        if (isset($entries['modulContent']['count'])){
+            $total = $entries['modulContent']['count'];
+        }
+        $i = 0;        
         $filter = new TextToHtml();
-        $html .= $html = '<div class="server-process"> </div><div id="orderform"> </div>';
-        $html .= '<p class="orderinfo"><a href="#" class="button guestbookentry">Wir freuen uns &uuml;ber einen Eintrag</a></p>';
-        foreach ($entries['modulContent'] as $entry) {
-            $html .= '<div class="callout callout-shadow panel bookentry">';
+        foreach ($entries['modulContent']['entries'] as $entry) {
+            $html .= '<div class="bookentry callout callout-shadow panel">';
             $html .= $filter->filter(stripslashes($entry->com));
             $html .= '<p>' . $entry->name  . ', ' . $entry->registerDate->format('d.m.Y') . '</p>';
             $html .= '</div>';
+            $i++;
         }
+        if ('html' === $this->view->xmlHttpRequest){
+            return $html;
+        }   
+        
+        $form = '<div class="server-process"> </div><div id="orderform"> </div>';
+        $form .= '<p class="orderinfo"><a href="#" class="button guestbookentry">Wir freuen uns &uuml;ber einen Eintrag</a></p>';
+        
+        $html = $form . '<div id="guestbookentries">' . $html . '</div>';
+        $html .= $this->pagination($entries,$total);
         return $html;
     }
+    
+    /**
+     *
+     * @param unknown $numberOfRows
+     * @param number $resultsPerPage
+     */
+    protected function pagination($entries, $numberOfRows, $resultsPerPage = 5)
+    {
+        $totalPages = ceil($numberOfRows / $resultsPerPage);
+    
+        $wrapper = array();
+        $wrapper['data-modul'] = $entries['modul'];
+        $wrapper['data-params'] = $entries['modulParams'];
+        $wrapper['data-display'] = $entries['modulDisplay'];
+        $wrapper['data-config'] = $entries['modulConfig'];
+        $wrapper['data-link'] = $entries['modulLink'];
+        $wrapper['data-format'] = $entries['modulFormat'];
+        $wrapper['data-url'] = $this->view->url;
+        $dataAttr = '';
+        foreach ($wrapper as $attr => $v){
+            if (strlen($v) > 0 ){
+                $dataAttr .= ' ' . $attr . '="' . $v . '"';
+            }
+        }
+    
+    
+        $html = '<ul id="pagination"'.$dataAttr.'>';
+        $firstResult = 0;
+        for($i = 1; $i <= $totalPages; $i++)
+        {
+            $next = '';
+            if (2 == $i){
+                $next = ' class="next"';
+            }
+            $firstResult =  $firstResult + $resultsPerPage;
+            $html .= '<li'.$next.' data-url="set/' . $firstResult . '"><a href="/' . $this->view->url . '/set/' . $firstResult . '" data-url="set/' . $firstResult . '">' . $i . '</a></li>';
+        }
+        $html .= '</ul>';
+        //$html .= '<p><a href="#" class="btn-floating btn-large waves-effect waves-light red addcontent"> <i class="fa fa-plus" aria-hidden="true"> </i></a></p>';
+        //$html .= '<p><a href="#" class="btn-floating btn-large waves-effect waves-light red addcontent"> <i class="material-icons" aria-hidden="true">add</i></a></p>';
+        return $html;
+    }    
 }
