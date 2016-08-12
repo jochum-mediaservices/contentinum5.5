@@ -14,11 +14,6 @@ return array(
                     'uri' => '/guestbook/entries',
                     'resource' => 'authorresource',               
                 ),                
-                array(
-                    'label' => 'Konfiguration',
-                    'uri' => '/guestbook/configuration',
-                    'resource' => 'managerresource'
-                ),
             )
         )
     )
