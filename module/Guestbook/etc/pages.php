@@ -265,8 +265,6 @@ return array(
         'resource' => 'index',
         'metaTitle' => 'Eintrag',
         'template' => 'forms/public',
-        'toolbar' => 1,
-        'tableedit' => 1,
         'pageContent' => array(
             'headline' => 'Eintrag',
             'content' => ''
@@ -278,7 +276,6 @@ return array(
             'formdecorators' => 'mcwork_form_decorators',
             'form' => 'Guestbook\Form\PublicGuestbookForm',
             'formaction' => '/guestbook/public/entry',
-            'settoroute' => '/guestbook/public/entry',
         ),
     ),    
     

@@ -32,6 +32,11 @@ use ContentinumComponents\Mapper\Process;
 
 class SaveEntry extends Process
 {
+    /**
+     * 
+     * @var unknown
+     */
+    private $alloedchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÄÖÜßäöü 0123456789.";
 
     /**
      * Prepare datas before save
@@ -48,6 +53,8 @@ class SaveEntry extends Process
                 );
             } else {
                 $datas['com'] = strip_tags($datas['com']);
+                $datas['com'] = str_replace ("http://","", $datas['com']);
+                $datas['com'] = str_replace ("https://","", $datas['com']);
                 parent::save($datas, $entity, $stage, $id);
                 return array(
                     'success' => 'Vielen Dank! Dein Eintrag wurde registriert und nach Prüfung freigeschaltet.'
