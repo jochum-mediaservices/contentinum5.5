@@ -49,6 +49,7 @@ class DesigningFieldsForm extends AbstractForms
         $html = '<dl class="tabs" data-tab="data-tab">';// tab header start
         $html .= '<dd class="active"><a href="#fieldsetField">' . $translation->translate('field_basedata') . '</a></dd>';// tab1
         $html .= '<dd><a href="#fieldsetFieldextend">' . $translation->translate('field_extended') . '</a></dd>';// tab2
+        $html .= '<dd><a href="#fieldsetFieldsetset">Fieldset</a></dd>';// tab2
         $html .= '</dl><div class="tabs-content">';// finish and start tab content area
         return $html;
     }    
@@ -293,6 +294,67 @@ class DesigningFieldsForm extends AbstractForms
                     )
                 )
             ),
+            
+            array(
+                'spec' => array(
+                    'name' => 'fieldset',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => ' Fieldset anzeigen ',
+                        'label_attributes' => array('for' => 'fieldset'),
+                         
+                    ),
+                    'type' => 'Checkbox',
+                    'attributes' => array(
+                        'id' => 'fieldset',
+                        'value' => 0
+                    )
+                )
+            ),  
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'fieldsetLegend',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Fieldset Legende',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+            
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'fieldsetLegend'
+                    )
+                )
+            ),            
+            
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'fieldsetAttributes',
+                    'required' => false,
+                    'options' => array(
+                        'label' => 'Fieldset Attribute',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'fieldset' => array(
+                            'legend' => 'Fieldset',
+                            'attributes' => array(
+                                'class' => 'content',
+                                'id' => 'fieldsetFieldsetset'
+                            )
+                        )                        
+                    ),
+                    'type' => 'Textarea',
+                    'attributes' => array(
+                        'rows' => '2',
+                        'id' => 'fieldsetAttributes',
+                    )
+                )
+            ),            
 
             array(
                 'spec' => array(

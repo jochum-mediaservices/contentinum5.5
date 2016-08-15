@@ -160,6 +160,16 @@ class ModulForms extends AbstractModuls
             $field['options']['label'] = $entry->label;
             $this->addFormFields($entry->fieldName, 'label', $entry->label);
         }
+        if (1 === $entry->fieldset && strlen($entry->fieldsetLegend)> 1){
+            $field['options']['fieldset']['legend'] = $entry->fieldsetLegend;
+            if (strlen($entry->fieldsetAttributes)> 1){
+                $attributes = explode(';', $entry->fieldsetAttributes);
+                foreach ($attributes as $attr){
+                    $attribs = explode('=', $attr);
+                    $field['options']['fieldset']['attributes'][$attribs[0]] = $attribs[1];
+                }
+            }
+        }
         switch ($entry->fieldTyp){
             case 'Select':
                 $field['type'] = 'Select';

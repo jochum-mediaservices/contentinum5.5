@@ -1,7 +1,23 @@
 <?php
 return array(
+    5529 => array(
+        'Konfiguration Fieldset bei Formularen',
+        "ALTER TABLE `web_forms_field` ADD `fieldset` INT(1) NOT NULL DEFAULT '0' AFTER `field_class`;ALTER TABLE `web_forms_field` ADD `fieldset_legend` VARCHAR(250) NOT NULL AFTER `fieldset`;ALTER TABLE `web_forms_field` ADD `fieldset_attributes` TEXT NOT NULL AFTER `fieldset_legend`;",
+    ),
+    5528 => array(
+        'Neues Plugin/Modul: Feuerwehr (Upgrade von Contentinum 4.4)',
+    ),    
+    5527 => array(
+        'Update Doctrine/ORM Module auf ~1.1',
+    ),    
+    5526 => array(
+        'Neues Plugin/Modul: Gästebuch (Upgrade von Contentinum 4.4)',
+    ),    
+    5525 => array(
+        'Anpassungen an Zend Framework 2.7; Vorbereitungen auf ZF 3',
+    ),    
     5524 => array(
-        'Wechsel Zend Framework von Version 2.4 auf 2.5/2.7',
+        'Vollständiger Wechsel Zend Framework von Version 2.4 auf 2.5/2.7',
     ),    
     5523 => array(
         'Neuer View Helper: Sitemap als HTML Version nach Linkwertigkeit sortiert',

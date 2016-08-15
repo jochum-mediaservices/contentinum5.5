@@ -76,7 +76,28 @@ class WebFormsField extends AbstractEntity
      *
      * @ORM\Column(name="field_class", type="string", length=50, nullable=false)
      */
-    private $fieldclass = '';    
+    private $fieldclass = '';   
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fieldset", type="integer", nullable=false)
+     */
+    private $fieldset = 0; 
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fieldset_legend", type="string", length=250, nullable=false)
+     */
+    private $fieldsetLegend = '';    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fieldset_attributes", type="text", length=65535, nullable=false)
+     */
+    private $fieldsetAttributes = '';    
 
     /**
      * @var string
@@ -356,6 +377,54 @@ class WebFormsField extends AbstractEntity
     }
 
 	/**
+     * @return the $fieldset
+     */
+    public function getFieldset()
+    {
+        return $this->fieldset;
+    }
+
+    /**
+     * @param number $fieldset
+     */
+    public function setFieldset($fieldset)
+    {
+        $this->fieldset = $fieldset;
+    }
+
+    /**
+     * @return the $fieldsetLegend
+     */
+    public function getFieldsetLegend()
+    {
+        return $this->fieldsetLegend;
+    }
+
+    /**
+     * @param string $fieldsetLegend
+     */
+    public function setFieldsetLegend($fieldsetLegend)
+    {
+        $this->fieldsetLegend = $fieldsetLegend;
+    }
+
+    /**
+     * @return the $fieldsetAttributes
+     */
+    public function getFieldsetAttributes()
+    {
+        return $this->fieldsetAttributes;
+    }
+
+    /**
+     * @param string $fieldsetAttributes
+     */
+    public function setFieldsetAttributes($fieldsetAttributes)
+    {
+        $this->fieldsetAttributes = $fieldsetAttributes;
+    }
+
+    /**
      * @return the $attributes
      */
     public function getAttributes()
