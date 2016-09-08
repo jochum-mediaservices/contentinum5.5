@@ -1,0 +1,41 @@
+@media only screen {
+	.equipment-fahrzeug { width: 100%;}
+	figure.fahrzeug-images { margin: 0;}
+	table.feuerwehr-fahrzeug-daten th, table.feuerwehr-einsatzbericht-daten th {text-align: left;}
+	.fahrzeug-images.center {margin-bottom: 2rem;}
+	.equipment-fahrzeug-details {margin-top: 2rem;}
+
+	/* archiv link liste */
+	.panel.report-archive-list-container h3 {
+		padding: 0;
+		font-size: 1.125rem;
+		color: #444444; 
+	}	
+	.report-archive-list {
+		padding: 0;
+		margin-left: 0;
+	}
+	.report-archive-list li {
+		list-style: none;
+		color: #1378B1;
+		font-variant: small-caps;
+		font-size: 1.0rem;
+	}
+	.report-archive-list li a {
+		font-weight: normal;
+	}
+	.report-archive-list-item a {
+		font-variant: normal;
+	}
+	.report-archive-list-item a:hover {
+		text-decoration: underline;
+	}
+	.report-archive-sublist {
+		display:none;
+	}
+	
+}
+@media screen and (min-width: 64em) {
+	table.feuerwehr-fahrzeug-daten td, table.feuerwehr-einsatzbericht-daten td {text-align: right;}
+	h2#ffheader {font-size: 1.75rem;}	
+}
