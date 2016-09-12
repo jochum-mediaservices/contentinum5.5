@@ -710,7 +710,21 @@ $(document).ready(function() {
 			$("#publishDate").val('');
 		}		
 		$("#publishDate").datetimepicker( Mcwork.Parameter.getDatePicker() );
-	}		
+	}
+	
+	if ($("#missionAlarm").length){
+		if ('0000-00-00 00:00:00' == $("#missionAlarm").val()){
+			$("#dateStart").val('');
+		}		
+		$("#missionAlarm").datetimepicker( Mcwork.Parameter.getDatePicker() );
+	}
+	
+	if ($("#missionFinish").length){
+		if ('0000-00-00 00:00:00' == $("#missionFinish").val()){
+			$("#dateEnd").val('');
+		}		
+		$("#missionFinish").datetimepicker( Mcwork.Parameter.getDatePicker() );
+	}			
 	
 	
 	var app = McworkFormValidation;
