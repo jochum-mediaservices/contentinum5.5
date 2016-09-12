@@ -33,6 +33,7 @@ class PageOptions extends AbstractOptions
         'populateFromRoute', 
         'populateFromGroup',
         'populateFromFactory',
+        'populateFromDb',
         'populateSerializeFields',
         'populateentity',
         'populate',
