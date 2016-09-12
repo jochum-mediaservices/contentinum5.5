@@ -151,7 +151,9 @@ return array(
                 ),
                 'grid' => array(
                     'element' => 'figure',
-                    'attr' => array()
+                    'attr' => array(
+                        'class' => 'orbit-figure',
+                    )
                 )                
             ),
             'caption' => array(
