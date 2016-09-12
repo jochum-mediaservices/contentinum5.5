@@ -50,33 +50,34 @@ class Content extends AbstractHelper
 	    $html = '';
 	    $overwrite = '';
 	    foreach ($entries['content'] as $row){
+	        $content = '';
 	        if ($adjustments === $row->adjustments){
-
     	        switch ($row->webContentgroup->groupStyle){
     	            case 'none':
     	                if (1 === $row->webContentgroup->webContent->overwrite){
     	                   $overwrite .= $this->view->contribution($row->webContentgroup->webContent,$this->view->contentstyles);
     	                } else {
-    	                   $html .= $this->view->contribution($row->webContentgroup->webContent,$this->view->contentstyles);
+    	                   $content .= $this->view->contribution($row->webContentgroup->webContent,$this->view->contentstyles);
     	                }
     	                break;
     	            default:
     	                if ('nonestyle' == $row->webContentgroup->groupStyle) {
-    	                    $html .= $this->view->nonestyle($entries['groups'],$row->webContentgroup->webContentgroup,array(),$this->view->contentstyles);
+    	                    $content .= $this->view->nonestyle($entries['groups'],$row->webContentgroup->webContentgroup,array(),$this->view->contentstyles);
     	                } elseif (null !== ($groupstyles = $this->view->groupstyles->styles->{$row->webContentgroup->groupStyle})){
     	                    $viewHelper = $groupstyles->viewhelper;
-    	                    $html .= $this->view->$viewHelper($entries['groups'],$row->webContentgroup->webContentgroup,$groupstyles->toArray(),$this->view->contentstyles);
+    	                    $content .= $this->view->$viewHelper($entries['groups'],$row->webContentgroup->webContentgroup,$groupstyles->toArray(),$this->view->contentstyles);
     	                }
     	                break;
     	        }
     	        
     	        if ('none' !== $row->htmlwidgets){
     	            if (null !== ($widgets = $this->view->widgets->widgets->{$row->htmlwidgets})){
-    	                $html = $this->view->contentrow($html,$widgets);
+    	                $content = $this->view->contentrow($content,$widgets);
     	            }
     	        }
 	    
 	        }
+	        $html .= $content;
 	    }
 	    if (strlen($html) == 0){
 	        $html = $overwrite;
