@@ -48,6 +48,38 @@ return array(
                 )
             )
         ), 
+        
+        'contentcolumn' => array(
+            'name' => 'Kombinierte Spalte / Zeile',
+            'grid' => array(
+                'element' => 'div',
+                'attr' => array(
+                    'class' => 'column row'
+                )
+            )
+        ),        
+        
+        'contentcolumncollapse' => array(
+            'name' => 'Kombinierte Spalte / Zeile (ohne padding)',
+            'grid' => array(
+                'element' => 'div',
+                'attr' => array(
+                    'class' => 'column collapse row'
+                )
+            )
+        ), 
+        
+        'contentcolumncolor' => array(
+            'name' => 'Kombinierte Spalte / Zeile mit zusätzlicher freien Klasse',
+            'grid' => array(
+                'element' => 'div',
+                'attr' => array(
+                    'class' => 'column row bgcolor'
+                )
+            )
+        ),        
+        
+        
         'contentgridlarge' => array(
             'name' => 'Standard large-12 (div>row>column)',
             'section' => array(

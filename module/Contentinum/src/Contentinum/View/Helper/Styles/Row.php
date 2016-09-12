@@ -84,6 +84,7 @@ class Row extends AbstractContentHelper
     {
         if (! empty($template)) {
             $this->setTemplate($template);
+            $widget = array();
             if (null !== $this->grid && null !== $this->row){
                 $widget['row'] = $this->row->toArray();
                 $widget['grid'] = $this->grid->toArray();
@@ -93,6 +94,9 @@ class Row extends AbstractContentHelper
                     $widget['grid'] = $this->section->toArray();
                     $content = $this->deployRow($widget, $content);
                 }
+            } elseif (null !== $this->grid){
+                $widget['grid'] = $this->grid->toArray();
+                $content = $this->deployRow($widget, $content);
             }
         }
         $this->unsetProperties();
