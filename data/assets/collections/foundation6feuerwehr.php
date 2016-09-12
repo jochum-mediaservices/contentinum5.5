@@ -26,6 +26,7 @@ return array(
                 '/css/content/foundation.callout.css',
                 '/css/content/foundation.accordion.css',
                 '/css/content/foundation.tooltip.css',
+                '/css/content/foundation.table.css',
                 '/css/media/foundation.orbit.css',
                 '/css/menu/foundation.menu.css',
                 '/css/menu/foundation.menuicon.css',
@@ -37,14 +38,11 @@ return array(
                 '/css/foundation.motionui.css',
                 '/css/customer.app.css',
                 '/css/feuerwehr.app.css',
-                '/css/foundation.helpers.css',               
-                
-                
+                '/css/foundation.helpers.css',
             ),
             'includes' => array(
                 '/data/usr/share/min/css/cssmin-v3.0.1.php'
-            )
-            ,
+            ),
             'filters' => array(
                 'mincss' => 'Assetic\Filter\CssMinFilter'
             )
@@ -60,6 +58,7 @@ return array(
             ),
             'assets' => array(
                 '/js/vendor/jquery.js',
+                '/js/vendor/jquery.cookie.js',
                 '/js/gallery/jquery.magnificpopup.min.js',
                 '/js/gallery/contentinum.gallery.js',
                 '/js/vendor/what-input.js',
@@ -80,6 +79,8 @@ return array(
                 '/js/foundation/foundation.responsiveToggle.js',
                 '/js/foundation/foundation.orbit.js',
                 '/js/gallery/ini.lightbox.js',
+                '/js/feuerwehr/fw.archiv.js',
+                '/js/feuerwehr/fw.ini.js',
                 '/js/app.js',
             ),
             'includes' => array(

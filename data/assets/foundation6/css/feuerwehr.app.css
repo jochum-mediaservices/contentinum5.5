@@ -1,7 +1,7 @@
 @media only screen {
 	.equipment-fahrzeug { width: 100%;}
 	figure.fahrzeug-images { margin: 0;}
-	table.feuerwehr-fahrzeug-daten th, table.feuerwehr-einsatzbericht-daten th {text-align: left;}
+	table.feuerwehr-fahrzeug-daten th, table.feuerwehr-einsatzbericht-daten th {text-align: left; vertical-align: text-top; }
 	.fahrzeug-images.center {margin-bottom: 2rem;}
 	.equipment-fahrzeug-details {margin-top: 2rem;}
 
@@ -36,6 +36,6 @@
 	
 }
 @media screen and (min-width: 64em) {
-	table.feuerwehr-fahrzeug-daten td, table.feuerwehr-einsatzbericht-daten td {text-align: right;}
+	table.feuerwehr-fahrzeug-daten td {text-align: right;}
 	h2#ffheader {font-size: 1.75rem;}	
 }

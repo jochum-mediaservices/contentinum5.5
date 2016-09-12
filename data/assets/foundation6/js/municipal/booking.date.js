@@ -38,10 +38,11 @@ $(document).ready(function() {
 			modalHtml += '<input id="phone" class="elm" type="tel" value="" name="phone"></p>';
 			modalHtml += '<p id="fieldemail" class="formElement"><label>E-Mail Adresse</label>';
 			modalHtml += '<input id="email" class="elm" type="email" value="" required="required" name="email"></p>';
+			modalHtml += '<p><input id="sendantrag" class="button expanded submitthisform" type="submit" name="send" value="Termin buchen"></p>';
 			modalHtml += '<input id="service" class="elm" type="hidden" value="'+ service +'" required="required" name="service">';
 			modalHtml += '<input id="business" class="elm" type="hidden" value="'+ business +'" required="required" name="business">';
 			modalHtml += '</fieldset></div></form><div>';
-			modalHtml += '<p><input id="sendantrag" class="button expanded submitthisform" type="submit" name="send" value="Termin buchen"></p>';
+			//modalHtml += '<p><input id="sendantrag" class="button expanded submitthisform" type="submit" name="send" value="Termin buchen"></p>';
 			modalHtml += '<button class="close-button" data-close aria-label="Close Accessible Modal" type="button"><span aria-hidden="true">&times;</span></button>';
 
 			var $modal = new Foundation.Reveal($('#bookingModal').html(modalHtml));
@@ -56,11 +57,12 @@ $(document).ready(function() {
 					$().FormHandler(form);
 				}
 			});
+			/*
 			$(document.body).on('click', '#sendantrag', function(ev) {
 				ev.preventDefault();
 				ev.stopPropagation();
 				$("#mcworkForm").submit();
-			});
+			});*/
 
 		}
 

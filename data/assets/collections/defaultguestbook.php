@@ -60,10 +60,13 @@ return array(
             ),
             'assets' => array(
                 '/js/vendor/jquery.js',
+                '/js/libs/scrollevent.js', 
+                '/js/material/waves.js',                 
                 '/js/form/jquery.validate.js',
                 '/js/form/jquery.mcworkform.js',
                 '/js/foundation.js',
                 '/js/foundation/foundation.topbar.js',
+                '/js/form/validate.form.js',
                 '/js/app.js',
                 '/js/content/guestbook.js'
             ),

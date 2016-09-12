@@ -33,88 +33,29 @@
 			defaults = $.extend({}, defaults, options);	
 			
 			console.log($( "#pagination > li.next" ));
-			/*$(window).scroll(function() {
-			$(document.body).on('scroll', '.addcontent', function(ev) {
-				if($(window).scrollTop() + window.innerHeight == $(document).height()) {
-					$.each($('#pagination').children(), function(key,value){
-						if ($(value).hasClass('next') ){
-							defaults.url = '/contentplugin/' + $(value).attr('data-url');
-							
-							$.ajax({
-								url : defaults.url,
-								async: false, 
-								type : 'POST',
-								dataType : 'html',
-								data : defaults.attribute,
-								success : function(data) {
-									$('#municipal-directories').append(data);				
-								}	
-								$(value).removeClass('next');
-								$(value).next().addClass('next');	
-							});							
-							
-							
-							
-
-							return; 
-						}
-					});
-				}
-			});		*/		
-			
-			
-
-
-
 		},		
 		
 	});
 })(jQuery);
-
-
-
-
 $(document).ready(function() {
 	'use strict';
 	//$('#pagination').css('display', 'none');
     Waves.attach('.btn-floating', ['waves-effect ']);
     Waves.init();	
     
-$().ScrollEvent({
-    listItem: '.hcard-wrapper',
-    listContainer: '#municipal-directories',
-    nextMarker: '.next',
-    dataUrl : 'data-url',
-    pagination: '#pagination',
-    delay: 600,
-    negativeMargin: 10
-});    
-
-
-    
-
+	$().ScrollEvent({
+	    listItem: '.hcard-wrapper',
+	    listContainer: '#municipal-directories',
+	    nextMarker: '.next',
+	    dataUrl : 'data-url',
+	    pagination: '#pagination',
+	    delay: 600,
+	    negativeMargin: 10
+	});    
 	//$('#pagination').LoadFurtherEntries();
 	$(document.body).on('click', '.addcontent', function(ev) {
 		ev.preventDefault();
 		console.log('click');
 	});	
-	/*
-	$(window).scroll(function() {
-		if($(window).scrollTop() + window.innerHeight == $(document).height()) {
-			$.each($('#pagination').children(), function(key,value){
-				if ($(value).hasClass('next') ){
-					console.log($(value).attr('data-url'));
-					$(value).removeClass('next');
-					$(value).next().addClass('next');
-					return; 
-				}
-			});
-		}
-	});	*/
-	
-
-	
-
-	
 	$('.toogleHcardElement').ToogleDescription();
 });
