@@ -150,8 +150,7 @@ return array(
                         'itemprop' => 'telephone'
                     )
                 )
-            )
-            ,
+            ),
         
             'phoneHome' => array(
         

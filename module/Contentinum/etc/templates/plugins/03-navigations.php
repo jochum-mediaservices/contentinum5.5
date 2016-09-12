@@ -1,7 +1,6 @@
 <?php
 return array(
-    'plugins' => array(
-        
+    'plugins' => array( 
         'topbar6' => array(    
             'viewhelper' => 'topbar6',
             'key' => 'topbar6',

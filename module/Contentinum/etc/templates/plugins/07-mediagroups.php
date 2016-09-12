@@ -1,6 +1,43 @@
 <?php
 return array(
     'plugins' => array(
+        
+        'mediablockgridvertikal' => array(
+            'viewhelper' => 'mediablockgrid',
+            'key' => 'mediagroup',
+            'name' => 'Media Blockgrid (1-1-1)',
+            'wrapper' => array(
+                'grid' => array(
+                    'element' => 'ul',
+                    'attr' => array(
+                        'class' => 'small-block-grid-1 medium-block-grid-1 large-block-grid-1 mediagroup-list'
+                    )
+                )
+            ),
+            'elements' => array(
+                'row' => array(
+                    'element' => 'li',
+                    'attr' => array(
+                        'class' => 'mediagroup-list-item'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'figure',
+                    'attr' => array(
+                        'class' => 'mediagroup-list-item-figure'
+                    )
+                )
+            ),
+            'caption' => array(
+                'grid' => array(
+                    'element' => 'figcaption',
+                    'attr' => array(
+                        'class' => 'mediagroup-list-item-figcaption'
+                    )
+                )
+            )
+        ),        
+        
         'mediablockgrid' => array(
             'viewhelper' => 'mediablockgrid',
             'key' => 'mediagroup',
