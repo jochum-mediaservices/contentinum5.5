@@ -179,6 +179,144 @@ return array(
                 )
             ),
             'content' => array()
-        )
+        ),
+        'grid93large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 9-3 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-9 columns'
+                ),
+                1 => array(
+                    'class' => 'large-3 columns'
+                )
+            ),
+            'content' => array()
+        ),
+        'grid39large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 3-9 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-3 columns'
+                ),
+                1 => array(
+                    'class' => 'large-9 columns'
+                )
+            ),
+            'content' => array()
+        ),
+        'grid84large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 8-4 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-8 columns'
+                ),
+                1 => array(
+                    'class' => 'large-4 columns'
+                )
+            ),
+            'content' => array()
+        ),
+        'grid48large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 4-8 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-4 columns'
+                ),
+                1 => array(
+                    'class' => 'large-8 columns'
+                )
+            ),
+            'content' => array()
+        ),  
+        'grid75large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 7-5 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-7 columns'
+                ),
+                1 => array(
+                    'class' => 'large-5 columns'
+                )
+            ),
+            'content' => array()
+        ), 
+        'grid57large' => array(
+            'viewhelper' => 'contentgrid',
+            'name' => 'Grid (split in 5-7 large columns)',
+            'grids' => 12,
+            'auto' => false,
+            'row' => 'div',
+            'attribute' => array(
+                'class' => 'row content'
+            ),
+            'grid' => array(
+                0 => 'div',
+                1 => 'div'
+            ),
+            'gridAttribute' => array(
+                0 => array(
+                    'class' => 'large-5 columns'
+                ),
+                1 => array(
+                    'class' => 'large-7 columns'
+                )
+            ),
+            'content' => array()
+        ),        
     )
 );
