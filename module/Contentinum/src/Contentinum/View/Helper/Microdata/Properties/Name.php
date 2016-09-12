@@ -56,10 +56,12 @@ class Name extends AbstractHelper
 	        }
 	        if ( strlen($entry->firstName) > 0 ){
 	            $result .= $entry->firstName . ' ';
-	        }
-	        	
+	        }	        	
 	        if ( strlen($entry->lastName) > 0 ){
 	            $result .= $entry->lastName;
+	        }	
+	        if ( strlen($entry->nameExtension) > 0 ){
+	            $result .= ', ' . $entry->nameExtension;
 	        }	        
 	    } else {
     	    if (1 === $entry->indexGroup->enableSalutation){
@@ -74,6 +76,11 @@ class Name extends AbstractHelper
     	    
     	    if (1 === $entry->indexGroup->enableLastName ){
     	        $result .= $entry->{$base}->lastName;
+    	        
+    	        if ( strlen($entry->{$base}->nameExtension) > 0 ){
+    	            $result .= ', ' . $entry->{$base}->nameExtension;
+    	        }    	        
+    	        
     	    }	    
 	    }
 	    return $result;

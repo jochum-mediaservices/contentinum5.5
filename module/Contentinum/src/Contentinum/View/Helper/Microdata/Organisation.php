@@ -94,6 +94,12 @@ class Organisation extends Parameters
                 $cardData .= $this->deployRow($phoneWorkTemplate, $entry->accountPhone);
             }
             
+            if ($this->phoneMobile && strlen($entry->phoneMobile) > 0) {
+                $phoneMobileTemplate = $this->phoneMobile->toArray();
+                $phoneMobileTemplate['grid']['attr']['href'] = $phoneMobileTemplate['grid']['attr']['href'] . $filterDigits->filter($entry->phoneMobile);
+                $cardData .= $this->deployRow($phoneMobileTemplate, $entry->phoneMobile);
+            }            
+            
             if ($this->phoneFax && strlen($entry->accountFax) > 0) {
                 $phoneFaxTemplate = $this->phoneFax->toArray();
                 $phoneFaxTemplate['grid']['attr']['href'] = $phoneFaxTemplate['grid']['attr']['href'] . $filterDigits->filter($entry->accountFax);

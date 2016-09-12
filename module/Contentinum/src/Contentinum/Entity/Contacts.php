@@ -53,6 +53,13 @@ class Contacts extends AbstractEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="name_extension", type="string", length=200, nullable=false)
+     */
+    private $nameExtension = '';   
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="object_name", type="string", length=250, nullable=false)
      */
     private $objectName = '';    
@@ -433,6 +440,22 @@ class Contacts extends AbstractEntity
     }
 
 	/**
+     * @return the $nameExtension
+     */
+    public function getNameExtension()
+    {
+        return $this->nameExtension;
+    }
+
+    /**
+     * @param string $nameExtension
+     */
+    public function setNameExtension($nameExtension)
+    {
+        $this->nameExtension = $nameExtension;
+    }
+
+    /**
      * @return the $objectName
      */
     public function getObjectName()
