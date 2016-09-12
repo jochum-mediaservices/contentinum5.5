@@ -105,6 +105,13 @@ class Accounts extends AbstractEntity
      * @ORM\Column(name="phone_alternate", type="string", length=25, nullable=false)
      */
     private $phoneAlternate = '';
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_mobile", type="string", length=50, nullable=false)
+     */
+    private $phoneMobile = '';    
 
     /**
      * @var string
@@ -273,7 +280,29 @@ class Accounts extends AbstractEntity
      *
      * @ORM\Column(name="municipal_directory", type="integer", nullable=false)
      */
-    private $municipalDirectory = 0;    
+    private $municipalDirectory = 0; 
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fw_account", type="integer", nullable=false)
+     */
+    private $fwAccount = 0;
+    
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fw_resource", type="integer", nullable=false)
+     */
+    private $fwResource = 0;    
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disable", type="integer", nullable=false)
+     */
+    private $disable = 0;    
 
     /**
      * @var integer
@@ -577,6 +606,22 @@ class Accounts extends AbstractEntity
     }
 
 	/**
+     * @return the $phoneMobile
+     */
+    public function getPhoneMobile()
+    {
+        return $this->phoneMobile;
+    }
+
+    /**
+     * @param string $phoneMobile
+     */
+    public function setPhoneMobile($phoneMobile)
+    {
+        $this->phoneMobile = $phoneMobile;
+    }
+
+    /**
      * @return the $accountEmail
      */
     public function getAccountEmail()
@@ -958,6 +1003,38 @@ class Accounts extends AbstractEntity
     public function setMunicipalDirectory($municipalDirectory)
     {
         $this->municipalDirectory = $municipalDirectory;
+    }
+
+    /**
+     * @return the $fwAccount
+     */
+    public function getFwAccount()
+    {
+        return $this->fwAccount;
+    }
+
+    /**
+     * @param boolean $fwAccount
+     */
+    public function setFwAccount($fwAccount)
+    {
+        $this->fwAccount = $fwAccount;
+    }   
+
+    /**
+     * @return the $fwResource
+     */
+    public function getFwResource()
+    {
+        return $this->fwResource;
+    }
+
+    /**
+     * @param boolean $fwResource
+     */
+    public function setFwResource($fwResource)
+    {
+        $this->fwResource = $fwResource;
     }
 
     /**
