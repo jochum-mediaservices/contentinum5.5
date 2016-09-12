@@ -184,6 +184,24 @@ class Contact extends AbstractForms
             
             array(
                 'spec' => array(
+                    'name' => 'nameExtension',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Weitere Angaben zum Name',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'description' => 'Wird hinter dem Namen angezeigt',
+                    ),
+            
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'nameExtension'
+                    )
+                )
+            ),            
+            
+            array(
+                'spec' => array(
                     'name' => 'businessTitle',
                     'required' => false,
             

@@ -380,7 +380,14 @@ class EditFormController extends AbstractApplicationController
             if ( is_array($factoryDatas) && !empty($factoryDatas) ){
                 $datas = array_merge($datas,$factoryDatas);
             }
-        }        
+        } 
+        if (false !== ($populateFromDb = $pageOptions->getApp('populateFromDb')) ) {
+            foreach ($populateFromDb as $key){
+                $mapper = $this->getServiceLocator()->get($key);
+                $datas = $mapper->fetchContent($datas);
+            }
+            
+        }
         if (false !== $this->notPopulate) {
             foreach ($this->notPopulate as $field) {
                 if (isset($datas[$field])) {
@@ -388,16 +395,15 @@ class EditFormController extends AbstractApplicationController
                 }
             }
         }
-        
         if (is_array($this->unserialize)){
             $mcSerialize = new HandleSerializeDatabase();
             foreach ($this->unserialize as $field){
                 if (isset($datas[$field]) && strlen($datas[$field]) > 1){
-                    $datas = array_merge($datas, $mcSerialize->execUnserialize($datas[$field]) );
+                    //$datas = array_merge($datas, $mcSerialize->execUnserialize($datas[$field]) );
+                    $datas[$field] = $mcSerialize->execUnserialize($datas[$field]);
                 }
             }
         }
-        
         return $datas;
     } 
 }

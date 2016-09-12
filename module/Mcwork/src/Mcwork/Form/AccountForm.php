@@ -226,6 +226,22 @@ class AccountForm extends AbstractForms
                     )
                 )
             ), 
+            
+            array(
+                'spec' => array(
+                    'name' => 'phoneMobile',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Mobile',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'phoneMobile'
+                    )
+                )
+            ),            
 
             
             array(

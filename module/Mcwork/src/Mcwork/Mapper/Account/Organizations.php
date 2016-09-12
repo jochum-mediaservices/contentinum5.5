@@ -43,7 +43,7 @@ class Organizations extends Worker
      */
     public function fetchContent(array $params = null)
     {
-        return $this->getStorage()->getRepository( $this->getEntityName() )->findAll();
+        return $this->getStorage()->getRepository( $this->getEntityName()  )->findBy(array('disable' => 0), array('organisation' => 'ASC'));
     }
     
     
