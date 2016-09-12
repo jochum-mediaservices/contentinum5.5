@@ -49,6 +49,12 @@ class ModulForms extends AbstractModuls
      * @var array
      */
     private $formFields;
+    
+    /**
+     *
+     * @var array
+     */
+    private $fieldFilter = array();    
 
 	/**
      * @return the $formFactory
@@ -91,6 +97,30 @@ class ModulForms extends AbstractModuls
     }
 
     /**
+     * @return the $fieldFilter
+     */
+    public function getFieldFilter()
+    {
+        return $this->fieldFilter;
+    }
+
+    /**
+     * @param multitype: $fieldFilter
+     */
+    public function setFieldFilter($fieldFilter)
+    {
+        $this->fieldFilter = $fieldFilter;
+    }
+    
+    /**
+     * @param multitype: $fieldFilter
+     */
+    public function addFieldFilter($name, $filter)
+    {
+        $this->fieldFilter[$name] = $filter;
+    }    
+
+    /**
      * (non-PHPdoc)
      * @see \Contentinum\Mapper\AbstractModul::fetchContent()
      */
@@ -108,6 +138,7 @@ class ModulForms extends AbstractModuls
     {
 
         $result = array();
+        $fieldElements = array();
         foreach ($entries as $entry){
             $id = $entry->webForms->id;
             $subheadline = $entry->webForms->subheadline;
@@ -117,6 +148,7 @@ class ModulForms extends AbstractModuls
         }
         $fieldElements[] = $this->createButton();
         $this->formFactory->setFieldElements($fieldElements);
+        $this->formFactory->setFieldFilter($this->getFieldFilter());
         $form = $this->formFactory->getForm();
 
         $form->setAttribute('action', '/'. $this->getUrl());
@@ -155,6 +187,7 @@ class ModulForms extends AbstractModuls
             $field['attributes']['required'] = 'required';
         } else {
             $field['required'] = false;
+            $this->addFieldFilter($field['name'], array('required' => false));
         }
         if (strlen($entry->label) > 1 ){
             $field['options']['label'] = $entry->label;
