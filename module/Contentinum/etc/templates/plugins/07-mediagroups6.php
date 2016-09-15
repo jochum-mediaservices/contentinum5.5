@@ -10,7 +10,7 @@ return array(
                 'grid' => array(
                     'element' => 'ul',
                     'attr' => array(
-                        'class' => 'row small-up-1 medium-up-2 large-up-3 mediagroup-list'
+                        'class' => 'row small-up-1 medium-up-1 large-up-1 mediagroup-list'
                     )
                 )
             ),
