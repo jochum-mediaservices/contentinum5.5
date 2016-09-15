@@ -1,6 +1,42 @@
 <?php
 return array(
     'plugins' => array(
+        'mediablockgrid1f6' => array(
+            'viewhelper' => 'mediablockgrid',
+            'key' => 'mediagroup',
+            'name' => 'Bildergruppe Blockgrid (1-1-1) Foundation 6',
+            'gtype' => 'blockgrid',
+            'wrapper' => array(
+                'grid' => array(
+                    'element' => 'ul',
+                    'attr' => array(
+                        'class' => 'row small-up-1 medium-up-2 large-up-3 mediagroup-list'
+                    )
+                )
+            ),
+            'elements' => array(
+                'row' => array(
+                    'element' => 'li',
+                    'attr' => array(
+                        'class' => 'column mediagroup-list-item'
+                    )
+                ),
+                'grid' => array(
+                    'element' => 'figure',
+                    'attr' => array(
+                        'class' => 'mediagroup-list-item-figure'
+                    )
+                )
+            ),
+            'caption' => array(
+                'grid' => array(
+                    'element' => 'figcaption',
+                    'attr' => array(
+                        'class' => 'mediagroup-list-item-figcaption'
+                    )
+                )
+            )
+        ),        
         'mediablockgridf6' => array(
             'viewhelper' => 'mediablockgrid',
             'key' => 'mediagroup',
