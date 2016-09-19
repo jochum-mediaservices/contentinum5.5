@@ -1,0 +1,9 @@
+<?php
+if (is_array($this->entries) && isset($this->entries['error'])) {
+    print '<h3>' . $this->entries['error'] . '</h3>';
+    print '<h4><a href="/">Zur Startseite</a></h4>';
+} else {
+    header('Location: /');
+}
+exit();
+?>
