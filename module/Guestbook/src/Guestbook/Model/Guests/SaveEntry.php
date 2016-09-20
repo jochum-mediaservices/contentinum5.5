@@ -29,9 +29,33 @@
 namespace Guestbook\Model\Guests;
 
 use ContentinumComponents\Mapper\Process;
+use function Zend\Mvc\Controller\forward;
 
 class SaveEntry extends Process
 {
+    
+    /**
+     * Zend\Mail\Transport\Smtp
+     * @var Zend\Mail\Transport\Smtp
+     */
+    private $transport;
+    
+    /**
+     * @return the $transport
+     */
+    public function getTransport()
+    {
+        return $this->transport;
+    }
+    
+    /**
+     * @param \Contentinum\Model\Zend\Mail\Transport\Smtp $transport
+     */
+    public function setTransport($transport)
+    {
+        $this->transport = $transport;
+    }
+    
     /**
      * 
      * @var unknown
@@ -52,10 +76,18 @@ class SaveEntry extends Process
                     'error' => 'Sorry! ERROR!'
                 );
             } else {
+                $conf = $this->fetchRow("SELECT * FROM web_guestbook_config WHERE id = 1;");
                 $datas['com'] = strip_tags($datas['com']);
                 $datas['com'] = str_replace ("http://","", $datas['com']);
                 $datas['com'] = str_replace ("https://","", $datas['com']);
+                if ('0' == $conf['mark_spam_first']){
+                    $datas['approved'] = 'publish';
+                    $datas['checkout'] = 1;
+                }
                 parent::save($datas, $entity, $stage, $id);
+                if ('1' == $conf['send_email']){
+                    $this->sendmail($datas, $conf);
+                }
                 return array(
                     'success' => 'Vielen Dank! Dein Eintrag wurde registriert und nach Prüfung freigeschaltet.'
                 );
@@ -66,4 +98,49 @@ class SaveEntry extends Process
             );
         }
     }
+    
+    
+    /**
+     *
+     * @param unknown $datas
+     */
+    private function sendmail($datas, $conf)
+    {
+    
+        $this->setTransport($this->getSl()->get('contentinum_smtp_transport'));
+        $configuration = $this->getSl()->get('contentinum_customer');
+        $support = $configuration->default->support_mail;
+        $body = 'Serverzeit: ' . date('d.m.Y H:i');
+        $body .= "\n\n" . 'Neuer Eintrag ins Gästebuch:';
+        $body .= "\n" . $datas['com'];
+        $body .= "\n\n" . 'Bitte loggen Sie sich ein und validieren den Eintrag';
+
+    
+    
+        require CON_ROOT_PATH . '/vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+        $mail = new \PHPMailer;
+        $mail->isSMTP();
+        $transport = $this->getTransport()->getOptions();
+        $mail->Host = $transport->getHost();
+        $mail->SMTPAuth = true;
+        $mail->CharSet = 'utf-8';
+        $creditals = $transport->getConnectionConfig();
+        $mail->Username = $creditals["username"];
+        $mail->Password = $creditals["password"];
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = $transport->getPort();
+        $mail->From = $support->mailfrom;
+        $mail->FromName = $support->mailfromname;
+        $mail->addReplyTo($support->mailfrom, $support->mailfromname);
+        foreach (explode(';', $conf['email']) as $email){
+            $mail->addAddress($email);
+        }
+        $mail->isHTML(false);
+        $mail->Subject = 'Neuer Gästebucheintrag';
+
+        $mail->Body = $body;
+        $mail->send();
+        return true;
+    
+    }    
 }

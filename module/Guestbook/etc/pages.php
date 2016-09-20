@@ -170,6 +170,100 @@ return array(
             
         )
     ),
+    
+    '/guestbook/configuration' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Gästebuch Konfiguration',
+        'template' => 'content/book/configindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Gästebuch Konfiguration',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Guestbook\Mapper\Book\Configuration',
+            'entity' => 'Guestbook\Entity\GuestbookConfig'
+        ),
+        'assets' => array(
+            'sets' => array(
+                'mcworktablestyles',
+                'mcworkhead',
+                'gbooktablescripts'
+            )
+        )
+    ),
+    '/guestbook/configuration/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Konfiguration hinzufügen',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Konfiguration hinzufügen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Guestbook\Model\Book\SaveKonfiguration',
+            'entity' => 'Guestbook\Entity\GuestbookConfig',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Guestbook\Form\GuestbookConfigForm',
+            'formaction' => '/guestbook/configuration/add',
+            'settoroute' => '/guestbook/configuration'
+        ),
+        'assets' => array(
+            'sets' => array(
+                'mcworkformstyles',
+                'mcworkhead',
+                'mcworkforms'
+            )
+        )
+    ),
+    
+    
+    '/guestbook/configuration/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Konfiguration bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Konfiguration bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Guestbook\Model\Book\SaveKonfiguration',
+            'entity' => 'Guestbook\Entity\GuestbookConfig',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Guestbook\Form\GuestbookConfigForm',
+            'formaction' => '/guestbook/configuration/edit',
+            'settoroute' => '/guestbook/configuration'
+        ),
+        'assets' => array(
+            'sets' => array(
+                'mcworkformstyles',
+                'mcworkhead',
+                'mcworkforms'
+            )
+        )
+    ),    
+    
+    // -----------------
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     '/guestbook/entries' => array(
         'resource' => 'publisherresource',
         'metaTitle' => 'Gästebucheinträge',

@@ -13,6 +13,11 @@ return array(
                     'label' => 'Einträge',
                     'uri' => '/guestbook/entries',
                     'resource' => 'authorresource',               
+                ),  
+                array(
+                    'label' => 'Konfiguration',
+                    'uri' => '/guestbook/configuration',
+                    'resource' => 'authorresource',
                 ),                
             )
         )

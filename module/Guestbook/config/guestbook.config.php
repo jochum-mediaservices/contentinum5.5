@@ -5,6 +5,7 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'entity_guestbook_guestbook' => 'Guestbook\Factory\Entities\GuestbookFactory',
+            'entity_guestbook_guestbookconfig' => 'Guestbook\Factory\Entities\GuestbookConfigFactory',
 
             'modul_guestbook_guestbook'  => 'Guestbook\Factory\Mapper\ModulGuestbookFactory',
             
