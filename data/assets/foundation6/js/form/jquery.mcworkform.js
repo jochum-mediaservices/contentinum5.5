@@ -22,9 +22,9 @@
 			icon2x : 'fa-2x',
 			formProcessSelector : '.server-process',
 			formResultSelector : '#form-container',
-			panel : 'panel',
-			panelWarn : 'panel alert',
-			panelSucess : 'panel success',
+			panel : 'callout',
+			panelWarn : 'callout alert',
+			panelSucess : 'callout success',
 			panelTag : 'div',
 			panelBootstrap : false,
 			
@@ -95,6 +95,7 @@
 					success : function(data) {
 						var obj = jQuery.parseJSON(data);
 						if (obj.success){
+							$('.server-process').html('');
 							$().FormSuccessPanel(obj.success);
 						} else if (obj.error) {							
 							$().FieldErrorPanel();
@@ -146,7 +147,7 @@
 		},
 		
 		FormErrorPanel : function(){
-			var str = '<div class="panel alert">';
+			var str = '<div class="callout alert">';
 			str += '<h2>Ihr Formular wurde erfolgreich &uuml;bermittelt<h2>';
 			str += '<p>Vielen Dank f&uuml;r Ihre Nachricht.</p>';
 			str += '</div>';
@@ -154,7 +155,7 @@
 		},		
 		
 		FormErrorPanel2 : function(){
-			var str = '<div class="panel alert">';
+			var str = '<div class="callout alert">';
 			str += '<h2>Fehler beim versenden des Formulars<h2>';
 			str += '<p>Das Formular konnte nicht versandt werden, versuchen Sie es sp&auml;ter Bitte noch einmal.<br />';
 			str += 'oder wenden Sie sich Bitte direkt an uns.</p>';
@@ -163,7 +164,7 @@
 		},
 		
 		FormSuccessPanel : function(messages){
-			var html = '<div class="panel success">';
+			var html = '<div class="callout success">';
 			html += '<p class="text-center"><i class="fa fa-check-circle emerald-color fa-2x"> </i></p>';
 			html += messages;
 			html += '</div>';	
