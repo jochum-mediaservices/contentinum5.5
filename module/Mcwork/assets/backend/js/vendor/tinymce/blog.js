@@ -132,6 +132,9 @@ $(document).ready(function() {
 					case 'panel':
 					   $('#elementAttribute').val('class:panel;');
 					   break;
+					case 'callout':
+					   $('#elementAttribute').val('class:callout;');
+					   break;					   
 				    case 'flexvideo':
 					   $('#elementAttribute').val('class:flex-video;');
 					   break;
@@ -175,6 +178,13 @@ $(document).ready(function() {
 				tinyMCE.activeEditor.insertContent(str);
 	        	$('#' +  elm + ' option:selected').prop("selected",false);
 	        	$('#' +  elm ).trigger("chosen:updated");
+			}
+		});
+		$("#mediaPlaceholder").click( function(ev){ 
+			if (false === $( this ).prop( "checked" )){
+				 tinyMCE.activeEditor.selection.setContent('');
+			} else {
+				tinyMCE.execCommand('mceInsertContent',false,'{MEDIAPLACE}'); 
 			}
 		});		
 });

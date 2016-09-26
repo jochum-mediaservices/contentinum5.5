@@ -391,6 +391,25 @@ class ArticleForm extends AbstractForms
                         'id' => 'htmlwidgets'
                     )
                 )
+            ), 
+            
+            array(
+                'spec' => array(
+                    'name' => 'mediaPlaceholder',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => ' Medien Platzhalter setzen',
+                        'label_attributes' => array('for' => 'mediaPlaceholder'),
+                        'description' => 'Wirkt nur in der Mehr lesen Ansicht.'
+                         
+                    ),
+                    'type' => 'Checkbox',
+                    'attributes' => array(
+                        'id' => 'mediaPlaceholder',
+                        'value' => 0
+                    )
+                )
             ),            
             
             array(

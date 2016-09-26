@@ -171,6 +171,9 @@ $(document).ready(function() {
 					case 'panel':
 					   $('#elementAttribute').val('class:panel;');
 					   break;
+					case 'callout':
+					   $('#elementAttribute').val('class:callout;');
+					   break;	
 				    case 'flexvideo':
 					   $('#elementAttribute').val('class:flex-video;');
 					   break;

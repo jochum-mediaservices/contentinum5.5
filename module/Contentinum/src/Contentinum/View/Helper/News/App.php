@@ -169,7 +169,11 @@ class App extends Images
             } else {
                 $article .= $entry->webContent->contentTeaser;
                 if (1 !== $entry->webContent->webMediasId->id){
-                    $article .= $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray());
+                    if (1 === $entry->webContent->mediaPlaceholder) {
+                        $article = str_replace('{MEDIAPLACE}', $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray()), $article);
+                    } else {
+                        $article .= $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray());
+                    }           
                 }
                 $article .= $this->formatElement($entry->webContent->content, $entry->webContent);
 
