@@ -29,6 +29,9 @@ namespace Contentinum;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Contentinum\Service\Errors\ErrorHandling;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream as LogWriterStream;
 
 /**
  * Contentinum application start
@@ -43,21 +46,30 @@ class Module
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $eventManager->attach('dispatch.error', function ($event) {
+            $exception = $event->getResult()->exception;
+            if ($exception) {
+                $sm = $event->getApplication()
+                    ->getServiceManager();
+                $service = $sm->get('ContentinumServiceErrorHandling');
+                $service->logException($exception);
+            }
+        });
     }
 
     public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
+                __DIR__ . '/autoload_classmap.php'
             ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
+                )
+            )
         );
-    } 
+    }
 
     public function getConfig()
     {
@@ -74,6 +86,27 @@ class Module
         return array(
             'invokables' => array(
                 'Frontendlayout' => 'Contentinum\Controller\Plugin\Frontendlayout'
+            )
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'ContentinumServiceErrorHandling' => function ($sm) {
+                    $logger = $sm->get('ZendLog');
+                    $service = new ErrorHandling($logger);
+                    return $service;
+                },
+                'ZendLog' => function ($sm) {
+                    $filename = 'error-' . date('Y-m-d') . '.log';
+                    $log = new Logger();
+                    $writer = new LogWriterStream('./data/logs/' . $filename);
+                    $log->addWriter($writer);
+                    
+                    return $log;
+                }
             )
         );
     }

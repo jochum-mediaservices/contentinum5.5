@@ -25,7 +25,7 @@ class ApplicationController extends AbstractApplicationController
         if (method_exists($this->worker, 'setIdentity')) {
             $this->worker->setIdentity($this->getIdentity());
         }        
-        
+
         return $this->buildView(array(
             'entries' => $this->worker->fetchContent($pageOptions->getParams()),
             'widgets' => $this->getServiceLocator()->get('contentinum_content_widgets'),

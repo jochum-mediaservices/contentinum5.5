@@ -93,12 +93,11 @@ abstract class AbstractApplicationController extends AbstractContentinumControll
         $role = $this->getServiceLocator()->get('contentinum_acl_defaultrole');
         $acl = $this->getServiceLocator()->get('contentinum_acl_acl');        
         $this->setXmlHttpRequest($this->getRequest()->isXmlHttpRequest());
-        
+                
         if (method_exists($this, 'prepare')) {
             $this->prepare($this->getPageOptions(), $role, $acl);
         }
-        
-        $routeMatch = $e->getRouteMatch();
+
         if ($this->getRequest()->isPost()) {
             $app = $this->process($this->getPageOptions(), $role, $acl);
         } else {
