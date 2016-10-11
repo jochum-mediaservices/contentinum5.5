@@ -47,7 +47,8 @@ class Dates extends AbstractForms
         $html = '<dl class="tabs" data-tab="data-tab">';// tab header start
         $html .= '<dd class="active"><a href="#fieldsetEvent">' . $translation->translate('Event') . '</a></dd>';// tab1
         $html .= '<dd><a href="#fieldsetDescription">' . $translation->translate('Description and Images') . '</a></dd>';
-        $html .= '<dd><a href="#fieldsetAddress">' . $translation->translate('Event address') . '</a></dd>';// tab2        
+        $html .= '<dd><a href="#fieldsetAddress">' . $translation->translate('Event address') . '</a></dd>';// tab2   
+        $html .= '<dd><a href="#fieldsetResponsibility">Teilnehmeranmeldung, Verantwortlicher Organisator</a></dd>';// tab2
         $html .= '</dl><div class="tabs-content">';// finish and start tab content area
         return $html;
     }    
@@ -460,7 +461,77 @@ class Dates extends AbstractForms
                         'id' => 'locationCity'
                     )
                 )
+            ), 
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'configureIdent',
+                    'required' => true,
+            
+                    'options' => array(
+                        'label' => 'Konfiguration Teilnehmeranmeldung',
+                        'value_options' => $this->getServiceLocator()->get('mcevent_configuration'),
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+            
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'id' => 'configureIdent',
+                    )
+                )
             ),            
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'applicantInt',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Anzahl intern',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'description' => 'Anzahl der zu vergebenen Teilnehmer intern, 0 keine Begrenzung'
+                    ),
+            
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'applicantInt',
+                        'value' => 0
+                    )
+                )
+            ),
+            
+            array(
+                'spec' => array(
+                    'name' => 'applicantExt',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Anzahl öffentlich',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'description' => 'Anzahl der zu vergebenen Teilnehmer extern, 0 keine Begrenzung',
+                        'fieldset' => array(
+                            'legend' => 'Verantwortlicher Organisator',
+                            'attributes' => array(
+                                'class' => 'content',
+                                'id' => 'fieldsetResponsibility'// tab1
+                            )
+                        )                        
+                    ),
+            
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'applicantExt',
+                        'value' => 0
+                    )
+                )
+            ), 
+            
+          
+            
+            
+            
             
             array(
                 'spec' => array(
@@ -500,6 +571,9 @@ class Dates extends AbstractForms
             ),
             'webMediasId' => array(
                 'required' => false,                
+            ),
+            'configureIdent' => array(
+                'required' => false,
             ),
         );
     }

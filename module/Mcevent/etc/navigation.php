@@ -23,7 +23,17 @@ return array(
                     'label' => 'Kalender Gruppen',
                     'uri' => '/mcevent/calendargroup',
                     'resource' => 'managerresource'
-                )
+                ),
+                array(
+                    'label' => 'Anmeldungen zu einem Termin',
+                    'uri' => '/mcevent/registrations',
+                    'resource' => 'authorresource',
+                ),
+                array(
+                    'label' => 'Konfiguration Teilnehmeranmeldung',
+                    'uri' => '/mcevent/configuration',
+                    'resource' => 'managerresource'
+                ),                
             )
         )
     )

@@ -46,6 +46,13 @@ class MceventDates extends AbstractEntity
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="configure_id", type="integer", nullable=false)
+     */
+    private $configureIdent = 0;    
 
     /**
      * @var string
@@ -225,6 +232,20 @@ class MceventDates extends AbstractEntity
      * @ORM\Column(name="public_view", type="string", length=3, nullable=false)
      */
     private $publicView = '';
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="applicant_int", type="integer", nullable=false)
+     */
+    private $applicantInt = 0;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="applicant_ext", type="integer", nullable=false)
+     */
+    private $applicantExt = 0;    
 
     /**
      * @var integer
@@ -336,6 +357,22 @@ class MceventDates extends AbstractEntity
     }
 
 	/**
+     * @return the $configureIdent
+     */
+    public function getConfigureIdent()
+    {
+        return $this->configureIdent;
+    }
+
+    /**
+     * @param string $configureIdent
+     */
+    public function setConfigureIdent($configureIdent)
+    {
+        $this->configureIdent = $configureIdent;
+    }
+
+    /**
      * @param number $id
      */
     public function setId($id)
@@ -762,6 +799,38 @@ class MceventDates extends AbstractEntity
     }
 
 	/**
+     * @return the $applicantInt
+     */
+    public function getApplicantInt()
+    {
+        return $this->applicantInt;
+    }
+
+    /**
+     * @param number $applicantInt
+     */
+    public function setApplicantInt($applicantInt)
+    {
+        $this->applicantInt = $applicantInt;
+    }
+
+    /**
+     * @return the $applicantExt
+     */
+    public function getApplicantExt()
+    {
+        return $this->applicantExt;
+    }
+
+    /**
+     * @param number $applicantExt
+     */
+    public function setApplicantExt($applicantExt)
+    {
+        $this->applicantExt = $applicantExt;
+    }
+
+    /**
      * @return the $createdBy
      */
     public function getCreatedBy()

@@ -10,9 +10,13 @@ return array(
              'entity_mcevent_calendargroup' => 'Mcevent\Factory\Entities\CalendarGroupFactory',
              'entity_mcevent_calendargroupindex' => 'Mcevent\Factory\Entities\CalendarGroupIndexFactory',
              'entity_mcevent_dates' => 'Mcevent\Factory\Entities\DatesFactory',
+             'entity_mcevent_datesconfig' => 'Mcevent\Factory\Entities\DatesConfigFactory',
+
              
              'mcevent_locations' => 'Mcevent\Service\Accounts\LocationServiceFactory',
              'mcevent_organizer' => 'Mcevent\Service\Accounts\OrganizerServiceFactory',
+             'mcevent_configuration' => 'Mcevent\Service\Configuration\OptionFactory',
+             
              'templates_plugin_events' => 'Mcevent\Service\Plugins\DatesTemplateFactory',
              'templates_plugin_eventnavigation' => 'Mcevent\Service\Plugins\NavigationTemplateFactory',
              
@@ -22,6 +26,13 @@ return array(
              'mcevent_actual_groupdates' => 'Mcevent\Factory\Mapper\ModulActualGroupDatesFactory',
              'mcevent_actual_groupbyday' => 'Mcevent\Factory\Mapper\ModulActualGroupByDayFactory',
              'mcevent_event_navigation' => 'Mcevent\Factory\Mapper\ModulNavigationFactory',
+             
+             'mcevent_event_datesregister' => 'Mcevent\Factory\Mapper\ModulActualDatesRegisterFactory',
+             'mcevent_event_datesregistergrp' => 'Mcevent\Factory\Mapper\ModulActualGroupDatesFactory',             
+             
+             'mcevent_options_eventdates' => 'Mcevent\Service\Register\RegisterEventFactory',
+             'mcevent_options_eventdateinternal' => 'Mcevent\Service\Register\RegisterEventInternalFactory',    
+             'mcevent_options_eventdatepublic' => 'Mcevent\Service\Register\RegisterEventPublicFactory',
          ),
      ),
     

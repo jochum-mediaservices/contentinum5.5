@@ -37,7 +37,7 @@ abstract class AbstactEventQueries extends AbstractModuls
      */
     protected function eventquery()
     {
-        $sql = "SELECT mcd.id, mcd.summary, mcd.organizer_id AS organizerId, mcd.organizer, mcd.location, mcd.location_addresse AS locationAddresse, mcd.location_zipcode AS locationZipcode, ";
+        $sql = "SELECT mcd.id, mcd.configure_id AS configIdent, mcd.summary, mcd.organizer_id AS organizerId, mcd.organizer, mcd.location, mcd.location_addresse AS locationAddresse, mcd.location_zipcode AS locationZipcode, ";
         $sql .= "mcd.account_id AS accountId, mcd.location_city AS locationCity, mcd.description, mcd.latitude, mcd.longitude, mcd.info_url AS infoUrl, ";
         $sql .= "mcd.web_files_id AS webFilesId, mcd.download_label AS downloadLabel, mcd.date_start AS dateStart, mcd.date_end AS dateEnd, ";
         // organizer

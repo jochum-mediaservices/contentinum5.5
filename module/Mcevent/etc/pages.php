@@ -559,6 +559,274 @@ return array(
     
             'settoroute' => '/mcevent/calgroups/category'
         )
+    ), 
+    
+    
+    
+    '/mcevent/configuration' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Konfiguration Teilnehmeranmeldung',
+        'template' => 'content/dates/configurationindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Konfiguration Teilnehmeranmeldung',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcevent\Mapper\Events\Configuration',
+            'entity' => 'Mcevent\Entity\MceventDatesConfig'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcevent/configuration/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Konfiguration hinzufügen',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Konfiguration hinzufügen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcevent\Model\Calendar\SaveConfiguration',
+            'entity' => 'Mcevent\Entity\MceventDatesConfig',
+            'targetentities' => array(
+                'contacts' => 'Contentinum\Entity\Contacts',
+            ),            
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcevent\Form\Dates\ConfigForm',
+            'formaction' => '/mcevent/configuration/add',
+            'settoroute' => '/mcevent/configuration'
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+    '/mcevent/configuration/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Konfiguration bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Konfiguration bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcevent\Model\Calendar\SaveConfiguration',
+            'entity' => 'Mcevent\Entity\MceventDatesConfig',
+            'targetentities' => array(
+                'contacts' => 'Contentinum\Entity\Contacts',
+            ),            
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcevent\Form\Dates\ConfigForm',
+            'populateSerializeFields' => array('settingsFormular'),
+            'formaction' => '/mcevent/configuration/edit',
+            'settoroute' => '/mcevent/configuration'
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+     
+    '/mcevent/configuration/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcevent\Model\Calendar\DeleteConfiguration',
+            'entity' => 'Mcevent\Entity\MceventDatesConfig',
+    
+            'hasEntries' => array(
+                'calendar' => array(
+                    'tablename' => 'Mcevent\Entity\MceventDates',
+                    'column' => 'configureIdent'
+                ),
+            ),
+    
+            'settoroute' => '/mcevent/configuration'
+        )
     ),    
     
+    '/mcevent/registrations' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Teilnehmer',
+        'template' => 'content/dates/registrations',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Teilnehmer',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcevent\Mapper\Events\Registrations',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+
+    
+    '/mcevent/registrations/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Anmeldung aufnehmen',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Anmeldung aufnehmen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcevent\Model\Events\SaveRegistration',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcevent\Form\Dates\RegistrationForm',
+            'formaction' => '/mcevent/registrations/add',
+            'settoroute' => '/mcevent/registrations'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+    '/mcevent/registrations/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Antrag bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Antrag bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcevent\Model\Events\SaveRegistration',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcevent\Form\Dates\RegistrationForm',
+            'formaction' => '/mcevent/registrations/edit',
+            'settoroute' => '/mcevent/registrations'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+    '/mcevent/registrations/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcevent\Model\Events\DeleteRegistration',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+             
+    
+            'settoroute' => '/mcevent/registrations'
+        )
+    ),
+    
+    '/mcevent/registrations/cancel' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcevent\Model\Events\CancelPublicRegistration',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+             
+    
+            'settoroute' => '/municipal/bookingdashboard'
+        )
+    ),    
+    
+    
+    
+    '/mcevent/public/register' => array(
+        'splitQuery' => 3,
+        'resource' => 'index',
+        'metaTitle' => 'Orders',
+        'template' => 'forms/public',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Anmeldung Termin',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcevent\Model\Events\SavePublicRegistration',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcevent\Form\Dates\RegistrationPublicForm',
+            'formaction' => '/mcevent/public/register',
+            //'setcategrory' => 'no',
+            'setcategroryvalue' => 'yes',
+            'populateFromRoute' => array('category' => 'mceventIdent'),
+        ),
+    ), 
+    
+    
+    '/mcevent/listparticipants' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Download Teilnehmerlisten',
+        'template' => 'content/dates/registerdownloadindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Download Teilnehmerlisten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcevent\Mapper\Events\RegistrationsDownload',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcevent/downloadorders/orderaddress' => array(
+        'resource' => 'publisherresource',
+        'template' => 'content/trash/downloadaddresses',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Municipal\Mapper\Trash\OrderDownloads',
+            'entity' => 'Municipal\Entity\TrashOrders',
+        )
+    
+    ),
+    
+    '/mcevent/downloadorders/orderlist' => array(
+        'resource' => 'publisherresource',
+        'template' => 'content/trash/downloadorderlist',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Municipal\Mapper\Trash\OrderDownloads',
+            'entity' => 'Municipal\Entity\TrashOrders',
+        )
+    
+    ),    
 );
