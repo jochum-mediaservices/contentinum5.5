@@ -34,29 +34,38 @@ namespace Contentinum\Mapper;
  */
 class ModulForms extends AbstractModuls
 {
+
     const ENTITY_NAME = 'Contentinum\Entity\WebFormsField';
-    
+
     const TABLE_NAME = 'web_forms_field';
-    
+
     /**
      * ContentinumComponents\Forms\AbstractForms
+     * 
      * @var ContentinumComponents\Forms\AbstractForms $formFactory
      */
     private $formFactory;
-    
-    /**
-     * 
-     * @var array
-     */
-    private $formFields;
-    
+
     /**
      *
      * @var array
      */
-    private $fieldFilter = array();    
+    private $formFields;
 
-	/**
+    /**
+     *
+     * @var array
+     */
+    private $fieldFilter = array();
+    
+    /**
+     * 
+     * @var unknown
+     */
+    private $button = false;
+
+    /**
+     *
      * @return the $formFactory
      */
     public function getFormFactory()
@@ -64,8 +73,9 @@ class ModulForms extends AbstractModuls
         return $this->formFactory;
     }
 
-	/**
-     * @param \Contentinum\Mapper\ContentinumComponents\Forms\AbstractForms $formFactory
+    /**
+     *
+     * @param \Contentinum\Mapper\ContentinumComponents\Forms\AbstractForms $formFactory            
      */
     public function setFormFactory($formFactory)
     {
@@ -73,23 +83,26 @@ class ModulForms extends AbstractModuls
     }
 
     /**
+     *
      * @return the $formFields
      */
     public function getFormFields()
     {
         return $this->formFields;
     }
-    
+
     /**
-     * @param multitype: $formFields
+     *
+     * @param multitype: $formFields            
      */
     public function addFormFields($name, $key, $value)
     {
         $this->formFields[$name][$key] = $value;
-    }    
+    }
 
-	/**
-     * @param multitype: $formFields
+    /**
+     *
+     * @param multitype: $formFields            
      */
     public function setFormFields($formFields)
     {
@@ -97,6 +110,7 @@ class ModulForms extends AbstractModuls
     }
 
     /**
+     *
      * @return the $fieldFilter
      */
     public function getFieldFilter()
@@ -105,60 +119,65 @@ class ModulForms extends AbstractModuls
     }
 
     /**
-     * @param multitype: $fieldFilter
+     *
+     * @param multitype: $fieldFilter            
      */
     public function setFieldFilter($fieldFilter)
     {
         $this->fieldFilter = $fieldFilter;
     }
-    
+
     /**
-     * @param multitype: $fieldFilter
+     *
+     * @param multitype: $fieldFilter            
      */
     public function addFieldFilter($name, $filter)
     {
         $this->fieldFilter[$name] = $filter;
-    }    
+    }
 
     /**
      * (non-PHPdoc)
+     * 
      * @see \Contentinum\Mapper\AbstractModul::fetchContent()
      */
-	public function fetchContent(array $params = null)
+    public function fetchContent(array $params = null)
     {
         return $this->build($this->query($this->configure['modulParams']));
     }
-    
+
     /**
      * Form content
-     * @param unknown $entries
+     * 
+     * @param unknown $entries            
      * @return multitype:multitype:string unknown multitype:multitype:string unknown
      */
     private function build($entries)
     {
-
         $result = array();
         $fieldElements = array();
-        foreach ($entries as $entry){
+        foreach ($entries as $entry) {
             $id = $entry->webForms->id;
             $subheadline = $entry->webForms->subheadline;
             $description = $entry->webForms->description;
             $responsetext = $entry->webForms->responsetext;
-            $fieldElements[] = $this->buildFieldArray($entry); 
+            $fieldElements[] = $this->buildFieldArray($entry);
         }
-        $fieldElements[] = $this->createButton();
+        if (false === $this->button){
+            $fieldElements[] = $this->createButton();
+        }
         $this->formFactory->setFieldElements($fieldElements);
         $this->formFactory->setFieldFilter($this->getFieldFilter());
         $form = $this->formFactory->getForm();
-
-        $form->setAttribute('action', '/'. $this->getUrl());
-        $form->setAttribute('method', 'POST'); 
-        $form->setAttribute('data-formident', $id); 
-
-        if (true == ($deco = $this->formFactory->getDecorators('deco-form')) ){
-            if ( isset($deco['form-attributtes']) && is_array($deco['form-attributtes']) ){
-                foreach ($deco['form-attributtes'] as $attribute => $value){
-                    $form->setAttribute($attribute,$value);
+        
+        $form->setAttribute('action', '/' . $this->getUrl());
+        $form->setAttribute('method', 'POST');
+        $form->setAttribute('data-formident', $id);
+        
+        if (true == ($deco = $this->formFactory->getDecorators('deco-form'))) {
+            if (isset($deco['form-attributtes']) && is_array($deco['form-attributtes'])) {
+                foreach ($deco['form-attributtes'] as $attribute => $value) {
+                    $form->setAttribute($attribute, $value);
                 }
             }
         }
@@ -169,106 +188,128 @@ class ModulForms extends AbstractModuls
         $result['form'] = $form;
         return $result;
     }
-    
+
     /**
      * Build format form filed content array for zend/form factory
-     * @param object $entry
+     * 
+     * @param object $entry            
      * @return multitype:Ambigous <string, multitype:multitype: boolean string NULL >
      */
     private function buildFieldArray($entry)
     {
         $field = array();
-        $field['attributes'] = array();        
-        $field['options'] = array();        
+        $field['attributes'] = array();
+        $field['options'] = array();
         $field['name'] = $entry->fieldName;
         $field['attributes'] = $this->formFactory->getDecorators('deco-attr-elements');
-        if ('yes' === $entry->fieldRequired){
+        if ('yes' === $entry->fieldRequired) {
             $field['required'] = true;
             $field['attributes']['required'] = 'required';
         } else {
             $field['required'] = false;
-            $this->addFieldFilter($field['name'], array('required' => false));
+            $this->addFieldFilter($field['name'], array(
+                'required' => false
+            ));
         }
-        if (strlen($entry->label) > 1 ){
+        if (strlen($entry->label) > 1 && 'Button' != $entry->fieldTyp) {
             $field['options']['label'] = $entry->label;
             $this->addFormFields($entry->fieldName, 'label', $entry->label);
         }
-        if (1 === $entry->fieldset && strlen($entry->fieldsetLegend)> 1){
-            $field['options']['fieldset']['legend'] = $entry->fieldsetLegend;
-            if (strlen($entry->fieldsetAttributes)> 1){
+        if (1 === $entry->fieldset) {
+            if (strlen($entry->fieldsetLegend) > 1) {
+                $field['options']['fieldset']['legend'] = $entry->fieldsetLegend;
+            }
+            if (strlen($entry->fieldsetAttributes) > 1) {
                 $attributes = explode(';', $entry->fieldsetAttributes);
-                foreach ($attributes as $attr){
+                foreach ($attributes as $attr) {
                     $attribs = explode('=', $attr);
                     $field['options']['fieldset']['attributes'][$attribs[0]] = $attribs[1];
                 }
             }
         }
-        switch ($entry->fieldTyp){
+        switch ($entry->fieldTyp) {
             case 'Select':
                 $field['type'] = 'Select';
                 $field['options']['empty_option'] = 'Please select';
                 $field['options']['value_options'] = $this->valueOptions($entry->id);
                 $field['options']['deco-row'] = $this->formFactory->getDecorators('deco-element-row');
-                break;                
+                break;
             case 'Text':
                 $field['type'] = 'Text';
                 $field['options']['deco-row'] = $this->formFactory->getDecorators('deco-element-row');
-                break;  
+                break;
             case 'Tel':
                 $field['type'] = 'ContentinumComponents\Forms\Elements\Tel';
                 $field['options']['deco-row'] = $this->formFactory->getDecorators('deco-element-row');
-                break;                 
+                break;
             case 'Email':
                 $field['type'] = 'Email';
                 $field['options']['deco-row'] = $this->formFactory->getDecorators('deco-element-row');
-                break;                
+                break;
             case 'Textarea':
                 $field['type'] = 'Textarea';
                 $field['options']['deco-row'] = $this->formFactory->getDecorators('deco-element-row');
                 $field['attributes']['rows'] = '4';
-                break;                             
+                break;
+            case 'Button':
+                $this->button = true;
+                $field['type'] = 'Submit';
+                $field['attributes']['class'] = 'button submitthisform';
+                $field['attributes']['value'] = $entry->fieldValue;
+                break;
             default:
                 break;
         }
         
-        if ( strlen($entry->description) > 1 ){
+        if (strlen($entry->description) > 1) {
             $field['options']['description'] = $entry->description;
             $this->addFormFields($entry->fieldName, 'description', $entry->description);
         }
         
-        if ( strlen($entry->fieldDomid) > 1 ){
+        if (strlen($entry->fieldDomid) > 1) {
             $field['attributes']['id'] = $entry->fieldDomid;
         } else {
             $field['attributes']['id'] = $entry->fieldName;
         }
         
-        if ( strlen($entry->fieldclass) > 1 ){
-            if ( isset($field['attributes']['class']) ){
+        if (strlen($entry->fieldclass) > 1) {
+            if (isset($field['attributes']['class'])) {
                 $field['attributes']['class'] = $field['attributes']['class'] . ' ' . $entry->fieldclass;
             } else {
                 $field['attributes']['class'] = $entry->fieldclass;
             }
-        }        
-        return array('spec' => $field);
+        }
+        return array(
+            'spec' => $field
+        );
     }
-    
+
     /**
      * Form query
-     * @param unknown $id
+     * 
+     * @param unknown $id            
      */
     private function query($id)
     {
-        return $this->getStorage()->getRepository( self::ENTITY_NAME )->findBy(array('webForms' => $id, 'publish' => 'yes'), array('itemRang' => 'ASC'));
+        return $this->getStorage()
+            ->getRepository(self::ENTITY_NAME)
+            ->findBy(array(
+            'webForms' => $id,
+            'publish' => 'yes'
+        ), array(
+            'itemRang' => 'ASC'
+        ));
     }
-    
-    
+
     /**
      * Form select options
-     * @param unknown $formField
+     * 
+     * @param unknown $formField            
      */
     private function valueOptions($formField)
     {
         /**
+         *
          * @var $mapper \Contentinum\Mapper\FormFieldOptions
          */
         $mapper = $this->getSl()->get('Contentinum\SelectFieldFactory');
@@ -277,27 +318,26 @@ class ModulForms extends AbstractModuls
 
     /**
      * Form button
+     * 
      * @return multitype:multitype:string multitype:string
      */
     private function createButton()
     {
-        
         $btn = $this->formFactory->getDecorators('deco-row-button');
-        if ( isset($btn['spec']) ){
+        if (isset($btn['spec'])) {
             return $btn;
         } else {
-        
-        return array(
-            'spec' => array(
-                'name' => 'send',
-                'type' => 'Submit',
-                'attributes' => array(
-                    'class' => 'button expand submitthisform',
-                    'value' => 'Absenden'
+            
+            return array(
+                'spec' => array(
+                    'name' => 'send',
+                    'type' => 'Submit',
+                    'attributes' => array(
+                        'class' => 'button expand expanded submitthisform',
+                        'value' => 'Absenden'
+                    )
                 )
-            )
-        );
-        
+            );
         }
     }
 }
