@@ -42,7 +42,7 @@ class WebMediaCategories extends AbstractEntity
      *
      * @var string
      *
-     * @ORM\Column(name="caption", type="string", length=500, nullable=false)
+     * @ORM\Column(name="caption", type="text", nullable=true)
      */
     private $caption = '';    
 

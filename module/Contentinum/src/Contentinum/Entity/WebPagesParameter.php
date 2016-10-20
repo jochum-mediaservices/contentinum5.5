@@ -105,7 +105,7 @@ class WebPagesParameter extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", type="string", length=180, nullable=false)
+     * @ORM\Column(name="meta_description", type="text", nullable=false)
      */
     private $metaDescription = '';
     
