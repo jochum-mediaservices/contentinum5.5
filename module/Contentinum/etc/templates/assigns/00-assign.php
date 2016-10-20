@@ -7,6 +7,12 @@ return array(
             'assign' => 'header',
             'rang' => '200',
         ),
+        'HEADERSTARTPAGE' => array(
+            'key' => 'defaults',
+            'name' => 'Inhalte Startseite in den Webseitenkopf (Headerstartpage) zuweisen',
+            'assign' => 'headerstartpage',
+            'rang' => '200',
+        ),        
         'FOOTER' => array(
             'key' => 'defaults',
             'name' => 'Inhalte in den Webseitenfuß (Footer) zuweisen',
