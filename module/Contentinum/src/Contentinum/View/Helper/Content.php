@@ -36,7 +36,6 @@ use Zend\View\Helper\AbstractHelper;
  */
 class Content extends AbstractHelper 
 {
-	
 	/**
 	 * Converts bytes into KB, MB, GB or TB
 	 *

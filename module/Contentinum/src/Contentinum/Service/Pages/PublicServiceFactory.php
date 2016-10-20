@@ -48,10 +48,10 @@ class PublicServiceFactory extends WebsiteServiceFactory
 
     /**
      * Name cache factory
-     * 
+     *
      * @var string
      */
-    const CONTENTINUM_CACHE = 'contentinum_cache_public';  
+    const CONTENTINUM_CACHE = 'contentinum_cache_public';
 
     private $cols = array(
         'id',
@@ -84,12 +84,17 @@ class PublicServiceFactory extends WebsiteServiceFactory
         $cache = $sl->get(static::CONTENTINUM_CACHE);
         $key = $config['cache'];
         if (! ($result = $cache->getItem($key))) {
-            $worker = new Worker($sl->get($config['entitymanager']));
-            $repos = $worker->getStorage()->getRepository($config['entity']);
-            if (isset($config['findBy'])) {
-                $entries = $repos->findBy($config['findBy']);
-            } else {
-                $entries = $repos->findAll();
+            try {
+                $worker = new Worker($sl->get($config['entitymanager']));
+                $repos = $worker->getStorage()->getRepository($config['entity']);
+                if (isset($config['findBy'])) {
+                    $entries = $repos->findBy($config['findBy']);
+                } else {
+                    $entries = $repos->findAll();
+                }
+            } catch (\Exception $e) {
+                print $e->getMessage();
+                exit('application break');
             }
             $rows = array();
             foreach ($entries as $entry) {
