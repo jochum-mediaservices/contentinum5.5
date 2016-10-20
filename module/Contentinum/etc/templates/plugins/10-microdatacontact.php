@@ -201,7 +201,7 @@ return array(
                 'row' => array(
                     'element' => 'p',
                     'attr' => array(
-                        'class' => 'hcard-phone'
+                        'class' => 'hcard-phone type-fax'
                     ),
                     'content:before' => '<i class="fa fa-fax" aria-hidden="true"> </i> '
                 ),
@@ -419,7 +419,7 @@ return array(
                 'row' => array(
                     'element' => 'p',
                     'attr' => array(
-                        'class' => 'hcard-phone'
+                        'class' => 'hcard-phone type-fax'
                     ),
                     'content:before' => '<i class="fa fa-fax" aria-hidden="true"></i> '
                 )
