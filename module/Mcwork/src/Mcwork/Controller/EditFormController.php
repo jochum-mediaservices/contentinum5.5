@@ -399,8 +399,12 @@ class EditFormController extends AbstractApplicationController
             $mcSerialize = new HandleSerializeDatabase();
             foreach ($this->unserialize as $field){
                 if (isset($datas[$field]) && strlen($datas[$field]) > 1){
-                    //$datas = array_merge($datas, $mcSerialize->execUnserialize($datas[$field]) );
-                    $datas[$field] = $mcSerialize->execUnserialize($datas[$field]);
+                    if ('y' == $pageOptions->getApp('populateSerialize')){
+                        $datas[$field] = $mcSerialize->execUnserialize($datas[$field]);
+                    } else {
+                       $datas = array_merge($datas, $mcSerialize->execUnserialize($datas[$field]) ); 
+                    }
+                    
                 }
             }
         }
