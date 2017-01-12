@@ -24,6 +24,7 @@ class PageOptions extends AbstractOptions
         'form',
         'formaction',
         'formattributes',
+        'formbuttons',
         'targetentities',
         'hasEntries',
         'setcategrory',

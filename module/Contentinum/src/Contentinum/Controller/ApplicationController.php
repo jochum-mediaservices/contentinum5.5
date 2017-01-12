@@ -2,6 +2,8 @@
 namespace Contentinum\Controller;
 
 use Zend\View\Model\ViewModel;
+use Contentinum\Exception\NoAccessException;
+use Zend\Http\Response;
 
 class ApplicationController extends AbstractApplicationController
 {
@@ -25,14 +27,27 @@ class ApplicationController extends AbstractApplicationController
         if (method_exists($this->worker, 'setIdentity')) {
             $this->worker->setIdentity($this->getIdentity());
         }        
-
+        $entries = $this->worker->fetchContent($pageOptions->getParams());
+        try {
+            $plugin = $this->iniPlugins($pageOptions,$role,$acl);
+        } catch ( \Exception $e ) {
+            header("HTTP/1.1 403 Forbidden" );
+            $str = '<html><body>';
+            $str .= '<h1>Nicht erlaubt / Forbidden</h1>';     
+            $str .= '<p>Sie sind nicht berechtigt, auf diesen Server '.$pageOptions->getHost().' zuzugreifen!</p>';
+            $str .= '<p>You don\'t have permission to access '.$pageOptions->getHost().' on this server!</p>';
+            $str .= '</body></html>';
+            print $str;
+            exit();
+        }        
+        
         return $this->buildView(array(
-            'entries' => $this->worker->fetchContent($pageOptions->getParams()),
+            'entries' => $entries,
             'widgets' => $this->getServiceLocator()->get('contentinum_content_widgets'),
             'groupstyles' => $this->getServiceLocator()->get('contentinum_group_styles' ),
             'contentstyles' => $this->getServiceLocator()->get('contentinum_content_styles'),
             'pluginstyles' => $this->getServiceLocator()->get('contentinum_template_plugins'),
-            'plugins' => $this->iniPlugins($pageOptions,$role,$acl),
+            'plugins' => $plugin,
             'identity' => $this->getIdentity(),
             'role' => $role,
             'acl' => $acl,      

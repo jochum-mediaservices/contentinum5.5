@@ -83,7 +83,28 @@ class ContactGroups extends AbstractEntity
      *
      * @ORM\Column(name="enable_orgaddress", type="integer", nullable=false)
      */
-    private $enableOrgaddress = 0;    
+    private $enableOrgaddress = 0;  
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="enable_orgaphone", type="integer", nullable=false)
+     */
+    private $enableOrgaphone = 1;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="enable_orgamail", type="integer", nullable=false)
+     */
+    private $enableOrgamail = 1;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="enable_orgainternet", type="integer", nullable=false)
+     */
+    private $enableOrgainternet = 1;
     
     /**
      * @var string
@@ -490,6 +511,54 @@ class ContactGroups extends AbstractEntity
     }
 
  /**
+     * @return the $enableOrgaphone
+     */
+    public function getEnableOrgaphone()
+    {
+        return $this->enableOrgaphone;
+    }
+
+    /**
+     * @param string $enableOrgaphone
+     */
+    public function setEnableOrgaphone($enableOrgaphone)
+    {
+        $this->enableOrgaphone = $enableOrgaphone;
+    }
+
+    /**
+     * @return the $enableOrgamail
+     */
+    public function getEnableOrgamail()
+    {
+        return $this->enableOrgamail;
+    }
+
+    /**
+     * @param string $enableOrgamail
+     */
+    public function setEnableOrgamail($enableOrgamail)
+    {
+        $this->enableOrgamail = $enableOrgamail;
+    }
+
+    /**
+     * @return the $enableOrgainternet
+     */
+    public function getEnableOrgainternet()
+    {
+        return $this->enableOrgainternet;
+    }
+
+    /**
+     * @param string $enableOrgainternet
+     */
+    public function setEnableOrgainternet($enableOrgainternet)
+    {
+        $this->enableOrgainternet = $enableOrgainternet;
+    }
+
+    /**
      * @return the $enableTitle
      */
     public function getEnableTitle()

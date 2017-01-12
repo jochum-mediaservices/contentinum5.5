@@ -12,7 +12,7 @@ return array(
             'contentinum_public_pages' => array(
                 'name' => 'Seiten im Webauftritt',
                 'cache' => 'contentinum_public_pages',
-                'savecache' => true,
+                'savecache' => false,
             ),
             'contentinum_attribute_pages' => array(
                 'name' => 'Seiten Eigenschaften',

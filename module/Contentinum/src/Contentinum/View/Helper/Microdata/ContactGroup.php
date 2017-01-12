@@ -145,6 +145,7 @@ class ContactGroup extends Parameters
                         $phoneMobileTemplate['grid']['attr']['href'] = $phoneMobileTemplate['grid']['attr']['href'] . $filterDigits->filter($phoneMobile);
                         $cardData .= $this->deployRow($phoneMobileTemplate, $phoneMobile);
                     }
+                    
                     if (1 === $entry->enablePhoneWork && null != ($phoneWork = $this->view->microdataoverwrite($entry, 'contacts', 'phoneWork'))) {
                         $phoneWorkTemplate = $this->phoneWork->toArray();
                         $phoneWorkTemplate['grid']['attr']['href'] = $phoneWorkTemplate['grid']['attr']['href'] . $filterDigits->filter($phoneWork);

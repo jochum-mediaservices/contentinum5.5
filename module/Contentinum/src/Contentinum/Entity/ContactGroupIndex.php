@@ -39,7 +39,7 @@ class ContactGroupIndex extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="business_title", type="string", length=250, nullable=false)
+     * @ORM\Column(name="business_title", type="text", length=65535, nullable=false)
      */
     private $businessTitle = '';
     

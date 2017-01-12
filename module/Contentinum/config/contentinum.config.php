@@ -57,7 +57,7 @@ return array(
             'contentinum_pages'  => 'Contentinum\Factory\Options\PagesFactory',
             'contentinum_page_files'  => 'Contentinum\Service\Pages\ConfigurationFilesFactory',
             'contentinum_page_defaults'  => 'Contentinum\Factory\Pages\DefaultPageFactory',
-            
+
             'contentinum_preference' => 'Contentinum\Service\Domains\PreferenceServiceFactory',
             'contentinum_page_headers' => 'Contentinum\Service\Domains\PageHeadersServiceFactory',
             'contentinum_public_pages' => 'Contentinum\Service\Pages\PublicServiceFactory',

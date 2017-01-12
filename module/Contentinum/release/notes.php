@@ -1,5 +1,111 @@
 <?php
 return array(
+    5558 => array(
+        'Download Kalender als csv oder ics Datei',
+    ),
+    5557 => array(
+        'Upgrade TinyMCE auf Version 4.5.2',
+    ),    
+    5556 => array(
+        'Upgrade Foundation auf Version 6.3',
+    ),
+    5555 => array(
+        "ALTER TABLE `mcevent_types` ADD `calc_key` VARCHAR(40) NOT NULL AFTER `description`;",
+        "ALTER TABLE `mcevent_group` ADD `calc_key` VARCHAR(40) NOT NULL AFTER `params`;"
+    ),
+    5554 => array(
+        "ALTER TABLE `contact_group_index` CHANGE `business_title` `business_title` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;",
+    ),
+    5553 => array(
+        "ALTER TABLE `contact_groups` ADD `enable_orgaphone` TINYINT(1) NOT NULL DEFAULT '1' AFTER `enable_orgaddress`, ADD `enable_orgamail` TINYINT(1) NOT NULL DEFAULT '1' AFTER `enable_orgaphone`, ADD `enable_orgainternet` TINYINT(1) NOT NULL DEFAULT '1' AFTER `enable_orgamail`;",
+    ),
+    5552 => array(
+        'robots.txt und Standard favicon.ico hinzugefügt',
+    ),
+    5551 => array(
+        'Neue CSS Klasse (Faxnummer) in Microdata Templates',
+    ),
+    5550 => array(
+        'Platzhalter für den Kopfbereich auf der Startseite'
+    ),
+    5549 => array(
+        'Neue Javascript Biblotheken und Kollektions für Teilnehmerregistrierung, Terminbuchungen',
+    ),    
+    5548 => array(
+        'Update javascript Formularvalidation',
+    ),
+    5547 => array(
+        'Meta Beschreibung in den Seiteneigenschaften von 180 auf 500 Zeichen verlängert.',
+        "ALTER TABLE `web_pages_parameter` CHANGE `meta_description` `meta_description` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;"
+    ),
+    5546 => array(
+        'Termine mit Teilnehmeranmeldungen',
+        "ALTER TABLE `mcevent_dates_register` ADD `num_groupmember` INT(4) NOT NULL DEFAULT '0' AFTER `merkblatt`;",
+        "ALTER TABLE `mcevent_dates_config` ADD `settings_formular` TEXT NOT NULL AFTER `emailsignature`;",
+        "ALTER TABLE `mcevent_dates_register` ADD `stay_breakfast` VARCHAR(10) NOT NULL AFTER `num_groupmember`, ADD `stay_lunch` VARCHAR(10) NOT NULL AFTER `stay_breakfast`, ADD `stay_dinner` VARCHAR(10) NOT NULL AFTER `stay_lunch`;",
+        "ALTER TABLE `mcevent_dates_register` ADD `stay_overnight` VARCHAR(10) NOT NULL AFTER `stay_dinner`;",
+        "ALTER TABLE `mcevent_dates_register` CHANGE `name` `name` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;",
+    ),
+    5545 => array(
+        'Formularfelder in Spalten anordnen',
+    ),
+    5544 => array(
+        'Anmelden zu einer Veranstaltung: Interresenten können sich zu einer Veranstaltung anmelden',
+        "ALTER TABLE `mcevent_dates` ADD `applicant_int` INT(4) NOT NULL DEFAULT '0' AFTER `public_view`;",
+        "ALTER TABLE `mcevent_dates` ADD `applicant_ext` INT(4) NOT NULL DEFAULT '0' AFTER `applicant_int`;",
+        "ALTER TABLE `mcevent_dates` ADD `configure_id` INT(5) NOT NULL DEFAULT '0' AFTER `calendar_id`;",
+    ),
+    5543 => array(
+        'Einstellungen Gästebuch als Datenbankeintrag'
+    ),    
+    5542 => array(
+        'Überarbeitung Javascript Fehlermeldungen bei Formularvaldierungen im Frontend'
+    ),    
+    5541 => array(
+        'Übersetzungen'
+    ),    
+    5540 => array(
+        'Weitere Beitragsformatierung: Large Grids'
+    ),    
+    5539 => array(
+        'Weitere Beitragsformatierung unter Foundation6: "Combined Column/Row", reduzierter HTML Quellcode'
+    ),
+    5538 => array(
+        'BUG Template addierende Schleife bei Auswahl einer Beitragsformatierung, Revision: Schleife entfernt',
+    ),    
+    5537 => array(
+        'Name Kontakt Erweiterung (Post)',
+    ),
+    5536 => array(
+        'Neue Page Option Eigenschaft: populateFromFactory',
+    ),
+    5535 => array(
+        'Automatisiertes setzen von Formular Filter wenn Pflichtfeld oder kein Pflichtfeld',
+    ),
+    5534 => array(
+        'Modul Feuerwehr: Einsatzberichte Portierung von Version 4.4 abgeschlossen',
+        "ALTER TABLE `fw_misson_report` ADD `mission_mediagroup_id` INT(20) NOT NULL DEFAULT '0' AFTER `id`;",
+        "ALTER TABLE `fw_misson_report` CHANGE `mission_alarmweg` `mission_alarmweg` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';",
+        "ALTER TABLE `fw_misson_assign_num` CHANGE `id` `id` INT(20) UNSIGNED NOT NULL AUTO_INCREMENT;ALTER TABLE `fw_misson_equipment` CHANGE `id` `id` INT(20) UNSIGNED NOT NULL AUTO_INCREMENT;",
+        "ALTER TABLE `fw_misson_report` CHANGE `mission_description` `description` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;",
+        "ALTER TABLE `fw_equipment` CHANGE `equipment_id` `equipment_id` VARCHAR(36) NOT NULL;ALTER TABLE `fw_equipment` CHANGE `department_id` `department_id` VARCHAR(36) NOT NULL;",
+        "ALTER TABLE `fw_misson_report` ADD `img_caption` VARCHAR(250) NOT NULL AFTER `img_source`, ADD `img_style` VARCHAR(250) NOT NULL AFTER `img_caption`, ADD `img_teaser` VARCHAR(250) NOT NULL AFTER `img_style`;",
+    ),
+    5533 => array(
+        'Neue Parameter in Account Tabelle zur begrenzug von Einträgen vom Feuerwehr Modul ',
+        "ALTER TABLE `accounts` ADD `fw_account` TINYINT(1) NOT NULL DEFAULT '0' AFTER `municipal_directory`;ALTER TABLE `accounts` ADD `fw_resource` TINYINT(1) NOT NULL DEFAULT '0' AFTER `fw_account`;ALTER TABLE `accounts` ADD `disable` TINYINT(1) NOT NULL DEFAULT '0' AFTER `fw_resource`;",
+    ),
+    5532 => array(
+        'Municipal Benutzer in Zugriffsgruppen einordnen (municipal/usringrp)',
+    ),    
+    5531 => array(
+        'Zusätzlichen Feld Mobile Telefonnummer in Organisationen',
+        "ALTER TABLE `accounts` ADD `phone_mobile` VARCHAR(50) NOT NULL AFTER `phone_alternate`;",
+    ),
+    5530 => array(
+        'Zusätzlichen Feld Post Namenserweiterung in Kontakte',
+        "ALTER TABLE `contacts` ADD `name_extension` VARCHAR(200) NOT NULL AFTER `last_name`;",
+    ),
     5529 => array(
         'Konfiguration Fieldset bei Formularen',
         "ALTER TABLE `web_forms_field` ADD `fieldset` INT(1) NOT NULL DEFAULT '0' AFTER `field_class`;ALTER TABLE `web_forms_field` ADD `fieldset_legend` VARCHAR(250) NOT NULL AFTER `fieldset`;ALTER TABLE `web_forms_field` ADD `fieldset_attributes` TEXT NOT NULL AFTER `fieldset_legend`;",
@@ -44,7 +150,8 @@ return array(
         "ALTER TABLE `municipal_service_groups` ADD `allowedips` VARCHAR(500) NOT NULL AFTER `groupscope`;ALTER TABLE `municipal_service_groups` ADD `urlident` VARCHAR(50) NOT NULL AFTER `groupscope`;",
     ),
     5516 => array(
-        "Diverse kleine Fehler und Anpassungen",
+        "Kleine Fehler und kleine Anpassungen",
+        "UPDATE `web_maps_data` SET `web_medias_id`= 1 WHERE `web_medias_id` = 0;",
     ),
     5515 => array(
         "Anpassung der Tabellenspalten an die function date('D')",

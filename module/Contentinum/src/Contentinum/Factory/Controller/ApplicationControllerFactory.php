@@ -49,6 +49,8 @@ class ApplicationControllerFactory implements FactoryInterface
                     case 'feuerwehr':
                     case 'guestbook':
                     case 'newsletter':
+                    case 'citizensbudget':
+                    case 'eildienst':
                         if (isset($pages['/' . $pageOptions->split(null, 3)])) {
                             $pageOptions->addOptions($pages, '/' . $pageOptions->split(null, 3), true);
                             $pageOptions->setActive('/' . $pageOptions->split(null, 3));
