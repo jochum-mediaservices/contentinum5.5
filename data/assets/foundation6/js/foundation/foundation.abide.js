@@ -19,9 +19,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} element - jQuery object to add the trigger to.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function Abide(element) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       _classCallCheck(this, Abide);
 
@@ -71,6 +70,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (this.options.liveValidate) {
           this.$inputs.off('input.zf.abide').on('input.zf.abide', function (e) {
+            _this2.validateInput($(e.target));
+          });
+        }
+
+        if (this.options.validateOnBlur) {
+          this.$inputs.off('blur.zf.abide').on('blur.zf.abide', function (e) {
             _this2.validateInput($(e.target));
           });
         }
@@ -275,6 +280,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'validateInput',
       value: function validateInput($el) {
+        var _this4 = this;
+
         var clearRequire = this.requiredCheck($el),
             validated = false,
             customValidator = true,
@@ -315,6 +322,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var goodToGo = [clearRequire, validated, customValidator, equalTo].indexOf(false) === -1;
         var message = (goodToGo ? 'valid' : 'invalid') + '.zf.abide';
+
+        if (goodToGo) {
+          // Re-validate inputs that depend on this one with equalto
+          var dependentElements = this.$element.find('[data-equalto="' + $el.attr('id') + '"]');
+          if (dependentElements.length) {
+            (function () {
+              var _this = _this4;
+              dependentElements.each(function () {
+                if ($(this).val()) {
+                  _this.validateInput($(this));
+                }
+              });
+            })();
+          }
+        }
 
         this[goodToGo ? 'removeErrorClasses' : 'addErrorClasses']($el);
 
@@ -442,12 +464,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'matchValidation',
       value: function matchValidation($el, validators, required) {
-        var _this4 = this;
+        var _this5 = this;
 
         required = required ? true : false;
 
         var clear = validators.split(' ').map(function (v) {
-          return _this4.options.validators[v]($el, required, $el.parent());
+          return _this5.options.validators[v]($el, required, $el.parent());
         });
         return clear.indexOf(false) === -1;
       }
@@ -547,6 +569,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @example false
      */
     liveValidate: false,
+
+    /**
+     * Set to true to validate inputs on blur.
+     * @option
+     * @example false
+     */
+    validateOnBlur: false,
 
     patterns: {
       alpha: /^[a-zA-Z]+$/,

@@ -1,6 +1,6 @@
 .media-object {
-  margin-bottom: 1rem;
-  display: block; }
+  display: block;
+  margin-bottom: 1rem; }
   .media-object img {
     max-width: none; }
   @media screen and (max-width: 39.9375em) {

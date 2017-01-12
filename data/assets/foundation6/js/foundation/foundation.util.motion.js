@@ -26,8 +26,14 @@
         start = null;
     // console.log('called');
 
+    if (duration === 0) {
+      fn.apply(elem);
+      elem.trigger('finished.zf.animate', [elem]).triggerHandler('finished.zf.animate', [elem]);
+      return;
+    }
+
     function move(ts) {
-      if (!start) start = window.performance.now();
+      if (!start) start = ts;
       // console.log(start, ts);
       prog = ts - start;
       fn.apply(elem);

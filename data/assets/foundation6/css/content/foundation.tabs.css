@@ -1,18 +1,18 @@
 .tabs {
   margin: 0;
-  list-style-type: none;
+  border: 1px solid #e6e6e6;
   background: #fefefe;
-  border: 1px solid #e6e6e6; }
+  list-style-type: none; }
   .tabs::before, .tabs::after {
-    content: ' ';
-    display: table; }
+    display: table;
+    content: ' '; }
   .tabs::after {
     clear: both; }
 
 .tabs.vertical > li {
-  width: auto;
+  display: block;
   float: none;
-  display: block; }
+  width: auto; }
 
 .tabs.simple > li > a {
   padding: 0; }
@@ -20,29 +20,33 @@
     background: transparent; }
 
 .tabs.primary {
-  background: #2199e8; }
+  background: #2ba6cb; }
   .tabs.primary > li > a {
-    color: #fefefe; }
+    color: #0a0a0a; }
     .tabs.primary > li > a:hover, .tabs.primary > li > a:focus {
-      background: #1893e4; }
+      background: #299ec1; }
 
 .tabs-title {
   float: left; }
   .tabs-title > a {
     display: block;
     padding: 1.25rem 1.5rem;
+    font-size: 0.75rem;
     line-height: 1;
-    font-size: 0.75rem; }
+    color: #2ba6cb; }
     .tabs-title > a:hover {
-      background: #fefefe; }
+      background: #fefefe;
+      color: #258faf; }
     .tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
-      background: #e6e6e6; }
+      background: #e6e6e6;
+      color: #2ba6cb; }
 
 .tabs-content {
-  background: #fefefe;
-  transition: all 0.5s ease;
   border: 1px solid #e6e6e6;
-  border-top: 0; }
+  border-top: 0;
+  background: #fefefe;
+  color: #0a0a0a;
+  transition: all 0.5s ease; }
 
 .tabs-content.vertical {
   border: 1px solid #e6e6e6;
@@ -51,5 +55,5 @@
 .tabs-panel {
   display: none;
   padding: 1rem; }
-  .tabs-panel.is-active {
+  .tabs-panel[aria-hidden="false"] {
     display: block; }

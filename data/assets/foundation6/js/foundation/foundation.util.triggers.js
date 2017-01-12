@@ -35,7 +35,12 @@
 
   // Elements with [data-toggle] will toggle a plugin that supports it when clicked.
   $(document).on('click.zf.trigger', '[data-toggle]', function () {
-    triggers($(this), 'toggle');
+    var id = $(this).data('toggle');
+    if (id) {
+      triggers($(this), 'toggle');
+    } else {
+      $(this).trigger('toggle.zf.trigger');
+    }
   });
 
   // Elements with [data-closable] will respond to close.zf.trigger events.
@@ -62,7 +67,7 @@
   * @function
   * @private
   */
-  $(window).load(function () {
+  $(window).on('load', function () {
     checkListeners();
   });
 
@@ -70,6 +75,7 @@
     eventsListener();
     resizeListener();
     scrollListener();
+    mutateListener();
     closemeListener();
   }
 
@@ -153,6 +159,17 @@
     }
   }
 
+  function mutateListener(debounce) {
+    var $nodes = $('[data-mutate]');
+    if ($nodes.length && MutationObserver) {
+      //trigger all listening elements and signal a mutate event
+      //no IE 9 or 10
+      $nodes.each(function () {
+        $(this).triggerHandler('mutateme.zf.trigger');
+      });
+    }
+  }
+
   function eventsListener() {
     if (!MutationObserver) {
       return false;
@@ -162,26 +179,27 @@
     //element callback
     var listeningElementsMutation = function (mutationRecordsList) {
       var $target = $(mutationRecordsList[0].target);
+
       //trigger the event handler for the element depending on type
-      switch ($target.attr("data-events")) {
+      switch (mutationRecordsList[0].type) {
 
-        case "resize":
-          $target.triggerHandler('resizeme.zf.trigger', [$target]);
+        case "attributes":
+          if ($target.attr("data-events") === "scroll" && mutationRecordsList[0].attributeName === "data-events") {
+            $target.triggerHandler('scrollme.zf.trigger', [$target, window.pageYOffset]);
+          }
+          if ($target.attr("data-events") === "resize" && mutationRecordsList[0].attributeName === "data-events") {
+            $target.triggerHandler('resizeme.zf.trigger', [$target]);
+          }
+          if (mutationRecordsList[0].attributeName === "style") {
+            $target.closest("[data-mutate]").attr("data-events", "mutate");
+            $target.closest("[data-mutate]").triggerHandler('mutateme.zf.trigger', [$target.closest("[data-mutate]")]);
+          }
           break;
 
-        case "scroll":
-          $target.triggerHandler('scrollme.zf.trigger', [$target, window.pageYOffset]);
+        case "childList":
+          $target.closest("[data-mutate]").attr("data-events", "mutate");
+          $target.closest("[data-mutate]").triggerHandler('mutateme.zf.trigger', [$target.closest("[data-mutate]")]);
           break;
-
-        // case "mutate" :
-        // console.log('mutate', $target);
-        // $target.triggerHandler('mutate.zf.trigger');
-        //
-        // //make sure we don't get stuck in an infinite loop from sloppy codeing
-        // if ($target.index('[data-mutate]') == $("[data-mutate]").length-1) {
-        //   domMutationObserver();
-        // }
-        // break;
 
         default:
           return false;
@@ -190,10 +208,10 @@
     };
 
     if (nodes.length) {
-      //for each element that needs to listen for resizing, scrolling, (or coming soon mutation) add a single observer
+      //for each element that needs to listen for resizing, scrolling, or mutation add a single observer
       for (var i = 0; i <= nodes.length - 1; i++) {
         var elementObserver = new MutationObserver(listeningElementsMutation);
-        elementObserver.observe(nodes[i], { attributes: true, childList: false, characterData: false, subtree: false, attributeFilter: ["data-events"] });
+        elementObserver.observe(nodes[i], { attributes: true, childList: true, characterData: false, subtree: true, attributeFilter: ["data-events", "style"] });
       }
     }
   }

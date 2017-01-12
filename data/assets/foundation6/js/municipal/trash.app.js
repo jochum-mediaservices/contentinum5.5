@@ -112,7 +112,7 @@
 					defaults.monthIdent = 'month0' + n;
 					defaults.month = '0' + n;
 				} else {
-					defaults.monthIdent = 'month' + n;
+					defaults.monthIdent = 'month0' + n;
 					defaults.month = n;					
 				}			
 			}
@@ -265,11 +265,11 @@ $(document).ready(function() {
 		
 		
 		if ( 1 == $( '#disablePrevDate' ).val( ) ){
-			$( '#disablePrevDate' ).val(0)
+			$( '#disablePrevDate' ).val(0);
 			$("#disablePrevDate").removeAttr('checked');
 			trashapp.init({'disableDates' : false});
 		} else {
-			$( '#disablePrevDate' ).val(1)
+			$( '#disablePrevDate' ).val(1);
 			$("#disablePrevDate").attr( "checked", "checked" );
 			var d = new Date();
 			trashapp.init({'disableDates' : true }); 

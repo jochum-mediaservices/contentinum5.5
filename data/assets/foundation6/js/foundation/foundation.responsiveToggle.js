@@ -20,7 +20,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {jQuery} element - jQuery object to attach tab bar functionality to.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function ResponsiveToggle(element, options) {
       _classCallCheck(this, ResponsiveToggle);
 
@@ -50,6 +49,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$targetMenu = $('#' + targetID);
         this.$toggler = this.$element.find('[data-toggle]');
+        this.options = $.extend({}, this.options, this.$targetMenu.data());
+
+        // If they were set, parse the animation classes
+        if (this.options.animate) {
+          var input = this.options.animate.split(' ');
+
+          this.animationIn = input[0];
+          this.animationOut = input[1] || null;
+        }
 
         this._update();
       }
@@ -103,14 +111,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'toggleMenu',
       value: function toggleMenu() {
-        if (!Foundation.MediaQuery.atLeast(this.options.hideFor)) {
-          this.$targetMenu.toggle(0);
+        var _this2 = this;
 
-          /**
-           * Fires when the element attached to the tab bar toggles.
-           * @event ResponsiveToggle#toggled
-           */
-          this.$element.trigger('toggled.zf.responsiveToggle');
+        if (!Foundation.MediaQuery.atLeast(this.options.hideFor)) {
+          if (this.options.animate) {
+            if (this.$targetMenu.is(':hidden')) {
+              Foundation.Motion.animateIn(this.$targetMenu, this.animationIn, function () {
+                /**
+                 * Fires when the element attached to the tab bar toggles.
+                 * @event ResponsiveToggle#toggled
+                 */
+                _this2.$element.trigger('toggled.zf.responsiveToggle');
+                _this2.$targetMenu.find('[data-mutate]').triggerHandler('mutateme.zf.trigger');
+              });
+            } else {
+              Foundation.Motion.animateOut(this.$targetMenu, this.animationOut, function () {
+                /**
+                 * Fires when the element attached to the tab bar toggles.
+                 * @event ResponsiveToggle#toggled
+                 */
+                _this2.$element.trigger('toggled.zf.responsiveToggle');
+              });
+            }
+          } else {
+            this.$targetMenu.toggle(0);
+            this.$targetMenu.find('[data-mutate]').trigger('mutateme.zf.trigger');
+
+            /**
+             * Fires when the element attached to the tab bar toggles.
+             * @event ResponsiveToggle#toggled
+             */
+            this.$element.trigger('toggled.zf.responsiveToggle');
+          }
         }
       }
     }, {
@@ -134,7 +166,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @option
      * @example 'medium'
      */
-    hideFor: 'medium'
+    hideFor: 'medium',
+
+    /**
+     * To decide if the toggle should be animated or not.
+     * @option
+     * @example false
+     */
+    animate: false
   };
 
   // Window exports

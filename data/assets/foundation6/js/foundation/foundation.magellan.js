@@ -19,7 +19,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} element - jQuery object to add the trigger to.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function Magellan(element, options) {
       _classCallCheck(this, Magellan);
 
@@ -27,6 +26,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.options = $.extend({}, Magellan.defaults, this.$element.data(), options);
 
       this._init();
+      this.calcPoints();
 
       Foundation.registerPlugin(this, 'Magellan');
     }
@@ -112,6 +112,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var arrival = this.getAttribute('href');
           _this.scrollToLoc(arrival);
         });
+        $(window).on('popstate', function (e) {
+          if (_this.options.deepLinking) {
+            _this.scrollToLoc(window.location.hash);
+          }
+        });
       }
 
       /**
@@ -123,9 +128,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'scrollToLoc',
       value: function scrollToLoc(loc) {
-        var scrollPos = Math.round($(loc).offset().top - this.options.threshold / 2 - this.options.barOffset);
+        // Do nothing if target does not exist to prevent errors
+        if (!$(loc).length) {
+          return false;
+        }
+        this._inTransition = true;
+        var _this = this,
+            scrollPos = Math.round($(loc).offset().top - this.options.threshold / 2 - this.options.barOffset);
 
-        $('html, body').stop(true).animate({ scrollTop: scrollPos }, this.options.animationDuration, this.options.animationEasing);
+        $('html, body').stop(true).animate({ scrollTop: scrollPos }, this.options.animationDuration, this.options.animationEasing, function () {
+          _this._inTransition = false;_this._updateActive();
+        });
       }
 
       /**
@@ -150,13 +163,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_updateActive',
       value: function _updateActive() /*evt, elem, scrollPos*/{
+        if (this._inTransition) {
+          return;
+        }
         var winPos = /*scrollPos ||*/parseInt(window.pageYOffset, 10),
             curIdx;
 
         if (winPos + this.winHeight === this.docHeight) {
           curIdx = this.points.length - 1;
         } else if (winPos < this.points[0]) {
-          curIdx = 0;
+          curIdx = undefined;
         } else {
           var isDown = this.scrollPos < winPos,
               _this = this,
@@ -167,14 +183,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         this.$active.removeClass(this.options.activeClass);
-        this.$active = this.$links.eq(curIdx).addClass(this.options.activeClass);
+        this.$active = this.$links.filter('[href="#' + this.$targets.eq(curIdx).data('magellan-target') + '"]').addClass(this.options.activeClass);
 
         if (this.options.deepLinking) {
-          var hash = this.$active[0].getAttribute('href');
-          if (window.history.pushState) {
-            window.history.pushState(null, null, hash);
-          } else {
-            window.location.hash = hash;
+          var hash = "";
+          if (curIdx != undefined) {
+            hash = this.$active[0].getAttribute('href');
+          }
+          if (hash !== window.location.hash) {
+            if (window.history.pushState) {
+              window.history.pushState(null, null, hash);
+            } else {
+              window.location.hash = hash;
+            }
           }
         }
 

@@ -1,22 +1,31 @@
 .label {
   display: inline-block;
   padding: 0.33333rem 0.5rem;
+  border-radius: 0px;
   font-size: 0.8rem;
   line-height: 1;
   white-space: nowrap;
   cursor: default;
-  border-radius: 0;
-  background: #2199e8;
+  background: #2ba6cb;
   color: #fefefe; }
+  .label.primary {
+    background: #2ba6cb;
+    color: #0a0a0a; }
   .label.secondary {
-    background: #777;
+    background: #e9e9e9;
+    color: #0a0a0a; }
+  .label.alert {
+    background: #c60f13;
     color: #fefefe; }
   .label.success {
-    background: #3adb76;
-    color: #fefefe; }
+    background: #5da423;
+    color: #0a0a0a; }
   .label.warning {
     background: #ffae00;
+    color: #0a0a0a; }
+  .label.body-font {
+    background: #222222;
     color: #fefefe; }
-  .label.alert {
-    background: #ec5840;
+  .label.header {
+    background: #222222;
     color: #fefefe; }

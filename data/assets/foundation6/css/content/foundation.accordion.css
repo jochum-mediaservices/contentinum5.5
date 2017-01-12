@@ -1,40 +1,40 @@
 .accordion {
-  list-style-type: none;
+  margin-left: 0;
   background: #fefefe;
-  margin-left: 0; }
+  list-style-type: none; }
 
 .accordion-item:first-child > :first-child {
-  border-radius: 0 0 0 0; }
+  border-radius: 0px 0px 0 0; }
 
 .accordion-item:last-child > :last-child {
-  border-radius: 0 0 0 0; }
+  border-radius: 0 0 0px 0px; }
 
 .accordion-title {
+  position: relative;
   display: block;
   padding: 1.25rem 1rem;
-  line-height: 1;
-  font-size: 0.75rem;
-  color: #2199e8;
-  position: relative;
   border: 1px solid #e6e6e6;
-  border-bottom: 0; }
+  border-bottom: 0;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: #2ba6cb; }
   :last-child:not(.is-active) > .accordion-title {
-    border-radius: 0 0 0 0;
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: 0 0 0px 0px; }
   .accordion-title:hover, .accordion-title:focus {
     background-color: #e6e6e6; }
   .accordion-title::before {
-    content: '+';
     position: absolute;
-    right: 1rem;
     top: 50%;
-    margin-top: -0.5rem; }
+    right: 1rem;
+    margin-top: -0.5rem;
+    content: '+'; }
   .is-active > .accordion-title::before {
     content: '–'; }
 
 .accordion-content {
-  padding: 1rem;
   display: none;
+  padding: 1rem;
   border: 1px solid #e6e6e6;
   border-bottom: 0;
   background-color: #fefefe;
@@ -45,23 +45,21 @@
 .is-accordion-submenu-parent > a {
   position: relative; }
   .is-accordion-submenu-parent > a::after {
-    content: '';
     display: block;
     width: 0;
     height: 0;
     border: inset 6px;
-    border-color: #2199e8 transparent transparent;
-    border-top-style: solid;
+    content: '';
     border-bottom-width: 0;
+    border-top-style: solid;
+    border-color: #2ba6cb transparent transparent;
     position: absolute;
     top: 50%;
-    margin-top: -4px;
+    margin-top: -3px;
     right: 1rem; }
 
 .is-accordion-submenu-parent[aria-expanded='true'] > a::after {
-  -webkit-transform-origin: 50% 50%;
-      -ms-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-  -webkit-transform: scaleY(-1);
-      -ms-transform: scaleY(-1);
-          transform: scaleY(-1); }
+  -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+  -ms-transform-origin: 50% 50%;
+      transform-origin: 50% 50%; }

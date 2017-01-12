@@ -1,25 +1,36 @@
 .callout {
+  position: relative;
   margin: 0 0 1rem 0;
   padding: 1rem;
   border: 1px solid rgba(10, 10, 10, 0.25);
-  border-radius: 0;
-  position: relative;
-  color: #0a0a0a;
-  background-color: white; }
+  border-radius: 0px;
+  background-color: white;
+  color: #0a0a0a; }
   .callout > :first-child {
     margin-top: 0; }
   .callout > :last-child {
     margin-bottom: 0; }
   .callout.primary {
-    background-color: #def0fc; }
+    background-color: #def2f8;
+    color: #0a0a0a; }
   .callout.secondary {
-    background-color: #ebebeb; }
-  .callout.success {
-    background-color: #e1faea; }
-  .callout.warning {
-    background-color: #fff3d9; }
+    background-color: #fcfcfc;
+    color: #0a0a0a; }
   .callout.alert {
-    background-color: #fce6e2; }
+    background-color: #fcd6d6;
+    color: #0a0a0a; }
+  .callout.success {
+    background-color: #e6f7d9;
+    color: #0a0a0a; }
+  .callout.warning {
+    background-color: #fff3d9;
+    color: #0a0a0a; }
+  .callout.body-font {
+    background-color: #dedede;
+    color: #0a0a0a; }
+  .callout.header {
+    background-color: #dedede;
+    color: #0a0a0a; }
   .callout.small {
     padding-top: 0.5rem;
     padding-right: 0.5rem;
@@ -34,12 +45,18 @@
 .close-button {
   position: absolute;
   color: #8a8a8a;
-  right: 1rem;
-  top: 0.5rem;
-  font-size: 2em;
-  line-height: 1;
   cursor: pointer; }
   [data-whatinput='mouse'] .close-button {
     outline: 0; }
   .close-button:hover, .close-button:focus {
     color: #0a0a0a; }
+  .close-button.small {
+    right: 0.66rem;
+    top: 0.33em;
+    font-size: 1.5em;
+    line-height: 1; }
+  .close-button, .close-button.medium {
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 2em;
+    line-height: 1; }

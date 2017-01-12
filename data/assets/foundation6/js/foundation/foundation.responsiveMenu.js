@@ -24,7 +24,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {jQuery} element - jQuery object to make into a dropdown menu.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function ResponsiveMenu(element, options) {
       _classCallCheck(this, ResponsiveMenu);
 
@@ -73,6 +72,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (!$.isEmptyObject(this.rules)) {
           this._checkMediaQueries();
         }
+        // Add data-mutate since children may need it.
+        this.$element.attr('data-mutate', this.$element.attr('data-mutate') || Foundation.GetYoDigits(6, 'responsive-menu'));
       }
 
       /**

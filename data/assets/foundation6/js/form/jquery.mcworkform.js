@@ -27,14 +27,13 @@
 			panelSucess : 'callout success',
 			panelTag : 'div',
 			panelBootstrap : false,
+			bottonIdent : '#send',
 			
 		},
 		
 		setDefaults: function( options ) {
 			$.extend( this.defaults, options );
 		},	
-		
-		
 		
 		FormValidation : function (form){
 			var formFieldError = false;	
@@ -68,7 +67,12 @@
 	    	
 	    	if (false === formFieldError){
 	    		if (true === this.defaults.async){
-	    			$().FormHandler(form);
+	    			$(form).submit( function(ev){
+	    				ev.preventDefault();
+	    				ev.stopPropagation();
+	    				$().FormHandler(form);
+	    				
+	    			} );
 	    		} else {
 	    			$(form).submit();
 	    		}
@@ -77,6 +81,7 @@
 		
 		FormHandler : function (form){
 			this.defaults.formAction = $(form).attr('action');
+			var buttonIdent = this.defaults.bottonIdent;
 			var formData = $(form).serialize();	
 			if (false !== this.defaults.formIdent){
 				formData += '&' + this.defaults.formIdent + '=' + $(form).attr('data-' + this.defaults.formIdent);
@@ -86,10 +91,14 @@
 					url : this.defaults.formAction,
 					type : this.defaults.formMethod,
 					data : formData,	
-					beforeSend : function(){
+					beforeSend : function(){	
+						$(buttonIdent).addClass('disabled');
+						$(buttonIdent).val('Bitte warten ...');
 						$().BeforeSendPanel();						
 					},	
 					error : function (argument) {
+						$(buttonIdent).removeClass('disabled');
+						$(buttonIdent).val('Senden');
 						$().FormErrorPanel();
 					},
 					success : function(data) {
@@ -97,7 +106,10 @@
 						if (obj.success){
 							$('.server-process').html('');
 							$().FormSuccessPanel(obj.success);
-						} else if (obj.error) {							
+							delete form;
+						} else if (obj.error) {		
+							$(buttonIdent).removeClass('disabled');		
+							$(buttonIdent).val('Senden');		
 							$().FieldErrorPanel();
 							$.each(obj.error.fields, function(index, messages) {
 								$.each(messages, function(mIndex, message) {

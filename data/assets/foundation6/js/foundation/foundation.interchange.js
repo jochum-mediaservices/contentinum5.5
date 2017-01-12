@@ -21,7 +21,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} element - jQuery object to add the trigger to.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function Interchange(element, options) {
       _classCallCheck(this, Interchange);
 
@@ -60,7 +59,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_events',
       value: function _events() {
-        $(window).on('resize.zf.interchange', Foundation.util.throttle(this._reflow.bind(this), 50));
+        var _this2 = this;
+
+        $(window).on('resize.zf.interchange', Foundation.util.throttle(function () {
+          _this2._reflow();
+        }, 50));
       }
 
       /**
@@ -78,7 +81,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         for (var i in this.rules) {
           if (this.rules.hasOwnProperty(i)) {
             var rule = this.rules[i];
-
             if (window.matchMedia(rule.query).matches) {
               match = rule;
             }
@@ -164,7 +166,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // Replacing images
         if (this.$element[0].nodeName === 'IMG') {
-          this.$element.attr('src', path).load(function () {
+          this.$element.attr('src', path).on('load', function () {
             _this.currentPath = path;
           }).trigger(trigger);
         }

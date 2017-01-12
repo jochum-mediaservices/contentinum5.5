@@ -1,8 +1,8 @@
 .top-bar {
   padding: 0.5rem; }
   .top-bar::before, .top-bar::after {
-    content: ' ';
-    display: table; }
+    display: table;
+    content: ' '; }
   .top-bar::after {
     clear: both; }
   .top-bar,
@@ -19,7 +19,7 @@
   .top-bar .top-bar-left,
   .top-bar .top-bar-right {
     width: 100%; }
-  @media screen and (min-width: 40em) {
+  @media print, screen and (min-width: 40em) {
     .top-bar .top-bar-left,
     .top-bar .top-bar-right {
       width: auto; } }
@@ -33,8 +33,11 @@
       width: 100%; } }
 
 .top-bar-title {
+  display: inline-block;
   float: left;
-  margin-right: 1rem; }
+  padding: 0.5rem 1rem 0.5rem 0; }
+  .top-bar-title .menu-icon {
+    bottom: 2px; }
 
 .top-bar-left {
   float: left; }

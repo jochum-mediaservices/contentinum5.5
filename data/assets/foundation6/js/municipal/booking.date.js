@@ -1,11 +1,8 @@
 $(document).ready(function() {
 	//'use strict';
-
 	$('body').append('<div class="small reveal" id="bookingModal" data-close-on-click="true" data-reveal> </div>');
-
 	$(document.body).on('click', '.calendar-day-btn', function(ev) {
 		ev.preventDefault();
-
 		var selected = $("input[type='radio'][name='servicebooking']:checked");
 		if (selected.length == 0) {
 			var modalHtml = '<h2><i class="fa fa-exclamation-triangle" aria-hidden="true"> </i> Auswahl fehlt</h2>';
@@ -22,11 +19,9 @@ $(document).ready(function() {
 			var modalHtml = '<h2>Termin buchen f&uuml;r den ' + displayDate[2] + '.' + displayDate[1] + '.' + displayDate[0] +  '</h2>';
 			modalHtml += '<div class="server-process"> </div>';
 			modalHtml += '<div id="orderform"><form id="mcworkForm" action="/municipal/public/appointments" accept-charset="UTF-8"  action="/"><div class="row"><fieldset  id="fieldoccupancyStart" class="large-4 columns"><legend>Uhrzeit ausw&auml;hlen</legend>';
-
 			$.each(bookingtime.split(';'), function(key, value) {
 				modalHtml += '<p class="formElement"><label><input type="radio" name="occupancyStart" value="' + bookingday + ' ' + value + '"> ' + value + ' Uhr</label> </p>';
 			});
-
 			modalHtml += '</fieldset><fieldset class="large-8 columns"><legend>Ihre Kontakdaten</legend>';
 			modalHtml += '<p id="fieldtitle" class="formElement"><label>Anrede</label>';
 			modalHtml += '<select id="title" required="required" name="title"><option value="Frau">Frau</option><option value="Herr">Herr</option></select></p>';
@@ -42,30 +37,19 @@ $(document).ready(function() {
 			modalHtml += '<input id="service" class="elm" type="hidden" value="'+ service +'" required="required" name="service">';
 			modalHtml += '<input id="business" class="elm" type="hidden" value="'+ business +'" required="required" name="business">';
 			modalHtml += '</fieldset></div></form><div>';
-			//modalHtml += '<p><input id="sendantrag" class="button expanded submitthisform" type="submit" name="send" value="Termin buchen"></p>';
 			modalHtml += '<button class="close-button" data-close aria-label="Close Accessible Modal" type="button"><span aria-hidden="true">&times;</span></button>';
-
 			var $modal = new Foundation.Reveal($('#bookingModal').html(modalHtml));
 			$modal.open();
-
 			$("#mcworkForm").validate({
 				submitHandler : function(form) {
 					$().setDefaults({
 						formIdent : false,
-						formResultSelector : '#orderform'
+						formResultSelector : '#orderform',
+						bottonIdent : '#sendantrag',
 					});
 					$().FormHandler(form);
 				}
 			});
-			/*
-			$(document.body).on('click', '#sendantrag', function(ev) {
-				ev.preventDefault();
-				ev.stopPropagation();
-				$("#mcworkForm").submit();
-			});*/
-
 		}
-
 	});
-
 }); 

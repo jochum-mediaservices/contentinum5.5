@@ -17,12 +17,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var Slider = function () {
     /**
-     * Creates a new instance of a drilldown menu.
+     * Creates a new instance of a slider control.
      * @class
-     * @param {jQuery} element - jQuery object to make into an accordion menu.
+     * @param {jQuery} element - jQuery object to make into a slider control.
      * @param {Object} options - Overrides to the default plugin settings.
      */
-
     function Slider(element, options) {
       _classCallCheck(this, Slider);
 
@@ -79,8 +78,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.inputs = $().add(this.$input);
           this.options.binding = true;
         }
+
         this._setInitAttr(0);
-        this._events(this.$handle);
 
         if (this.handles[1]) {
           this.options.doubleSided = true;
@@ -92,18 +91,100 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           isDbl = true;
 
-          this._setHandlePos(this.$handle, this.options.initialStart, true, function () {
-
-            _this._setHandlePos(_this.$handle2, _this.options.initialEnd, true);
-          });
           // this.$handle.triggerHandler('click.zf.slider');
           this._setInitAttr(1);
-          this._events(this.$handle2);
         }
 
-        if (!isDbl) {
-          this._setHandlePos(this.$handle, this.options.initialStart, true);
+        // Set handle positions
+        this.setHandles();
+
+        this._events();
+      }
+    }, {
+      key: 'setHandles',
+      value: function setHandles() {
+        var _this2 = this;
+
+        if (this.handles[1]) {
+          this._setHandlePos(this.$handle, this.inputs.eq(0).val(), true, function () {
+            _this2._setHandlePos(_this2.$handle2, _this2.inputs.eq(1).val(), true);
+          });
+        } else {
+          this._setHandlePos(this.$handle, this.inputs.eq(0).val(), true);
         }
+      }
+    }, {
+      key: '_reflow',
+      value: function _reflow() {
+        this.setHandles();
+      }
+      /**
+      * @function
+      * @private
+      * @param {Number} value - floating point (the value) to be transformed using to a relative position on the slider (the inverse of _value)
+      */
+
+    }, {
+      key: '_pctOfBar',
+      value: function _pctOfBar(value) {
+        var pctOfBar = percent(value - this.options.start, this.options.end - this.options.start);
+
+        switch (this.options.positionValueFunction) {
+          case "pow":
+            pctOfBar = this._logTransform(pctOfBar);
+            break;
+          case "log":
+            pctOfBar = this._powTransform(pctOfBar);
+            break;
+        }
+
+        return pctOfBar.toFixed(2);
+      }
+
+      /**
+      * @function
+      * @private
+      * @param {Number} pctOfBar - floating point, the relative position of the slider (typically between 0-1) to be transformed to a value
+      */
+
+    }, {
+      key: '_value',
+      value: function _value(pctOfBar) {
+        switch (this.options.positionValueFunction) {
+          case "pow":
+            pctOfBar = this._powTransform(pctOfBar);
+            break;
+          case "log":
+            pctOfBar = this._logTransform(pctOfBar);
+            break;
+        }
+        var value = (this.options.end - this.options.start) * pctOfBar + this.options.start;
+
+        return value;
+      }
+
+      /**
+      * @function
+      * @private
+      * @param {Number} value - floating point (typically between 0-1) to be transformed using the log function
+      */
+
+    }, {
+      key: '_logTransform',
+      value: function _logTransform(value) {
+        return baseLog(this.options.nonLinearBase, value * (this.options.nonLinearBase - 1) + 1);
+      }
+
+      /**
+      * @function
+      * @private
+      * @param {Number} value - floating point (typically between 0-1) to be transformed using the power function
+      */
+
+    }, {
+      key: '_powTransform',
+      value: function _powTransform(value) {
+        return (Math.pow(this.options.nonLinearBase, value) - 1) / (this.options.nonLinearBase - 1);
       }
 
       /**
@@ -161,7 +242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             elemDim = this.$element[0].getBoundingClientRect()[hOrW],
 
         //percentage of bar min/max value based on click or drag point
-        pctOfBar = percent(location - this.options.start, this.options.end - this.options.start).toFixed(2),
+        pctOfBar = this._pctOfBar(location),
 
         //number of actual pixels to shift the handle, based on the percentage obtained above
         pxToMove = (elemDim - handleDim) * pctOfBar,
@@ -183,7 +264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           dim,
 
           //percentage w/h of the handle compared to the slider bar
-          handlePct = ~ ~(percent(handleDim, elemDim) * 100);
+          handlePct = ~~(percent(handleDim, elemDim) * 100);
           //if left handle, the math is slightly different than if it's the right handle, and the left/top property needs to be changed for the fill bar
           if (isLeftHndl) {
             //left or top percentage value to apply to the fill bar.
@@ -196,12 +277,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               cb();
             } //this is only needed for the initialization of 2 handled sliders
           } else {
-              //just caching the value of the left/bottom handle's left/top property
-              var handlePos = parseFloat(this.$handle[0].style[lOrT]);
-              //calculate the new min-height/width for the fill bar. Use isNaN to prevent false positives for numbers <= 0
-              //based on the percentage of movement of the handle being manipulated, less the opposing handle's left/top position, plus the percentage w/h of the handle itself
-              dim = movement - (isNaN(handlePos) ? this.options.initialStart / ((this.options.end - this.options.start) / 100) : handlePos) + handlePct;
-            }
+            //just caching the value of the left/bottom handle's left/top property
+            var handlePos = parseFloat(this.$handle[0].style[lOrT]);
+            //calculate the new min-height/width for the fill bar. Use isNaN to prevent false positives for numbers <= 0
+            //based on the percentage of movement of the handle being manipulated, less the opposing handle's left/top position, plus the percentage w/h of the handle itself
+            dim = movement - (isNaN(handlePos) ? (this.options.initialStart - this.options.start) / ((this.options.end - this.options.start) / 100) : handlePos) + handlePct;
+          }
           // assign the min-height/width to our css object
           css['min-' + hOrW] = dim + '%';
         }
@@ -218,8 +299,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var moveTime = this.$element.data('dragging') ? 1000 / 60 : this.options.moveTime;
 
         Foundation.Move(moveTime, $hndl, function () {
-          //adjusting the left/top property of the handle, based on the percentage calculated above
-          $hndl.css(lOrT, movement + '%');
+          // adjusting the left/top property of the handle, based on the percentage calculated above
+          // if movement isNaN, that is because the slider is hidden and we cannot determine handle width,
+          // fall back to next best guess.
+          if (isNaN(movement)) {
+            $hndl.css(lOrT, pctOfBar * 100 + '%');
+          } else {
+            $hndl.css(lOrT, movement + '%');
+          }
 
           if (!_this.options.doubleSided) {
             //if single-handled, a simple method to expand the fill bar
@@ -250,6 +337,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_setInitAttr',
       value: function _setInitAttr(idx) {
+        var initVal = idx === 0 ? this.options.initialStart : this.options.initialEnd;
         var id = this.inputs.eq(idx).attr('id') || Foundation.GetYoDigits(6, 'slider');
         this.inputs.eq(idx).attr({
           'id': id,
@@ -257,12 +345,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           'min': this.options.start,
           'step': this.options.step
         });
+        this.inputs.eq(idx).val(initVal);
         this.handles.eq(idx).attr({
           'role': 'slider',
           'aria-controls': id,
           'aria-valuemax': this.options.end,
           'aria-valuemin': this.options.start,
-          'aria-valuenow': idx === 0 ? this.options.initialStart : this.options.initialEnd,
+          'aria-valuenow': initVal,
           'aria-orientation': this.options.vertical ? 'vertical' : 'horizontal',
           'tabindex': 0
         });
@@ -328,9 +417,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             barXY = eventFromBar;
           }
-          offsetPct = percent(barXY, barDim);
+          var offsetPct = percent(barXY, barDim);
 
-          value = (this.options.end - this.options.start) * offsetPct + this.options.start;
+          value = this._value(offsetPct);
 
           // turn everything around for RTL, yay math!
           if (Foundation.rtl() && !this.options.vertical) {
@@ -392,12 +481,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * Adds event listeners to the slider elements.
        * @function
        * @private
-       * @param {jQuery} $handle - the current handle to apply listeners to.
        */
 
     }, {
       key: '_events',
-      value: function _events($handle) {
+      value: function _events() {
+        this._eventsForHandle(this.$handle);
+        if (this.handles[1]) {
+          this._eventsForHandle(this.$handle2);
+        }
+      }
+
+      /**
+       * Adds event listeners a particular handle
+       * @function
+       * @private
+       * @param {jQuery} $handle - the current handle to apply listeners to.
+       */
+
+    }, {
+      key: '_eventsForHandle',
+      value: function _eventsForHandle($handle) {
         var _this = this,
             curHandle,
             timer;
@@ -496,6 +600,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.handles.off('.zf.slider');
         this.inputs.off('.zf.slider');
         this.$element.off('.zf.slider');
+
+        clearTimeout(this.timeout);
 
         Foundation.unregisterPlugin(this);
       }
@@ -608,7 +714,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @option
      * @example 500
      */
-    changedDelay: 500
+    changedDelay: 500,
+    /**
+    * Basevalue for non-linear sliders
+    * @option
+    * @example 5
+    */
+    nonLinearBase: 5,
+    /**
+    * Basevalue for non-linear sliders, possible values are: 'linear', 'pow' & 'log'. Pow and Log use the nonLinearBase setting.
+    * @option
+    * @example 'linear'
+    */
+    positionValueFunction: 'linear'
   };
 
   function percent(frac, num) {
@@ -616,6 +734,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
   function absPosition($handle, dir, clickPos, param) {
     return Math.abs($handle.position()[dir] + $handle[param]() / 2 - clickPos);
+  }
+  function baseLog(base, value) {
+    return Math.log(value) / Math.log(base);
   }
 
   // Window exports

@@ -1,21 +1,30 @@
 .badge {
   display: inline-block;
-  padding: 0.3em;
   min-width: 2.1em;
+  padding: 0.3em;
+  border-radius: 50%;
   font-size: 0.6rem;
   text-align: center;
-  border-radius: 50%;
-  background: #2199e8;
+  background: #2ba6cb;
   color: #fefefe; }
+  .badge.primary {
+    background: #2ba6cb;
+    color: #0a0a0a; }
   .badge.secondary {
-    background: #777;
+    background: #e9e9e9;
+    color: #0a0a0a; }
+  .badge.alert {
+    background: #c60f13;
     color: #fefefe; }
   .badge.success {
-    background: #3adb76;
-    color: #fefefe; }
+    background: #5da423;
+    color: #0a0a0a; }
   .badge.warning {
     background: #ffae00;
+    color: #0a0a0a; }
+  .badge.body-font {
+    background: #222222;
     color: #fefefe; }
-  .badge.alert {
-    background: #ec5840;
+  .badge.header {
+    background: #222222;
     color: #fefefe; }

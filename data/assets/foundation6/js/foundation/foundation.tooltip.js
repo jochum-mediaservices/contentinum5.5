@@ -10,6 +10,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * Tooltip module.
    * @module foundation.tooltip
    * @requires foundation.util.box
+   * @requires foundation.util.mediaQuery
    * @requires foundation.util.triggers
    */
 
@@ -21,7 +22,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {jQuery} element - jQuery object to attach a tooltip to.
      * @param {Object} options - object to extend the default configuration.
      */
-
     function Tooltip(element, options) {
       _classCallCheck(this, Tooltip);
 
@@ -50,7 +50,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.options.tipText = this.options.tipText || this.$element.attr('title');
         this.template = this.options.template ? $(this.options.template) : this._buildTemplate(elemId);
 
-        this.template.appendTo(document.body).text(this.options.tipText).hide();
+        if (this.options.allowHtml) {
+          this.template.appendTo(document.body).html(this.options.tipText).hide();
+        } else {
+          this.template.appendTo(document.body).text(this.options.tipText).hide();
+        }
 
         this.$element.attr({
           'title': '',
@@ -58,7 +62,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           'data-yeti-box': elemId,
           'data-toggle': elemId,
           'data-resize': elemId
-        }).addClass(this.triggerClass);
+        }).addClass(this.options.triggerClass);
 
         //helper variables to track movement on collisions
         this.usedPositions = [];
@@ -187,7 +191,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'show',
       value: function show() {
-        if (this.options.showOn !== 'all' && !Foundation.MediaQuery.atLeast(this.options.showOn)) {
+        if (this.options.showOn !== 'all' && !Foundation.MediaQuery.is(this.options.showOn)) {
           // console.error('The screen is too small to display this tooltip');
           return false;
         }
@@ -286,11 +290,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //_this.hide();
               // _this.isClick = false;
             } else {
-                _this.isClick = true;
-                if ((_this.options.disableHover || !_this.$element.attr('tabindex')) && !_this.isActive) {
-                  _this.show();
-                }
+              _this.isClick = true;
+              if ((_this.options.disableHover || !_this.$element.attr('tabindex')) && !_this.isActive) {
+                _this.show();
               }
+            }
           });
         } else {
           this.$element.on('mousedown.zf.tooltip', function (e) {
@@ -357,9 +361,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'destroy',
       value: function destroy() {
-        this.$element.attr('title', this.template.text()).off('.zf.trigger .zf.tootip')
-        //  .removeClass('has-tip')
-        .removeAttr('aria-describedby').removeAttr('data-yeti-box').removeAttr('data-toggle').removeAttr('data-resize');
+        this.$element.attr('title', this.template.text()).off('.zf.trigger .zf.tooltip').removeClass('has-tip top right left').removeAttr('aria-describedby aria-haspopup data-disable-hover data-resize data-toggle data-tooltip data-yeti-box');
 
         this.template.remove();
 
@@ -456,7 +458,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @option
      * @example 12
      */
-    hOffset: 12
+    hOffset: 12,
+    /**
+    * Allow HTML in tooltip. Warning: If you are loading user-generated content into tooltips,
+    * allowing HTML may open yourself up to XSS attacks.
+    * @option
+    * @example false
+    */
+    allowHtml: false
   };
 
   /**
