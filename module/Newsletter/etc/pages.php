@@ -355,14 +355,9 @@ return array(
         'resource' => 'publisherresource',
         'app' => array(
             'controller' => 'Mcwork\Controller\DeleteController',
-            'worker' => 'Newsletter\Model\Tags\DeleteUser',
+            'worker' => 'Newsletter\Model\Users\DeleteUser',
             'entity' => 'Newsletter\Entity\NewsletterUsers',
-            'hasEntries' => array(
-                'webPages' => array(
-                    'tablename' => 'Contentinum\Entity\WebPagesContent',
-                    'column' => 'webPages'
-                ),
-            ),
+
     
             'settoroute' => '/mcwork/pages'
         )
