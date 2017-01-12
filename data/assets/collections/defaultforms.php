@@ -58,7 +58,7 @@ return array(
             ),
             'assets' => array(
                 '/js/vendor/jquery.js',
-                '/js/form/jquery.validate.js',
+                '/js/form/jquery.validate.v1.5.js',
                 '/js/form/jquery.mcworkform.js',
                 '/js/foundation.js',
                 '/js/foundation/foundation.topbar.js',
