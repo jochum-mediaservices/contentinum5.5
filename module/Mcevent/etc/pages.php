@@ -318,6 +318,16 @@ return array(
             'formdecorators' => 'mcwork_form_decorators',
             'form' => 'Mcevent\Form\Dates',
             'formaction' => '/mcevent/eventdate/add',
+            'formattributes' => array(
+                'data-rules' => 'eventdates',
+                'data-process' => 'add',
+                'data-editor' => 'tinymce',
+            ),            
+            'formbuttons' => array(
+                'save' => array(),
+                'saveplus' => array(),
+                'cancel' => array('label' => 'Cancel', 'attribs' => array('data-back' => '' )),
+            ),
             'populate' => array(
                 'account' => '1',
                 'organizerId' => '1',
@@ -826,6 +836,38 @@ return array(
             'controller' => 'Mcwork\Controller\McworkController',
             'worker' => 'Municipal\Mapper\Trash\OrderDownloads',
             'entity' => 'Municipal\Entity\TrashOrders',
+        )
+    
+    ),    
+    
+    '/mcevent/download/calendar' => array(
+        'resource' => 'index',
+        'template' => 'content/download/ics',
+        'app' => array(
+            'controller' => 'Mcevent\Controller\DownloadsController',
+            'worker' => 'Mcevent\Mapper\Download\Calendar',
+            'entity' => 'Mcevent\Entity\MceventDates',
+        )
+    
+    ), 
+    
+    '/mcevent/download/calendargroup' => array(
+        'resource' => 'index',
+        'template' => 'content/download/ics',
+        'app' => array(
+            'controller' => 'Mcevent\Controller\DownloadsController',
+            'worker' => 'Mcevent\Mapper\Download\Group',
+            'entity' => 'Mcevent\Entity\MceventDates',
+        )
+    
+    ),  
+    '/mcevent/download/calendarunits' => array(
+        'resource' => 'index',
+        'template' => 'content/download/csv',
+        'app' => array(
+            'controller' => 'Mcevent\Controller\DownloadsController',
+            'worker' => 'Mcevent\Mapper\Download\Units',
+            'entity' => 'Mcevent\Entity\MceventDates',
         )
     
     ),    

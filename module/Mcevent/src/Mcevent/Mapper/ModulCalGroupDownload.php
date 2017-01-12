@@ -17,7 +17,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category Mcevent
- * @package Model
+ * @package Mapper
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
  * @license http://www.opensource.org/licenses/bsd-license
@@ -25,32 +25,31 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Mcevent\Model\Events;
-
-use ContentinumComponents\Mapper\Process;
+namespace Mcevent\Mapper;
 
 
-class SaveDates extends Process
+
+
+use Contentinum\Mapper\AbstractModuls;
+
+class ModulCalGroupDownload extends AbstractModuls
 {
-   
     /**
-     * Prepare datas before save
+     * (non-PHPdoc)
      *
-     * @see \ContentinumComponents\Mapper\Process::save()
+     * @see \Contentinum\Mapper\AbstractModuls::fetchContent()
      */
-    public function save($datas, $entity = null, $stage = '', $id = null)
+    public function fetchContent(array $params = null)
     {
-        if (null === $entity->getPrimaryValue()) {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }
-            parent::save($datas, $entity, $stage, $id);
-        } else {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }            
-            parent::save($datas, $entity, $stage, $id);
-        }
-        return true;
-    }    
+        return $this->query($this->configure['modulParams']);
+    }
+    
+    /**
+     *
+     * @param unknown $id
+     */
+    private function query($id)
+    {
+        return $this->fetchRow("SELECT * FROM mcevent_group WHERE id = {$id};");
+    }
 }

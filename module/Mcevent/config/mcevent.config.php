@@ -26,6 +26,8 @@ return array(
              'mcevent_actual_groupdates' => 'Mcevent\Factory\Mapper\ModulActualGroupDatesFactory',
              'mcevent_actual_groupbyday' => 'Mcevent\Factory\Mapper\ModulActualGroupByDayFactory',
              'mcevent_event_navigation' => 'Mcevent\Factory\Mapper\ModulNavigationFactory',
+             'mcevent_calc_download' => 'Mcevent\Factory\Mapper\ModulCalendarDownloadFactory',
+             'mcevent_calgrp_download' => 'Mcevent\Factory\Mapper\ModulCalGroupDownloadFactory',
              
              'mcevent_event_datesregister' => 'Mcevent\Factory\Mapper\ModulActualDatesRegisterFactory',
              'mcevent_event_datesregistergrp' => 'Mcevent\Factory\Mapper\ModulActualGroupDatesFactory',             
@@ -58,6 +60,7 @@ return array(
         'etc_cfg_files' => array(
             'app_plugins' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/plugins.php'),
             'app_plugin_templates' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/templates/plugins'),
+            'mcwork_form_rules' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/form/rules.php'),
             'mcwork_navigation' => array(__NAMESPACE__ => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/navigation.php'),
     
         ),

@@ -17,7 +17,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category Mcevent
- * @package Model
+ * @package View
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
  * @license http://www.opensource.org/licenses/bsd-license
@@ -25,32 +25,31 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Mcevent\Model\Events;
+namespace Mcevent\View\Helper\Download;
 
-use ContentinumComponents\Mapper\Process;
+use Mcevent\View\Helper\Event\Parameter;
 
-
-class SaveDates extends Process
+class Group extends Parameter
 {
-   
+
     /**
-     * Prepare datas before save
      *
-     * @see \ContentinumComponents\Mapper\Process::save()
+     * @param unknown $entries            
+     * @param unknown $template            
+     * @param unknown $media            
      */
-    public function save($datas, $entity = null, $stage = '', $id = null)
+    public function __invoke($entries, $template, $media)
     {
-        if (null === $entity->getPrimaryValue()) {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }
-            parent::save($datas, $entity, $stage, $id);
+        $html = '';///mcevent/download/calendar
+        if (is_array($entries['modulContent']) && !empty($entries['modulContent'])){
+            $html .= '<p>Klicken Sie auf den Button zum Download der Kalenderdatei (ICS) oder ...</p>';
+            $html .= '<p><a class="button" href="/mcevent/download/calendargroup/'.$entries['modulContent']['id'].'/';
+            $html .= $entries['modulContent']['calc_key'] . '">Download ' . $entries['modulContent']['title'] . '</a></p>'; 
+            $html .= '<p>... kopieren Sie sich den Link unten und abonnieren Sie den Kalender in Outlook etc.</p>';
+            $html .= '<pre>'.$this->view->protocol.'://'.$this->view->host.'/mcevent/download/calendargroup/'.$entries['modulContent']['id'].'/'. $entries['modulContent']['calc_key'] .'</pre>';
         } else {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }            
-            parent::save($datas, $entity, $stage, $id);
+            $html .= '<p>Parameter konnten nicht ausgelesen werden.</p>';
         }
-        return true;
-    }    
+        return $html;
+    }
 }

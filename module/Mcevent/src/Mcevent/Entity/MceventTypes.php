@@ -67,6 +67,13 @@ class MceventTypes extends AbstractEntity
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description = '';
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="calc_key", type="string", length=40, nullable=false)
+     */
+    private $calcKey = '';    
 
     /**
      * @var string
@@ -210,6 +217,22 @@ class MceventTypes extends AbstractEntity
     }
 
 	/**
+     * @return the $calcKey
+     */
+    public function getCalcKey()
+    {
+        return $this->calcKey;
+    }
+
+    /**
+     * @param string $calcKey
+     */
+    public function setCalcKey($calcKey)
+    {
+        $this->calcKey = $calcKey;
+    }
+
+    /**
      * @return the $publish
      */
     public function getPublish()

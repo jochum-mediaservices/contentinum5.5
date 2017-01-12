@@ -1,6 +1,8 @@
 <?php
 return array(
     'key_plugins' => array(
+        'eventgroupdwnlnk' => 'mcevent_calgrp_download',
+        'eventdatedwnlnk' => 'mcevent_calc_download',
         'eventnavigation' => 'mcevent_event_navigation',
         'eventdates' => 'mcevent_static_dates',
         'actualdates' => 'mcevent_actual_dates',
@@ -11,6 +13,8 @@ return array(
         'actualdatesregistergrp' =>  'mcevent_event_datesregistergrp',
     ),
     'viewhelper_plugins' => array(
+        'eventgroupdwnlnk' => 'eventgroupdwnlnk',
+        'eventdatedwnlnk' => 'eventdatedwnlnk' ,
         'eventnavigation' => 'eventnavigation',
         'actualdates' => 'eventdates',
         'actualgroupdatesbyday' => 'eventdates',
@@ -984,6 +988,172 @@ return array(
                     )
                 )
             ),
+            
+            'eventgroupdwnlnk' => array(
+                
+                'resource' => 'intranet',
+                'name' => 'Kalendergruppe Downloadlink',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Kalender',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Mcevent\Entity\MceventGroup',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'title'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )                
+                
+            ),
+            
+            'eventdatedwnlnk' => array(
+                'resource' => 'intranet',
+                'name' => 'Kalender Downloadlink',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Kalender',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Mcevent\Entity\MceventTypes',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'name'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+            
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+            
+                            'attributes' => array(
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+            
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+            
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+            
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )
+            ),            
 
         )
     )

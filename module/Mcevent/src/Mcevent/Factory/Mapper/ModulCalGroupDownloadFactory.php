@@ -17,7 +17,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category Mcevent
- * @package Model
+ * @package Factory
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
  * @license http://www.opensource.org/licenses/bsd-license
@@ -25,32 +25,26 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Mcevent\Model\Events;
+namespace Mcevent\Factory\Mapper;
 
-use ContentinumComponents\Mapper\Process;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Mcevent\Mapper\ModulCalGroupDownload;
+use Contentinum\Factory\EntityManagerFactory;
 
-
-class SaveDates extends Process
+/**
+ * 
+ * @author mike
+ *
+ */
+class ModulCalGroupDownloadFactory extends EntityManagerFactory
 {
-   
     /**
-     * Prepare datas before save
+     * (non-PHPdoc)
      *
-     * @see \ContentinumComponents\Mapper\Process::save()
+     * @see \Zend\ServiceManager\FactoryInterface::createService()
      */
-    public function save($datas, $entity = null, $stage = '', $id = null)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (null === $entity->getPrimaryValue()) {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }
-            parent::save($datas, $entity, $stage, $id);
-        } else {
-            if (0 == $datas['account']){
-                $datas['account'] = 1;
-            }            
-            parent::save($datas, $entity, $stage, $id);
-        }
-        return true;
+        return new ModulCalGroupDownload($serviceLocator->get(self::MC_ENTITYMANAGER));
     }    
 }

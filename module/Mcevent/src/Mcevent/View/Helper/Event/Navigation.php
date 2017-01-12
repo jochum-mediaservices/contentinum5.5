@@ -151,7 +151,7 @@ class Navigation extends AbstractContentHelper
                     $activeElements = $this->elements->toArray();
                     $activeElements['row']['attr']['class'] .= ' active';
                     $activeElements['grid']['attr']['href'] = '/' . $this->view->url . '/' . $entry['monthlinks'];
-                    $elments['grid']['attr']['data-section'] = $entry['monthlinks'];
+                    $activeElements['grid']['attr']['data-section'] = $entry['monthlinks'];
                     $list .= $this->deployRow($activeElements, $this->monthshort[$entry['month']]);                    
                 } else {
                     $elments['grid']['attr']['href'] = '/' . $this->view->url . '/' . $entry['monthlinks'];

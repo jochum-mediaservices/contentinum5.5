@@ -170,7 +170,7 @@ class DatesRow extends Parameter
             }
             
             if ($this->imagesSource && $entry['webMediasId'] > 1 ){
-                $description .= $this->deployRow($this->convertparams, $this->image($entry->webMediasId));
+                $description .= $this->image($entry); //$this->deployRow($this->convertparams, $this->image($entry));
             }
             
             if ($this->downloadfile && $entry['webFilesId'] > 1 ){

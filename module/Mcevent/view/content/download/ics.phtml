@@ -1,0 +1,101 @@
+<?php
+define('DATE_ICAL', 'Ymd\THis'); // \Z
+$vcalendar = 'BEGIN:VCALENDAR';
+$vcalendar .= "\n" . 'PRODID:-//SPD im Regionalverband//Frankfurt am Main//DE';
+$vcalendar .= "\n" . 'VERSION:2.0';
+$vcalendar .= "\n" . 'METHOD:PUBLISH';
+//$vcalendar .= "\n" . 'X-CALSTART:20161202T120000Z';
+//$vcalendar .= "\n" . 'X-CALEND:20161202T130000Z';
+//$vcalendar .= "\n" . 'X-CLIPSTART:20161201T230000Z';
+//$vcalendar .= "\n" . 'X-CLIPEND:20161202T230000Z';
+//$vcalendar .= "\n" . 'X-WR-RELCALID:{0000002E-C40F-C0D5-7FF2-A10B74CB6B78}';
+$vcalendar .= "\n" . 'X-WR-CALNAME:'. $this->calname;
+//$vcalendar .= "\n" . 'X-PRIMARY-CALENDAR:TRUE';
+//$vcalendar .= "\n" . 'X-OWNER;CN="Michael Jochum":mailto:michael.jochum@jochum-mediaservices.de';
+$vcalendar .= "\n" . 'X-MS-OLK-WKHRSTART;TZID="Mitteleuropäische Zeit":080000';
+$vcalendar .= "\n" . 'X-MS-OLK-WKHREND;TZID="Mitteleuropäische Zeit":170000';
+$vcalendar .= "\n" . 'X-MS-OLK-WKHRDAYS:MO,TU,WE,TH,FR';
+$vcalendar .= "\n" . 'BEGIN:VTIMEZONE';
+$vcalendar .= "\n" . 'TZID:Mitteleuropäische Zeit';
+$vcalendar .= "\n" . 'BEGIN:STANDARD';
+$vcalendar .= "\n" . 'DTSTART:16011028T030000';
+$vcalendar .= "\n" . 'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10';
+$vcalendar .= "\n" . 'TZOFFSETFROM:+0200';
+$vcalendar .= "\n" . 'TZOFFSETTO:+0100';
+$vcalendar .= "\n" . 'END:STANDARD';
+$vcalendar .= "\n" . 'BEGIN:DAYLIGHT';
+$vcalendar .= "\n" . 'DTSTART:16010325T020000';
+$vcalendar .= "\n" . 'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3';
+$vcalendar .= "\n" . 'TZOFFSETFROM:+0100';
+$vcalendar .= "\n" . 'TZOFFSETTO:+0200';
+$vcalendar .= "\n" . 'END:DAYLIGHT';
+$vcalendar .= "\n" . 'END:VTIMEZONE';
+$vevent = '';
+foreach ($this->entries as $entry) {
+    $vevent .= "\n";
+    $vevent .= "\n" . 'BEGIN:VEVENT';
+    $vevent .= "\n" . 'SUMMARY:' . $entry['summary'];
+    $vevent .= "\n" . 'UID:' . $entry['id'];
+    $vevent .= "\n" . 'STATUS:CONFIRMED';
+    $datestart = new \DateTime($entry['dateStart']);
+    $vevent .= "\n" . 'DTSTART:' . date(DATE_ICAL, strtotime($datestart->format("Y-m-d H:i:s")));
+    if ('0000-00-00 00:00:00' !== $entry['dateEnd']) {
+        $dateend = new \DateTime($entry['dateStart']);        
+        $vevent .= "\n" . 'DTEND:' . date(DATE_ICAL, strtotime($dateend->format("Y-m-d H:i:s")));
+    } else {
+        //$datestart->modify('+2 hours');
+        //$vevent .= "\n" . 'DTEND:' . date(DATE_ICAL, strtotime($datestart->format("Y-m-d H:i:s")));
+    }
+    $vevent .= "\n" . 'LAST-MODIFIED:' . date(DATE_ICAL, strtotime($entry['lastModified']));
+    // location new
+    if ($entry['accountId'] > 1) {
+        $dataLocation = ' ';
+        if (strlen($entry['accountStreet']) > 1) {
+            $street = $entry['accountStreet'];
+            if (strlen($entry['accountStreetNum']) > 0) {
+                $street .= ' ' . $entry['accountStreetNum'];
+            }
+            $dataLocation .= $street;
+        }
+        if (strlen($entry['accountZipcode']) > 1) {
+            $zipcode = $entry['accountZipcode'];
+            $dataLocation .= ' ' . $zipcode;
+        }
+        if (strlen($entry['accountCity']) > 1) {
+            $city = $entry['accountCity'];
+            $dataLocation .= ' ' . $city;
+        }        
+        $vevent .= "\n" . 'LOCATION:' . $entry['accountName'] . $dataLocation;
+    } else {
+        $zipcode = '';
+        $dataLocation = ' ';
+        if (strlen($entry['locationAddresse']) > 1) {
+            $address = $entry['locationAddresse'];
+            $dataLocation .= $address;
+        }
+        if (strlen($entry['locationZipcode']) > 1) {
+            $zipcode = $entry['locationZipcode'];         
+            $dataLocation .= ' ' . $zipcode;
+        }
+        if (strlen($entry['locationCity']) > 1) {
+            $city = $entry['locationCity'];
+            $dataLocation .= ' ' . $city;
+        }
+        $vevent .= "\n" . 'LOCATION:' . $entry['location'] . ' ' . $dataLocation;
+    }
+    if ($entry['organizerId'] > 0) {
+        $vevent .= "\n" . 'ORGANIZER;CN=' . $entry['organizerName'];
+    } elseif (strlen($entry['organizer']) > 1) {
+        $vevent .= "\n" . 'ORGANIZER;CN=' . $entry['organizer'];
+    }
+    if (strlen($entry['description']) > 3){
+        $vevent .= "\n" . 'DESCRIPTION:' . $entry['description'];
+    }
+    $vevent .= "\n" . 'END:VEVENT';
+}
+$vcalendar .= $vevent;
+$vcalendar .= "\n" . 'END:VCALENDAR';
+header('Content-Type: text/calendar; charset=utf-8');
+header('Content-Disposition: attachment; filename="'.$this->calname.'.ics"');
+echo $vcalendar;
+exit();
