@@ -93,6 +93,13 @@ class AddFormController extends AbstractApplicationController
             $category = '/' . $value;
         }
         
+        if ('yes' == $pageOptions->getApp('setcategroryvalue') ){
+            if (false !== ($value = $this->params()->fromRoute('categoryvalue', false))) {
+                $category .= '/' . $value;
+            }
+            
+        }
+                
         if (false !== ( $setcategrory = $pageOptions->getApp('setcategrory') )  ){
             switch ($setcategrory){
                 case 'no':

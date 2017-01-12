@@ -152,8 +152,9 @@ class FileCategoryForm extends AbstractForms
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
                         'description' => 'Bildunterschrift erscheint unterhalb der Datei und &uuml;berschreibt die Bildunterschrift in den Metaangaben',
                     ),
-                    'type' => 'Text',
+                    'type' => 'Textarea',
                     'attributes' => array(
+                        'rows' => '4',
                         'id' => 'caption'
                     )
                 )

@@ -253,14 +253,21 @@ var McworkFormValidation = {
 		if (false === opts.xhr){
 			$(form).submit();
 		} else {
-			
+			var editorContent = '';
+			var editorIdent = '';
+			var oldGlobalSettings = '';
 			if ('tinymce' === $(form).attr('data-editor')){
+				editorContent = tinymce.activeEditor.getContent();
+				editorIdent = tinymce.activeEditor.id;
 				tinyMCE.triggerSave();
 			}
 						
 			var formData = $(form).serialize();
 			var action = $(form).attr('action');
-			
+			if ('tinymce' === $(form).attr('data-editor')){
+				$('#' + editorIdent).val(editorContent);
+								console.debug(editorContent);
+			}
 			$.ajax({
 				url : action,
 				type : opts.method,
@@ -269,6 +276,7 @@ var McworkFormValidation = {
 					Mcwork.Modals.buildProcess(false);
 				} ,							
 				success : function(data) {
+					var data = jQuery.parseJSON(data);
 					if (1 == data) {
 						if (false !== opts.entity && true === opts.savenext && false !== opts.nextident){
 							McworkFormValidation.loadform(opts.entity, opts.nextident);
@@ -287,10 +295,6 @@ var McworkFormValidation = {
 						}
 						
 					} else {
-						var obj = jQuery.parseJSON(data);
-						console.log(obj);
-						return false;
-						
 						Mcwork.xhrErrorMessages(data);
 					}
 				},

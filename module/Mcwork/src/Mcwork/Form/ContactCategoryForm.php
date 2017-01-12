@@ -140,8 +140,9 @@ class ContactCategoryForm extends AbstractForms
                         )                        
                     ),
             
-                    'type' => 'Text',
+                    'type' => 'Textarea',
                     'attributes' => array(
+                        'rows' => '2',
                         'id' => 'businessTitle'
                     )
                 )

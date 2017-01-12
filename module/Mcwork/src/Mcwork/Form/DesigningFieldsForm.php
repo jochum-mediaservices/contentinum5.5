@@ -156,6 +156,7 @@ class DesigningFieldsForm extends AbstractForms
                             'Url' => 'Input field url',
                             'Textarea' => 'Text field',
                             'Select' => 'Select field',
+                            'Button' => 'Formular Absendebutton'
                             
                         ),
                         'deco-row' => $this->getDecorators(self::DECO_TAB_ROW),

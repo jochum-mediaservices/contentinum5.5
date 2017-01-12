@@ -1864,6 +1864,89 @@ return array(
         )
     ),
     
+    '/mcwork/pressusers' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'E-Mails Presseverteiler',
+        'template' => 'content/press/pressuserindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'E-Mails Presseverteiler',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Blog\PressEmails',
+            'entity' => 'Contentinum\Entity\WebPressUsers',
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcwork/pressusers/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'E-Mailadress anlegen',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'E-Mailadress anlegen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcwork\Model\Press\SavePressUsers',
+            'entity' => 'Contentinum\Entity\WebPressUsers',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Blog\PressUserForm',
+            'formaction' => '/mcwork/pressusers/add',
+            'settoroute' => '/mcwork/pressusers'
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),  
+    
+    '/mcwork/pressusers/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'E-Mailadresse bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'E-Mailadresse bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Press\SavePressUsers',
+            'entity' => 'Contentinum\Entity\WebPressUsers',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Blog\PressUserForm',
+            'formaction' => '/mcwork/pressusers/edit',
+            'settoroute' => '/mcwork/pressusers'
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ), 
+    
+    '/mcwork/pressusers/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Blog\DeletePressUsers',
+            'entity' => 'Contentinum\Entity\WebPressUsers',
+    
+            'settoroute' => '/mcwork/pressusers'
+        )
+    ),    
+    
     '/mcwork/article' => array(
         'resource' => 'publisherresource',
         'metaTitle' => 'News or Blog Article',
