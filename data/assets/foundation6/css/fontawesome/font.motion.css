@@ -63,17 +63,3 @@
 :root .fa-flip-vertical {
   filter: none;
 }
-
-.fa-spinner:before {
-  content: "\f110";
-}
-.fa-circle-o-notch:before {
-  content: "\f1ce";
-}
-.fa-refresh:before {
-  content: "\f021";
-}
-.fa-gear:before,
-.fa-cog:before {
-  content: "\f013";
-}
