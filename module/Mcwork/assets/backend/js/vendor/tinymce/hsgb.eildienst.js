@@ -79,4 +79,37 @@ $(document).ready(function() {
 		$('#setAvailableAuthors').html(strHtml);		
 		
 	}
+	
+	$('.editorlink').click(function(ev){
+		ev.preventDefault();
+		var elm = $(this).attr('data-ref');
+		var link = $(this).attr('data-link');
+		var media = $('#' + elm).val();
+		var label = $('#' + elm + ' option:selected').text();
+		if (media.length > 0) {
+			var str = '';
+			var selectedText = tinyMCE.activeEditor.selection.getContent({format: 'text'});
+			if ('org' === link){
+				if (selectedText.length > 0) {
+					label = selectedText;
+				} else {
+					label = label.replace('(internal)','');
+					label = label.trim();
+				}
+				str += '<a href="'+ media +'">' + label + '</a>';
+			} else {
+				if (selectedText.length > 0) {
+					label = selectedText;
+				} else  {
+					label = label.substr(label.indexOf('#') + 1);
+				}
+				
+				str += '<a href="/' + link + '/'+ media +'">' + label + '</a>';				
+			}
+			tinyMCE.activeEditor.insertContent(str);
+        	$('#' +  elm + ' option:selected').prop("selected",false);
+        	$('#' +  elm ).trigger("chosen:updated");
+		}
+	});		
+	
 });

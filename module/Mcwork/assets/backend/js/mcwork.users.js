@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	$('.usrblocked').click(function(ev){
+	//$('.usrblocked').click(function(ev){
+	$(document.body).on('click', '.usrblocked', function(ev) {	
 		ev.preventDefault();
 		console.log('y');
 		var options = {};

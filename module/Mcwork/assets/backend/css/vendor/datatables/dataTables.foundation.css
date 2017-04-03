@@ -51,6 +51,10 @@ th .maxwidth20,td .maxwidth20 {
 	max-width: 20%;
 }
 
+th .maxwidth50,td .maxwidth50 {
+	max-width: 50%;
+}
+
 table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting,
 table.dataTable thead > tr > td.sorting_asc,
 table.dataTable thead > tr > td.sorting_desc,

@@ -8,7 +8,7 @@ class Entries extends AbstractEntries
     {
         if (false === $this->isEntries($id)) {
             $entity = $this->find($id);
-            //$this->deleteEntry($entity, $id);
+            $this->deleteEntry($entity, $id);
             $this->setMessage('The data set was successfully deleted');
             return 'success';
         } else {

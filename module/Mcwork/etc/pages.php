@@ -3971,6 +3971,343 @@ return array(
         ),
     ), 
     
+    '/mcwork/accounttagassign' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisation Tags',
+        'template' => 'content/accounts/assigntagsindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Organisation Tags',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Account\TagIndex',
+            'entity' => 'Contentinum\Entity\WebTagsAssign'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcwork/accounttagassign/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisation assign tag',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Organisation assign tag',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveAssignTags',
+            'entity' => 'Contentinum\Entity\WebTagsAssign',
+            'targetentities' => array(
+                'account' => 'Contentinum\Entity\Accounts',
+                'webtags' => 'Contentinum\Entity\WebTags',
+            ),            
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\TagsForm',
+            'formaction' => '/mcwork/accounttagassign/add',
+            'settoroute' => '/mcwork/accounttagassign'
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),   
+    
+    '/mcwork/accounttagassign/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisation change tag',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Organisation change tag',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveAssignTags',
+            'entity' => 'Contentinum\Entity\WebTagsAssign',
+            'targetentities' => array(
+                'account' => 'Contentinum\Entity\Accounts',
+                'webtags' => 'Contentinum\Entity\WebTags',
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\TagsForm',
+            'formaction' => '/mcwork/accounttagassign/edit',
+            'settoroute' => '/mcwork/accounttagassign'
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ), 
+    
+    '/mcwork/accounttagassign/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Delete\Entries',
+            'entity' => 'Contentinum\Entity\WebTagsAssign',
+            'settoroute' => '/mcwork/accounttagassign'
+        )        
+    ),
+    
+    '/mcwork/accountags' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Account tags',
+        'template' => 'content/accounts/tagsindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Account tags',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Account\Tags',
+            'entity' => 'Contentinum\Entity\WebTags'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcwork/accountags/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'add_Accounttags',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'add_Accounttags',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveTags',
+            'entity' => 'Contentinum\Entity\WebTags',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\TagForm',
+            'formaction' => '/mcwork/accountags/add',
+            'settoroute' => '/mcwork/accountags'
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+    '/mcwork/accountags/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'edit_Accounttags',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'edit_Accounttags',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveTags',
+            'entity' => 'Contentinum\Entity\WebTags',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\TagForm',
+            'formaction' => '/mcwork/accountags/edit',
+            'settoroute' => '/mcwork/accountags',
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ),
+    
+    
+    '/mcwork/accountags/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Delete\Entries',
+            'entity' => 'Contentinum\Entity\WebTags',
+            'hasEntries' => array(
+                'groups' => array(
+                    'tablename' => 'Contentinum\Entity\WebTagsAssign',
+                    'column' => 'webTagId'
+                ),
+            ),
+            'settoroute' => '/mcwork/accountags'
+        )
+    ),    
+    
+    '/mcwork/accountlink' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisationen mit Kontakten',
+        'template' => 'content/accounts/linkindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Organisationen mit Kontakten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Account\Link',
+            'entity' => 'Contentinum\Entity\AccountContact'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ), 
+    
+    '/mcwork/accountlink/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisation mit Kontakt verknüpfen',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Organisation mit Kontakt verknüpfen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveAccountLink',
+            'entity' => 'Contentinum\Entity\AccountContact',
+            'targetentities' => array(
+                'account' => 'Contentinum\Entity\Accounts',
+                'contact' => 'Contentinum\Entity\Contacts',
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\LinkForm',
+            'formaction' => '/mcwork/accountlink/add',
+            'settoroute' => '/mcwork/accountlink'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ), 
+    
+    '/mcwork/accountlink/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Verknüpfung bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Verknüpfung bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveAccountLink',
+            'entity' => 'Contentinum\Entity\AccountContact',
+            'targetentities' => array(
+                'account' => 'Contentinum\Entity\Accounts',
+                'contact' => 'Contentinum\Entity\Contacts',
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\Accounts\LinkForm',
+            'formaction' => '/mcwork/accountlink/edit',
+            'settoroute' => '/mcwork/accountlink'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkforms'),
+        ),
+    ), 
+        
+    '/mcwork/accountlink/accountedit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Organisation bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'bodyFooterScript' => array(
+            'prepend' => array(
+                'https://maps.google.com/maps/api/js?libraries=places&key=' . GOOGLE_API_KEY,
+                '/assets/app/tinymce/js/tinymce/tinymce.min.js',
+            ),
+        ),
+        'pageContent' => array(
+            'headline' => 'Organisation bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveAccounts',
+            'entity' => 'Contentinum\Entity\Accounts',
+            'targetentities' => array(
+                'fieldtypes' => 'Contentinum\Entity\FieldTypes'
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\AccountForm',
+            'formaction' => '/mcwork/accountlink/accountedit',
+            'settoroute' => '/mcwork/accountlink'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkformsaccounts'),
+        ),
+    ), 
+    
+    '/mcwork/accountlink/contactedit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Kontakt bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'bodyFooterScript' => array(
+            'prepend' => array(
+                '/assets/app/tinymce/js/tinymce/tinymce.min.js',
+            ),
+        ),
+        'pageContent' => array(
+            'headline' => 'Kontakt bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Accounts\SaveContacts',
+            'entity' => 'Contentinum\Entity\Contacts',
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\ContactForm',
+            'formaction' => '/mcwork/accountlink/contactedit',
+            'settoroute' => '/mcwork/accountlink'
+    
+    
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstyles','mcworkhead','mcworkformstinymcesmallexlp'),
+        ),
+    ),    
+    
+    '/mcwork/accountlink/remove' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Accounts\RemoveAccountLink',
+            'entity' => 'Contentinum\Entity\AccountContact',
+    
+            'settoroute' => '/municipal/contactlink'
+        )
+    ),    
+    
+    
     // --- admin ---
     
     '/mcwork/preferences' => array(
@@ -5041,7 +5378,18 @@ return array(
             'entitymanager' => 'contentinum_files_storage_manager',
             'entity' => 'Mcwork\Entity\FsDenied'
         )
-    ), 
+    ),
+    
+    '/mcwork/medias/download' => array(
+        'resource' => 'index',
+        'template' => 'content/files/download',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DownloadController',
+            'worker' => 'Mcwork\Mapper\Files\Download',
+            'entity' => 'Contentinum\Entity\WebMedias',
+            'settoroute' => '/mcwork/filesdenied',
+        )
+    ),    
     
     '/mcwork/files/download' => array(
         'resource' => 'index',

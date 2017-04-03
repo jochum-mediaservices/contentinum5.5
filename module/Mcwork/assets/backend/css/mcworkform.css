@@ -1,4 +1,3 @@
-
 form#mcworkForm {
 	border: 1px solid #C6C9CA;
 	background: #F9F9F9;
@@ -13,6 +12,11 @@ form.custom .custom.dropdown {
 }
 #contentinumUpload {
 	height: 200px;
+}
+.scrollcontainer {
+    border: 1px solid #dddddd;
+    height: 300px;
+    overflow-x: scroll;
 }
 p.formElement {
 	padding: 0.8em 0;

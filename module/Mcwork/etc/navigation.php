@@ -159,7 +159,22 @@ return array(
                                 'label' => 'Organizationgroups',
                                 'uri' => '/mcwork/accountgroups',
                                 'resource' => 'publisherresource',
+                            ), 
+                            array(
+                                'label' => 'Organisation Tags',
+                                'uri' => '/mcwork/accountags',
+                                'resource' => 'publisherresource',
                             ),                            
+                            array(
+                                'label' => 'Organisation to Tags',
+                                'uri' => '/mcwork/accounttagassign',
+                                'resource' => 'publisherresource',
+                            ),                            
+                            array(
+                                'label' => 'Organisationen mit Kontakten',
+                                'uri' => '/mcwork/accountlink',
+                                'resource' => 'publisherresource',
+                            ),
                         ) // end sub fieldtypes
 
                         

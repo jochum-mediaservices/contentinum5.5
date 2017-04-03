@@ -67,6 +67,7 @@ $(document).ready(function() {
 		    link_list: "/mcwork/services/application/linklist",
 		    link_class_list: [
 		                      {title: 'None', value: ''},
+		                      {title: 'Fonticon Bleistift', value: 'fa fa-edit'},
 		                      {title: 'Button small (Foundation)', value: 'button small'},
 		                      {title: 'Button standard (Foundation)', value: 'button'},
 		                      {title: 'Button expand (Foundation)', value: 'button expand'},
