@@ -195,6 +195,8 @@
 })(jQuery);
 $(document).ready(function() {
 	
+	//$('#mcworkTables_filter input').on( 'click', function () {});	
+	
 	$(document.body).on('click', '.publish', function(ev) {
 		ev.preventDefault();
 		ev.stopImmediatePropagation();
