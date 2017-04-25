@@ -112,17 +112,17 @@ h6 {
 
 a {
   line-height: inherit;
-  color: #2ba6cb;
+  color: #1779ba;
   text-decoration: none;
   cursor: pointer; }
   a:hover, a:focus {
-    color: #258faf; }
+    color: #1468a0; }
   a img {
     border: 0; }
 
 hr {
   clear: both;
-  max-width: 62.5rem;
+  max-width: 75rem;
   height: 0;
   margin: 1.25rem auto;
   border-top: 0;
@@ -170,7 +170,7 @@ cite {
   font-size: 0.8125rem;
   color: #8a8a8a; }
   cite:before {
-    content: "â€” "; }
+    content: "— "; }
 
 abbr {
   border-bottom: 1px dotted #0a0a0a;

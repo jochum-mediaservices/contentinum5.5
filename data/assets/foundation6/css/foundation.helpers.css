@@ -1,24 +1,3 @@
-.show-for-print {
-  display: none !important; }
-
-.float-left {
-  float: left !important; }
-
-.float-right {
-  float: right !important; }
-
-.float-center {
-  display: block;
-  margin-right: auto;
-  margin-left: auto; }
-
-.clearfix::before, .clearfix::after {
-  display: table;
-  content: ' '; }
-
-.clearfix::after {
-  clear: both; }
-
 .hide {
   display: none !important; }
 
@@ -103,3 +82,21 @@
     .hide-for-landscape,
     .show-for-portrait {
       display: block !important; } }
+
+.float-left {
+  float: left !important; }
+
+.float-right {
+  float: right !important; }
+
+.float-center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+
+.clearfix::before, .clearfix::after {
+  display: table;
+  content: ' '; }
+
+.clearfix::after {
+  clear: both; }

@@ -1,5 +1,5 @@
 .row {
-  max-width: 62.5rem;
+  max-width: 75rem;
   margin-right: auto;
   margin-left: auto; }
   .row::before, .row::after {
@@ -11,8 +11,8 @@
     padding-right: 0;
     padding-left: 0; }
   .row .row {
-    margin-right: -0.9375rem;
-    margin-left: -0.9375rem; }
+    margin-right: -0.625rem;
+    margin-left: -0.625rem; }
     @media print, screen and (min-width: 40em) {
       .row .row {
         margin-right: -0.9375rem;
@@ -29,12 +29,24 @@
     .row.expanded .row {
       margin-right: auto;
       margin-left: auto; }
+  .row:not(.expanded) .row {
+    max-width: none; }
+  .row.gutter-small > .column, .row.gutter-small > .columns {
+    padding-right: 0.625rem;
+    padding-left: 0.625rem; }
+  .row.gutter-medium > .column, .row.gutter-medium > .columns {
+    padding-right: 0.9375rem;
+    padding-left: 0.9375rem; }
 
 .column, .columns {
   width: 100%;
   float: left;
-  padding-right: 0.9375rem;
-  padding-left: 0.9375rem; }
+  padding-right: 0.625rem;
+  padding-left: 0.625rem; }
+  @media print, screen and (min-width: 40em) {
+    .column, .columns {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
   .column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
     float: right; }
   .column.end:last-child:last-child, .end.columns:last-child:last-child {
@@ -302,8 +314,8 @@
   margin-left: 0; }
 
 .small-uncollapse > .column, .small-uncollapse > .columns {
-  padding-right: 0.9375rem;
-  padding-left: 0.9375rem; }
+  padding-right: 0.625rem;
+  padding-left: 0.625rem; }
 
 .small-centered {
   margin-right: auto;
@@ -747,6 +759,11 @@
     margin-left: 0; } }
 
 .column-block {
-  margin-bottom: 1.875rem; }
+  margin-bottom: 1.25rem; }
   .column-block > :last-child {
     margin-bottom: 0; }
+  @media print, screen and (min-width: 40em) {
+    .column-block {
+      margin-bottom: 1.875rem; }
+      .column-block > :last-child {
+        margin-bottom: 0; } }

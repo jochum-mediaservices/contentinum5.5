@@ -11,7 +11,7 @@
   z-index: 1200;
   max-width: 10rem;
   padding: 0.75rem;
-  border-radius: 0px;
+  border-radius: 0;
   background-color: #0a0a0a;
   font-size: 80%;
   color: #fefefe; }
@@ -27,8 +27,9 @@
     position: absolute;
     bottom: 100%;
     left: 50%;
-    -ms-transform: translateX(-50%);
-        transform: translateX(-50%); }
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%); }
   .tooltip.top::before {
     display: block;
     width: 0;
@@ -52,8 +53,9 @@
     top: 50%;
     bottom: auto;
     left: 100%;
-    -ms-transform: translateY(-50%);
-        transform: translateY(-50%); }
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
   .tooltip.right::before {
     display: block;
     width: 0;
@@ -67,5 +69,6 @@
     right: 100%;
     bottom: auto;
     left: auto;
-    -ms-transform: translateY(-50%);
-        transform: translateY(-50%); }
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }

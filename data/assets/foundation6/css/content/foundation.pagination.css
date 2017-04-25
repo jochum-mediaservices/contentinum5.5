@@ -8,7 +8,7 @@
     clear: both; }
   .pagination li {
     margin-right: 0.0625rem;
-    border-radius: 0px;
+    border-radius: 0;
     font-size: 0.875rem;
     display: none; }
     .pagination li:last-child, .pagination li:first-child {
@@ -20,14 +20,14 @@
   .pagination button {
     display: block;
     padding: 0.1875rem 0.625rem;
-    border-radius: 0px;
+    border-radius: 0;
     color: #0a0a0a; }
     .pagination a:hover,
     .pagination button:hover {
       background: #e6e6e6; }
   .pagination .current {
     padding: 0.1875rem 0.625rem;
-    background: #2ba6cb;
+    background: #1779ba;
     color: #fefefe;
     cursor: default; }
   .pagination .disabled {

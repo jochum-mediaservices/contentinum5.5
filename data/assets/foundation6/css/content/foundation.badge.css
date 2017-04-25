@@ -5,26 +5,20 @@
   border-radius: 50%;
   font-size: 0.6rem;
   text-align: center;
-  background: #2ba6cb;
+  background: #1779ba;
   color: #fefefe; }
   .badge.primary {
-    background: #2ba6cb;
-    color: #0a0a0a; }
+    background: #1779ba;
+    color: #fefefe; }
   .badge.secondary {
-    background: #e9e9e9;
-    color: #0a0a0a; }
-  .badge.alert {
-    background: #c60f13;
+    background: #767676;
     color: #fefefe; }
   .badge.success {
-    background: #5da423;
+    background: #3adb76;
     color: #0a0a0a; }
   .badge.warning {
     background: #ffae00;
     color: #0a0a0a; }
-  .badge.body-font {
-    background: #222222;
-    color: #fefefe; }
-  .badge.header {
-    background: #222222;
+  .badge.alert {
+    background: #cc4b37;
     color: #fefefe; }

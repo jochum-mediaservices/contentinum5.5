@@ -166,3 +166,6 @@
 .fa-thumbs-down:before {
   content: "\f165";
 }
+.fa-spinner:before {
+  content: "\f110";
+}

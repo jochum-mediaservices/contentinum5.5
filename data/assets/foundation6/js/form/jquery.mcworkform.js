@@ -151,7 +151,7 @@
 
 		
 		BeforeSendPanel : function (){
-			$(this.defaults.formProcessSelector).html( this.BuildPanel('warn', '<p class="text-center">' + this.FontAwesomeIcon('spinner','2x') + '</p>'  ) );
+			$(this.defaults.formProcessSelector).html( this.BuildPanel('warn', '<p class="text-center">' + this.FontAwesomeIcon('spinner','2x') + ' Formular wird versandt.</p>'  ) );
 		},
 		
 		FieldErrorPanel : function(){
