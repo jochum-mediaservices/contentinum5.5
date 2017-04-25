@@ -33,7 +33,7 @@ use ContentinumComponents\Images\CalculateResize;
 
 class Images extends AbstractNewsHelper
 {
-    protected function imagesrc($content, $media, $template, $mediaStyle = null, $setSize = null)
+    protected function imagesrc($content, $media, $template, $mediaStyle = null, $setSize = null, $setcapt = true)
     {
         $mediaMetas = $this->setConvertparams($media->mediaMetas, true);
         $src = $media->mediaLink;
@@ -81,7 +81,7 @@ class Images extends AbstractNewsHelper
         if (null !== $mediaStyle){
             $mediarows['row']['attr']['class'] .= ' ' . $mediaStyle;
         }
-        if (false !== ($caption = $this->hasValue($mediaMetas, 'caption'))) {
+        if (false !== ($caption = $this->hasValue($mediaMetas, 'caption')) && true == $setcapt ) {
             $mediarows['row']['content:before'] = $img;
             $images = $this->deployRow($mediarows, $caption);
         } else {

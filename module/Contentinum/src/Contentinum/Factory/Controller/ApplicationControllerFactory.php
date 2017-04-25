@@ -51,6 +51,8 @@ class ApplicationControllerFactory implements FactoryInterface
                     case 'newsletter':
                     case 'citizensbudget':
                     case 'eildienst':
+                    case 'notification':
+                    case 'registerdownload':
                         if (isset($pages['/' . $pageOptions->split(null, 3)])) {
                             $pageOptions->addOptions($pages, '/' . $pageOptions->split(null, 3), true);
                             $pageOptions->setActive('/' . $pageOptions->split(null, 3));
@@ -70,8 +72,13 @@ class ApplicationControllerFactory implements FactoryInterface
             'login',
             'logout'
         ))) {
-            $defaults->setCacheKey('mcuser_pages');
-            $pages = $defaults->get($pagefiles['mcuser_pages']);
+            if (isset($pagefiles['mcuser_customer_pages']) && is_file($pagefiles['mcuser_customer_pages'])){
+                $defaults->setCacheKey('mcuser_customer_pages');
+                $pages = $defaults->get('mcuser_customer_pages');
+            } else {
+                $defaults->setCacheKey('mcuser_pages');
+                $pages = $defaults->get($pagefiles['mcuser_pages']);
+            }
             $pageOptions->addOptions($pages); // default options
             $pageOptions->addOptions($pages, '/' . $pageOptions->split(null, 2), true);
             $pageOptions->setActive('/' . $pageOptions->split(null, 2));
@@ -85,6 +92,7 @@ class ApplicationControllerFactory implements FactoryInterface
                 case 'pdf':
                 case 'emailrecom':
                 case 'contentplugin':
+                case 'jsonpages':
                     $pageOptions->addOptions($defaults->get($pagefiles['app_pages']), $url);
                     break;
                 default:

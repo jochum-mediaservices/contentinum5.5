@@ -209,7 +209,7 @@ return array(
                 'grid' => array(
                     'element' => 'article',
                     'attr' => array(
-                        'class' => 'news-article'
+                        'class' => 'news-article actualgrid'
                     )
                 )
             ),
@@ -385,7 +385,7 @@ return array(
                 'grid' => array(
                     'element' => 'article',
                     'attr' => array(
-                        'class' => 'news-article'
+                        'class' => 'news-article actualgrid'
                     )
                 ),                
             ),

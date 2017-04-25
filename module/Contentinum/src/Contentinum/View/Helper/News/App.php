@@ -62,8 +62,8 @@ class App extends Images
             case 'n' :
                 break;
             case 'y' :
-            default:
-            $html .= $this->groupHeader('<h1>' . $this->groupName . '</h1>');    
+            default:   
+            $html .= $this->groupHeader(  $this->deployRow($this->groupheadline, $this->groupName)  );
         }
         
         $readMoreView = false;

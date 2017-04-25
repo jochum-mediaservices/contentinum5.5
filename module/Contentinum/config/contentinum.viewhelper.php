@@ -58,6 +58,7 @@ return array(
         
         'accountmembers' => 'Contentinum\View\Helper\Account\Members',
         'accountgroup' => 'Contentinum\View\Helper\Account\Group', 
+        'microdataaccountlink' => 'Contentinum\View\Helper\Account\LinkSort',
         
         'maps' => 'Contentinum\View\Helper\Maps',
         'forms' => 'Contentinum\View\Helper\Forms',

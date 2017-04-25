@@ -62,7 +62,7 @@ abstract class WebsiteServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('Contentinum\Configure');
+        $config = $serviceLocator->get('contentinum_configure');
         $config = $config['db_cache_keys'];
         
         if (isset($config[static::CONTENTINUM_DATABASE])) {

@@ -125,6 +125,7 @@ return array(
             'entity_formfieldoptions' => 'Contentinum\Factory\Entities\FormFieldOptionsFactory', 
             
             'entity_tags' => 'Contentinum\Factory\Entities\TagsFactory',
+            'entity_tags_assign' => 'Contentinum\Factory\Entities\TagsAssignFactory',
             
             // module plugins factories
             'contentinum_navigation' => 'Contentinum\Factory\Mapper\ModulNavigationFactory',
@@ -145,6 +146,7 @@ return array(
              
             'contentinum_file_group' => 'Contentinum\Factory\Mapper\ModulFileGroupFactory',
             'contentinum_account_members' => 'Contentinum\Factory\Mapper\ModulAccountMembersFactory',
+            'contentinum_account_links' => 'Contentinum\Factory\Mapper\ModulAccountLinksFactory',
             'contentinum_maps' => 'Contentinum\Factory\Mapper\ModulMapsFactory',
             'contentinum_forms' => 'Contentinum\Factory\Mapper\ModulFormsFactory',
             'contentinum_contact' => 'Contentinum\Factory\Mapper\ModulContactFactory',

@@ -1,5 +1,18 @@
 <?php
-return array(
+return array( //ALTER TABLE `account_groups` ADD `enable_internet` TINYINT(1) NOT NULL DEFAULT '1' AFTER `enable_description`;
+    5564 => array(
+        "ALTER TABLE `web_medias` CHANGE `media_link` `media_link` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;"
+    ),
+    5563 => array(
+        'Backend Update: jquery datatables version 1.10.13'
+    ),    
+    5562 => array(
+        'Tags für Organisation anlegen und Organisationen zuweisen'
+    ),
+    5561 => array(
+        'Organisationen mit Kontakte verknüpfen, als Gruppe anzeigen',
+        "CREATE TABLE `account_contacts` ( `id` int(11) UNSIGNED NOT NULL,  `account_id` int(20) UNSIGNED NOT NULL,  `contacts_id` int(11) UNSIGNED NOT NULL,  `created_by` int(11) UNSIGNED NOT NULL DEFAULT '0',  `update_by` int(11) UNSIGNED NOT NULL DEFAULT '0',  `register_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  `up_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00') ENGINE=InnoDB DEFAULT CHARSET=utf8;ALTER TABLE `account_contacts`ADD PRIMARY KEY (`id`);",
+    ),
     5560 => array(
         'Contentinum build 5560',
     ), 

@@ -30,6 +30,7 @@ return array(
         'microdatagroup' => 'contentinum_contact_group',
         'microdatacontact' => 'contentinum_contact',
         'microdataorganisation' => 'contentinum_organisation',
+        'microdataaccountlink' => 'contentinum_account_links',
         
         
         'microdataaccountgroup' => 'contentinum_index_accounts',
@@ -66,6 +67,7 @@ return array(
         'microdatagroup' =>  'microdatacontactgroup',
         'microdatacontact' => 'microdatacontact',
         'microdataorganisation' => 'microdataorganisation',
+        'microdataaccountlink' => 'microdataaccountlink',
         
         
         
@@ -77,6 +79,102 @@ return array(
     'default_plugins' => array(
         's' => array(
             
+            'microdataaccountlink' => array(
+                'resource' => 'intranet',
+                'name' => 'Steckbrief Organisationen sortiert',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Organisationgruppe auswählen',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Contentinum\Entity\FieldTypes',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'name',
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams',
+                                'class' => 'chosen-select'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Template auswählen',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/services',
+                                    'data' => array(
+                                        'entity' => 'templates_plugin_microdataaccount',
+                                        'prepare' => 'select',
+                                        'result' => 'array',
+                                        'value' => '1',
+                                        'label' => '1'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                            'attributes' => array(
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )                
+            ),
             
             'microdataaccountgroup' => array(
             
@@ -1715,7 +1813,133 @@ return array(
                     )
                 )
             ),
+            'blogreversed' => array(
+                'resource' => 'intranet',
+                'name' => 'Nachrichten (Reversed)',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Nachrichten auswählen',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/blogselect',
+                                    'data' => array(
+                                        'entity' => 'Contentinum\Entity\WebContentGroups',
+                                        'prepare' => 'select',
+                                        'result' => 'array',
+                                        'value' => '1',
+                                        'label' => '1'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Display items',
+                                'value_options' => array(
+                                    '1' => 'Display 1',
+                                    '2' => 'Display 2',
+                                    '3' => 'Display 3',
+                                    '4' => 'Display 4',
+                                    '5' => 'Display 5',
+                                    '6' => 'Display 6',
+                                    '7' => 'Display 7',
+                                    '8' => 'Display 8',
+                                    '9' => 'Display 9',
+                                    '10' => 'Display 10',
+                                    '11' => 'Display 11',
+                                    '12' => 'Display 12',
+                                    '13' => 'Display 13',
+                                    '14' => 'Display 14',
+                                    '15' => 'Display 15',
+                                    '16' => 'Display 16',
+                                    '17' => 'Display 17',
+                                    '18' => 'Display 18',
+                                    '19' => 'Display 19',
+                                    '20' => 'Display 20',                                    
+                                    '9999' => '&infin;'
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
             
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Abgelaufene Nachrichten',
+                                'value_options' => array(
+                                    'todate' => 'Am Tag ausblenden',
+                                    'totime' => 'Zur Uhrzeit ausblenden',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+            
+                            'attributes' => array(
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Format Datum wählen',
+                                'empty_option' => 'Please select',
+                                'value_options' => array(
+                                    'FULL' => 'Name Wochentag, Name Monat, Jahr 4 stellig',
+                                    'LONG' => 'Name Monat, Jahr 4 stellig',
+                                    'MEDIUM' => 'Nur Datum, Jahr 4 stellig',
+                                    'SHORT' => 'Nur Datum, Jahr 2 stellig',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )                
+            ),
             'blogs' => array(
                 'resource' => 'intranet',
                 'name' => 'Nachrichten (Hauptanwendung)',

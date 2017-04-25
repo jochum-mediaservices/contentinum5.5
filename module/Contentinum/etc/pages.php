@@ -65,7 +65,17 @@ return array(
             'worker' => 'Contentinum\Mapper\Content\Plugin',
             'entity' => 'Contentinum\Entity\WebContentGroups',
         )
-    ),    
+    ), 
+    'jsonpages' => array(
+        'splitQuery' => 1,
+        'resource' => 'index',
+        'template' => 'app/response/jsonpages',
+        'app' => array(
+            'controller' => 'Contentinum\Controller\JsonController',
+            'worker' => 'Contentinum\Mapper\Content\JsonPageContent',
+            'entity' => 'Contentinum\Entity\WebContentGroups',
+        )        
+    ),
     'sitemap.xml' => array(
         'splitQuery' => 1,
         'resource' => 'index',

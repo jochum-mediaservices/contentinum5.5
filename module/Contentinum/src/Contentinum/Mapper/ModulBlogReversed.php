@@ -35,96 +35,112 @@ namespace Contentinum\Mapper;
  */
 class ModulBlogReversed extends AbstractModuls
 {
-
     /**
      *
      * @var unknown
      */
     private $findModul = false;
-
+    
+    private $backlink = null;
+    
+    private $categorybacklink = null;
+    
     /**
      * (non-PHPdoc)
      *
-     * @see \Contentinum\Mapper\AbstractModul::fetchContent()
+     * @see \Contentinum\Mapper\AbstractModuls::fetchContent()
      */
     public function fetchContent(array $params = null)
     {
-        return $this->build($this->groupQuery($this->configure['modulParams']));
+        $this->backlink = null;
+        return $this->build($this->query($this->configure['modulParams']));
     }
-
+    
     /**
-     * Build content array from query result
+     * Build content array from database query result
      *
-     * @param array $entries
-     *            database result
+     * @param array $entries query result
      * @return multitype:multitype:string unknown multitype:multitype:string unknown
      */
     private function build($entries)
     {
-        if (is_array(($contents = $this->query($this->configure['modulParams'])))) {
-            $entries = array_merge($entries, $contents);
-        }
         $result = array();
-        if ($entries) {
-            $result['news'] = $entries;
+        $result['news'] = $entries;
+        $result['group'] = $this->fetchBlogGroup($this->configure['modulParams']);
+        if (false !== ($section = $this->getParameter('section'))) {
+            switch ($section) {
+                case 'tag':
+                case 'category':
+                case 'archive':
+                    break;
+                default:
+                    $this->isModulContent($entries);
+                    if (false !== $this->findModul){
+                        $result['newsplugins'] = $this->fetchModulContent();
+                    }
+            }
         }
-        if ($this->article && 'archive' !== $this->article) {
-            $result['newsarticle'] = 1;
-            $this->isModulContent($entries);
-            if (false !== $this->findModul){
-                $result['newsplugins'] = $this->fetchModulContent();
-            }          
-        } elseif ($this->article && 'archive' === $this->article && $this->category) {
-            $result['archivbacklink'] = $this->article . '/' . $this->category;
+    
+    
+        if (null !== $this->backlink){
+            $result['archivbacklink'] = $this->backlink;
         }
         return $result;
     }
-
+    
     /**
      *
-     * @param unknown $entries            
+     * @param unknown $entries
      * @return unknown
      */
     private function isModulContent($entries)
     {
+        $modul = array();
         foreach ($entries as $entry) {
-            if (1 !== (int) $entry['id']){
-                if (strlen($entry['modul']) > 1) {
-                    $modul[$entry['modul']][$entry['id']]['modulReferer'] = $entry['id'];
-                    $modul[$entry['modul']][$entry['id']]['modulParams'] = $entry['modul_params'];
-                    $modul[$entry['modul']][$entry['id']]['modulDisplay'] = $entry['modul_display'];
-                    $modul[$entry['modul']][$entry['id']]['modulConfig'] = $entry['modul_config'];
-                    $modul[$entry['modul']][$entry['id']]['modulLink'] = $entry['modul_link'];
-                    $modul[$entry['modul']][$entry['id']]['modulFormat'] = $entry['modul_format'];
+            if (1 !== (int) $entry->webContent->id){
+                if (strlen($entry->webContent->modul) > 1) {
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulReferer'] = $entry->webContent->id;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulParams'] = $entry->webContent->modulParams;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulDisplay'] = $entry->webContent->modulDisplay;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulConfig'] = $entry->webContent->modulConfig;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulLink'] = $entry->webContent->modulLink;
+                    $modul[$entry->webContent->modul][$entry->webContent->id]['modulFormat'] = $entry->webContent->modulFormat;
                     $this->findModul = $modul;
                 }
                 break;
             }
-            
+    
         }
-        
+    
         return $entries;
     }
     
     /**
-     * 
+     *
      */
     private function fetchModulContent()
     {
-        $modul = $this->getSl()->get('Contentinum\Modul');
-        $modul->setPlugins( $this->getSl()->get('Contentinum\PluginKeys') );
+    
+        $modul = $this->getSl()->get('contentinum_modul');
+        $modul->setPlugins($this->getSl()->get('contentinum_plugin_keys'));
+        $modul->setArticle( $this->getArticle());
+        $modul->setCategory($this->getCategory());
+        $modul->setTag($this->getTag());
+        $modul->setTagValue($this->getTagValue());
+        $modul->setIdentity($this->getIdentity());
+        $modul->setAcl($this->getAcl());
+        $modul->setDefaultRole($this->getDefaultRole());
         $modul->setUrl($this->getUrl());
-        $modul->setArticle( $this->getArticle() );
-        $modul->setCategory( $this->getCategory() );
+        $modul->setXmlHttpRequest($this->getXmlHttpRequest());
         $modul->setModul($this->findModul);
         return $modul->fetchContent();
+         
     }
-
+    
     /**
-     * Build query string and execute this
+     * Database query
      *
-     * @param int $id
-     *            blog or news ident
+     * @param int $id integer
      */
     private function query($id)
     {
@@ -134,62 +150,90 @@ class ModulBlogReversed extends AbstractModuls
             $limit = (int) $this->configure['modulDisplay'];
         }
         
-        if (null == $this->configure['modulFormat']){
-            
-        }
-        
         switch ($this->configure['modulFormat']){
             case 'totime':
                 $condition = date('Y-m-d H:i:s');
                 break;
             case 'todate':
             default:
-              $condition = date('Y-m-d') . ' 00:00:00';  
-              break;
-        }
-        
-        
-        
-        $sql = "SELECT mainContent.id, mainContent.web_medias_id, mainContent.htmlwidgets, mainContent.source, mainContent.headline, ";
-        $sql .= "mainContent.modul, mainContent.modul_params, mainContent.modul_display, mainContent.modul_config, mainContent.modul_link, mainContent.modul_format, ";
-        $sql .= "mainContent.content_teaser, mainContent.content, mainContent.number_character_teaser, ";
-        $sql .= "mainContent.label_read_more, mainContent.publish_date, DATE_FORMAT(mainContent.publish_date,'%Y/%m/%d') AS lnPublishDate, mainContent.publish_author, ";
-        $sql .= "mainContent.author_email, mainContent.overwrite, pageParams.url ";
-        $sql .= "FROM web_content_groups AS main ";
-        $sql .= "LEFT JOIN web_content AS mainContent ON mainContent.id = main.web_content_id ";
-        $sql .= "LEFT JOIN web_pages_parameter AS pageParams ON pageParams.id = main.content_group_page ";
-        if ($this->article && 'archive' !== $this->article) {
-            $sql .= "WHERE mainContent.source = '" . $this->article . "' ";
-        } elseif ($this->article && 'archive' === $this->article && $this->category) {
-            $sql .= "WHERE main.web_contentgroup_id = '" . $id . "' ";
-            $sql .= "AND main.publish_date LIKE '" . $this->category . "%' ";
-            $sql .= "ORDER BY main.publish_date DESC ";
+                $condition = date('Y-m-d') . ' 00:00:00';
+                break;
+        }        
+    
+        $em = $this->getStorage();
+        $builder = $em->createQueryBuilder();
+        $builder->select('main');
+        $builder->from('Contentinum\Entity\WebContentGroups', 'main');
+        $builder->where('main.webContentgroup = :id');
+        $builder->andWhere('main.webContent != 1');
+    
+        if (false !== ($section = $this->getParameter('section'))) {
+            switch ($section) {
+                case 'tag':
+                    if (false !== ($article = $this->getParameter('article'))) {
+                        $limit = null;
+                        $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
+                        $builder->leftJoin('Contentinum\Entity\WebTagAssign', 'ref2', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref2.webItemId = ref1.id');
+                        $builder->leftJoin('Contentinum\Entity\WebTags', 'ref3', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref3.id = ref2.webTagId');
+                        $builder->andWhere('ref3.tagScope = :tagscope');
+                        $builder->setParameter('tagscope', $article);
+                        $this->backlink = 'tag/' . $article;
+                    }
+                    break;
+                case 'category':
+                    if (false !== ($article = $this->getParameter('article'))) {
+                        $limit = null;
+                        $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
+                        $builder->leftJoin('Contentinum\Entity\WebTags', 'ref2', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref2.id = ref1.contentCategory');
+                        $builder->andWhere('ref2.tagScope = :tagscope');
+                        $builder->setParameter('tagscope', $article);
+                        $this->backlink = 'category/' . $article;
+                    }
+                    break;
+                case 'archive':
+                    if (false !== ($article = $this->getParameter('article'))) {
+                        $limit = null;
+                        $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
+                        $builder->andWhere('ref1.publishDate LIKE :date');
+                        $builder->setParameter('date', $article . '%');
+                        $this->backlink = 'archive/' . $article;
+                    }
+                    break;
+                default:
+                    $limit = null;
+                    $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
+                    $builder->andWhere('ref1.source = :source');
+                    $builder->setParameter('source', $section);
+                    break;
+            }
         } else {
-            $sql .= "WHERE main.web_contentgroup_id = '" . $id . "' ";
-            $sql .= "AND main.publish_date > '" . $condition . "' ";
-            $sql .= "ORDER BY main.publish_date ASC ";
-            $sql .= "LIMIT 0,{$limit} ";
+            $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
         }
-        
-        return $this->fetchAll($sql);
+        $builder->andWhere('ref1.publish = :publish');
+        $builder->andWhere("ref1.publishUp = '0000-00-00 00:00:00' OR ref1.publishUp <= '". date('Y-m-d H:i:s') ."'");
+        $builder->andWhere("ref1.publishDown = '0000-00-00 00:00:00' OR ref1.publishDown >= '". date('Y-m-d H:i:s') ."'");
+        $builder->andWhere("main.publishDate > '" . $condition . "'");
+        $builder->setParameter('id', $id);
+        $builder->setParameter('publish', 'yes');
+        $builder->orderBy('main.publishDate', 'ASC');
+        if (null === $limit) {
+            $builder->setMaxResults($limit);
+        }
+        return $builder->getQuery()->getResult();
     }
-
+    
     /**
-     * Build query string and execute this
      *
-     * @param int $id
-     *            blog or news ident
+     * @param unknown $id
      */
-    private function groupQuery($id)
+    private function fetchBlogGroup($id)
     {
-        $sql = "SELECT main.web_content_id AS id, main.name AS groupName, main.group_style, main.group_element, ";
-        $sql .= "main.group_element_attribute, main.web_contentgroup_id AS groupId, main.group_params ";
+        $sql = "SELECT main.name, main.group_style, main.group_element, main.group_element_attribute, main.group_params, wpp.url, ";
+        $sql .= "wm.media_name, wm.media_link, wm.media_metas ";
         $sql .= "FROM web_content_groups AS main ";
-        $sql .= "WHERE main.web_contentgroup_id = '" . $id . "' ";
-        $sql .= "AND main.web_content_id = '1' ";
-        return $this->fetchAll($sql);
+        $sql .= "LEFT JOIN web_pages_parameter AS wpp ON wpp.id = main.content_group_page ";
+        $sql .= "LEFT JOIN web_medias AS wm ON wm.id = main.headline_images ";
+        $sql .= "WHERE main.id = {$id}";
+        return $this->fetchRow($sql);
     }
-
-    private function modulquery()
-    {} 
 }
