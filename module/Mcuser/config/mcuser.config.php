@@ -37,9 +37,16 @@ return array(
     
     'contentinum_config' => array(
         'contentinum_module' => array('mcuser'),
-        'etc_cfg_pages' => array(
-            'mcuser_pages' => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/pages.php'
+        'etc_cfg_pages' => array('mcuser_pages' => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/pages.php',
+                                //'mcuser_customer_pages' => CON_ROOT_PATH . '/data/view/login/etc/pages.php'
         ),
+        /*'etc_cfg_pages' => function (){
+            if (is_file(CON_ROOT_PATH . '/data/view/login/etc/pages.php')){
+                return array('mcuser_pages' => CON_ROOT_PATH . '/data/view/login/etc/pages.php');
+            } else {
+                return array('mcuser_pages' => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/pages.php');
+            }
+        },*/
         'etc_cfg_files' => array(
             'mcwork_navigation' => array(__NAMESPACE__ => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/navigation.php'),
             'user_form_decorators' => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/form/decorators.php',
