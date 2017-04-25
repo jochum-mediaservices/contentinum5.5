@@ -84,8 +84,12 @@ foreach ($this->entries as $entry) {
     $rowContent = array();
     $rowContent[] = '<input id="row' . $i . '" type="checkbox" value="' . $entry['id'] . '" name="cb[]" data-name="' .  $entry['summary'] . '" />';
     $rowContent[] = $entry['summary'] . '<br /><em>' . $entry['name'] . '</em>';
+    $ext = '';
     if ( $entry['organizerId'] > 0 ){
-        $rowContent[] = $entry['organizerName'];
+        if ( strlen($entry['organizerNameExt']) > 1 ){
+            $ext = ', ' . $entry['organizerNameExt'];
+        }
+        $rowContent[] = $entry['organizerName'] . $ext;
     } else {
         $rowContent[] = $entry['organizer'];
     }

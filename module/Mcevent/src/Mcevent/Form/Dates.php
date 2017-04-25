@@ -142,7 +142,7 @@ class Dates extends AbstractForms
                     'options' => array(
                         'label' => 'Veranstalter',
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
-                        'description' => 'Veranstaltunger hier eintragen, wenn dieser nicht in Organisationen angelegt ist',
+                        'description' => 'Veranstalter hier eintragen, wenn dieser nicht in Organisationen angelegt ist',
                     ),
             
                     'type' => 'Text',
@@ -151,6 +151,24 @@ class Dates extends AbstractForms
                     )
                 )
             ), 
+            
+            array(
+                'spec' => array(
+                    'name' => 'infoUrl',
+                    'required' => false,
+            
+                    'options' => array(
+                        'label' => 'Mehr Information unter (URL)',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'description' => 'Auf eine Webseite mit weiteren Informationen verweisen, bitte mit http:// oder https:// angeben',
+                    ),
+            
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'infoUrl'
+                    )
+                )
+            ),            
             
             array(
                 'spec' => array(
@@ -211,7 +229,7 @@ class Dates extends AbstractForms
                     'name' => 'organizerId',
                     'required' => false,
                     'options' => array(
-                        'label' => 'Veranstaltunger auswählen',
+                        'label' => 'Veranstalter auswählen',
                         'empty_option' => 'Please select',
                         'value_options' => $this->getOptions('mcevent_organizer'),
                         'description' => 'Überschreibt das Feld Veranstaltunger',

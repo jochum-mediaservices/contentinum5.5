@@ -50,19 +50,25 @@ class DatesRow extends Parameter
         $format = $entries['modulConfig'];
         $displaymonthname = false;
         $dataProp = array();
+        $host = str_replace('www.', '', $this->view->host);
         foreach ($entries['modulContent'] as $entry) {
             $dateData = '';           
             $dataProp['data-summary'] = $entry['summary'];
             $dateData .= $this->deployRow($this->summary, $entry['summary']);
             if ( $entry['organizerId'] > 0 ){
-                $dataProp['data-attendee'] = $entry['organizerName'];
-                $dateData .= $this->deployRow($this->organizer, $entry['organizerName']);                
+                $organizerExt = '';
+                if (strlen($entry['organizerNameExt']) > 1) {
+                    $organizerExt = ' ' . $entry['organizerNameExt'];
+                }
+                $dataProp['data-attendee'] = $entry['organizerName'] . $organizerExt;                
+                $dateData .= $this->deployRow($this->organizer, $entry['organizerName'] . $organizerExt);                
             } elseif (strlen($entry['organizer']) > 1){
                 $dataProp['data-attendee'] = $entry['organizer'];
                 $dateData .= $this->deployRow($this->organizer, $entry['organizer']);
             }         
             $datetime = new \DateTime($entry['dateStart']);        
             $dataProp['data-dstart'] = $datetime->format("Ymd\\THis");
+            $dataProp['data-uuid'] = $datetime->format("Ymd\\THis") . '-IC'. $entry['id'] . '@' . $host;
             $dataProp['data-dend'] = '00000000T000000';
             $dateEndStr = '';
             $dateEndMeta = '';
@@ -74,7 +80,11 @@ class DatesRow extends Parameter
                     if ($datetime->format("Y-m-d") === $dateTimeEnd->format("Y-m-d")){
                         $dateEndStr = ' &dash; ' . $dateTimeEnd->format("H:i");
                     } else {
-                        $dateEndStr = ' &dash; ' . $this->convert($dateTimeEnd->format('N'),'dayname')  . ', ' . $dateTimeEnd->format('d') . '. ' . $this->convert($dateTimeEnd->format('m')) . ' ' . $dateTimeEnd->format('Y');
+                        $endtime = '';
+                        if ('00:00' != $dateTimeEnd->format("H:i")){
+                            $endtime .= ', ' . $dateTimeEnd->format("H:i");
+                        }
+                        $dateEndStr = ' &dash; ' . $this->convert($dateTimeEnd->format('N'),'dayname')  . ', ' . $dateTimeEnd->format('d') . '. ' . $this->convert($dateTimeEnd->format('m')) . ' ' . $dateTimeEnd->format('Y') . $endtime;
                     }
                 }
             }
@@ -188,6 +198,10 @@ class DatesRow extends Parameter
                 $dateData .= $this->deployRow($descriptionHead, 'Weitere Informationen');
                 $dateData .= $this->deployRow($descriptionBody, $description);                
             }
+            
+            if ( strlen($entry['infoUrl']) > 1 ){
+                $dateData .= '<p class="event-url"><a class="event-url" itemprop="url" href="' . $entry['infoUrl'] . '">' . $entry['infoUrl'] . '</a></p>';
+            }            
             
             $toolbar = '';
             if (null !== $this->toolbar) {

@@ -46,7 +46,7 @@ class DatesIndex extends Worker
         
         $sql = "SELECT mcd.id, mcd.summary, mcd.organizer, mcd.organizer_id AS organizerId, mcd.account_id AS accountId, mct.name, ";
         $sql .= "mcd.location, mcd.publish, mcd.date_start, mcd.date_end, mcd.created_by, mcd.update_by, mcd.register_date, mcd.up_date, ";
-        $sql .= "orga.organisation AS organizerName, orga.organisation_ext organizerNameExt, orga.account_street AS organizerStreet, ";
+        $sql .= "orga.organisation AS organizerName, orga.organisation_ext AS organizerNameExt, orga.account_street AS organizerStreet, ";
         $sql .= "account.organisation AS accountName, account.organisation_ext AS accountNameExt, account.account_street AS accountStreet ";
         $sql .= "FROM mcevent_dates AS mcd ";
         $sql .= "LEFT JOIN accounts AS orga ON orga.id = mcd.organizer_id ";

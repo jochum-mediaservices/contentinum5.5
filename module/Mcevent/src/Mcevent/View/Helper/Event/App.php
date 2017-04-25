@@ -50,19 +50,25 @@ class App extends Parameter
         $format = $entries['modulConfig'];
         $displaymonthname = false;
         $dataProp = array();
+        $host = str_replace('www.', '', $this->view->host);
         foreach ($entries['modulContent'] as $entry) {
             $dateData = '';           
             $dataProp['data-summary'] = $entry['summary'];
             $dateData .= $this->deployRow($this->summary, $entry['summary']);
             if ( $entry['organizerId'] > 0 ){
-                $dataProp['data-attendee'] = $entry['organizerName'];
-                $dateData .= $this->deployRow($this->organizer, $entry['organizerName']);                
+                $organizerExt = '';
+                if (strlen($entry['organizerNameExt']) > 1) {
+                    $organizerExt = ' ' . $entry['organizerNameExt'];
+                }
+                $dataProp['data-attendee'] = $entry['organizerName'] . $organizerExt;
+                $dateData .= $this->deployRow($this->organizer, $entry['organizerName'] . $organizerExt);                
             } elseif (strlen($entry['organizer']) > 1){
                 $dataProp['data-attendee'] = $entry['organizer'];
                 $dateData .= $this->deployRow($this->organizer, $entry['organizer']);
             }         
             $datetime = new \DateTime($entry['dateStart']);        
             $dataProp['data-dstart'] = $datetime->format("Ymd\\THis");
+            $dataProp['data-uuid'] = $datetime->format("Ymd\\THis") . '-IC'. $entry['id'] . '@' . $host;
             $dataProp['data-dend'] = '00000000T000000';
             $dateEndStr = '';
             $dateEndMeta = '';
@@ -187,6 +193,10 @@ class App extends Parameter
                 $descriptionBody['grid']['attr']['id'] = 'event' . $entry['id'];
                 $dateData .= $this->deployRow($descriptionHead, 'Weitere Informationen');
                 $dateData .= $this->deployRow($descriptionBody, $description);                
+            }
+            
+            if ( strlen($entry['infoUrl']) > 1 ){
+                $dateData .= '<p class="event-url"><a class="event-url" itemprop="url" href="' . $entry['infoUrl'] . '">' . $entry['infoUrl'] . '</a></p>';
             }
             
             $toolbar = '';

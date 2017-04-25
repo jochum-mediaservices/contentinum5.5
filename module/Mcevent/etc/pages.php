@@ -641,7 +641,7 @@ return array(
                 'contacts' => 'Contentinum\Entity\Contacts',
             ),            
             'formdecorators' => 'mcwork_form_decorators',
-            'form' => 'Mcevent\Form\Dates\ConfigForm',
+            'form' => 'Mcevent\Form\Dates\ConfigEditForm',
             'populateSerializeFields' => array('settingsFormular'),
             'formaction' => '/mcevent/configuration/edit',
             'settoroute' => '/mcevent/configuration'
@@ -870,5 +870,25 @@ return array(
             'entity' => 'Mcevent\Entity\MceventDates',
         )
     
+    ),
+    '/mcevent/downloads/evenets' => array(
+        'resource' => 'index',
+        'template' => 'downloads/download/icsevenets',
+        'app' => array(
+            'controller' => 'Mcevent\Controller\DownloadsController',
+            'worker' => 'Mcevent\Mapper\Download\Events',
+            'entity' => 'Mcevent\Entity\MceventDates',
+        )
+    
+    ),
+    
+    '/mcevent/subscribe/evenets' => array(
+        'resource' => 'index',
+        'app' => array(
+            'controller' => 'Mcevent\Controller\StreamController',
+            'worker' => 'Mcevent\Mapper\Streams\Events',
+            'entity' => 'Municipal\Entity\TrashCalendar',
+        )
     ),    
+    
 );

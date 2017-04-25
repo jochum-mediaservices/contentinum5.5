@@ -35,6 +35,9 @@ return array(
              'mcevent_options_eventdates' => 'Mcevent\Service\Register\RegisterEventFactory',
              'mcevent_options_eventdateinternal' => 'Mcevent\Service\Register\RegisterEventInternalFactory',    
              'mcevent_options_eventdatepublic' => 'Mcevent\Service\Register\RegisterEventPublicFactory',
+             
+             
+             'mcevent_options_eventdownload' => 'Mcevent\Service\Opt\DownloadEventsFactory',
          ),
      ),
     
@@ -62,6 +65,7 @@ return array(
             'app_plugin_templates' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/templates/plugins'),
             'mcwork_form_rules' => array(CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/form/rules.php'),
             'mcwork_navigation' => array(__NAMESPACE__ => CON_ROOT_PATH . '/module/' . __NAMESPACE__ . '/etc/navigation.php'),
+            'mcevent_eventdownload' => CON_ROOT_PATH . '/data/opt/eventsdownload.config.php',
     
         ),
     ), 

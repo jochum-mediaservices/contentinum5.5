@@ -16,7 +16,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category Mcevent
+ * @category contentinum
  * @package Service
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  * @copyright Copyright (c) 2009-2013 jochum-mediaservices, Katja Jochum (http://www.jochum-mediaservices.de)
@@ -25,58 +25,47 @@
  * @link      https://github.com/Mikel1961/contentinum-components
  * @version   1.0.0
  */
-namespace Mcevent\Service\Accounts;
+namespace Mcevent\Service\Opt;
 
-use Contentinum\Service\WebsiteServiceFactory;
-use ContentinumComponents\Mapper\Worker;
+use Contentinum\Service\ContentinumServiceFactory;
 use Zend\Config\Config;
 
-class OrganizerServiceFactory extends WebsiteServiceFactory
+/**
+ * Config key customconfig customer base adjusments
+ *
+ * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
+ */
+class DownloadEventsFactory extends ContentinumServiceFactory
 {
 
     /**
-     * Cache key page table
+     * Contentinum logger configuration key
      *
      * @var string
      */
-    const CONTENTINUM_DATABASE = 'mcevent_organizer';
+    const CONTENTINUM_CFG_FILE = 'mcevent_eventdownload';
 
     /**
      * Name cache factory
-     *
+     * 
      * @var string
      */
-    const CONTENTINUM_CACHE = 'mcwork_cache_data';
+    const CONTENTINUM_CACHE = 'contentinum_cache_struture';
 
-    protected function queryDbCacheResult($config, $sl)
+    /**
+     * Get result from cache or read from php file
+     *
+     * @param string $file path to file and filename
+     * @param string $key template file ident
+     * @param ServiceLocatorInterface $sl            
+     */
+    protected function getFileAsConfig($file, $key, $sl)
     {
         $result = array();
-        $cache = $sl->get(static::CONTENTINUM_CACHE);
-        $key = $config['cache'];
-        if (! ($result = $cache->getItem($key))) {
-            $worker = new Worker($sl->get($config['entitymanager']));
-            
-            $entries = $worker->getStorage()
-                ->getRepository($config['entity'])
-                ->findBy(array(
-                'eventOrganizer' => 1
-            ), array(
-                'organisation' => 'ASC'
-            ));
-            
-            $tmp = array();
-            foreach ($entries as $entry) {
-                $ext = '';
-                if (strlen($entry->organisationExt) > 1){
-                    $ext = $entry->organisationExt;
-                }
-                
-                $tmp[$entry->id] = array(
-                    'name' => $entry->organisation . ', ' . $ext,
-                );
-            }
-            $result = new Config($tmp);
-            if (isset($config['savecache']) && true === $config['savecache']) {
+        if (is_file(CON_ROOT_PATH . '/data/opt/eventsdownload.config.php')) {
+            $cache = $sl->get(static::CONTENTINUM_CACHE);         
+            if (! ($result = $cache->getItem($key))) {
+                $result = new Config(include $file);
                 $cache->setItem($key, $result);
             }
         }

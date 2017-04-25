@@ -51,6 +51,8 @@ class RegistrationPublicForm extends AbstractForms
         $sl = $this->getServiceLocator();
         $pageOptions = $sl->get('contentinum_pages');
         $configuration = $pageOptions->getParameter('categoryvalue');
+        
+        //var_dump($pageOptions->getParams());exit;
 
         $con = new Worker($sl->get('doctrine.entitymanager.orm_default'));
         $result = $con->fetchRow("SELECT * FROM mcevent_dates_config WHERE id = {$configuration};");
@@ -89,6 +91,59 @@ class RegistrationPublicForm extends AbstractForms
                     $onlysingle = true;
                 }
                 
+                if ('fieldcompany' == $setting){
+                    $field = '';
+                    $field['name'] = 'company';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Firma';
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['type'] = 'Text';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'company';
+                    $field['attributes']['required'] = 'required';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
+                if ('fieldtitle' == $setting){
+                    $field = '';
+                    $field['name'] = 'title';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Anrede';
+                    $field['options']['empty_option'] = 'Please select';
+                    $field['options']['value_options'] = array('Frau' => 'Frau', 'Herr' => 'Herr');
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['type'] = 'Select';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'title';
+                    $field['attributes']['required'] = 'required';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
+                if ('fieldsurname' == $setting){
+                    $field = '';
+                    $field['name'] = 'surname';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Vorname';
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['type'] = 'Text';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'surname';
+                    $field['attributes']['required'] = 'required';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
                 if ('fieldname' == $setting){
                     $field = '';
                     $field['name'] = 'name';
@@ -104,6 +159,40 @@ class RegistrationPublicForm extends AbstractForms
                     $fields[] = array(
                         'spec' => $field
                     );                    
+                }
+                
+                if ('fieldstreet' == $setting){
+                    $field = '';
+                    $field['name'] = 'street';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Straße und Hausnummer';
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['type'] = 'Text';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'street';
+                    $field['attributes']['required'] = 'required';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
+                if ('fieldcity' == $setting){
+                    $field = '';
+                    $field['name'] = 'city';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Postleitzahl und Ort';
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['type'] = 'Text';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'city';
+                    $field['attributes']['required'] = 'required';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
                 }
                 
                 
@@ -157,7 +246,67 @@ class RegistrationPublicForm extends AbstractForms
                     $fields[] = array(
                         'spec' => $field
                     );
-                } 
+                }
+                
+                if ('fieldstayBreakfast' == $setting){
+                    $field = '';
+                    $field['name'] = 'stayBreakfast';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Frühstückteilnahme bestätigen';
+                    $field['options']['value_options'] = array('yes' => 'Ja, ich nutze das Frühstücksangebot', 'no' => 'Nein, ich nehme am Frühstück nicht teil', 'perhaps' => 'Noch unentschlossen');
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['options']['description'] = 'Bestätigen Sie Bitte ob Sie am Frühstück teilnehmen';
+                    $field['type'] = 'Select';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'stayBreakfast';
+                    $field['attributes']['required'] = 'required';
+                    $field['attributes']['value'] = 'no';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
+                if ('fieldstayLunch' == $setting){
+                    $field = '';
+                    $field['name'] = 'stayLunch';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Teilnahme am Mittagessen bestätigen';
+                    $field['options']['value_options'] = array('yes' => 'Ja, ich nutze das Mittagessen', 'no' => 'Nein, ich nehme am Mittagessen nicht teil', 'perhaps' => 'Noch unentschlossen');
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['options']['description'] = 'Bestätigen Sie Bitte ob Sie am Mittagessen teilnehmen';
+                    $field['type'] = 'Select';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'stayLunch';
+                    $field['attributes']['required'] = 'required';
+                    $field['attributes']['value'] = 'no';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
+                
+                if ('fieldstayDinner' == $setting){
+                    $field = '';
+                    $field['name'] = 'stayDinner';
+                    $field['required'] = true;
+                    $field['options'] = array();
+                    $field['options']['label'] = 'Teilnahme am Abendessen bestätigen';
+                    $field['options']['value_options'] = array('yes' => 'Ja, ich nutze das Abendessen', 'no' => 'Nein, ich nehme am Abendessen nicht teil', 'perhaps' => 'Noch unentschlossen');
+                    $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['options']['description'] = 'Bestätigen Sie Bitte ob Sie am Abendessen teilnehmen';
+                    $field['type'] = 'Select';
+                    $field['attributes'] = array();
+                    $field['attributes']['id'] = 'stayDinner';
+                    $field['attributes']['required'] = 'required';
+                    $field['attributes']['value'] = 'no';
+                    
+                    $fields[] = array(
+                        'spec' => $field
+                    );
+                }
                 
                 if ('fieldstayOvernight' == $setting){
                     $field = '';
@@ -172,7 +321,7 @@ class RegistrationPublicForm extends AbstractForms
                     $field['attributes'] = array();
                     $field['attributes']['id'] = 'stayOvernight';
                     $field['attributes']['required'] = 'required';
-                    $field['attributes']['value'] = 'yes';
+                    $field['attributes']['value'] = 'no';
                 
                     $fields[] = array(
                         'spec' => $field

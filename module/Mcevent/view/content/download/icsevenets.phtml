@@ -1,0 +1,68 @@
+<?php
+print '<pre>';
+var_dump($this->entries);
+exit();
+
+define('DATE_ICAL', 'Ymd\THis'); // \Z
+$params = $this->entries['params'];
+$name = 'Trash';
+$proid = 'Trash Administration//city';
+if (isset($params['organisation'])){
+    $proid = $params['organisation'];
+}
+if (isset($params['name'])){
+    $name = $params['name'];
+}
+if (isset($params['city'])){
+    $proid .= '//' . $params['city'];
+    $name .= '-' . $params['city'];
+}
+$street = '';
+if (isset($this->entries['street'])){
+    $street = ', ' . $this->entries['street']['street'];
+}
+$vcalendar = 'BEGIN:VCALENDAR';
+$vcalendar .= "\n" . 'PRODID:-//'.$proid.'//DE';
+$vcalendar .= "\n" . 'VERSION:2.0';
+$vcalendar .= "\n" . 'METHOD:PUBLISH';
+$vcalendar .= "\n" . 'X-WR-CALNAME:'. $name;
+$vcalendar .= "\n" . 'X-MS-OLK-WKHRSTART;TZID="Mitteleuropäische Zeit":080000';
+$vcalendar .= "\n" . 'X-MS-OLK-WKHREND;TZID="Mitteleuropäische Zeit":170000';
+$vcalendar .= "\n" . 'X-MS-OLK-WKHRDAYS:MO,TU,WE,TH,FR';
+$vcalendar .= "\n" . 'BEGIN:VTIMEZONE';
+$vcalendar .= "\n" . 'TZID:Mitteleuropäische Zeit';
+$vcalendar .= "\n" . 'BEGIN:STANDARD';
+$vcalendar .= "\n" . 'DTSTART:16011028T030000';
+$vcalendar .= "\n" . 'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10';
+$vcalendar .= "\n" . 'TZOFFSETFROM:+0200';
+$vcalendar .= "\n" . 'TZOFFSETTO:+0100';
+$vcalendar .= "\n" . 'END:STANDARD';
+$vcalendar .= "\n" . 'BEGIN:DAYLIGHT';
+$vcalendar .= "\n" . 'DTSTART:16010325T020000';
+$vcalendar .= "\n" . 'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3';
+$vcalendar .= "\n" . 'TZOFFSETFROM:+0100';
+$vcalendar .= "\n" . 'TZOFFSETTO:+0200';
+$vcalendar .= "\n" . 'END:DAYLIGHT';
+$vcalendar .= "\n" . 'END:VTIMEZONE';
+$vevent = '';
+$host = str_replace('www.', '', $this->host);
+foreach ($this->entries['entries'] as $entry) {
+    $vevent .= "\n" . 'BEGIN:VEVENT';
+    $datestart = new \DateTime($entry['dateStart']); // . ' 06:00:00');
+    $vevent .= "\n" . 'UID:' . $entry['id'] . '@' . $host;
+    $vevent .= "\n" . 'DTSTAMP:' . date(DATE_ICAL, strtotime($entry['dtstamp']));
+    $vevent .= "\n" . 'DTSTART;VALUE=DATE:' . date(DATE_ICAL, strtotime($datestart->format("Y-m-d")));    
+    $vevent .= "\n" . 'SUMMARY:' . $entry['trashname'];
+    $vevent .= "\n" . 'LOCATION:' . $entry['district'] . $street;
+    $vevent .= "\n" . 'DESCRIPTION:Bitte ab 6 Uhr am Abholtag bereitstellen';
+    $vevent .= "\n" . 'STATUS:CONFIRMED';    
+    $vevent .= "\n" . 'TRANSP:TRANSPARENT';
+    $vevent .= "\n" . 'CLASS:CONFIDENTIAL';
+    $vevent .= "\n" . 'END:VEVENT';
+}
+$vcalendar .= $vevent;
+$vcalendar .= "\n" . 'END:VCALENDAR';
+header('Content-Type: text/calendar; charset=utf-8');
+header('Content-Disposition: attachment; filename='.$name.'.ics');
+echo $vcalendar;
+exit();
