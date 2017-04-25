@@ -4166,6 +4166,26 @@ return array(
         ),
     ), 
     
+    '/mcwork/accountlink/download' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Download Organisationen',
+        'template' => 'content/accounts/download',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Download Organisationen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Account\Download',
+            'entity' => 'Contentinum\Entity\AccountContact'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ), 
+    
     '/mcwork/accountlink/add' => array(
         'splitQuery' => 3,
         'resource' => 'publisherresource',

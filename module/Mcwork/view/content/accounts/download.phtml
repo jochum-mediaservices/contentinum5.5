@@ -1,0 +1,55 @@
+<?php
+$xls = 'Organisation' . ";";
+$xls .= 'Anrede' . ";";
+$xls .= 'Vorname' . ";";
+$xls .= 'Name' . ";";
+$xls .= 'Telefon' . ";";
+$xls .= 'Telefon Arbeit' . ";";
+$xls .= 'Mobil' . ";";
+$xls .= 'Fax' . ";";
+$xls .= 'E-Mail' . ";";
+$xls .= iconv('UTF-8', 'ISO-8859-1', 'Straße') . ";";
+$xls .= 'PLZ' . ";";
+$xls .= 'Ort' . ";";
+$xls .= 'Internet' . ";";
+$xls .= "\r\n";
+foreach ($this->entries as $entry) {
+    if ('3' == $entry->account->fieldtypes->id){
+    $ext = '';
+    if (strlen($entry->account->organisationExt) > 1){
+        $ext = ' ' .  $entry->account->organisationExt;
+    }
+    $xls .= iconv('UTF-8', 'ISO-8859-1', $entry->account->organisation . $ext) . ";";
+    $name = '';
+    if ('mr' == $entry->contact->salutation){
+        $name = 'Herr';
+    }
+    if ('ms' == $entry->contact->salutation){
+        $name = 'Frau';
+    }
+    $xls .= $name . ";";
+    $xls .= iconv('UTF-8', 'ISO-8859-1', $entry->contact->firstName) . ";";
+    $xls .= iconv('UTF-8', 'ISO-8859-1', $entry->contact->lastName) . ";";
+    $xls .= $entry->contact->phoneHome . ";";
+    $xls .= $entry->contact->phoneWork . ";";
+    $xls .= $entry->contact->phoneMobile . ";";
+    $xls .= $entry->contact->phoneFax . ";";
+    $xls .= $entry->contact->contactEmail . ";";
+    $xls .= iconv('UTF-8', 'ISO-8859-1', $entry->contact->contactAddress) . ";";
+    $xls .= $entry->contact->contactZipcode. ";";
+    $xls .= iconv('UTF-8', 'ISO-8859-1', $entry->contact->contactCity) . ";";
+    $xls .= $entry->account->internet . ";";
+    $xls .= "\r\n";
+    }
+}
+header("Content-type: application/csv");
+header("Content-Disposition: attachment; filename=exportaddress-" . date('Y-m-d') . ".csv");
+header('Cache-Control: max-age=0');
+header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+header ('Pragma: public');
+while (ob_get_level()) {
+    ob_end_clean();
+}
+print $xls;exit();

@@ -145,7 +145,11 @@ if (isset($this->toolbarcontent)) {
         ),
         'delete' => array(
             'href' => '/mcwork/' . $this->paramter['section'] . '/delete'
-        )
+        ),
+        'download' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/download'
+        ),
+        
     );
     $toolbar = $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());
 }
