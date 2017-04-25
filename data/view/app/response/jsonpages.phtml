@@ -1,0 +1,8 @@
+<?php 
+$datas = array();
+foreach ($this->entries as $entry){
+    $datas[] = $entry['content'];
+}
+echo $this->json($datas);
+exit();
+?>
