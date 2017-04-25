@@ -1,0 +1,10 @@
+<?php
+return array(
+    'eventdownload' => array(
+        'organisation' => '',
+        'city' => '',
+        'name' => '',
+        'unitcalendar' => '',
+    ),
+    
+);

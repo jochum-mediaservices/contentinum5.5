@@ -42,6 +42,9 @@ return array(
                  'calendar' => '91',
             ), 
 	        'newsletter' => array(
+	             'masteremail' => 'email@domain.tdl',
+                     'mastername' => 'name',
+                     'emailsubjekt' => 'Newsletteranmeldung',
 		      'website' => 'contentinum develop',
 	             'link' => 'https://[HOST]/newsletter/confirm/subscription',
 	             'signature' => '[ Dies ist eine automatisch durch das Webformular generierte E-Mail. ]',

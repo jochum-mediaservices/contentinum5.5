@@ -1,0 +1,9 @@
+<?php
+return array(
+    'onesignal' => array(
+        'application_id' => '',
+        'application_auth_key' => '',
+        'auth_key' => '',
+    ),
+    
+);
