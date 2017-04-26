@@ -1,0 +1,27 @@
+<?php
+$content = utf8_decode("Veranstaltung;Datum;Firma;Anrede;Vorame;Familienname;Telefon;E-Mail;Straße und Hausnummer;Postleitzahl und Ort;Anmerkung\r");
+foreach ($this->entries as $row) {//;Abhol Ortsteil
+    $name = '';
+    $content .= utf8_decode(stripslashes($row['summary'])) . ";";
+    $content .= utf8_decode( $this->datetimeformat($row['date_start'], 'FULL') ) . ";";
+    $content .= utf8_decode(stripslashes($row['company'])) . ";";//'company'
+    $content .= $row['title'] . ";";
+    $content .= utf8_decode(stripslashes($row['surname'])) . ";";
+    $content .= utf8_decode(stripslashes($row['name'])) . ";";
+    $content .= $row['phone'] . ";";
+    $content .= $row['email'] . ";";
+    $content .= utf8_decode(stripslashes($row['street'])) . ";";
+    $content .= utf8_decode(stripslashes($row['city'])) . ";";
+    $desc = utf8_decode(stripslashes($row['description']));
+    $content .= preg_replace("/\\s+/", " ", $desc) . ";";
+    //$content .= '' . ";"; //utf8_decode(stripslashes($row['description']))
+    $content .= "\n"; 
+}
+header("Content-type: application/csv");
+header("Content-Disposition: attachment; filename=teilnehmerliste-" . date('Y-m-d') . ".csv");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+header("Pragma: public");
+echo $content;
+exit();
+?>

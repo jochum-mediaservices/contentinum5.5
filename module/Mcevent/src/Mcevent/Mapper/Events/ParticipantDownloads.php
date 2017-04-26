@@ -34,7 +34,7 @@ use ContentinumComponents\Mapper\Worker;
  *
  * @author Michael Jochum, michael.jochum@jochum-mediaservices.de
  */
-class RegistrationsDownload extends Worker
+class ParticipantDownloads extends Worker
 {
     /**
      * Content query
@@ -45,14 +45,13 @@ class RegistrationsDownload extends Worker
     {
         $current = date('Y-m-d',strtotime(date('Y-m-d') . ' -1 month'));
         
-        $sql = "SELECT mdr.id, mdr.mcevent_id, mdr.name, mdr.surname, mdr.phone, mdr.email, ";
+        $sql = "SELECT mdr.id, mdr.company, mdr.title, mdr.name, mdr.surname, mdr.phone, mdr.email, ";
+        $sql .= "mdr.street, mdr.city, mdr.description, ";
         $sql .= "md.date_start, md.summary, ";
         $sql .= "mdr.created_by, mdr.update_by, mdr.register_date, mdr.up_date ";
         $sql .= "FROM mcevent_dates_register AS mdr ";
         $sql .= "LEFT JOIN mcevent_dates AS md ON md.id = mdr.mcevent_id ";
-        $sql .= "WHERE md.date_start >= '".$current."%'";
-        $sql .= "GROUP BY mdr.mcevent_id ";
-        $sql .= "ORDER BY md.date_start ASC;";
+        $sql .= "WHERE mdr.mcevent_id = '".$params['category']."' ";
         return $this->fetchAll($sql);        
     }
     

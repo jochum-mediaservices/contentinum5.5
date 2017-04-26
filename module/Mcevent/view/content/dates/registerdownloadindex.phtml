@@ -74,7 +74,7 @@ foreach ($this->entries as $entry) {
     $rowContent[] = '#';
     $rowContent[] = '<time>' . $this->datetimeformat($entry['date_start'], 'FULL') . '</time><br />' . $entry['summary'];
     
-    $rowContent[] = ''; //<a href="/mcevent/' . $this->paramter['section'] . '/listparticipants/'.$entry['id'].'" class="button tiny">Download Liste Teilnehmer</a>';
+    $rowContent[] = '<a href="/mcevent/' . $this->paramter['section'] . '/download/'.$entry['mcevent_id'].'" class="button tiny">Download Liste Teilnehmer</a>';
     $tableFactory->setHtmlContent($rowContent);
 }
 if (true === $this->xmlHttpRequest){

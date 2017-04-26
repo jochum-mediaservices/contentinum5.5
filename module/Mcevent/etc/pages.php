@@ -818,13 +818,13 @@ return array(
         ),
     ),
     
-    '/mcevent/downloadorders/orderaddress' => array(
+    '/mcevent/listparticipants/download' => array(
         'resource' => 'publisherresource',
-        'template' => 'content/trash/downloadaddresses',
+        'template' => 'content/dates/downloadadparticipant',
         'app' => array(
             'controller' => 'Mcwork\Controller\McworkController',
-            'worker' => 'Municipal\Mapper\Trash\OrderDownloads',
-            'entity' => 'Municipal\Entity\TrashOrders',
+            'worker' => 'Mcevent\Mapper\Events\ParticipantDownloads',
+            'entity' => 'Mcevent\Entity\MceventDatesRegister',
         )
     
     ),

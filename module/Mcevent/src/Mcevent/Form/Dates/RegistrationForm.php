@@ -116,174 +116,44 @@ class RegistrationForm extends AbstractForms
             ),            
             
             
-            array(
-                'spec' => array(
-                    'name' => 'formRowStartfieldsetStreet',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumStartfieldsetStreet',
-                        'value' => '<div class="row"><div class="medium-8 columns">'
-                    )
-                )
-            ),            
+           
             
             
             array(
                 'spec' => array(
                     'name' => 'street',
-                    'required' => true,
+                    'required' => false,
             
                     'options' => array(
-                        'label' => 'Straße',
+                        'label' => 'Straße und Hausnummer',
             
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW)
                     ),
             
                     'type' => 'Text',
                     'attributes' => array(
-                        'required' => 'required',
                         'id' => 'street',
                     )
                 )
             ),
             
-            
-            array(
-                'spec' => array(
-                    'name' => 'formRowMiddlefieldsetStreet',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumMiddlefieldsetStreet',
-                        'value' => '</div><div class="medium-4 columns">'
-                    )
-                )
-            ),            
-            
-            
-            array(
-                'spec' => array(
-                    'name' => 'number',
-                    'required' => true,
-            
-                    'options' => array(
-                        'label' => 'Nummer',
-                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
-                    ),
-            
-                    'type' => 'Text',
-                    'attributes' => array(
-                        'required' => 'required',
-                        'id' => 'number'
-                    )
-                )
-            ),
-            
-            
-
-            array(
-                'spec' => array(
-                    'name' => 'formRowEndfieldsetStreet',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumEndfieldsetStreet',
-                        'value' => '</div></div>'
-                    )
-                )
-            ),
-            
-            
-            array(
-                'spec' => array(
-                    'name' => 'formRowStartfieldsetCity',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumStartfieldsetCity',
-                        'value' => '<div class="row"><div class="medium-5 columns">'
-                    )
-                )
-            ),            
-            
-            
-            array(
-                'spec' => array(
-                    'name' => 'zipcode',
-                    'required' => true,
-            
-                    'options' => array(
-                        'label' => 'Postleitzahl',
-                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
-                    ),
-            
-                    'type' => 'Text',
-                    'attributes' => array(
-                        'required' => 'required',
-                        'id' => 'zipcode',
-                    )
-                )
-            ),
-            
-            array(
-                'spec' => array(
-                    'name' => 'formRowMiddlefieldsetCity',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumMiddlefieldsetCity',
-                        'value' => '</div><div class="medium-7 columns">'
-                    )
-                )
-            ),            
-            
             array(
                 'spec' => array(
                     'name' => 'city',
-                    'required' => true,
+                    'required' => false,
             
                     'options' => array(
-                        'label' => 'Ort',
+                        'label' => 'Postleitzahl und Ort',
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
                     ),
             
                     'type' => 'Text',
                     'attributes' => array(
-                        'required' => 'required',
                         'id' => 'city',
                     )
                 )
             ),            
-            
-            
-            
-            
-            array(
-                'spec' => array(
-                    'name' => 'formRowEndfieldsetCity',
-                    'options' => array(
-            
-                    ),
-                    'type' => 'ContentinumComponents\Forms\Elements\Note',
-                    'attributes' => array(
-                        'id' => 'formColumEndfieldsetCity',
-                        'value' => '</div></div>'
-                    )
-                )
-            ), 
-            
-            
+
             array(
                 'spec' => array(
                     'name' => 'description',
@@ -389,7 +259,7 @@ class RegistrationForm extends AbstractForms
             array(
                 'spec' => array(
                     'name' => 'surname',
-                    'required' => true,
+                    'required' => false,
                     
                     'options' => array(
                         'label' => 'Vorname',
@@ -399,7 +269,6 @@ class RegistrationForm extends AbstractForms
                     
                     'type' => 'Text',
                     'attributes' => array(
-                        'required' => 'required',
                         'id' => 'surname'
                     )
                 )
@@ -436,7 +305,7 @@ class RegistrationForm extends AbstractForms
                     'options' => array(
                         'label' => 'Telefon',
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
-                        'description' => 'Bei Gruppenanmeldung Telefonummer des Ansprechpartners der Gruppe',
+                        'description' => 'Nur Zahlen und Leerzeichen sind erlaubt, keine Trennzeichen zwischen Vorwahl und Durchwahl. Bei Gruppenanmeldung Telefonummer des Ansprechpartners der Gruppe',
                     ),
             
                     'type' => 'Text',
@@ -477,7 +346,7 @@ class RegistrationForm extends AbstractForms
                     'type' => 'Checkbox',
                     'attributes' => array(
                         'id' => 'sendConfirm',
-                        'value' => '1',
+                        'value' => '0',
                     )
                 )
             ),            
@@ -844,7 +713,22 @@ class RegistrationForm extends AbstractForms
         return array(
             'email' => array(
                 'required' => false,
-            ),            
+            ), 
+            'sendConfirm' => array(
+                'required' => false,
+            ), 
+            'stayBreakfast' => array(
+                'required' => false,
+            ),
+            'stayLunch' => array(
+                'required' => false,
+            ), 
+            'stayDinner' => array(
+                'required' => false,
+            ),
+            'stayOvernight' => array(
+                'required' => false,
+            ), 
         );
     }
 

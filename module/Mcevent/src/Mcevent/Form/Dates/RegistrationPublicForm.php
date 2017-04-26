@@ -203,6 +203,7 @@ class RegistrationPublicForm extends AbstractForms
                     $field['options'] = array();
                     $field['options']['label'] = 'Telefon';
                     $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
+                    $field['options']['description'] = 'Nur Zahlen und Leerzeichen sind erlaubt, keine Trennzeichen zwischen Vorwahl und Durchwahl.';
                     $field['type'] = 'ContentinumComponents\Forms\Elements\Tel';
                     $field['attributes'] = array();
                     $field['attributes']['id'] = 'phone';
