@@ -2764,7 +2764,7 @@ return array(
         'resource' => 'publisherresource',
         'app' => array(
             'controller' => 'Mcwork\Controller\DeleteController',
-            'worker' => 'Mcwork\Model\Delete\Entries',
+            'worker' => 'Mcwork\Model\Forms\DeleteFieldoptions',
             'entity' => 'Contentinum\Entity\WebFieldOptions',
             'settoroute' => '/mcwork/fieldsoption',
         )
@@ -3970,6 +3970,33 @@ return array(
             'sets' => array('mcworkformstyles','mcworkhead','mcworkformsaccounts'),
         ),
     ), 
+    
+    '/mcwork/accounts/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Accounts\DeleteAccounts',
+            'entity' => 'Contentinum\Entity\Accounts',
+            'hasEntries' => array(
+                'account1' => array(
+                    'area' => 'Die Organisation ist noch mit Kontakten verlinkt',
+                    'tablename' => 'Contentinum\Entity\AccountContact',
+                    'column' => 'account'
+                ),
+                'account2' => array(
+                    'area' => 'Die Organisation ist noch in einer Gruppe',
+                    'tablename' => 'Contentinum\Entity\AccountGroupIndex',
+                    'column' => 'accounts'
+                ),
+                'account3' => array(
+                    'area' => 'Die Organisation ist noch mit einer Kontaktgruppe verlinkt',
+                    'tablename' => 'Contentinum\Entity\ContactGroups',
+                    'column' => 'accounts'
+                ),
+            ),
+            'settoroute' => '/mcwork/accounts'
+        )
+    ),
     
     '/mcwork/accounttagassign' => array(
         'resource' => 'publisherresource',
