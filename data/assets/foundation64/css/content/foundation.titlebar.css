@@ -1,0 +1,26 @@
+.title-bar {
+  padding: 0.5rem;
+  background: #0a0a0a;
+  color: #fefefe;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center; }
+  .title-bar .menu-icon {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem; }
+
+.title-bar-left,
+.title-bar-right {
+  -ms-flex: 1 1 0px;
+      flex: 1 1 0px; }
+
+.title-bar-right {
+  text-align: right; }
+
+.title-bar-title {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold; }

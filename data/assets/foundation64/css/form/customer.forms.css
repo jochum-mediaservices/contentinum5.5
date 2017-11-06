@@ -1,0 +1,11 @@
+input.error,
+textarea.error {
+	margin: 0;
+	border-color: #c60f13;
+}
+span.error,
+label.error {
+	padding: 6px 2px;
+	background-color: #c60f13;
+	color: #FFFFFF;
+}
