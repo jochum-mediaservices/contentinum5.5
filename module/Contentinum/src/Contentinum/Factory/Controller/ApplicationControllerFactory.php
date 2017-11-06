@@ -28,6 +28,10 @@ class ApplicationControllerFactory implements FactoryInterface
             define('GOOGLE_API_KEY', $opt['default']['google_map_apikey']);
         }
         $request = new HttpRequest();
+        define('LOCALENAV', '');
+        $language = 'de';
+        $pageOptions->setLanguage($language);
+        $controllerName = false;
         $pageOptions->setHost($request->getUri()->getHost());
         $pageOptions->setQuery($request->getUri()->getPath());
         $pageOptions->setProtocol($request->getUri()->getScheme());
@@ -43,6 +47,7 @@ class ApplicationControllerFactory implements FactoryInterface
                 $pageOptions->setActive('/' . $pageOptions->split(null, 5));
             } else {
                 switch ($page) {
+                    case 'api':
                     case 'mcevent':
                     case 'mcwork':
                     case 'municipal':
@@ -82,7 +87,8 @@ class ApplicationControllerFactory implements FactoryInterface
             $pageOptions->addOptions($pages); // default options
             $pageOptions->addOptions($pages, '/' . $pageOptions->split(null, 2), true);
             $pageOptions->setActive('/' . $pageOptions->split(null, 2));
-         } else {           
+         } else {  
+             
             $defaults->setCacheKey('app_pages');
             $pageOptions->addOptions($defaults->get($pagefiles['app_pages']));        
             $url = $pageOptions->split($pageOptions->getQuery(), 1);
@@ -96,6 +102,10 @@ class ApplicationControllerFactory implements FactoryInterface
                     $pageOptions->addOptions($defaults->get($pagefiles['app_pages']), $url);
                     break;
                 default:
+                    if ('suche' == $url){
+                        $controllerName = 'Contentinum\Controller\SearchController';
+                    }
+                    
                     $preferences = $sl->get('contentinum_preference');
                     $pageOptions->addOptions($preferences);
                     $pageOptions->addOptions($preferences, $pageOptions->getHost());
@@ -104,13 +114,13 @@ class ApplicationControllerFactory implements FactoryInterface
                     if (strlen($url) == 0) {
                         $url = 'index';
                     }
-                    if (null !== ($page = $pages->$hostId->$url)) {
+                    if (null !== ($page = $pages->$hostId->$language->$url)) {
                         $attribute = $sl->get('contentinum_attribute_pages');
                         $attribute = (is_array($attribute)) ? $attribute : $attribute->toArray();
                         (isset($attribute[$page['parentPage']])) ? $pageOptions->addOptions($attribute, $page['parentPage']) : false;
                         (isset($attribute[$page['id']])) ? $pageOptions->addOptions($attribute, $page['id']) : false;
                         $pageHeaders = $sl->get('contentinum_page_headers');
-                        (isset($pageHeaders[$page['parentPage']])) ? $pageOptions->addPageHeaders($pageHeaders, $page['parentPage']) : false;
+                        (isset($pageHeaders[$page['parentPage']])) ? $pageOptions->addPageHeaders($pageHeaders,$page['parentPage']) : false;
                         (isset($pageHeaders[$page['id']])) ? $pageOptions->addPageHeaders($pageHeaders, $page['id']) : false;
                         $pageOptions->addPage($page);
                     } else {
@@ -137,7 +147,9 @@ class ApplicationControllerFactory implements FactoryInterface
         if (false !== ($entityName = $pageOptions->getApp('entity'))) {
             $worker->setEntity(new $entityName());
         }
-        $controllerName = $pageOptions->getApp('controller');
+        if (false === $controllerName){
+            $controllerName = $pageOptions->getApp('controller');
+        }
         $controller = new $controllerName($pageOptions);
         $controller->setConfiguration($opt);
         $controller->setWorker($worker);

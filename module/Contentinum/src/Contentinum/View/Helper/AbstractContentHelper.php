@@ -309,7 +309,19 @@ abstract class AbstractContentHelper extends AbstractHelper
                     break;   
                 case 'SHORT':
                     $content = $this->view->datetimeformat($content,'SHORT');
-                    break;                    
+                    break;              
+                case 'LONGLONG':
+                    $content = $this->view->datetimeformat($content,'LONG') . ', ' . $this->view->datetimeformat($content, false,'SHORT') . ' Uhr';
+                    break;
+                case 'MEDIUMLONG':
+                    $content = $this->view->datetimeformat($content,'MEDIUM') . ', ' . $this->view->datetimeformat($content, false,'SHORT') . ' Uhr';
+                    break;
+                case 'SHORTLONG':
+                    $content = $this->view->datetimeformat($content,'SHORT') . ', ' . $this->view->datetimeformat($content, false,'SHORT') . ' Uhr';
+                    break;
+                case 'FULLLONG':
+                    $content = $this->view->datetimeformat($content,'FULL') . ', ' . $this->view->datetimeformat($content, false,'SHORT') . ' Uhr';
+                    break;
                 case 'FULL':
                 default:                    
                     $content = $this->view->datetimeformat($content,'FULL');

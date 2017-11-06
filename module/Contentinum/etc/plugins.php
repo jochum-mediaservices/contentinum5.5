@@ -24,6 +24,8 @@ return array(
         'maps' => 'contentinum_maps',
         'forms' => 'contentinum_forms',
         
+        'langswitch' => 'contentinum_lang_switch',
+        
         'breadcrumbs' => 'contentinum_navigation',
         'sitemap' => 'contentinum_navigation',
         
@@ -60,6 +62,8 @@ return array(
         'accountmembers' => 'accountmembers',
         'maps' => 'maps',
         'forms' => 'forms',
+        
+        'langswitch' => 'langswitch',
         
         'breadcrumbs' => 'breadcrumbnav',
         'sitemap' => 'sitemapbuild',
@@ -578,6 +582,87 @@ return array(
         ),
         
         'n' => array(
+            
+            'langswitch' => array(
+                'resource' => 'intranet',
+                'name' => 'Language Switch',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Language Navigation',
+                                'empty_option' => 'Please select',
+                                'value_function' => array(
+                                    'method' => 'ajax',
+                                    'url' => '/mcwork/services/application/options',
+                                    'data' => array(
+                                        'entity' => 'Contentinum\Entity\WebPreferences',
+                                        'prepare' => 'select',
+                                        'value' => 'id',
+                                        'label' => 'host'
+                                    )
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    )
+                )
+            ),  
             
             
             'megamenu' => array(
@@ -1524,8 +1609,15 @@ return array(
                         'spec' => array(
                             'name' => 'modulLink',
                             'required' => false,
-                            'options' => array(),
-                            'type' => 'Hidden',
+                            'options' => array(
+                                'label' => 'Social Media Buttons',
+                                'value_options' => array(
+                                    'no' => 'Keine Buttons einblenden',
+                                    'yes' => 'Social Media Buttons einblenden',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
                 
                             'attributes' => array(
                                 'id' => 'modulLink'

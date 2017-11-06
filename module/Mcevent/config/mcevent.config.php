@@ -38,6 +38,7 @@ return array(
              
              
              'mcevent_options_eventdownload' => 'Mcevent\Service\Opt\DownloadEventsFactory',
+             'mcevent_event_eventdownload' => 'Mcevent\Factory\Mapper\ModulDownloadFactory',
          ),
      ),
     

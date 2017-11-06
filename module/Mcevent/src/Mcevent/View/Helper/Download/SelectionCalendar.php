@@ -29,9 +29,6 @@ class SelectionCalendar extends AbstractContentHelper
         $html = '';
         $html .= '<form id="prepare-event-termine" class="form-customer eventcalendar callout" accept-charset="UTF-8" method="post" action="#" enctype="application/x-www-form-urlencoded" role="application">';
         $html .= '<fieldset><legend>Kalender Einstellungen zum Download oder abonnieren</legend>';
-        $html .= '<p id="fieldselectbezirk" class="formElement"><label for="selectbezirk">Anzeige nach Kalender</label>';
-        $html .= '<select id="selectbezirk" name="selectbezirk">'.$options.'</select>';
-        $html .= '</p>'; 
         $html .= '<div id="cptext"> </div>';
         $html .= '<div class="row collapse"><div class="small-10 columns">';
         $html .= '<input type="text" name="calurl" id="calurl" /></div>';

@@ -871,23 +871,24 @@ return array(
         )
     
     ),
-    '/mcevent/downloads/evenets' => array(
+    '/mcevent/downloads/events' => array(
         'resource' => 'index',
-        'template' => 'downloads/download/icsevenets',
+        'template' => 'content/download/icsevenets',
         'app' => array(
-            'controller' => 'Mcevent\Controller\DownloadsController',
+            'controller' => 'Mcevent\Controller\DownloadEventsController',
             'worker' => 'Mcevent\Mapper\Download\Events',
             'entity' => 'Mcevent\Entity\MceventDates',
         )
     
     ),
     
-    '/mcevent/subscribe/evenets' => array(
+    '/mcevent/subscribe/events' => array(
         'resource' => 'index',
+        'template' => 'content/download/icsevenets',
         'app' => array(
             'controller' => 'Mcevent\Controller\StreamController',
-            'worker' => 'Mcevent\Mapper\Streams\Events',
-            'entity' => 'Municipal\Entity\TrashCalendar',
+            'worker' => 'Mcevent\Mapper\Download\Events',
+            'entity' => 'Mcevent\Entity\MceventDates',
         )
     ),    
     

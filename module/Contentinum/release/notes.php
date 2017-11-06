@@ -1,5 +1,13 @@
 <?php
 return array( //ALTER TABLE `account_groups` ADD `enable_internet` TINYINT(1) NOT NULL DEFAULT '1' AFTER `enable_description`;
+    5569 => array(
+        "ALTER TABLE `web_navigations` ADD `language` VARCHAR(10) NOT NULL AFTER `sitemap`;"
+    ),
+    5568 => array(
+        "ALTER TABLE `municipal_services` ADD `enable_freetext_field` INT(1) NOT NULL DEFAULT '0' AFTER `duration`;",
+        "ALTER TABLE `municipal_service_appointments` ADD `userentry` VARCHAR(200) NOT NULL AFTER `sachgebiete_id`;",
+        "ALTER TABLE `municipal_service_appointments` ADD `address` TEXT NOT NULL AFTER `zipcode`;"
+    ),
     5564 => array(
         "ALTER TABLE `web_medias` CHANGE `media_link` `media_link` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;"
     ),

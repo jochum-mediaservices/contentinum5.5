@@ -64,6 +64,8 @@ return array(
             'media_tags_assign' => 'Mcwork\Factory\Model\MediaTagsFactory',
             'file_tags_assign' => 'Mcwork\Factory\Mapper\FileTagsFactory',
             'mcwork_pagelabels' => 'Mcwork\Service\Pages\LabelsServiceFactory',
+            'mcwork_pagehost' => 'Mcwork\Service\Pages\PageHostFactory',
+            'mcwork_pagedefaultshost' => 'Mcwork\Service\Pages\PageDefaultsHostFactory',
             'mcwork_pageurls' => 'Mcwork\Service\Pages\UrlsServiceFactory',
             
             'mcwork_blog_categories' => 'Mcwork\Factory\Mapper\BlogCategoriesFactory',
@@ -160,6 +162,18 @@ return array(
                 'entitymanager' => 'doctrine.entitymanager.orm_default',
                 'entity' => 'Contentinum\Entity\WebPagesParameter',
                 'savecache' => false,                
+            ),
+            'mcwork_pagedefaultshost' => array(
+                'cache' => 'mcwork_pagehost',
+                'entitymanager' => 'doctrine.entitymanager.orm_default',
+                'entity' => 'Contentinum\Entity\WebPagesParameter',
+                'savecache' => false,
+            ),
+            'mcwork_pagehost' => array(
+                'cache' => 'mcwork_pagehost',
+                'entitymanager' => 'doctrine.entitymanager.orm_default',
+                'entity' => 'Contentinum\Entity\WebPagesParameter',
+                'savecache' => false,
             ),
             'mcwork_pageurls' => array(
                 'cache' => 'mcwork_pageurls',

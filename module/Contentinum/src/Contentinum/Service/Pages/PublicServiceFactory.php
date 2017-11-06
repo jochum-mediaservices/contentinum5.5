@@ -102,7 +102,7 @@ class PublicServiceFactory extends WebsiteServiceFactory
                 foreach ($this->cols as $col) {
                     $row[$col] = $entry->{$col};
                 }
-                $rows[$entry->webPreferences->hostId][$entry->url] = $row;
+                $rows[$entry->webPreferences->hostId][$entry->language][$entry->url] = $row;
             }
             $result = new Config($rows);
             if (isset($config['savecache']) && true === $config['savecache']) {

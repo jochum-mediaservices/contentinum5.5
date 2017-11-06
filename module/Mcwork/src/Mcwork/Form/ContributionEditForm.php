@@ -152,6 +152,25 @@ class ContributionEditForm extends AbstractForms
                     )
                 )
             ),
+            
+            
+            array(
+                'spec' => array(
+                    'name' => 'lang',
+                    'required' => true,
+                    'options' => array(
+                        'label' => 'Language',
+                        'empty_option' => 'Please select',
+                        'value_options' => $this->getOptions('locale_language'),
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'required' => 'required',
+                        'id' => 'lang',
+                    )
+                )
+            ),
                    
             array(
                 'spec' => array(

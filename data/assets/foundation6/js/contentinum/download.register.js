@@ -10,7 +10,7 @@ $(document).ready(function() {
 	    //if ( $(this).attr('data-dataident').length ) {
 	    //	category += '/' + $(this).attr('data-dataident');
 	    //}
-		$("html, body").animate({ scrollTop: 5 }, 600);
+		//$("html, body").animate({ scrollTop: 5 }, 600);
 		$(this).hide();
 		$.ajax({
 			url : '/' + url + category,

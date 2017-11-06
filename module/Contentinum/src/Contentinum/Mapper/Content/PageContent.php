@@ -29,6 +29,9 @@ class PageContent extends Worker
         $builder->andWhere('ref2.scope = :group');
         $builder->andWhere("ref3.publish = 'yes'");
         
+        $builder->andWhere("ref3.lang = :lang");
+        $builder->setParameter('lang', $this->getLanguage());
+        
         if (null !== ($identity = $this->getIdentity())) {
             if ('admin' == $identity->role) {
                 $builder->andWhere("ref3.resourceGroup >= 0");

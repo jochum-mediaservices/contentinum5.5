@@ -15,6 +15,7 @@ class Backendlayout extends AbstractPlugin
 {
     public function __invoke($pageOptions, $identity, $role, $acl, $layout, $sl)
     {
+        define('MCWORKADMIN', true);
         $viewHelperManager = $sl->get('viewHelperManager');
         $this->setAccessRights($layout, $role, $acl);
         $this->navigation($layout, $sl, $identity);

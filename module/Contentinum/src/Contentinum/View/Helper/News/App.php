@@ -102,9 +102,11 @@ class App extends Images
                 $links['pdf'] = array(
                     'href' => '/' . $entry->webContent->id . '/' . $entry->webContentgroup,
                 );
-                $links['facebook'] = array(
-                    'href' => '?u=' . urlencode($this->view->protocol . '://' . $this->view->host . '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $entry->webContent->publishDate . '#' . $blogId)
-                );
+                if ('no' == $this->shariff){
+                    $links['facebook'] = array(
+                        'href' => '?u=' . urlencode($this->view->protocol . '://' . $this->view->host . '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $entry->webContent->publishDate . '#' . $blogId)
+                    );
+                }
                 $links['sendmail'] = array(
                     'href' => '/' . $entry->webContent->id
                 );
@@ -115,15 +117,15 @@ class App extends Images
             $head .= $this->deployRow($this->headline, stripslashes($entry->webContent->headline));
             $header['grid']['attr']['id'] = $blogId;
             $article .= $this->deployRow($header, $head); 
-            
+
             if (false === $readMoreView) {
                 
-                if (1 !== $entry->webContent->webMediasId->id){
+                if (1 !== $entry->webContent->webMediasId->id && true === $this->teasermedia){
                     $setSizes = null;
-                    if ('mediateaserright' == $entry->webContent->htmlwidgets) {
-                        $mediaTemplate = $this->mediateaserright->toArray();
-                    } else {
+                    if ('mediateaserleft' == $entry->webContent->htmlwidgets) {
                         $mediaTemplate = $this->mediateaserleft->toArray();
+                    } else {
+                        $mediaTemplate = $this->mediateaserright->toArray();
                     } 
                     
                     if (false !== $this->teaserLandscapeSize){
@@ -149,11 +151,18 @@ class App extends Images
                 $labelReadMore["grid"]["attr"]['href'] = '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $this->convertPublishDate($entry->webContent->publishDate) . '#' . $blogId;
                 $labelReadMore["grid"]["attr"]['title'] = $entry->webContent->labelReadMore . ' zu ' . $filter->filter($entry->webContent->headline);                
                 
+                $shariff = ''; 
+                if ('111111' == $this->shariff){
+                    $surl = $this->view->protocol . '://' . $this->view->host . '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $this->convertPublishDate($entry->webContent->publishDate) . '#' . $blogId;
+                    $shariff .= '<div data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;info&quot;]" data-theme="standard" data-lang="de" class="shariff" data-url="'.$surl.'" data-title="'.stripslashes($entry->webContent->headline).'" data-info-url="/social-media-buttons"></div>';
+                }
                 
                 
                 if (strlen($entry->webContent->contentTeaser) > 1) {
                     $article .= $entry->webContent->contentTeaser;
-                    $article .= $this->deployRow($labelReadMore, $entry->webContent->labelReadMore);
+                    $article .= '<footer class="news-article-footer">';
+                    $article .= $this->deployRow($labelReadMore, $entry->webContent->labelReadMore) . $shariff;
+                    $article .= '</footer>';
                 } else {
                     $content = $entry->webContent->content;
                     if ($entry->webContent->numberCharacterTeaser > 0 && strlen($content) > $entry->webContent->numberCharacterTeaser) {
@@ -161,20 +170,26 @@ class App extends Images
                         $content = substr($content, 0, strrpos($content, " "));
                         $content = $content . ' ...</p>';
                         $article .= $content;
-                        $article .= $this->deployRow($labelReadMore, $entry->webContent->labelReadMore);
+                        $article .= '<footer class="news-article-footer">';
+                        $article .= $this->deployRow($labelReadMore, $entry->webContent->labelReadMore) . $shariff;
+                        $article .= '</footer>';
                     } else {
                         $article .= $this->formatElement($content, $entry->webContent);
                     }
                 }                
             } else {
                 $article .= $entry->webContent->contentTeaser;
+                $description = $entry->webContent->contentTeaser;
+                $ogimage = false;
                 if (1 !== $entry->webContent->webMediasId->id){
+                    $ogimage = $entry->webContent->webMediasId->mediaLink;
                     if (1 === $entry->webContent->mediaPlaceholder) {
                         $article = str_replace('{MEDIAPLACE}', $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray()), $article);
                     } else {
                         $article .= $this->imagesrc($entry->webContent, $entry->webContent->webMediasId, $this->media->toArray());
                     }           
                 }
+                $description .= $entry->webContent->content;
                 $article .= $this->formatElement($entry->webContent->content, $entry->webContent);
 
                 if (isset($entries['modulContent']['newsplugins'])) {
@@ -191,9 +206,34 @@ class App extends Images
                     $backLink["grid"]["attr"]['class'] = $backLink["grid"]["attr"]['class'] . ' unsetBacklink';
                     $backLink["grid"]["attr"]['href'] = $this->view->cookies['backlinkarchiv'];
                 }
+                $foot = '';
+                $strdesc = strip_tags($description);
+                $strdesc = preg_replace("#[\r\n]#", ' ', $strdesc);  
+                $strdesc = html_entity_decode(substr($strdesc, 0, 200));
+                $this->view->headMeta()->setName('description',$strdesc);
+                $this->view->headTitle()->prepend(stripslashes($entry->webContent->headline));
+                $this->view->headMeta()->setName('topic','News');
+                $this->view->headMeta()->setName('fulltitle',stripslashes($entry->webContent->headline));
+                $this->view->headMeta()->setName('DC.title',stripslashes($entry->webContent->headline));
+
+
+                $this->view->headMeta()->setName('DC.description',$strdesc);
+                               
+                $this->view->headMeta()->setProperty('og:url',$this->view->protocol . '://' . $this->view->host . '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $this->convertPublishDate($entry->webContent->publishDate) . '#' . $blogId);
+                $this->view->headMeta()->setProperty('og:type', 'article');
+                $this->view->headMeta()->setProperty('og:title', stripslashes($entry->webContent->headline));
                 
+                if (false !== $ogimage){
+                    $this->view->headMeta()->setProperty('og:image', $this->view->protocol . '://' . $this->view->host . $ogimage);
+                }
+                $this->view->headMeta()->setProperty('og:description', $strdesc);
                 $backLink["grid"]["attr"]['title'] = $this->view->translate('Back');
-                $foot = $this->deployRow($backLink, $this->view->translate('Back'));
+                $foot .= $this->deployRow($backLink, $this->view->translate('Back'));
+                
+                if ('no' != $this->shariff){
+                    $surl = $this->view->protocol . '://' . $this->view->host . '/' . $this->groupurl . '/' . $entry->webContent->source . '/' . $this->convertPublishDate($entry->webContent->publishDate) . '#' . $blogId;
+                    $foot .= '<div data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;info&quot;]" data-theme="standard" data-lang="de" class="shariff" data-url="'.$surl.'" data-title="'.stripslashes($entry->webContent->headline).'" data-info-url="/social-media-buttons"></div>';
+                }
                 
                 if (null !== $this->footer) {
                     $article .= $this->deployRow($this->footer, $foot);

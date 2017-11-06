@@ -94,6 +94,12 @@ foreach ($this->entries as $entry) {
                     'class' => 'button tiny alert deleteitem'
                 )
             ),
+            'download' => array(
+                'href' => '/mcwork/contactgroupindex/download/' . $entry->id,
+                'attribs' => array(
+                    'class' => 'button tiny'
+                )
+            ),
             'info' => array(
                 'attribs' => array(
                     'data-service' => 'backend_client_app',
@@ -130,6 +136,9 @@ if (isset($this->toolbarcontent)) {
         ),
         'delete' => array(
             'href' => '/mcwork/' . $this->paramter['section'] . '/delete'
+        ),
+        'download' => array(
+            'href' => '/mcwork/' . $this->paramter['section'] . '/download'
         ),
     );
     $toolbar = $this->mcworkToolbar($links, true, $this->toolbarcontent->toArray());

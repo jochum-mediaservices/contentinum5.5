@@ -59,14 +59,13 @@ class Toolbar extends AbstractContentHelper
         'row',
         'grid',
         'elements'
-    )
-    ;
+    );
 
     /**
      *
-     * @param array $entry
-     * @param unknown $medias
-     * @param unknown $template
+     * @param array $entry            
+     * @param unknown $medias            
+     * @param unknown $template            
      * @return unknown
      */
     public function __invoke(array $entry, $template)
@@ -88,10 +87,9 @@ class Toolbar extends AbstractContentHelper
                         $row['attr'] = array_merge($entry[$element]['attr'], $row['attr']);
                     }
                 }
+                $configure = $row;
+                $html .= $this->view->contentelement($grid, $this->buildLink($configure), $attr);
             }
-            
-            $configure = $row;
-            $html .= $this->view->contentelement($grid, $this->buildLink($configure), $attr);
         }
         $row = $this->getTemplateProperty('row', 'element');
         $attr = array();
@@ -105,7 +103,7 @@ class Toolbar extends AbstractContentHelper
 
     /**
      *
-     * @param unknown $link
+     * @param unknown $link            
      * @return string
      */
     protected function buildLink($link)

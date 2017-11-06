@@ -77,6 +77,13 @@ class WebNavigations extends AbstractEntity
      * @ORM\Column(name="params", type="text", nullable=false)
      */
     private $params = '';
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="language", type="string", length=10, nullable=false)
+     */
+    private $language = 'de';
 
     /**
      * @var string
@@ -359,6 +366,22 @@ class WebNavigations extends AbstractEntity
     public function getParams()
     {
         return $this->params;
+    }
+
+    /**
+     * @return the $language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 
     /**

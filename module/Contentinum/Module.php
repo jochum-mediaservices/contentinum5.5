@@ -73,7 +73,8 @@ class Module
 
     public function getConfig()
     {
-        return \ContentinumComponents\Tools\ArrayMergeRecursiveDistinct::merge(include __DIR__ . '/config/contentinum.config.php', include __DIR__ . '/config/customer.config.php');
+        $config = \ContentinumComponents\Tools\ArrayMergeRecursiveDistinct::merge(include __DIR__ . '/config/contentinum.config.php', include __DIR__ . '/config/customer.config.php');
+        return $config;
     }
 
     public function getViewHelperConfig()

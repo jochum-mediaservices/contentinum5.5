@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-05 23:45-0700\n"
-"PO-Revision-Date: 2016-09-19 10:29+0100\n"
+"PO-Revision-Date: 2017-08-19 10:50+0200\n"
 "Last-Translator: Michael Jochum <michael.jochum@jochum-mediaservices.de>\n"
 "Language-Team: ZF Contributors <zf-devteam@zend.com>\n"
 "Language: de_DE\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 2.0.3\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../view/error/index.phtml:1
 msgid "An error occurred"
-msgstr "Ein Fehler ist aufgetreten"
+msgstr "Ein Fehler trat auf!"
 
 #: ../view/error/index.phtml:8
 msgid "Additional information"
@@ -80,6 +80,9 @@ msgstr "Ausnahme"
 #: user login
 msgid "Your user entries are not correct!"
 msgstr "Ihre Benutzereingaben sind nicht korrekt!"
+
+msgid "Supplied_credential"
+msgstr "Mitgelieferte Berechtigungsnachweis ist ungültig."
 
 msgid "Supplied credential is invalid."
 msgstr "Mitgelieferte Berechtigungsnachweis ist ungültig. Sie haben noch 2 Versuche."

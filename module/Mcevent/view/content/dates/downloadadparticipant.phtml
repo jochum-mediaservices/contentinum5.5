@@ -1,5 +1,5 @@
 <?php
-$content = utf8_decode("Veranstaltung;Datum;Firma;Anrede;Vorame;Familienname;Telefon;E-Mail;Straße und Hausnummer;Postleitzahl und Ort;Anmerkung\r");
+$content = utf8_decode("Veranstaltung;Datum;Firma;Anrede;Vorame;Familienname;Telefon;E-Mail;Straße und Hausnummer;Postleitzahl und Ort;Frühstück;Mittagessen;Abendessen;Übernachtung;Anmerkung\r");
 foreach ($this->entries as $row) {//;Abhol Ortsteil
     $name = '';
     $content .= utf8_decode(stripslashes($row['summary'])) . ";";
@@ -12,6 +12,10 @@ foreach ($this->entries as $row) {//;Abhol Ortsteil
     $content .= $row['email'] . ";";
     $content .= utf8_decode(stripslashes($row['street'])) . ";";
     $content .= utf8_decode(stripslashes($row['city'])) . ";";
+    $content .= utf8_decode(stripslashes($row['stay_breakfast'])) . ";";
+    $content .= utf8_decode(stripslashes($row['stay_lunch'])) . ";";
+    $content .= utf8_decode(stripslashes($row['stay_dinner'])) . ";";
+    $content .= utf8_decode(stripslashes($row['stay_overnight'])) . ";";  
     $desc = utf8_decode(stripslashes($row['description']));
     $content .= preg_replace("/\\s+/", " ", $desc) . ";";
     //$content .= '' . ";"; //utf8_decode(stripslashes($row['description']))

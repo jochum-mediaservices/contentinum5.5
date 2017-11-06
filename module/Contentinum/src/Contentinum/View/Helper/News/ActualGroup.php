@@ -41,6 +41,13 @@ class ActualGroup extends Images
         if (isset($entries['modulFormat'])){
             $templateKey = $entries['modulFormat'];
         }
+        
+        if (isset($entries['modulLink'])){
+            $this->shariff = $entries['modulLink'];
+        } else {
+            $this->shariff = 'no';
+        }
+        
         $this->setTemplate($template->plugins->$templateKey);   
 
         $labelReadMore = $this->labelReadMore->toArray();
@@ -66,9 +73,11 @@ class ActualGroup extends Images
                     $links['pdf'] = array(
                         'href' => '/' . $entry['id']
                     );
-                    $links['facebook'] = array(
-                        'href' => '?u=' . urlencode($this->view->protocol . '://' . $this->view->host . '/' . $entry['url'] . '/' . $entry['source'] . '/' . $entry['lnPublishDate'] . '#'.$blogId)
-                    );
+                    if ('no' == $this->shariff){
+                        $links['facebook'] = array(
+                            'href' => '?u=' . urlencode($this->view->protocol . '://' . $this->view->host . '/' . $entry['url'] . '/' . $entry['source'] . '/' . $entry['lnPublishDate'] . '#'.$blogId)
+                        );
+                    }
                     $links['sendmail'] = array(
                         'href' => '/' . $entry['id']
                     );                    
@@ -80,10 +89,10 @@ class ActualGroup extends Images
                 
                 if (1 !==  (int) $entry['web_medias_id'] && 'no' !== $this->displayimage) {
                     
-                    if ('mediateaserright' == $entry['htmlwidgets']) {
-                        $mediaTemplate = $this->mediateaserright->toArray();
-                    } else {
+                    if ('mediateaserleft' == $entry['htmlwidgets']) {
                         $mediaTemplate = $this->mediateaserleft->toArray();
+                    } else {
+                        $mediaTemplate = $this->mediateaserright->toArray();
                     }
                     $setSize = array(
                         'landscape' => $this->teaserLandscapeSize,
@@ -137,9 +146,20 @@ class ActualGroup extends Images
                 $labelReadMore["grid"]["attr"]['href'] = '/' . $entry['url'] . '/' . $entry['source'] . '/' . $entry['lnPublishDate'] . '#'.$blogId;
                 $labelReadMore["grid"]["attr"]['title'] = $entry['label_read_more'] . ' zu ' . $filter->filter($entry['headline']); 
                 
+                
+                $shariff = '';
+                if ('111111' == $this->shariff){
+                    $surl = $this->view->protocol . '://' . $this->view->host . '/' . $entry['url'] . '/' . $entry['source'] . '/' . $entry['lnPublishDate'] . '#'.$blogId;
+                    $shariff .= '<div data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;info&quot;]" data-theme="standard" data-lang="de" class="shariff" data-url="'.$surl.'" data-title="'.$entry['headline'].'" data-info-url="/social-media-buttons"></div>';
+                }
+                
+                
                 if (strlen($entry['content_teaser']) > 1) {
                     $article .= $entry['content_teaser'];
+                    $article .= '<footer class="news-article-footer">';
                     $article .= $this->deployRow($labelReadMore, $entry['label_read_more']);
+                    $article .= $shariff;
+                    $article .= '</footer>';
                 } else {
                     $content = $entry['content'];
                     if ($entry['number_character_teaser'] > 0 && strlen($content) > $entry['number_character_teaser']) {
@@ -147,9 +167,15 @@ class ActualGroup extends Images
                         $content = substr($content, 0, strrpos($content, " "));
                         $content = $content . ' ...</p>';
                         $article .= $content;
+                        $article .= '<footer class="news-article-footer">';
                         $article .= $this->deployRow($labelReadMore, $entry['label_read_more']);
+                        $article .= $shariff;
+                        $article .= '</footer>';
                     } else {
                         $article .= $content;
+                        $article .= '<footer class="news-article-footer">';
+                        $article .= $shariff;
+                        $article .= '</footer>';
                     }
                 }
                 //$article .= '<p><a class="button expand" title="Lesen Sie mehr" href="#">Lesen Sie mehr</a></p>';

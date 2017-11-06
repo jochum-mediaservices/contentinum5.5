@@ -965,6 +965,105 @@ return array(
         )
     ), 
     
+    '/mcwork/pagegroups' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Seitengruppen',
+        'template' => 'content/pages/groupsindex',
+        'layout' => 'mcwork/layout/admin',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Seitengruppen',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Pages\Groups',
+            'entity' => 'Contentinum\Entity\WebPagesGroups'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ),
+    
+    '/mcwork/pagegroups/add' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Seiten gruppieren',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Seiten gruppieren',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\AddFormController',
+            'worker' => 'Mcwork\Model\Pages\SaveGroups',
+            'entity' => 'Contentinum\Entity\WebPagesGroups',
+            'targetentities' => array(
+                'webPages' => 'Contentinum\Entity\WebPagesParameter',
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\PageGroupForm',
+            'formaction' => '/mcwork/pagegroups/add',
+            'formattributes' => array(
+                'data-rules' => 'pagegroup',
+                'data-process' => 'add',
+            ),
+            
+            'settoroute' => '/mcwork/pagegroups',
+            
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstylesdtpick','mcworkhead','mcworkformsdtpick'),
+        ),
+    ),
+    
+    
+    '/mcwork/pagegroups/edit' => array(
+        'splitQuery' => 3,
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Seitengruppe bearbeiten',
+        'template' => 'forms/standard',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Seitengruppe bearbeiten',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\EditFormController',
+            'worker' => 'Mcwork\Model\Pages\SaveGroups',
+            'entity' => 'Contentinum\Entity\WebPagesGroups',
+            'targetentities' => array(
+                'webPages' => 'Contentinum\Entity\WebPagesParameter',
+            ),
+            'formdecorators' => 'mcwork_form_decorators',
+            'form' => 'Mcwork\Form\PageGroupForm',
+            'formaction' => '/mcwork/pagegroups/edit',
+            'formattributes' => array(
+                'data-rules' => 'pageattribute',
+                'data-process' => 'edit',
+            ),
+            'settoroute' => '/mcwork/pagegroups',
+            
+        ),
+        'assets' => array(
+            'sets' => array('mcworkformstylesdtpick','mcworkhead','mcworkformsdtpick'),
+        ),
+    ),
+    
+    '/mcwork/pagegroups/delete' => array(
+        'resource' => 'publisherresource',
+        'app' => array(
+            'controller' => 'Mcwork\Controller\DeleteController',
+            'worker' => 'Mcwork\Model\Delete\Entries',
+            'entity' => 'Contentinum\Entity\WebPagesAttributes',
+            'settoroute' => '/mcwork/pagegroups'
+        )
+    ), 
+    
     '/mcwork/links' => array(
         'resource' => 'publisherresource',
         'metaTitle' => 'Links',
@@ -3366,6 +3465,30 @@ return array(
         
         
     ),
+        
+    
+    '/mcwork/contactgroupindex/download' => array(
+        
+        'resource' => 'publisherresource',
+        'metaTitle' => 'ContactsInGroup',
+        'template' => 'content/contacts/categorydownload',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'ContactsInGroup',
+            'content' => '',
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Contacts\Categories',
+            'entity' => 'Contentinum\Entity\ContactGroupIndex'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+        
+        
+    ),
     
     '/mcwork/contactgroupindex/add' => array(
         'splitQuery' => 3,
@@ -3481,6 +3604,29 @@ return array(
         ),
     ), 
     
+    '/mcwork/contactgroup/download' => array(
+        
+        'resource' => 'publisherresource',
+        'metaTitle' => 'ContactsInGroup',
+        'template' => 'content/contacts/categorydownload',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'ContactsInGroup',
+            'content' => '',
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Contacts\AllCategories',
+            'entity' => 'Contentinum\Entity\ContactGroupIndex'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+        
+        
+    ),
+    
     '/mcwork/contactgroup/add' => array(
         'splitQuery' => 3,
         'resource' => 'publisherresource',
@@ -3559,6 +3705,26 @@ return array(
         'resource' => 'publisherresource',
         'metaTitle' => 'Contacts',
         'template' => 'content/accounts/contactindex',
+        'toolbar' => 1,
+        'tableedit' => 1,
+        'pageContent' => array(
+            'headline' => 'Contacts',
+            'content' => ''
+        ),
+        'app' => array(
+            'controller' => 'Mcwork\Controller\McworkController',
+            'worker' => 'Mcwork\Mapper\Contacts',
+            'entity' => 'Contentinum\Entity\Contacts'
+        ),
+        'assets' => array(
+            'sets' => array('mcworktablestyles','mcworkhead','mcworktablescripts'),
+        ),
+    ), 
+    
+    '/mcwork/contacts/download' => array(
+        'resource' => 'publisherresource',
+        'metaTitle' => 'Contacts',
+        'template' => 'content/accounts/downloadcontact',
         'toolbar' => 1,
         'tableedit' => 1,
         'pageContent' => array(

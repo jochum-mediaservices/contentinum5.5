@@ -87,10 +87,10 @@ class Actual extends Images
  
             if (1 !== $entry->webContent->webMediasId->id){
                 $setSizes = null;
-                if ('mediateaserright' == $entry->webContent->htmlwidgets) {
-                    $mediaTemplate = $this->mediateaserright->toArray();
-                } else {
+                if ('mediateaserleft' == $entry->webContent->htmlwidgets) {
                     $mediaTemplate = $this->mediateaserleft->toArray();
+                } else {
+                    $mediaTemplate = $this->mediateaserright->toArray();
                 } 
                 
                 if (false !== $this->teaserLandscapeSize){

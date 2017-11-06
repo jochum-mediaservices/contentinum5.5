@@ -67,13 +67,15 @@ class Events extends Worker
     public function fetchContent(array $queryparams = null)
     {
         
-        $year = date('Y-m-d');
+        $year = date('Y-m');
         $organizer = false;
         $calendar = false;
         
         $result = array();
         $params = $this->getSl()->get('mcevent_options_eventdownload');
-        $params = $params->eventdownload->toArray();
+        if (!empty($params) ){
+            $params = $params->eventdownload->toArray();
+        }
         $result['params'] = $params;
         if (isset($params['date'])){
             $year = $params['date'];
@@ -120,7 +122,7 @@ class Events extends Worker
         if (false !== $calendar){
             $sql .= "AND mcd.calendar_id = '".$calendarIdent."' ";
         }        
-        $sql .= "AND mcd.date_start LIKE '".$year."%' ";
+        $sql .= "AND mcd.date_start >= '".$year."-01 00:00:00' ";
         $sql .= "ORDER BY mcd.date_start ASC;";
         return $this->fetchAll($sql);
     }

@@ -9,6 +9,8 @@ return array(
             'viewhelper' => 'news',
             'key' => 'newsblog',
             'name' => 'Standard news or blog template',
+            'teasermedia' => true,
+            'mediaplaces' => false,
             'teaserLandscapeSize' => '250',
             'teaserPortraitSize' => '250',
             'toolbar' => array(
@@ -193,9 +195,10 @@ return array(
             'viewhelper' => 'newsactual',
             'key' => 'newsactual',
             'name' => 'Aktuelle Nachrichten (untereinander)',
+            'teasermedia' => true,
             'teaserLandscapeSize' => '250',
             'teaserPortraitSize' => '250',
-        
+            'displayimage' => 'yes',
         
             'wrapper' => array(
                 'grid' => array(
@@ -356,6 +359,7 @@ return array(
             'viewhelper' => 'newsactual',
             'key' => 'newsactual',
             'name' => 'Aktuelle Nachrichten (Blockgrid)',
+            'teasermedia' => true,
             'teaserLandscapeSize' => '250',
             'teaserPortraitSize' => '250',
             'displayimage' => 'no',

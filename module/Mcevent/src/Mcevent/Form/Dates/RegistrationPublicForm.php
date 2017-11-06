@@ -238,7 +238,7 @@ class RegistrationPublicForm extends AbstractForms
                     $field['options'] = array();
                     $field['options']['label'] = 'Bemerkung';
                     $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
-                    $field['options']['description'] = 'Bemerkung zur Anmeldung, Nachricht an Organisator';
+                    $field['options']['description'] = 'Bemerkung zur Anmeldung, Nachricht an Initiator';
                     $field['type'] = 'Textarea';
                     $field['attributes'] = array();
                     $field['attributes']['id'] = 'description';
@@ -297,7 +297,7 @@ class RegistrationPublicForm extends AbstractForms
                     $field['options']['label'] = 'Teilnahme am Abendessen bestätigen';
                     $field['options']['value_options'] = array('yes' => 'Ja, ich nutze das Abendessen', 'no' => 'Nein, ich nehme am Abendessen nicht teil', 'perhaps' => 'Noch unentschlossen');
                     $field['options']['deco-row'] = $this->getDecorators(self::DECO_ELM_ROW);
-                    $field['options']['description'] = 'Bestätigen Sie Bitte ob Sie am Abendessen teilnehmen';
+                    //$field['options']['description'] = 'Bestätigen Sie Bitte ob Sie am Abendessen teilnehmen';
                     $field['type'] = 'Select';
                     $field['attributes'] = array();
                     $field['attributes']['id'] = 'stayDinner';

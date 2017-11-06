@@ -26,7 +26,10 @@ class ApplicationController extends AbstractApplicationController
 
         if (method_exists($this->worker, 'setIdentity')) {
             $this->worker->setIdentity($this->getIdentity());
-        }        
+        } 
+        if (method_exists($this->worker, 'setLanguage')) {
+            $this->worker->setLanguage($pageOptions->getLanguage());
+        }
         $entries = $this->worker->fetchContent($pageOptions->getParams());
         try {
             $plugin = $this->iniPlugins($pageOptions,$role,$acl);
@@ -153,6 +156,7 @@ class ApplicationController extends AbstractApplicationController
         $modul->setDefaultRole($role);
         $modul->setUrl($pageOptions->getUrl());
         $modul->setXmlHttpRequest($this->getXmlHttpRequest()); 
+        $modul->setLanguage($pageOptions->getLanguage());
         $mapper = $this->getServiceLocator()->get('contentinum_modul_parameter');
         $modul->setModul($mapper->fetchContent($pageOptions->getParams()));   
         return $modul->fetchContent();

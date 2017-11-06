@@ -56,11 +56,7 @@ class NavigationMenuForm extends AbstractForms
                     'options' => array(
                         'label' => 'Page or link to this item',
                         'empty_option' => 'Please select',
-                        'value_options' => $this->getSelectOptions('webPages', array(
-                            'value' => 'id',
-                            'label' => array('label','url')
-                            ), array('main.scope != :scope' => array(':scope', '_default'))
-                            ),
+                        'value_options' => $this->getOptions( 'mcwork_pagehost' ),
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
                     ),
             

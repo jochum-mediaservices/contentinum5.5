@@ -268,7 +268,24 @@ class NewsBlogSettingsForm extends AbstractForms
                         'value' => '10',
                     )
                 )
-            ),            
+            ),   
+            
+            array(
+                'spec' => array(
+                    'name' => 'shariff',
+                    'required' => false,
+                    'options' => array(
+                        'label' => 'Social-Media-Buttons mit Datenschutz',
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                        'description' => 'Wert stehen lassen',
+                    ),
+                    'type' => 'Text',
+                    'attributes' => array(
+                        'id' => 'shariff',
+                        'value' => 'no',
+                    )
+                )
+            ), 
             
             array(
                 'spec' => array(

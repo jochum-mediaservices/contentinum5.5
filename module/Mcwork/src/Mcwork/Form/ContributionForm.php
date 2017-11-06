@@ -130,11 +130,13 @@ class ContributionForm extends AbstractForms
                     'options' => array(
                         'label' => 'Assign to a page',
                         'empty_option' => 'Please select',
+                        'value_options' => $this->getOptions( 'mcwork_pagedefaultshost' ),
+                        /*
                         'value_options' => $this->getSelectOptions('webPages', array(
                             'value' => 'id',
                             'label' => array('label','url')
                         ), array('main.onlylink != :onlylink' => array(':onlylink', '1')),null,false,array(),array('main.label'  => 'ASC')
-                        ),                        
+                        ),*/                   
                         
                         'deco-row' => $this->getDecorators(self::DECO_ELM_ROW)
                     ),
@@ -183,7 +185,26 @@ class ContributionForm extends AbstractForms
                         'id' => 'adjustments'
                     )
                 )
-            ),            
+            ), 
+            
+            array(
+                'spec' => array(
+                    'name' => 'lang',
+                    'required' => true,
+                    'options' => array(
+                        'label' => 'Language',
+                        'empty_option' => 'Please select',
+                        'value_options' => $this->getOptions('locale_language'),
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'required' => 'required',
+                        'id' => 'lang',
+                        'value' => 'de'
+                    )
+                )
+            ),
             
             array(
                 'spec' => array(

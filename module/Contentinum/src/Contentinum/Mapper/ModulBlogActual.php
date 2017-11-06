@@ -78,8 +78,12 @@ class ModulBlogActual extends AbstractModuls
         $builder = $em->createQueryBuilder();
         $builder->select('main');
         $builder->from('Contentinum\Entity\WebContentGroups', 'main');
+        $builder->leftJoin('Contentinum\Entity\WebContent', 'ref1', \Doctrine\ORM\Query\Expr\Join::WITH, 'ref1.id = main.webContent');
         $builder->where('main.webContentgroup = :id');
         $builder->andWhere('main.webContent != 1');
+        $builder->andWhere("ref1.publish = 'yes'");
+        $builder->andWhere("ref1.publishUp = '0000-00-00 00:00:00' OR ref1.publishUp <= '". date('Y-m-d H:i:s') ."'");
+        $builder->andWhere("ref1.publishDown = '0000-00-00 00:00:00' OR ref1.publishDown >= '". date('Y-m-d H:i:s') ."'");
         $builder->setParameter('id', $id);
         $builder->orderBy('main.publishDate', 'DESC');
         $builder->setMaxResults($limit);

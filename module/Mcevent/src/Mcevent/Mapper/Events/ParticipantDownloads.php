@@ -47,6 +47,7 @@ class ParticipantDownloads extends Worker
         
         $sql = "SELECT mdr.id, mdr.company, mdr.title, mdr.name, mdr.surname, mdr.phone, mdr.email, ";
         $sql .= "mdr.street, mdr.city, mdr.description, ";
+        $sql .= "mdr.stay_breakfast, mdr.stay_lunch, mdr.stay_dinner, mdr.stay_overnight, ";
         $sql .= "md.date_start, md.summary, ";
         $sql .= "mdr.created_by, mdr.update_by, mdr.register_date, mdr.up_date ";
         $sql .= "FROM mcevent_dates_register AS mdr ";

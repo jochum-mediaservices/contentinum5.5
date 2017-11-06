@@ -45,6 +45,12 @@ class Contentinum extends Menu
      */
     protected $ulAttribute = array();
     
+    /**
+     * 
+     * @var string
+     */
+    protected $localenav = '';
+    
 	/**
 	 * Set Submenu class attribute
 	 * @var string
@@ -57,8 +63,9 @@ class Contentinum extends Menu
 	 */
 	protected $subUlAttribute = '';
 	
-	public function __invoke($container = null, $attribute = array())
+	public function __invoke($container = null, $attribute = array(), $subattribute = array())
 	{
+	    $this->localenav = LOCALENAV;
 	    $this->ulAttribute = $attribute;
 	    return parent::__invoke($container);
 	}	
@@ -323,7 +330,10 @@ class Contentinum extends Menu
         $href = $page->getHref();
         if ($href) {
             $element = 'a';
-            $attribs['href'] = $href;
+            if ('/' == $href){
+                $href = '';
+            }
+            $attribs['href'] = $this->localenav . $href;
             $attribs['target'] = $page->getTarget();
             if(true == ($aClass = $page->get('aClass'))){
                 $addClass = ( isset( $attribs['class']) ) ? ' ' .  $attribs['class'] : '';

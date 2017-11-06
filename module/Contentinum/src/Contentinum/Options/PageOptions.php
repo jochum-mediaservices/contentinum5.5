@@ -834,8 +834,13 @@ class PageOptions extends AbstractOptions
     /**
      * @param multitype: $pageHeaders
      */
-    public function addPageHeaders($pageHeaders)
+    public function addPageHeaders($pageHeaders, $ident = 0)
     {
+        if (0 != $ident){
+            $tmp = $pageHeaders[$ident];
+            $pageHeaders = array();
+            $pageHeaders[$ident] = $tmp;
+        }
         if (null != $pageHeaders && !is_array($pageHeaders)){
             $pageHeaders[] = $pageHeaders;
         }

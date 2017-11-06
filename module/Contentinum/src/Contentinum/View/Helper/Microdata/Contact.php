@@ -48,7 +48,7 @@ class Contact extends Parameters
         foreach ($entries['modulContent'] as $entry) {
             $cardData = '';
             
-            $human = $this->view->microdataname($entry, false, false);
+            $human = $this->view->microdataname($entry);
             if ('_nomedia' != $entry->contactImgSource) {
                 $cardData .= $this->deployRow($this->imagesSource, '<img src="' . $entry->contactImgSource . '" alt="' . $human . '" />');
             }

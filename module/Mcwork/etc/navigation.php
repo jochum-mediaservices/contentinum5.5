@@ -80,6 +80,11 @@ return array(
                                 'resource' => 'managerresource'
                             ),
                             array(
+                                'label' => 'Seitengruppen',
+                                'uri' => '/mcwork/pagegroups',
+                                'resource' => 'managerresource'
+                            ),
+                            array(
                                 'label' => 'Links',
                                 'uri' => '/mcwork/links',
                                 'resource' => 'managerresource'

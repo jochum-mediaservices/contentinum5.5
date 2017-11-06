@@ -68,7 +68,7 @@ class Name extends AbstractHelper
     	        $result .= $this->salutation($entry->{$base}->salutation) . ' ';
     	    }
     	    if (1 === $entry->indexGroup->enableTitle){
-    	        $result .= $this->salutation($entry->{$base}->title) . ' ';
+    	        $result .= $entry->{$base}->title . ' ';
     	    }	    
     	    if (1 === $entry->indexGroup->enableFirstName ){
     	        $result .= $entry->{$base}->firstName . ' ';

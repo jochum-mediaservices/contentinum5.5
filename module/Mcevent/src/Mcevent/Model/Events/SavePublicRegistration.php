@@ -185,7 +185,22 @@ class SavePublicRegistration extends Process
         $mail->isHTML(false);
         $mail->Subject = 'Anmeldung zur ' . $configure['emailsubject'];
         $body = str_replace('{DATETIME}', date('d.m.Y H:i'), $configure['email_organizer']);
-        $body = str_replace('{TEILNEHMER}', $ordername . ', ' . $datas['phone'], $body);
+        $desc = '';
+        if (isset($datas['description'])){
+            
+            $desc = strip_tags($datas['description']);
+            $desc = preg_replace("#[\r\n]#", ' ', $desc);  
+            
+            
+            $desc = "\nAnmerkung:\n" . wordwrap(html_entity_decode($desc),80, "\n\t", true);
+        }
+        if (isset($datas['stayDinner'])){
+            $desc .= "\nAbendessen: " .$datas['stayDinner'];
+        }
+        if (isset($datas['city'])){
+            $desc .= "\n\n: " .$datas['city'];
+        }
+        $body = str_replace('{TEILNEHMER}', $ordername . ', ' . $datas['phone'] . $desc, $body);
         $body = str_replace('{TERMIN}', $trashDate, $body);
         $body .= "\n\n" . $configure['emailsignature'];
         $mail->Body = $body;

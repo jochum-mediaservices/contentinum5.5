@@ -1,12 +1,13 @@
 <?php
-print '<pre>';
-var_dump($this->entries);
-exit();
+//print '<pre>';var_dump($this->entries);exit();
 
 define('DATE_ICAL', 'Ymd\THis'); // \Z
-$params = $this->entries['params'];
-$name = 'Trash';
-$proid = 'Trash Administration//city';
+$params = array();
+if (isset($this->entries['params'])){
+    $params = $this->entries['params'];
+}
+$name = 'Veranstaltungskalender';
+$proid = 'Veranstaltungskalender Administration//city';
 if (isset($params['organisation'])){
     $proid = $params['organisation'];
 }
@@ -16,10 +17,6 @@ if (isset($params['name'])){
 if (isset($params['city'])){
     $proid .= '//' . $params['city'];
     $name .= '-' . $params['city'];
-}
-$street = '';
-if (isset($this->entries['street'])){
-    $street = ', ' . $this->entries['street']['street'];
 }
 $vcalendar = 'BEGIN:VCALENDAR';
 $vcalendar .= "\n" . 'PRODID:-//'.$proid.'//DE';
@@ -45,20 +42,73 @@ $vcalendar .= "\n" . 'TZOFFSETTO:+0200';
 $vcalendar .= "\n" . 'END:DAYLIGHT';
 $vcalendar .= "\n" . 'END:VTIMEZONE';
 $vevent = '';
+$i = 0;
 $host = str_replace('www.', '', $this->host);
-foreach ($this->entries['entries'] as $entry) {
+foreach ($this->entries as $entry) {
     $vevent .= "\n" . 'BEGIN:VEVENT';
     $datestart = new \DateTime($entry['dateStart']); // . ' 06:00:00');
     $vevent .= "\n" . 'UID:' . $entry['id'] . '@' . $host;
-    $vevent .= "\n" . 'DTSTAMP:' . date(DATE_ICAL, strtotime($entry['dtstamp']));
-    $vevent .= "\n" . 'DTSTART;VALUE=DATE:' . date(DATE_ICAL, strtotime($datestart->format("Y-m-d")));    
-    $vevent .= "\n" . 'SUMMARY:' . $entry['trashname'];
-    $vevent .= "\n" . 'LOCATION:' . $entry['district'] . $street;
-    $vevent .= "\n" . 'DESCRIPTION:Bitte ab 6 Uhr am Abholtag bereitstellen';
+    $vevent .= "\n" . 'DTSTAMP:' . date(DATE_ICAL, strtotime($entry['lastModified']));
+    $vevent .= "\n" . 'DTSTART;VALUE=DATE:' . date(DATE_ICAL, strtotime($datestart->format("Y-m-d H:i:s")));   
+    if ('0000-00-00 00:00:00' !== $entry['dateEnd']) {
+        $dateend = new \DateTime($entry['dateEnd']);
+        $vevent .= "\n" . 'DTEND;VALUE=DATE:' . date(DATE_ICAL, strtotime($dateend->format("Y-m-d H:i:s")));
+    }
+    $vevent .= "\n" . 'SUMMARY:' . $entry['summary'];
+    // location new
+    if ($entry['accountId'] > 1) {
+        $dataLocation = ' ';
+        if (strlen($entry['accountStreet']) > 1) {
+            $street = $entry['accountStreet'];
+            if (strlen($entry['accountStreetNum']) > 0) {
+                $street .= ' ' . $entry['accountStreetNum'];
+            }
+            $dataLocation .= $street;
+        }
+        if (strlen($entry['accountZipcode']) > 1) {
+            $zipcode = $entry['accountZipcode'];
+            $dataLocation .= ' ' . $zipcode;
+        }
+        if (strlen($entry['accountCity']) > 1) {
+            $city = $entry['accountCity'];
+            $dataLocation .= ' ' . $city;
+        }
+        $vevent .= "\n" . 'LOCATION:' . $entry['accountName'] . $dataLocation;
+    } else {
+        $zipcode = '';
+        $dataLocation = ' ';
+        if (strlen($entry['locationAddresse']) > 1) {
+            $address = $entry['locationAddresse'];
+            $dataLocation .= $address;
+        }
+        if (strlen($entry['locationZipcode']) > 1) {
+            $zipcode = $entry['locationZipcode'];
+            $dataLocation .= ' ' . $zipcode;
+        }
+        if (strlen($entry['locationCity']) > 1) {
+            $city = $entry['locationCity'];
+            $dataLocation .= ' ' . $city;
+        }
+        $vevent .= "\n" . 'LOCATION:' . $entry['location'] . ' ' . $dataLocation;
+    }
+    if ($entry['organizerId'] > 0) {
+        //$vevent .= "\n" . 'ORGANIZER;CN=' . $entry['organizerName'];
+    } elseif (strlen($entry['organizer']) > 1) {
+        //$vevent .= "\n" . 'ORGANIZER;CN=' . $entry['organizer'];
+    }
+    if (strlen($entry['description']) > 3){
+        $strdesc = strip_tags($entry['description']);
+        $strdesc = preg_replace("#[\r\n]#", ' ', $strdesc);  
+        $vevent .= "\n" . 'DESCRIPTION:' . wordwrap(html_entity_decode($strdesc),74, "\n\t", true);
+    }
     $vevent .= "\n" . 'STATUS:CONFIRMED';    
     $vevent .= "\n" . 'TRANSP:TRANSPARENT';
     $vevent .= "\n" . 'CLASS:CONFIDENTIAL';
     $vevent .= "\n" . 'END:VEVENT';
+    if (9999 === $i){
+        break;
+    }
+    $i++;
 }
 $vcalendar .= $vevent;
 $vcalendar .= "\n" . 'END:VCALENDAR';

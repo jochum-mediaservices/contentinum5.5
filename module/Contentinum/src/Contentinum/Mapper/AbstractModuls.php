@@ -118,6 +118,12 @@ abstract class AbstractModuls extends Worker
     protected $pluginRequest;
     
     /**
+     * 
+     * @var string
+     */
+    protected $language;
+    
+    /**
      * @return the $url
      */
     public function getUrl()
@@ -350,6 +356,22 @@ abstract class AbstractModuls extends Worker
     public function setPluginRequest($pluginRequest)
     {
         $this->pluginRequest = $pluginRequest;
+    }
+
+    /**
+     * @return the $language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 
     /**

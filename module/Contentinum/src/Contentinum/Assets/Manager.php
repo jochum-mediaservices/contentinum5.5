@@ -57,6 +57,12 @@ class Manager
      * @var string
      */
     protected $inlineLink;
+    
+    /**
+     * Onload style link
+     * @var string
+     */
+    protected $onloadStyleLink = '';
 
     /**
      *
@@ -308,7 +314,12 @@ class Manager
         ), $filters);
         $css->setTargetPath($key . '.css');
         $this->writeAssets($css, self::ASSETS_LASTMODIFIED . $key, DOCUMENT_ROOT . $web, '/' . $key . '.css');
-        $this->setStylesheets($this->linkStylesheet($web . '/' . $key . '.css', $collection['attr']));
+        if (isset($collection['onload']) && true === $collection['onload']) {
+            $this->onloadStyles($web . '/' . $key . '.css');
+        } else {
+            $this->setStylesheets($this->linkStylesheet($web . '/' . $key . '.css', $collection['attr']));
+        }
+        
         return true;
     }
 
@@ -430,7 +441,8 @@ class Manager
      */
     protected function onloadScript($src, $collection)
     {
-        $str = '<script>function downloadJSAtOnload(){var element=document.createElement("script");';
+        $str = '<script>' . $this->onloadStyleLink;
+        $str .= 'function downloadJSAtOnload(){var element=document.createElement("script");';
         if (isset($collection['area']) && 'head' === $collection['area']) {
             $str .= 'element.src="' . $src . '";document.head.appendChild(element);}';
         } else {
@@ -439,7 +451,19 @@ class Manager
         $str .= 'if(window.addEventListener){window.addEventListener("load",downloadJSAtOnload,false);}';
         $str .= 'else if(window.attachEvent){window.attachEvent("onload",downloadJSAtOnload);}else{window.onload=downloadJSAtOnload;}</script>';
         return $str;
-    }   
+    } 
+    
+    /**
+     * 
+     * @param unknown $styles
+     * @return NULL
+     */
+    protected function onloadStyles($styles)
+    {
+        $this->onloadStyleLink = "var cb = function() {var l = document.createElement('link'); l.media='screen'; l.rel = 'stylesheet'; l.href = '{$styles}';var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h); }; var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame; if (raf) raf(cb);else window.addEventListener('load', cb);";
+        return null;
+        
+    }
 
     /**
      *

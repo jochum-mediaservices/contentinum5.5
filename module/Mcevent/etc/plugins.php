@@ -11,6 +11,7 @@ return array(
         'eventapp' => 'mcevent_app_dates',
         'actualdatesregister' => 'mcevent_event_datesregister',
         'actualdatesregistergrp' =>  'mcevent_event_datesregistergrp',
+        'eventdownload' => 'mcevent_event_eventdownload',
     ),
     'viewhelper_plugins' => array(
         'eventgroupdwnlnk' => 'eventgroupdwnlnk',
@@ -22,7 +23,8 @@ return array(
         'eventdates' => 'eventdates',
         'eventapp' => 'eventapp',
         'actualdatesregister' => 'eventdatesregister',
-        'actualdatesregistergrp' =>  'eventdatesregister',        
+        'actualdatesregistergrp' =>  'eventdatesregister',     
+        'eventdownload' => 'eventdownload',
     ),
     'default_plugins' => array(
         
@@ -126,6 +128,84 @@ return array(
                 
                 
             ),
+            
+            'eventdownload' => array(
+                
+                'resource' => 'intranet',
+                'name' => 'Download Kalender (Datei oder Stream)',
+                'form' => array(
+                    1 => array(
+                        'spec' => array(
+                            'name' => 'modulParams',
+                            'required' => false,
+                            'options' => array(
+                                'label' => 'Formular Einstellungen Download',
+                                'value_options' => array(
+                                    '1' => 'Formular einblenden',
+                                ),
+                                'deco-row' => 'text'
+                            ),
+                            'type' => 'Select',
+                            
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulParams'
+                            )
+                        )
+                    ),
+                    2 => array(
+                        'spec' => array(
+                            'name' => 'modulFormat',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'required' => 'required',
+                                'id' => 'modulFormat'
+                            )
+                        )
+                    ),
+                    3 => array(
+                        'spec' => array(
+                            'name' => 'modulDisplay',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulDisplay'
+                            )
+                        )
+                    ),
+                    4 => array(
+                        'spec' => array(
+                            'name' => 'modulConfig',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulConfig'
+                            )
+                        )
+                    ),
+                    5 => array(
+                        'spec' => array(
+                            'name' => 'modulLink',
+                            'required' => false,
+                            'options' => array(),
+                            'type' => 'Hidden',
+                            
+                            'attributes' => array(
+                                'id' => 'modulLink'
+                            )
+                        )
+                    )
+                )
+                
+                
+            ),   
             
             'actualdatesregistergrp' => array(
                 'resource' => 'intranet',

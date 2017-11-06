@@ -84,7 +84,25 @@ class NavigationAddForm extends AbstractForms
                         'id' => 'menue'
                     )
                 )
-            ),            
+            ),  
+            array(
+                'spec' => array(
+                    'name' => 'language',
+                    'required' => true,
+                    'options' => array(
+                        'label' => 'Language',
+                        'empty_option' => 'Please select',
+                        'value_options' => $this->getOptions('locale_language'),
+                        'deco-row' => $this->getDecorators(self::DECO_ELM_ROW),
+                    ),
+                    'type' => 'Select',
+                    'attributes' => array(
+                        'required' => 'required',
+                        'id' => 'language',
+                        'value' => 'de'
+                    )
+                )
+            ),
                                                             
         );       
     }

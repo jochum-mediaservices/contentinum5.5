@@ -45,6 +45,7 @@ class SaveSettings extends AbstractContentGroup
         'htmlwidgets',
         'numberCharacterTeaser',
         'numbernews',
+        'shariff',
         'labelReadMore',
         'publishAuthor',
         'authorEmail',

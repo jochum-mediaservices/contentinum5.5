@@ -40,6 +40,8 @@ return array(
         'filesize' => 'Contentinum\View\Helper\Filesize',
         'datetimeformat' => 'Contentinum\View\Helper\DateTimeFormat',
         
+        'langswitch' =>  'Contentinum\View\Helper\LanguageSwitch',
+        
         'contenttoolbar' => 'Contentinum\View\Helper\Toolbar',
         
         'news' => 'Contentinum\View\Helper\News\App',

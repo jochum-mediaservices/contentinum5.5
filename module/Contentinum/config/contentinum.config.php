@@ -109,6 +109,7 @@ return array(
             'entity_pages' => 'Contentinum\Factory\Entities\PagesFactory',
             'entity_pageattribute'=> 'Contentinum\Factory\Entities\PageAttributeFactory',
             'entity_pageheadlinks' => 'Contentinum\Factory\Entities\PageHeadLinksFactory',
+            'entity_pagegroups' =>  'Contentinum\Factory\Entities\PageGroupsFactory',
             
             'entity_media_table' => 'Contentinum\Factory\Entities\MediaTableFactory',
             
@@ -154,6 +155,8 @@ return array(
             'contentinum_contact_group' => 'Contentinum\Factory\Mapper\ModulContactGroupFactory',
             'contentinum_index_accounts' => 'Contentinum\Factory\Mapper\ModulIndexAccountsFactory',
             'contentinum_search_forms' => 'Contentinum\Factory\Mapper\ModulSearchFormFactory',   
+            
+            'contentinum_lang_switch' => 'Contentinum\Factory\Mapper\ModulLangSwitchFactory', 
             
             // form factories
             'recommendation_forms' => 'Contentinum\Factory\Form\RecommendationFormFactory',

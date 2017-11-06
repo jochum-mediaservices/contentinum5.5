@@ -95,6 +95,18 @@ abstract class AbstractNewsHelper extends AbstractContentHelper
     protected $mediateaserright;
     
     /**
+     * 
+     * @var boolen
+     */
+    protected $teasermedia;
+    
+    /**
+     * 
+     * @var boolen
+     */
+    protected $mediaplaces;
+    
+    /**
      *
      * @var array
      */
@@ -171,6 +183,12 @@ abstract class AbstractNewsHelper extends AbstractContentHelper
      * 
      * @var unknown
      */
+    protected $shariff;
+    
+    /**
+     * 
+     * @var unknown
+     */
     protected $displayimage = 'yes';
     
     /**
@@ -197,6 +215,8 @@ abstract class AbstractNewsHelper extends AbstractContentHelper
         'media',
         'mediateaserleft',
         'mediateaserright',
+        'teasermedia',
+        'mediaplaces',
         'publishAuthor',
         'publishDate',
         'labelReadMore',
@@ -254,7 +274,7 @@ abstract class AbstractNewsHelper extends AbstractContentHelper
      */
     protected function getDateFormat($config)
     {
-        if (isset($config['modulConfig']) && in_array($config['modulConfig'], array('FULL','LONG' , 'MEDIUM','SHORT'))){
+        if (isset($config['modulConfig']) && in_array($config['modulConfig'], array('FULL','LONG' , 'MEDIUM','SHORT','FULLLONG','LONGLONG' , 'MEDIUMLONG','SHORTLONG'))){
             return $config['modulConfig'];
         } else {
             return 'FULL';

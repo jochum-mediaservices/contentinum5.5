@@ -8,5 +8,6 @@ return array(
         'eventnavigation' => 'Mcevent\View\Helper\Event\Navigation', 
         'eventdatedwnlnk' => 'Mcevent\View\Helper\Download\Calendar', 
         'eventgroupdwnlnk' => 'Mcevent\View\Helper\Download\Group', 
+        'eventdownload' => 'Mcevent\View\Helper\Download\SelectionCalendar',
     )
 );

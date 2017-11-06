@@ -4,7 +4,6 @@ namespace Contentinum\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ContentinumComponents\Entity\AbstractEntity;
-use Zend\XmlRpc\Value\String;
 
 /**
  * WebContentGroups

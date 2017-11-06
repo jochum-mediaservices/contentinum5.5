@@ -73,9 +73,13 @@ class SaveRegistration extends Process
             $datas['registerIdent'] = Id::get();
             if (strlen($datas['poststreet']) < 2) {
                 $datas['poststreet'] = $datas['street'];
-                $datas['postnumber'] = $datas['number'];
+                if (isset($datas['number'])){
+                    $datas['postnumber'] = $datas['number'];
+                }
                 $datas['postcity'] = $datas['city'];
-                $datas['postzipcode'] = $datas['zipcode'];
+                if (isset($datas['zipcode'])){
+                    $datas['postzipcode'] = $datas['zipcode'];
+                }
             }
             parent::save($datas, $entity, $stage, $id);
             if ('1' === $datas['sendConfirm']){
